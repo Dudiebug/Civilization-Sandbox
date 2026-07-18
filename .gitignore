@@ -1,0 +1,40 @@
+# Unity generated
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+BuildOutput/
+Builds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+Recordings/
+
+# IDE / OS
+.vs/
+.idea/
+.vscode/*.log
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+.DS_Store
+Thumbs.db
+
+# Test / coverage output
+TestResults/
+CoverageResults/
+Artifacts/
+
+# Local secrets and machine overrides
+.env
+.env.*
+!.env.example
+*.local.toml

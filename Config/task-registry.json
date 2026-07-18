@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "title": "Repository governance and reproducible Windows bootstrap",
+      "phase": 0,
+      "risk": "Critical",
+      "depends_on": [],
+      "path": "docs/plans/tasks/TASK-001.md"
+    },
+    {
+      "id": "TASK-002",
+      "title": "Source-of-truth, story, and AI document set",
+      "phase": 0,
+      "risk": "High",
+      "depends_on": [
+        "TASK-001"
+      ],
+      "path": "docs/plans/tasks/TASK-002.md"
+    },
+    {
+      "id": "TASK-003",
+      "title": "Architecture and code-quality gates",
+      "phase": 0,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-001",
+        "TASK-002"
+      ],
+      "path": "docs/plans/tasks/TASK-003.md"
+    },
+    {
+      "id": "TASK-004",
+      "title": "Command-line and CI harness",
+      "phase": 0,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-001",
+        "TASK-003"
+      ],
+      "path": "docs/plans/tasks/TASK-004.md"
+    },
+    {
+      "id": "TASK-005",
+      "title": "Authoritative world clock and scheduler shell",
+      "phase": 1,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-004"
+      ],
+      "path": "docs/plans/tasks/TASK-005.md"
+    },
+    {
+      "id": "TASK-006",
+      "title": "Stable identity registry",
+      "phase": 1,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-005"
+      ],
+      "path": "docs/plans/tasks/TASK-006.md"
+    },
+    {
+      "id": "TASK-007",
+      "title": "Keyed deterministic random streams",
+      "phase": 1,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-005",
+        "TASK-006"
+      ],
+      "path": "docs/plans/tasks/TASK-007.md"
+    },
+    {
+      "id": "TASK-008",
+      "title": "Historical event graph foundation",
+      "phase": 1,
+      "risk": "High",
+      "depends_on": [
+        "TASK-006",
+        "TASK-007"
+      ],
+      "path": "docs/plans/tasks/TASK-008.md"
+    },
+    {
+      "id": "TASK-009",
+      "title": "Canonical checksum and state diff",
+      "phase": 1,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-005",
+        "TASK-006",
+        "TASK-007",
+        "TASK-008"
+      ],
+      "path": "docs/plans/tasks/TASK-009.md"
+    },
+    {
+      "id": "TASK-010",
+      "title": "Semantic persistence skeleton",
+      "phase": 1,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-006",
+        "TASK-008",
+        "TASK-009"
+      ],
+      "path": "docs/plans/tasks/TASK-010.md"
+    },
+    {
+      "id": "TASK-011",
+      "title": "Synthetic 10,000-person engine benchmark",
+      "phase": 1,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-005",
+        "TASK-006",
+        "TASK-007",
+        "TASK-009",
+        "TASK-010"
+      ],
+      "path": "docs/plans/tasks/TASK-011.md"
+    },
+    {
+      "id": "TASK-012",
+      "title": "Spatial chunks and bounded queries",
+      "phase": 1,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-005",
+        "TASK-006",
+        "TASK-011"
+      ],
+      "path": "docs/plans/tasks/TASK-012.md"
+    },
+    {
+      "id": "TASK-013",
+      "title": "Hierarchical navigation prototype",
+      "phase": 1,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-012"
+      ],
+      "path": "docs/plans/tasks/TASK-013.md"
+    },
+    {
+      "id": "TASK-014",
+      "title": "2.5D presentation proof",
+      "phase": 1,
+      "risk": "High",
+      "depends_on": [
+        "TASK-011",
+        "TASK-012",
+        "TASK-013"
+      ],
+      "path": "docs/plans/tasks/TASK-014.md"
+    },
+    {
+      "id": "TASK-015",
+      "title": "AI Behavior Contract schema and decision catalog",
+      "phase": 2,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-002",
+        "TASK-003",
+        "TASK-010"
+      ],
+      "path": "docs/plans/tasks/TASK-015.md"
+    },
+    {
+      "id": "TASK-016",
+      "title": "Canonical AI primitives",
+      "phase": 2,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-005",
+        "TASK-007",
+        "TASK-012",
+        "TASK-015"
+      ],
+      "path": "docs/plans/tasks/TASK-016.md"
+    },
+    {
+      "id": "TASK-017",
+      "title": "AI Decision Laboratory runner",
+      "phase": 2,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-009",
+        "TASK-010",
+        "TASK-015",
+        "TASK-016"
+      ],
+      "path": "docs/plans/tasks/TASK-017.md"
+    },
+    {
+      "id": "TASK-018",
+      "title": "Founding-group site-selection contract",
+      "phase": 2,
+      "risk": "High",
+      "depends_on": [
+        "TASK-012",
+        "TASK-015",
+        "TASK-016",
+        "TASK-017"
+      ],
+      "path": "docs/plans/tasks/TASK-018.md"
+    },
+    {
+      "id": "TASK-019",
+      "title": "Urgent individual-needs contract",
+      "phase": 2,
+      "risk": "High",
+      "depends_on": [
+        "TASK-015",
+        "TASK-016",
+        "TASK-017"
+      ],
+      "path": "docs/plans/tasks/TASK-019.md"
+    },
+    {
+      "id": "TASK-020",
+      "title": "Settlement labor-allocation contract",
+      "phase": 2,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-015",
+        "TASK-016",
+        "TASK-017",
+        "TASK-019"
+      ],
+      "path": "docs/plans/tasks/TASK-020.md"
+    },
+    {
+      "id": "TASK-021",
+      "title": "Procedural world generation and validation",
+      "phase": 3,
+      "risk": "High",
+      "depends_on": [
+        "TASK-008",
+        "TASK-010",
+        "TASK-012",
+        "TASK-018"
+      ],
+      "path": "docs/plans/tasks/TASK-021.md"
+    },
+    {
+      "id": "TASK-022",
+      "title": "Persistent people, households, inheritance, and traits",
+      "phase": 3,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-006",
+        "TASK-010",
+        "TASK-019",
+        "TASK-021"
+      ],
+      "path": "docs/plans/tasks/TASK-022.md"
+    },
+    {
+      "id": "TASK-023",
+      "title": "Physical camp and building-construction proof",
+      "phase": 3,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-013",
+        "TASK-014",
+        "TASK-021",
+        "TASK-022"
+      ],
+      "path": "docs/plans/tasks/TASK-023.md"
+    },
+    {
+      "id": "TASK-024",
+      "title": "Paths, road edges, parcels, and project-order boundary",
+      "phase": 3,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-013",
+        "TASK-020",
+        "TASK-023"
+      ],
+      "path": "docs/plans/tasks/TASK-024.md"
+    },
+    {
+      "id": "TASK-025",
+      "title": "Integrated settlement-formation and chronicle gate",
+      "phase": 3,
+      "risk": "Critical",
+      "depends_on": [
+        "TASK-018",
+        "TASK-019",
+        "TASK-020",
+        "TASK-021",
+        "TASK-022",
+        "TASK-023",
+        "TASK-024"
+      ],
+      "path": "docs/plans/tasks/TASK-025.md"
+    }
+  ]
+}
