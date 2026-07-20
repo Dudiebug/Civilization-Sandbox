@@ -1,0 +1,5 @@
+{
+  "name": "CivSandbox.Tooling.Runtime",
+  "rootNamespace": "CivSandbox.Tooling",
+  "autoReferenced": true
+}

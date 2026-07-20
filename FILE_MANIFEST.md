@@ -1,51 +1,69 @@
 # File Manifest
 
-**Total files:** 163  
-**Scoped `codex.md` files:** 50  
+**Total files:** 235
+**Scoped `codex.md` files:** 50
 **Forbidden `AGENTS.md` files:** 0
 
 ## Top-level groups
 
 | Group | Files |
 |---|---:|
-| `.codex` | 1 |
 | `.gitattributes` | 1 |
-| `.github` | 1 |
+| `.github` | 2 |
 | `.gitignore` | 1 |
-| `Assets` | 1 |
-| `Build` | 7 |
+| `Assets` | 9 |
+| `Build` | 15 |
 | `CHANGELOG.md` | 1 |
 | `CONTRIBUTING.md` | 1 |
-| `Config` | 2 |
+| `Config` | 5 |
 | `FILE_MANIFEST.md` | 1 |
-| `GamePackages` | 22 |
+| `GamePackages` | 43 |
 | `KIT_AUDIT.md` | 1 |
-| `Packages` | 1 |
-| `ProjectSettings` | 1 |
+| `Packages` | 3 |
+| `ProjectSettings` | 24 |
 | `README.md` | 1 |
 | `START_HERE.md` | 1 |
-| `Tests` | 7 |
+| `Tests` | 8 |
 | `codex.md` | 1 |
-| `docs` | 111 |
+| `docs` | 117 |
 
 ## Full path list
 
-- `.codex/config.toml`
 - `.gitattributes`
 - `.github/workflows/codex.md`
+- `.github/workflows/repository-policy.yml`
 - `.gitignore`
+- `Assets/Bootstrap.meta`
+- `Assets/Bootstrap/Bootstrap.unity`
+- `Assets/Bootstrap/Bootstrap.unity.meta`
 - `Assets/codex.md`
+- `Assets/codex.md.meta`
+- `Assets/DefaultVolumeProfile.asset`
+- `Assets/DefaultVolumeProfile.asset.meta`
+- `Assets/UniversalRenderPipelineGlobalSettings.asset`
+- `Assets/UniversalRenderPipelineGlobalSettings.asset.meta`
 - `Build/CI/codex.md`
+- `Build/Bootstrap.ps1`
+- `Build/Build.ps1`
+- `Build/Clean.ps1`
+- `Build/Configure-Repository.ps1`
+- `Build/Package-Evidence.ps1`
 - `Build/README.md`
+- `Build/Task001.Common.psm1`
+- `Build/Test.ps1`
 - `Build/Update-Status.ps1`
 - `Build/Validate-Plan.ps1`
+- `Build/Verify-CleanCheckout.ps1`
 - `Build/codex.md`
 - `Build/update_status.py`
 - `Build/validate_plan.py`
 - `CHANGELOG.md`
 - `CONTRIBUTING.md`
 - `Config/codex.md`
+- `Config/benchmark-reference.json`
+- `Config/repository-governance.json`
 - `Config/task-registry.json`
+- `Config/toolchain.json`
 - `FILE_MANIFEST.md`
 - `GamePackages/PACKAGE_MAP.md`
 - `GamePackages/codex.md`
@@ -67,11 +85,57 @@
 - `GamePackages/com.civsandbox.story/codex.md`
 - `GamePackages/com.civsandbox.telemetry/codex.md`
 - `GamePackages/com.civsandbox.tooling/codex.md`
+- `GamePackages/com.civsandbox.tooling/codex.md.meta`
+- `GamePackages/com.civsandbox.tooling/Editor.meta`
+- `GamePackages/com.civsandbox.tooling/Editor/BaselineBuild.cs`
+- `GamePackages/com.civsandbox.tooling/Editor/BaselineBuild.cs.meta`
+- `GamePackages/com.civsandbox.tooling/Editor/BaselineProjectSetup.cs`
+- `GamePackages/com.civsandbox.tooling/Editor/BaselineProjectSetup.cs.meta`
+- `GamePackages/com.civsandbox.tooling/Editor/CivSandbox.Tooling.Editor.asmdef`
+- `GamePackages/com.civsandbox.tooling/Editor/CivSandbox.Tooling.Editor.asmdef.meta`
+- `GamePackages/com.civsandbox.tooling/package.json`
+- `GamePackages/com.civsandbox.tooling/package.json.meta`
+- `GamePackages/com.civsandbox.tooling/Runtime.meta`
+- `GamePackages/com.civsandbox.tooling/Runtime/BootstrapPlayerExit.cs`
+- `GamePackages/com.civsandbox.tooling/Runtime/BootstrapPlayerExit.cs.meta`
+- `GamePackages/com.civsandbox.tooling/Runtime/CivSandbox.Tooling.Runtime.asmdef`
+- `GamePackages/com.civsandbox.tooling/Runtime/CivSandbox.Tooling.Runtime.asmdef.meta`
+- `GamePackages/com.civsandbox.tooling/Tests.meta`
+- `GamePackages/com.civsandbox.tooling/Tests/Editor.meta`
+- `GamePackages/com.civsandbox.tooling/Tests/Editor/BootstrapProjectTests.cs`
+- `GamePackages/com.civsandbox.tooling/Tests/Editor/BootstrapProjectTests.cs.meta`
+- `GamePackages/com.civsandbox.tooling/Tests/Editor/CivSandbox.Tooling.Editor.Tests.asmdef`
+- `GamePackages/com.civsandbox.tooling/Tests/Editor/CivSandbox.Tooling.Editor.Tests.asmdef.meta`
 - `GamePackages/com.civsandbox.ui/codex.md`
 - `GamePackages/com.civsandbox.world/codex.md`
 - `KIT_AUDIT.md`
 - `Packages/codex.md`
+- `Packages/manifest.json`
+- `Packages/packages-lock.json`
 - `ProjectSettings/codex.md`
+- `ProjectSettings/AudioManager.asset`
+- `ProjectSettings/ClusterInputManager.asset`
+- `ProjectSettings/DynamicsManager.asset`
+- `ProjectSettings/EditorBuildSettings.asset`
+- `ProjectSettings/EditorSettings.asset`
+- `ProjectSettings/EntitiesClientSettings.asset`
+- `ProjectSettings/GraphicsSettings.asset`
+- `ProjectSettings/InputManager.asset`
+- `ProjectSettings/MemorySettings.asset`
+- `ProjectSettings/MultiplayerManager.asset`
+- `ProjectSettings/NavMeshAreas.asset`
+- `ProjectSettings/Physics2DSettings.asset`
+- `ProjectSettings/PresetManager.asset`
+- `ProjectSettings/ProjectSettings.asset`
+- `ProjectSettings/ProjectVersion.txt`
+- `ProjectSettings/QualitySettings.asset`
+- `ProjectSettings/SceneTemplateSettings.json`
+- `ProjectSettings/ShaderGraphSettings.asset`
+- `ProjectSettings/TagManager.asset`
+- `ProjectSettings/TimeManager.asset`
+- `ProjectSettings/UnityConnectSettings.asset`
+- `ProjectSettings/VersionControlSettings.asset`
+- `ProjectSettings/VFXManager.asset`
 - `README.md`
 - `START_HERE.md`
 - `Tests/Benchmarks/codex.md`
@@ -81,6 +145,7 @@
 - `Tests/Scenarios/codex.md`
 - `Tests/Unit/codex.md`
 - `Tests/codex.md`
+- `Tests/Bootstrap/Task001.Bootstrap.Tests.ps1`
 - `codex.md`
 - `docs/REGRESSION_LEDGER.md`
 - `docs/ai/AI_GOLDEN_RULES.md`
@@ -100,6 +165,7 @@
 - `docs/core/GAME_DESIGN.md`
 - `docs/core/GAME_VISION.md`
 - `docs/core/PERFORMANCE_BUDGETS.md`
+- `docs/core/REPOSITORY_GOVERNANCE.md`
 - `docs/core/RISK_REGISTER.md`
 - `docs/core/SIMULATION_CONTRACTS.md`
 - `docs/core/TECHNICAL_ARCHITECTURE.md`
@@ -112,9 +178,14 @@
 - `docs/creator/QUICK_REFERENCE.md`
 - `docs/creator/codex.md`
 - `docs/decisions/README.md`
+- `docs/decisions/ADR-001-unity-toolchain-baseline.md`
 - `docs/decisions/codex.md`
 - `docs/evidence/PLANNING-KIT/EVIDENCE.md`
 - `docs/evidence/README.md`
+- `docs/evidence/TASK-001/ACCEPTANCE.md`
+- `docs/evidence/TASK-001/EVIDENCE.md`
+- `docs/evidence/TASK-001/MANIFEST.json`
+- `docs/evidence/TASK-001/REVIEW.md`
 - `docs/evidence/codex.md`
 - `docs/plans/CREATOR_DECISIONS.md`
 - `docs/plans/CURRENT_STEP.md`

@@ -5,7 +5,7 @@ This kit converts the authoritative Game Development Blueprint v2.0 into a stage
 ## Included
 
 - Hierarchical `codex.md` instructions, without `AGENTS.md`.
-- Safe Codex configuration using `codex.md` as the project-document fallback.
+- Hierarchical project guidance through committed `codex.md` files; project-local Codex configuration is deferred to TASK-002.
 - Eight phase plans from repository bootstrap through first-playable stabilization.
 - Detailed contracts for the blueprint's first 25 implementation tasks.
 - Evidence-gated status tracking and validation scripts.
@@ -32,4 +32,4 @@ No lower item may silently contradict a higher item.
 - `[!]` Blocked
 - `[x] ~~Completed item~~` — allowed only after acceptance evidence exists
 
-Run `python Build/validate_plan.py` before marking work done.
+Run `python Build/validate_plan.py` before marking work done. TASK-001 bootstrap commands and their safety contract are documented in `Build/README.md`.

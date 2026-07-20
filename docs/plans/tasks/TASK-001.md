@@ -1,6 +1,6 @@
 # TASK-001 — Repository governance and reproducible Windows bootstrap
 
-**Status:** Not Started  
+**Status:** In Progress
 **Phase:** Phase 0  
 **Risk:** Critical  
 **Depends on:** None  
@@ -21,19 +21,19 @@ A fresh Windows account can clone, bootstrap, build a baseline Unity project, ru
 - Create recoverable known-good baseline and destructive-operation policy.
 
 ## Required outputs
-- [ ] Repository root and Unity project skeleton.
-- [ ] Pinned dependency/package files.
-- [ ] Windows bootstrap/build/test/package scripts.
+- [x] ~~Repository root and Unity project skeleton.~~
+- [x] ~~Pinned dependency/package files.~~
+- [x] ~~Windows bootstrap/build/test/package scripts.~~
 - [ ] Clean-account verification procedure and first evidence pack.
-- [ ] Initial ADR for exact engine/package pins.
+- [x] ~~Initial ADR for exact engine/package pins.~~
 
 ## Verification and acceptance
 - [ ] Run from a fresh Windows user profile and clean clone.
 - [ ] Baseline editor/player build succeeds non-interactively.
-- [ ] One headless test executes and reports deterministically.
+- [x] ~~One headless test executes and reports deterministically on the creator machine.~~
 - [ ] Repeated bootstrap is idempotent.
-- [ ] Broken prerequisite or package hash fails with a useful diagnosis.
-- [ ] Documentation and relevant `codex.md` instructions match the implementation.
+- [x] ~~Broken prerequisite or package hash fails with a useful diagnosis.~~
+- [x] ~~Documentation and relevant `codex.md` instructions match the implementation.~~
 - [ ] Independent adversarial review reports no blocking findings.
 - [ ] Creator-visible acceptance is recorded.
 
@@ -41,8 +41,8 @@ A fresh Windows account can clone, bootstrap, build a baseline Unity project, ru
 - Terrain, gameplay systems, citizens, buildings, AI, art, or broad content.
 
 ## Required work sequence
-- [ ] Planner produces small milestones, exact files, tests, rollback, and stop conditions.
-- [ ] Creator approves the plan.
+- [x] ~~Planner produces small milestones, exact files, tests, rollback, and stop conditions.~~
+- [x] ~~Creator approves the plan.~~
 - [ ] Implementer completes one milestone at a time.
 - [ ] Verification agent reproduces evidence from a clean worktree.
 - [ ] Adversarial reviewer challenges architecture and failure cases.

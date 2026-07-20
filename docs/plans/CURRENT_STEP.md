@@ -1,15 +1,15 @@
 # Current Step
 
 **Active task:** TASK-001 — Repository governance and reproducible Windows bootstrap  
-**Status:** Not Started  
+**Status:** In Progress
 **Phase:** 0  
-**Model:** 5.6 Sol, Max reasoning, planner role
+**Model:** Implementation and verification role
 
 ## One action
-Open `docs/plans/tasks/TASK-001.md`, then use `docs/prompts/01_PLAN_TASK.md` in Plan mode.
+After the unrelated Windows Installer session is clear, rerun `powershell -NoProfile -ExecutionPolicy Bypass -File Build/Bootstrap.ps1 -InstallPrerequisites`; then resume the Linux build and live governance audit. Keep acceptance and recovery gates pending until independently observed.
 
 ## Do not do yet
-Do not create terrain, citizens, buildings, gameplay AI, or art. Do not let Codex implement until the Task 001 plan is approved.
+Do not create terrain, citizens, buildings, gameplay AI, art, persistence, replay, or player-facing APIs.
 
 ## Success for this step
-An approved milestone plan that names exact repository files, pinned-tool decisions, clean-checkout verification, CI checks, evidence, rollback, and creator decisions.
+Local governance and Unity checks pass with retained evidence; remote protection, clean-profile reproduction, independent review, and creator acceptance are explicitly recorded.

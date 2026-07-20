@@ -1,15 +1,17 @@
 # Current Session Handoff
 
 **Active task:** TASK-001  
-**Status:** Not Started  
+**Status:** In Progress
 **Last accepted implementation:** None
 
 ## Completed
 - Planning/control kit generated from Blueprint v2.0.
-- No gameplay or repository bootstrap task has been implemented.
+- The approved 32-file creator diff was preserved on `prep/task001-approved-docs`.
+- Recovery tag `task-001-start-aec44fc`, local `main`, and isolated `task/TASK-001-bootstrap` were created.
+- No gameplay has been introduced.
 
 ## Next single action
-Open the Advanced model picker, then plan TASK-001 in Plan mode using 5.6 Sol, Max reasoning.
+Complete TASK-001 implementation and verification, then obtain independent review and creator acceptance before merge.
 
 ## Blockers
-The final repository location, source-control host, reference Windows hardware, and exact Unity 6.3 LTS patch/package versions must be confirmed during Task 001 planning.
+The installed Linux support lacks the non-development Linux Mono player. Pinned PowerShell and Python installed; Git still requires an administrator prompt, and GitHub CLI/Unity module installation was stopped while an unrelated MSI session held Windows Installer. Remote protection, authenticated GitHub CLI, clean standard-profile reproduction, independent review, and creator acceptance remain gates.

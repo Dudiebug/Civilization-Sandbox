@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 import re
 import sys
-import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,6 +19,11 @@ REQUIRED_EVIDENCE = {
     "Documentation": {"PASS"},
     "Independent review": {"PASS"},
 }
+IGNORED_TOP_LEVEL = {
+    ".git", ".idea", ".vs", "Artifacts", "BuildOutput", "Builds", "CoverageResults",
+    "Library", "Logs", "MemoryCaptures", "Obj", "Recordings", "Temp", "TestResults", "UserSettings",
+}
+IGNORED_SUFFIXES = {".booproj", ".csproj", ".mdb", ".opendb", ".pdb", ".pidb", ".sln", ".suo", ".svd", ".user", ".userprefs"}
 
 
 def status_from(path: Path) -> str | None:
@@ -32,6 +36,24 @@ def evidence_value(text: str, label: str) -> str | None:
     pattern = rf"^\s*[-*]?\s*{re.escape(label)}:\s*(PASS|FAIL|N/A|CHANGES REQUIRED|PENDING)\b"
     match = re.search(pattern, text, re.IGNORECASE | re.MULTILINE)
     return match.group(1).upper() if match else None
+
+
+def repository_files() -> list[str]:
+    files: list[str] = []
+    for path in ROOT.rglob("*"):
+        if not path.is_file():
+            continue
+        relative = path.relative_to(ROOT)
+        if relative.parts[0] in IGNORED_TOP_LEVEL:
+            continue
+        if path.suffix.lower() in IGNORED_SUFFIXES:
+            continue
+        if path.name in {".DS_Store", "Thumbs.db"} or path.name.startswith(".env") or path.name.endswith(".local.toml"):
+            continue
+        if relative.parts[:1] == (".vscode",) and path.suffix.lower() == ".log":
+            continue
+        files.append(relative.as_posix())
+    return sorted(files)
 
 
 def main() -> int:
@@ -107,21 +129,19 @@ def main() -> int:
     if len(codex_files) < 20:
         errors.append(f"Expected a scoped codex.md suite; found only {len(codex_files)}")
 
-    config_path = ROOT / ".codex" / "config.toml"
-    if not config_path.exists():
-        errors.append("Missing .codex/config.toml")
+    if (ROOT / ".codex" / "config.toml").exists():
+        errors.append(".codex/config.toml is deferred to TASK-002 and must remain absent during TASK-001")
+
+    manifest_path = ROOT / "FILE_MANIFEST.md"
+    if not manifest_path.exists():
+        errors.append("Missing FILE_MANIFEST.md")
     else:
-        try:
-            config = tomllib.loads(config_path.read_text(encoding="utf-8"))
-        except Exception as exc:  # pragma: no cover - diagnostic path
-            errors.append(f"Invalid TOML in .codex/config.toml: {exc}")
-        else:
-            if "codex.md" not in config.get("project_doc_fallback_filenames", []):
-                errors.append(".codex/config.toml does not set codex.md as a project-document fallback")
-            if config.get("sandbox_mode") != "workspace-write":
-                warnings.append("sandbox_mode is not workspace-write")
-            if config.get("sandbox_workspace_write", {}).get("network_access") is not False:
-                warnings.append("workspace-write network access is not explicitly false")
+        declared = sorted(re.findall(r"^- `([^`]+)`$", manifest_path.read_text(encoding="utf-8"), re.MULTILINE))
+        actual = repository_files()
+        if declared != actual:
+            missing = sorted(set(actual) - set(declared))
+            stale = sorted(set(declared) - set(actual))
+            errors.append(f"FILE_MANIFEST.md is stale; missing={missing}, stale={stale}")
 
     required_paths = [
         "START_HERE.md",
@@ -134,6 +154,9 @@ def main() -> int:
         "docs/core/TECHNICAL_ARCHITECTURE.md",
         "docs/ai/DECISION_LAB.md",
         "docs/templates/EVIDENCE_TEMPLATE.md",
+        "Config/repository-governance.json",
+        "Config/toolchain.json",
+        "docs/core/REPOSITORY_GOVERNANCE.md",
     ]
     for rel in required_paths:
         if not (ROOT / rel).exists():

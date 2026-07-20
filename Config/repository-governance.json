@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "repository": "Dudiebug/Civilization-Sandbox",
+  "visibility": "private",
+  "defaultBranch": "main",
+  "taskBranchPattern": "task/TASK-NNN-description",
+  "worktreePolicy": "sibling",
+  "recoveryTag": "task-001-start-aec44fc",
+  "baselineCommit": "aec44fcb4285767716fbd22715fd96233459ab8e",
+  "protection": {
+    "requirePullRequest": true,
+    "requiredApprovingReviewCount": 0,
+    "requireStatusCheckAfterFirstRun": "repository-policy",
+    "requireBranchesUpToDate": true,
+    "enforceAdmins": true,
+    "allowForcePushes": false,
+    "allowDeletions": false
+  },
+  "workflow": {
+    "path": ".github/workflows/repository-policy.yml",
+    "jobName": "repository-policy",
+    "checkoutAction": "actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8"
+  }
+}

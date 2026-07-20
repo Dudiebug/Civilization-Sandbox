@@ -56,8 +56,8 @@ for phase in sorted(phase_counts):
 
 text = f"""# Status Board
 
-**Generated:** {stamp}  
-**Active:** {active['id'] if active else 'None'}  
+**Generated:** {stamp}
+**Active:** {active['id'] if active else 'None'}
 **Completed game tasks:** {done} / {len(REGISTRY)}
 
 ## Repository-control setup

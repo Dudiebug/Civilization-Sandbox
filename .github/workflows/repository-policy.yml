@@ -1,0 +1,39 @@
+name: Repository Policy
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repository-policy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository-policy:
+    name: repository-policy
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+
+      - name: Validate task plan
+        shell: pwsh
+        run: python Build/validate_plan.py
+
+      - name: Audit committed governance
+        shell: powershell
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File Build/Configure-Repository.ps1 -Offline
+
+      - name: Verify manifest and package-lock hash
+        shell: powershell
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File Build/Bootstrap.ps1 -RepositoryOnly
+
+      - name: Run TASK-001 command self-tests
+        shell: powershell
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File Tests/Bootstrap/Task001.Bootstrap.Tests.ps1

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "taskId": "TASK-001",
+  "state": "IN_PROGRESS",
+  "trackedEvidence": [
+    "docs/evidence/TASK-001/EVIDENCE.md",
+    "docs/evidence/TASK-001/MANIFEST.json",
+    "docs/evidence/TASK-001/REVIEW.md",
+    "docs/evidence/TASK-001/ACCEPTANCE.md"
+  ],
+  "ignoredArtifactRoot": "Artifacts/",
+  "requiredGeneratedArtifacts": [
+    "Artifacts/build/windows/CivilizationSandboxBootstrap.exe",
+    "Artifacts/build/linux/CivilizationSandboxBootstrap.x86_64",
+    "Artifacts/tests/bootstrap-editmode.xml"
+  ],
+  "note": "Generated artifact hashes are written by Build/Package-Evidence.ps1. Missing artifacts are failures, never passes."
+}

@@ -1,7 +1,7 @@
 # Status Board
 
-**Generated:** 2026-07-17 23:21 UTC  
-**Active:** TASK-001  
+**Generated:** 2026-07-20 05:56 UTC
+**Active:** TASK-001
 **Completed game tasks:** 0 / 25
 
 ## Repository-control setup
@@ -12,13 +12,13 @@
 ## Phase summary
 | Phase | Done | Active | Review | Blocked | Total |
 |---:|---:|---:|---:|---:|---:|
-| 0 | 0 | 0 | 0 | 0 | 4 |
+| 0 | 0 | 1 | 0 | 0 | 4 |
 | 1 | 0 | 0 | 0 | 0 | 10 |
 | 2 | 0 | 0 | 0 | 0 | 6 |
 | 3 | 0 | 0 | 0 | 0 | 5 |
 
 ## First 25 implementation tasks
-- [ ] **TASK-001** — Repository governance and reproducible Windows bootstrap
+- [~] **TASK-001** — Repository governance and reproducible Windows bootstrap — **IN PROGRESS**
 - [ ] **TASK-002** — Source-of-truth, story, and AI document set
 - [ ] **TASK-003** — Architecture and code-quality gates
 - [ ] **TASK-004** — Command-line and CI harness

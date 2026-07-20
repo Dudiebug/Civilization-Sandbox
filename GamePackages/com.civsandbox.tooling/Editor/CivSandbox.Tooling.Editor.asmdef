@@ -1,0 +1,11 @@
+{
+  "name": "CivSandbox.Tooling.Editor",
+  "rootNamespace": "CivSandbox.Tooling.Editor",
+  "references": [
+    "CivSandbox.Tooling.Runtime"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "autoReferenced": true
+}

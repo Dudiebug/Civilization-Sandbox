@@ -11,4 +11,6 @@
 9. Obtain creator-visible acceptance.
 10. Merge only through the protected process and update status/release notes.
 
+Branches use `task/TASK-NNN-description` and sibling worktrees. `main` requires a pull request and the `repository-policy` check after its first successful run; direct pushes, force-pushes, and deletion are prohibited. See `docs/core/REPOSITORY_GOVERNANCE.md`.
+
 High-risk changes may not be planned, implemented, verified, and approved by one uninterrupted role/session.

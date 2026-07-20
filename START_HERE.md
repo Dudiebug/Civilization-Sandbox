@@ -1,15 +1,13 @@
 # START HERE
 
 This folder is a repository-ready control system for building **Civilization Sandbox** with Codex.
-It deliberately contains **no `AGENTS.md` file**. Codex is configured to use scoped `codex.md` files instead.
+It deliberately contains **no `AGENTS.md` file**. Scoped `codex.md` files remain the committed project guidance; project-local Codex configuration is deferred to TASK-002.
 
 ## Your next action
 
-1. Put this kit at the root of a new Git repository.
-2. Open `docs/plans/CURRENT_STEP.md`.
-3. Open the model control, select **Advanced**, then choose **5.6 Sol** with **Max** reasoning for critical `TASK-001` planning.
-4. Paste `docs/prompts/01_PLAN_TASK.md` and tell it to plan `TASK-001`.
-5. Do not let it implement until you approve the plan.
+1. Open `docs/plans/CURRENT_STEP.md`.
+2. Run `powershell -NoProfile -File Build/Bootstrap.ps1 -RepositoryOnly` for a read-only repository audit.
+3. Continue only on the active TASK-001 branch/worktree and follow the stop conditions in the approved task plan.
 
 ## Three files to use most often
 

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "tools": [
+    {
+      "name": "Git",
+      "command": "git",
+      "wingetId": "Git.Git",
+      "version": "2.55.0.3",
+      "installerSha256": "af12577d0fdff74243a5988197aa49b957d5044edc17004f6ddf0768996f1dca"
+    },
+    {
+      "name": "PowerShell",
+      "command": "pwsh",
+      "wingetId": "Microsoft.PowerShell",
+      "version": "7.6.3",
+      "wingetVersion": "7.6.3.0",
+      "installerSha256": "5f60ccc7db8ddd7344b70f5a69af6b85956ac9b5ef424177d1488170f7301415"
+    },
+    {
+      "name": "Python",
+      "command": "python",
+      "wingetId": "Python.Python.3.13",
+      "version": "3.13.14",
+      "installerSha256": "c54d9b9bbb8a36e6489363ddd01139707fd781d72f1f9e90c7ec65d0061368e0"
+    },
+    {
+      "name": "GitHub CLI",
+      "command": "gh",
+      "wingetId": "GitHub.cli",
+      "version": "2.96.0",
+      "installerSha256": "583ee96619753844ae4af9dff29ae6d34076a4d0b74c8354f150473dd21fa5d6"
+    },
+    {
+      "name": "Unity Hub",
+      "command": "Unity Hub",
+      "wingetId": "UnityTechnologies.UnityHub",
+      "version": "3.19.5",
+      "installerSha256": "06d09ea17e7973ff9889e46b20ddc9b61221b6c3e9e722d69e34b508616f0497"
+    }
+  ],
+  "unity": {
+    "version": "6000.3.20f1",
+    "changeset": "c9ba695d4f07",
+    "editorSha256": "f025d925990cbef012bba6600c8463ee0c94cbab90ee10c4c2f93dd69f85120e",
+    "installModules": [
+      "windows-mono",
+      "linux-mono"
+    ],
+    "packageLockSha256": "5dda07b9b8c1ab85cb77a5353a94a47414866f87ce222b3c8220d3d0d727e8df"
+  },
+  "packages": {
+    "com.unity.burst": "1.8.29",
+    "com.unity.collections": "2.6.8",
+    "com.unity.entities": "1.4.8",
+    "com.unity.entities.graphics": "1.4.21",
+    "com.unity.render-pipelines.universal": "17.3.0",
+    "com.unity.test-framework": "1.6.0",
+    "com.civsandbox.tooling": "file:../GamePackages/com.civsandbox.tooling"
+  }
+}
