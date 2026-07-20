@@ -4,10 +4,12 @@
 Open `docs/plans/CURRENT_STEP.md`. Work only on that task.
 
 ## Model
-- Plan or high-risk review: **5.6 Sol, Extra High**.
-- Normal implementation: **5.6 Terra, High**.
-- Small repetitive edits: **5.6 Luna, Medium**.
-- Tiny real-time iteration: **5.3 Codex Spark**, only when available and tightly scoped.
+- Open the model control and select **Advanced** to expose individual model and reasoning choices.
+- Critical planning or review: **5.6 Sol, Max**.
+- High-risk planning or review: **5.6 Sol, Extra High**.
+- Normal implementation, testing, documentation, exploration, and debugging: **5.6 Terra, High**.
+- Exact mechanical work with no unresolved decisions: **5.6 Terra, Medium**.
+- Use **Ultra** only when an approved plan names independent parallel workstreams. Do not use Luna or Fast mode for this project.
 
 ## Prompt shape
 **Goal → Context → Constraints → Done evidence → Stop conditions.**

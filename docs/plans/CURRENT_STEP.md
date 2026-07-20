@@ -3,7 +3,7 @@
 **Active task:** TASK-001 — Repository governance and reproducible Windows bootstrap  
 **Status:** Not Started  
 **Phase:** 0  
-**Model:** 5.6 Sol, Extra High reasoning, planner role
+**Model:** 5.6 Sol, Max reasoning, planner role
 
 ## One action
 Open `docs/plans/tasks/TASK-001.md`, then use `docs/prompts/01_PLAN_TASK.md` in Plan mode.

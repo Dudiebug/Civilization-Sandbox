@@ -7,7 +7,7 @@ It deliberately contains **no `AGENTS.md` file**. Codex is configured to use sco
 
 1. Put this kit at the root of a new Git repository.
 2. Open `docs/plans/CURRENT_STEP.md`.
-3. In Codex, select **5.6 Sol** with **Extra High** reasoning.
+3. Open the model control, select **Advanced**, then choose **5.6 Sol** with **Max** reasoning for critical `TASK-001` planning.
 4. Paste `docs/prompts/01_PLAN_TASK.md` and tell it to plan `TASK-001`.
 5. Do not let it implement until you approve the plan.
 

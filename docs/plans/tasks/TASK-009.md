@@ -48,4 +48,4 @@ Generate deterministic subsystem digests and localized state diffs over authorit
 - [ ] `Build/validate_plan.py` permits Done status.
 
 ## Suggested launch
-Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Extra High** for planning. After approval, use **5.6 Terra / High** for ordinary implementation unless the plan identifies a critical architecture or migration change.
+Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Max** for Critical planning. After approval, use **5.6 Terra / High** for ordinary implementation and **Terra / Medium** only for exact mechanical work.
