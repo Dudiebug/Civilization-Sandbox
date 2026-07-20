@@ -42,6 +42,7 @@
 - Clean first import: PASS, Unity `6000.3.20f1`; 70.075-second initial asset refresh (99.85-second editor wall time); resolved direct packages exactly match the contract; no C# warnings or errors after the obsolete-API correction.
 - Package lock: PASS, SHA-256 `5dda07b9b8c1ab85cb77a5353a94a47414866f87ce222b3c8220d3d0d727e8df`.
 - Repository-only bootstrap: PASS in 2.67 seconds.
+- Same-profile clean clone in `C:\Users\dudie\AppData\Local\CivSandboxTask001Verification`: PASS for two repository-only bootstrap runs; tracked state and lock hash remained unchanged and the temporary clone was removed. This is not credited as the required new standard-user profile run.
 - Windows x64 Mono player: PASS in 84.76 seconds; executable SHA-256 `34c4e304e53e56499267dfd9c975c63dc279ed3011a69a8ca16eb207f1856a8f`.
 - EditMode/headless Windows smoke: PASS in 17.48 seconds; NUnit XML has one passed, zero failed; XML SHA-256 `c3067171e7defdfb6061957c3ae51575f3984c6e41db4a809b282d01fd07395e`.
 - PowerShell guard suite: PASS, 12 tests, including a nested reparse-point escape refusal.
