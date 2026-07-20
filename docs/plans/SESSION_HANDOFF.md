@@ -14,4 +14,4 @@
 Complete TASK-001 implementation and verification, then obtain independent review and creator acceptance before merge.
 
 ## Blockers
-The installed Linux support lacks the non-development Linux Mono player. Pinned PowerShell and Python installed; Git still requires an administrator prompt, and GitHub CLI/Unity module installation was stopped while an unrelated MSI session held Windows Installer. Remote protection, authenticated GitHub CLI, clean standard-profile reproduction, independent review, and creator acceptance remain gates.
+The installed Linux support lacks the non-development Linux Mono player. Pinned PowerShell, Python, and GitHub CLI installed; Git still requires an administrator prompt, GitHub CLI requires `gh auth login`, and the Unity module installer remains queued behind an unrelated MSI session. Remote protection, clean standard-profile reproduction, independent review, and creator acceptance remain gates.

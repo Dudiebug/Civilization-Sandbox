@@ -52,9 +52,9 @@
 ## Current blockers
 
 1. The installed Linux support tree lacks `Variations/linux64_player_nondevelopment_mono`, so the Linux Mono build fails honestly with nonzero exit and retained log.
-2. The explicit prerequisite install added pinned PowerShell `7.6.3` and Python `3.13.14`. Git required an administrator prompt and was cancelled; GitHub CLI was stopped while an unrelated Windows Installer session held the MSI lock. No installed tool was removed or downgraded.
+2. The explicit prerequisite install added pinned PowerShell `7.6.3`, Python `3.13.14`, and GitHub CLI `2.96.0`. Git required an administrator prompt and was cancelled. GitHub CLI is not authenticated; no installed tool was removed or downgraded.
 3. Hub downloaded the exact `c9ba695d4f07` Linux Mono support installer and queued it, but could not start the installer while that unrelated MSI session was active. The bootstrap-owned headless Hub process was stopped; no editor click or license activation was used.
-4. Authenticated GitHub CLI, protected private-branch enforcement, first workflow run, non-OneDrive clean standard-profile reproduction, independent review, creator acceptance, merge, accepted tag, and recovery rehearsal remain pending.
+4. GitHub CLI authentication, protected private-branch enforcement, first workflow run, non-OneDrive clean standard-profile reproduction, independent review, creator acceptance, merge, accepted tag, and recovery rehearsal remain pending.
 
 ## Changed surface
 

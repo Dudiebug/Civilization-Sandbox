@@ -6,7 +6,7 @@
 **Model:** Implementation and verification role
 
 ## One action
-After the unrelated Windows Installer session is clear, rerun `powershell -NoProfile -ExecutionPolicy Bypass -File Build/Bootstrap.ps1 -InstallPrerequisites`; then resume the Linux build and live governance audit. Keep acceptance and recovery gates pending until independently observed.
+Run `gh auth login`. After the unrelated Windows Installer session is clear, rerun `powershell -NoProfile -ExecutionPolicy Bypass -File Build/Bootstrap.ps1 -InstallPrerequisites`; then resume the Linux build and live governance audit. Keep acceptance and recovery gates pending until independently observed.
 
 ## Do not do yet
 Do not create terrain, citizens, buildings, gameplay AI, art, persistence, replay, or player-facing APIs.
