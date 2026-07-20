@@ -1,28 +1,19 @@
 # Model and Prompt Guide
 
-Verified against official OpenAI Codex documentation and GPT-5.6 guidance on 2026-07-19.
+Verified against official OpenAI Codex documentation on 2026-07-17.
 
 ## Which model to use
 
 | Task | Model | Reasoning |
 |---|---|---|
-| Critical task planning, irreversible architecture, determinism, saves, or migrations | 5.6 Sol | Max |
-| High-risk planning, difficult diagnosis, or adversarial review | 5.6 Sol | Extra High |
-| Normal C#/Unity implementation from an approved task | 5.6 Terra | High |
-| Tests, documentation, exploration, debugging, or small bounded refactors | 5.6 Terra | High |
-| Highly repetitive edits with exact examples and no unresolved decisions | 5.6 Terra | Medium |
+| Architecture, phase planning, risky migrations, root-cause analysis | 5.6 Sol | Extra High; use Max/Ultra only for genuinely decomposable hard work |
+| Adversarial review, security, determinism, save integrity | 5.6 Sol | Extra High |
+| Normal engine/project implementation from an approved task | 5.6 Terra | High |
+| Tests, documentation updates, small refactors with clear boundaries | 5.6 Terra | Medium or High |
+| Repetitive schema/content work with exact examples | 5.6 Luna | Medium |
+| Tiny interactive edits or rapid compile-fix loops | 5.3 Codex Spark | Medium; only when available and scope is very small |
 
-Use Sol for deciding **what** to build and reviewing consequential work. Use Terra for building and verifying an approved slice. This project does not use Luna or Codex Spark.
-
-## Picker, Max, Ultra, and Fast mode
-
-The repository config sets the project default, but it does not populate the app's model menu. Open the model control beneath the composer and select **Advanced** to choose Sol or Terra with a specific reasoning level.
-
-- **Max** is the deepest single-agent reasoning level. Use it for Critical task plans and other decisions where a mistake would be expensive to reverse.
-- **Ultra** coordinates multiple agents and uses more total tokens. Use it only when an approved plan explicitly declares independent parallel workstreams; it is not the default for Critical tasks.
-- **Fast mode** trades higher credit consumption for lower latency. It is disabled for this project; use the Standard service tier.
-
-OpenAI's published GPT-5.6 coding results support Terra as the routine default: Sol/Terra score 80.0/77.4 on the Artificial Analysis Coding Agent Index, 64.6/63.4 on SWE-Bench Pro, and 88.8/87.4 on Terminal-Bench 2.1. These are benchmark results, not guaranteed Codex-app completion times. Source: https://openai.com/index/gpt-5-6/
+Use the strongest model for deciding **what** to build and reviewing consequences. Use the balanced model for building an already-approved slice. Use the fast model only after ambiguity is removed.
 
 ## Network and web research
 

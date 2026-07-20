@@ -1,53 +1,51 @@
-# TASK-001 — Repository governance and reproducible Windows bootstrap
+# TASK-001 - Repository governance and reproducible bootstrap
 
-**Status:** Not Started  
-**Phase:** Phase 0  
-**Risk:** Critical  
-**Depends on:** None  
+**Status:** Not Started
+**Milestone:** 0.1 - Project Foundation
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** Critical
+**Depends on:** None
+**Decision dependencies:** D01, D02, repository host/location
 **Evidence folder:** `docs/evidence/TASK-001/`
-**Blueprint source:** Section 81, Task 001; Sections 4.7, 65–68, 75.1, 80.1, 81, and Appendix F–H
+**Blueprint/ADR source:** Blueprint Sections 4.7, 56-57, 65-68, 75.1, 80.1, 81; ADR-001
 
 ## Creator summary
-Create the safe container for all later work. The result is a clean, pinned, recoverable repository—not gameplay.
+Create the safe container for all later work. This task opens only the decisions needed for a reproducible toolchain. It does not decide gameplay scope, content counts, or future-release systems.
 
 ## Objective
-A fresh Windows account can clone, bootstrap, build a baseline Unity project, run one headless test, and package evidence without manual repair.
+A fresh supported development environment can clone, bootstrap, build a baseline project, run one headless test, and package evidence without manual repair.
 
 ## In scope
 - Initialize Git and protected-branch/worktree conventions.
-- Pin the exact Unity 6.3 LTS patch and initial package set.
-- Create idempotent PowerShell bootstrap, build, test, package, and clean commands.
-- Record tool prerequisites, reference hardware, package lock, and baseline build manifest.
-- Create recoverable known-good baseline and destructive-operation policy.
+- Present and record the D01 engine/toolchain decision; pin the selected engine/editor/runtime and initial dependencies.
+- Record D02 supported development hosts and reference hardware.
+- Create idempotent bootstrap, build, test, package, and clean commands.
+- Record prerequisites, dependency lock, baseline build manifest, and recoverable known-good baseline.
+- Establish destructive-operation policy and rollback.
 
 ## Required outputs
-- [ ] Repository root and Unity project skeleton.
-- [ ] Pinned dependency/package files.
-- [ ] Windows bootstrap/build/test/package scripts.
-- [ ] Clean-account verification procedure and first evidence pack.
-- [ ] Initial ADR for exact engine/package pins.
+- [ ] Repository root and selected-engine project skeleton.
+- [ ] Accepted engine/toolchain ADR and exact dependency locks.
+- [ ] Bootstrap/build/test/package scripts for approved hosts.
+- [ ] Clean-account or clean-environment verification and first evidence pack.
+- [ ] Baseline build manifest and rollback instructions.
 
 ## Verification and acceptance
-- [ ] Run from a fresh Windows user profile and clean clone.
-- [ ] Baseline editor/player build succeeds non-interactively.
-- [ ] One headless test executes and reports deterministically.
+- [ ] Clean clone/bootstrap/build/test succeeds on the approved development host.
+- [ ] One headless deterministic test executes and reports results.
 - [ ] Repeated bootstrap is idempotent.
-- [ ] Broken prerequisite or package hash fails with a useful diagnosis.
-- [ ] Documentation and relevant `codex.md` instructions match the implementation.
+- [ ] Broken prerequisite or dependency hash fails with a useful diagnosis.
+- [ ] Placeholder engine-specific folders are accepted, adapted, or removed consistently with D01.
 - [ ] Independent adversarial review reports no blocking findings.
 - [ ] Creator-visible acceptance is recorded.
 
 ## Out of scope
-- Terrain, gameplay systems, citizens, buildings, AI, art, or broad content.
+World size, population target, content counts, gameplay systems, terrain, people, buildings, AI behavior, art, public release configuration, or Version 1.1-1.5 planning.
+
+## Stop conditions
+- D01 or D02 is required but not recorded.
+- The selected path cannot support clean headless validation.
+- Implementation starts choosing gameplay or release scope.
 
 ## Required work sequence
-- [ ] Planner produces small milestones, exact files, tests, rollback, and stop conditions.
-- [ ] Creator approves the plan.
-- [ ] Implementer completes one milestone at a time.
-- [ ] Verification agent reproduces evidence from a clean worktree.
-- [ ] Adversarial reviewer challenges architecture and failure cases.
-- [ ] Creator tests the observable result and accepts or requests changes.
-- [ ] `Build/validate_plan.py` permits Done status.
-
-## Suggested launch
-Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Max** for Critical planning. After approval, use **5.6 Terra / High** for ordinary implementation and **Terra / Medium** only for exact mechanical work.
+Plan -> creator decision(s) one at a time -> approved milestones -> implementation -> clean verification -> adversarial review -> creator acceptance -> plan validation.

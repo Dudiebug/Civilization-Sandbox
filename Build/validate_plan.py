@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-"""Validate evidence-gated task state and repository-control invariants."""
+"""Validate milestone-aware roadmap structure, evidence-gated task state, and kit invariants."""
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sys
-import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "Config" / "task-registry.json"
 VALID_STATUSES = {"Not Started", "In Progress", "Blocked", "In Review", "Done"}
+EXPECTED_MILESTONES = [f"0.{i}" for i in range(1, 10)]
+BLUEPRINT_SHA256 = "6c71f41ad6f4cecbfd1aaa0c3c0474d6b4be4d63dd9a418a28174d9f2fa0ac6e"
 REQUIRED_EVIDENCE = {
     "Build": {"PASS", "N/A"},
     "Tests": {"PASS", "N/A"},
@@ -22,9 +24,15 @@ REQUIRED_EVIDENCE = {
 }
 
 
-def status_from(path: Path) -> str | None:
+def field_from(path: Path, field: str) -> str | None:
     text = path.read_text(encoding="utf-8")
-    match = re.search(r"^\*\*Status:\*\*\s*(.+?)\s*$", text, re.MULTILINE)
+    match = re.search(rf"^\*\*{re.escape(field)}:\*\*\s*(.+?)\s*$", text, re.MULTILINE)
+    return match.group(1).strip() if match else None
+
+
+def heading_from(path: Path) -> str | None:
+    text = path.read_text(encoding="utf-8")
+    match = re.search(r"^#\s+(.+?)\s*$", text, re.MULTILINE)
     return match.group(1).strip() if match else None
 
 
@@ -34,15 +42,53 @@ def evidence_value(text: str, label: str) -> str | None:
     return match.group(1).upper() if match else None
 
 
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
 
     if not REGISTRY_PATH.exists():
         errors.append("Missing Config/task-registry.json")
-        registry = {"tasks": []}
+        registry: dict = {"tasks": [], "milestones": []}
     else:
-        registry = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
+        try:
+            registry = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
+        except Exception as exc:
+            errors.append(f"Invalid JSON in Config/task-registry.json: {exc}")
+            registry = {"tasks": [], "milestones": []}
+
+    if registry.get("schema_version", 0) < 2:
+        errors.append("task-registry schema_version must be at least 2")
+    if not registry.get("roadmap_revision"):
+        errors.append("task-registry must declare roadmap_revision")
+
+    milestones = registry.get("milestones", [])
+    milestone_ids = [m.get("id") for m in milestones]
+    if milestone_ids != EXPECTED_MILESTONES:
+        errors.append(f"Milestone IDs/order must be {EXPECTED_MILESTONES}; found {milestone_ids}")
+    if len(set(milestone_ids)) != len(milestone_ids):
+        errors.append("Duplicate milestone IDs in task registry")
+    milestone_map = {m.get("id"): m for m in milestones}
+    for milestone in milestones:
+        mid = milestone.get("id")
+        plan_rel = milestone.get("plan")
+        if not plan_rel:
+            errors.append(f"Milestone {mid}: missing plan path")
+            continue
+        plan = ROOT / plan_rel
+        if not plan.exists():
+            errors.append(f"Milestone {mid}: missing plan {plan_rel}")
+            continue
+        heading = heading_from(plan) or ""
+        if f"Milestone {mid}" not in heading:
+            errors.append(f"Milestone {mid}: plan heading does not identify the milestone: {heading!r}")
 
     tasks = registry.get("tasks", [])
     if len(tasks) != 25:
@@ -54,22 +100,61 @@ def main() -> int:
         errors.append("Task registry IDs/order do not equal TASK-001 through TASK-025")
 
     status_map: dict[str, str] = {}
-    for task in tasks:
-        tid = task["id"]
-        path = ROOT / task["path"]
-        if not path.exists():
-            errors.append(f"{tid}: missing task file {task['path']}")
+    for index, task in enumerate(tasks, start=1):
+        tid = task.get("id", f"TASK-?{index}")
+        path_rel = task.get("path")
+        if not path_rel:
+            errors.append(f"{tid}: missing task path")
             continue
-        status = status_from(path)
+        path = ROOT / path_rel
+        if not path.exists():
+            errors.append(f"{tid}: missing task file {path_rel}")
+            continue
+
+        expected_milestone = "0.1" if index <= 10 else "0.2" if index <= 20 else "0.3"
+        milestone = task.get("milestone")
+        if milestone != expected_milestone:
+            errors.append(f"{tid}: expected milestone {expected_milestone}; found {milestone!r}")
+        if milestone not in milestone_map:
+            errors.append(f"{tid}: unknown milestone {milestone!r}")
+
+        expected_legacy_phase = int(expected_milestone[-1]) - 1
+        if task.get("phase") != expected_legacy_phase:
+            warnings.append(
+                f"{tid}: legacy phase field {task.get('phase')!r} does not match expected {expected_legacy_phase}"
+            )
+
+        heading = heading_from(path)
+        expected_heading = f"{tid} - {task.get('title')}"
+        if heading != expected_heading:
+            errors.append(f"{tid}: heading {heading!r} does not match registry {expected_heading!r}")
+
+        status = field_from(path, "Status")
         if status is None:
             errors.append(f"{tid}: missing **Status:** line")
-            continue
-        status_map[tid] = status
-        if status not in VALID_STATUSES:
-            errors.append(f"{tid}: invalid status {status!r}")
+        else:
+            status_map[tid] = status
+            if status not in VALID_STATUSES:
+                errors.append(f"{tid}: invalid status {status!r}")
+
+        milestone_field = field_from(path, "Milestone")
+        if milestone_field is None or not milestone_field.startswith(f"{milestone} "):
+            errors.append(f"{tid}: **Milestone:** must begin with {milestone!r}; found {milestone_field!r}")
+        if field_from(path, "Release horizon") is None:
+            errors.append(f"{tid}: missing **Release horizon:** line")
+        if field_from(path, "Decision dependencies") is None:
+            errors.append(f"{tid}: missing **Decision dependencies:** line")
+        if re.search(r"^\*\*Phase:\*\*", path.read_text(encoding="utf-8"), re.MULTILINE):
+            errors.append(f"{tid}: obsolete **Phase:** metadata remains")
+
+        for dep in task.get("depends_on", []):
+            if dep not in expected_ids:
+                errors.append(f"{tid}: unknown dependency {dep}")
+            elif expected_ids.index(dep) >= expected_ids.index(tid):
+                errors.append(f"{tid}: dependency {dep} is not earlier in the ordered first-task sequence")
 
     for task in tasks:
-        tid = task["id"]
+        tid = task.get("id")
         status = status_map.get(tid)
         if status != "Done":
             continue
@@ -95,7 +180,11 @@ def main() -> int:
                 errors.append(f"{tid}: evidence {label!r} must be one of {sorted(allowed)}; found {value!r}")
 
         acceptance = acceptance_path.read_text(encoding="utf-8")
-        if not re.search(r"^\s*\*\*?Decision:\*\*?\s*APPROVE\b|^\s*Decision:\s*APPROVE\b", acceptance, re.IGNORECASE | re.MULTILINE):
+        if not re.search(
+            r"^\s*\*\*?Decision:\*\*?\s*APPROVE\b|^\s*Decision:\s*APPROVE\b",
+            acceptance,
+            re.IGNORECASE | re.MULTILINE,
+        ):
             errors.append(f"{tid}: creator acceptance does not contain Decision: APPROVE")
 
     # User explicitly requested no AGENTS.md. Check case-insensitively.
@@ -108,37 +197,71 @@ def main() -> int:
         errors.append(f"Expected a scoped codex.md suite; found only {len(codex_files)}")
 
     config_path = ROOT / ".codex" / "config.toml"
-    if not config_path.exists():
-        errors.append("Missing .codex/config.toml")
-    else:
-        try:
-            config = tomllib.loads(config_path.read_text(encoding="utf-8"))
-        except Exception as exc:  # pragma: no cover - diagnostic path
-            errors.append(f"Invalid TOML in .codex/config.toml: {exc}")
-        else:
-            if "codex.md" not in config.get("project_doc_fallback_filenames", []):
-                errors.append(".codex/config.toml does not set codex.md as a project-document fallback")
-            if config.get("sandbox_mode") != "workspace-write":
-                warnings.append("sandbox_mode is not workspace-write")
-            if config.get("sandbox_workspace_write", {}).get("network_access") is not False:
-                warnings.append("workspace-write network access is not explicitly false")
+    if config_path.exists():
+        errors.append(".codex/config.toml is deferred and must remain absent")
 
     required_paths = [
+        "README.md",
         "START_HERE.md",
+        "REVISION_SUMMARY.md",
         "codex.md",
         "docs/blueprint/Civilization_Sandbox_Game_Development_Blueprint_v2.0.pdf",
         "docs/creator/MODEL_AND_PROMPT_GUIDE.md",
+        "docs/decisions/ADR-001_RELEASE_SCOPE_REBASELINE.md",
         "docs/plans/MASTER_PLAN.md",
+        "docs/plans/PRE_1_0_ROADMAP.md",
+        "docs/plans/RELEASE_LADDER.md",
+        "docs/plans/DECISION_QUEUE.md",
+        "docs/plans/IDENTITY_GUARDRAILS.md",
         "docs/plans/STATUS_BOARD.md",
         "docs/plans/CURRENT_STEP.md",
+        "docs/plans/PHASE_8.md",
+        "docs/plans/VERSION_1_PRODUCTION.md",
+        "docs/plans/VERSION_1_5_PRODUCTION.md",
         "docs/core/TECHNICAL_ARCHITECTURE.md",
         "docs/ai/DECISION_LAB.md",
         "docs/templates/EVIDENCE_TEMPLATE.md",
+        "docs/templates/MILESTONE_GATE_TEMPLATE.md",
+        "docs/prompts/10_PLAN_MILESTONE.md",
+        "docs/evidence/ROADMAP-REBASELINE/EVIDENCE.md",
     ]
     for rel in required_paths:
         if not (ROOT / rel).exists():
             errors.append(f"Missing required file: {rel}")
 
+    adr = ROOT / "docs" / "decisions" / "ADR-001_RELEASE_SCOPE_REBASELINE.md"
+    if adr.exists() and field_from(adr, "Status") != "Accepted":
+        errors.append("ADR-001 must be recorded as Accepted")
+
+    decision_queue = ROOT / "docs" / "plans" / "DECISION_QUEUE.md"
+    if decision_queue.exists():
+        text = decision_queue.read_text(encoding="utf-8")
+        decision_ids = re.findall(r"^\|\s*(D\d{2})\s*\|", text, re.MULTILINE)
+        expected_decisions = [f"D{i:02d}" for i in range(1, 12)]
+        if decision_ids != expected_decisions:
+            errors.append(
+                f"Decision queue must contain ordered D01-D11; found {decision_ids}"
+            )
+
+    blueprint = ROOT / "docs" / "blueprint" / "Civilization_Sandbox_Game_Development_Blueprint_v2.0.pdf"
+    if blueprint.exists():
+        actual_hash = sha256(blueprint)
+        if actual_hash != BLUEPRINT_SHA256:
+            errors.append(f"Blueprint PDF hash changed: {actual_hash}")
+
+    status_board = ROOT / "docs" / "plans" / "STATUS_BOARD.md"
+    if status_board.exists():
+        board = status_board.read_text(encoding="utf-8")
+        for task in tasks:
+            needle = f"**{task['id']}** — {task['title']}"
+            if needle not in board:
+                errors.append(f"Status board is stale or missing registry title: {needle}")
+        for mid in EXPECTED_MILESTONES:
+            if f"| {mid} |" not in board:
+                errors.append(f"Status board is missing milestone {mid}")
+
+    print(f"Roadmap revision: {registry.get('roadmap_revision', 'Unspecified')}")
+    print(f"Milestones registered: {len(milestones)}")
     print(f"Tasks registered: {len(tasks)}")
     print(f"Scoped codex.md files: {len(codex_files)}")
     print(f"Done tasks: {sum(1 for s in status_map.values() if s == 'Done')}")

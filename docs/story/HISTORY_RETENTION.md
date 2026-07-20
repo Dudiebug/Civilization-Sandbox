@@ -1,10 +1,14 @@
 # History Retention Summary
 
-- Canonical founding, war, treaty, government change, invention, extinction, disaster, Tier 3 ruin, and player intervention: permanent.
-- Person routine actions: 30 game days full; two years monthly summaries; annual life summaries thereafter.
-- Settlement economy/health: one year daily; twenty years monthly; annual thereafter.
-- Civilization metrics: monthly for twenty years; annual thereafter.
-- Important decisions: bounded recent buffers with promotion for major events.
-- World-defining physical geography, stable landmark IDs, and dependent causal evidence: never silently compact.
+## Version 1.0 minimum
+- Permanent: founding, major route/building completion or destruction, migration waves, war/peace, settlement collapse/recovery, major player interventions, and protected ruins.
+- Recent person and settlement traces: bounded rolling buffers.
+- Older routine actions: aggregate or discard after they no longer support an active explanation.
+- Physical scars cited by retained major events: keep stable identity and sufficient geometry/state to remain recognizable.
+
+The exact retention window and save-size budget are selected during Milestone 0.9 from measured save-growth evidence.
+
+## Version 1.5 horizon
+The Blueprint's full tiered retention, long person summaries, civilization metrics, perspective history, historical maps, and 500-year compaction verification remain the complete early-modern target.
 
 A no-compaction debug mode may exist for verification; it is not necessarily a supported retail mode.

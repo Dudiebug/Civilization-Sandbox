@@ -1,23 +1,32 @@
 # START HERE
 
-This folder is a repository-ready control system for building **Civilization Sandbox** with Codex.
-It deliberately contains **no `AGENTS.md` file**. Codex is configured to use scoped `codex.md` files instead.
+This folder is a repository-ready control system for building **Civilization Sandbox** with Codex. It deliberately contains **no `AGENTS.md` file**. Codex is configured to use scoped `codex.md` files instead.
+
+## Roadmap status
+
+The release plan has been rebaselined:
+- Version 1.0 is the lean regional game.
+- The original Blueprint v2.0 complete early-modern target is Version 1.5.
+- Pre-1.0 work uses Milestones 0.1 through 0.9.
+- Exact product counts and detailed content choices are intentionally deferred to `docs/plans/DECISION_QUEUE.md`.
 
 ## Your next action
 
 1. Put this kit at the root of a new Git repository.
-2. Open `docs/plans/CURRENT_STEP.md`.
-3. Open the model control, select **Advanced**, then choose **5.6 Sol** with **Max** reasoning for critical `TASK-001` planning.
-4. Paste `docs/prompts/01_PLAN_TASK.md` and tell it to plan `TASK-001`.
-5. Do not let it implement until you approve the plan.
+2. Read `REVISION_SUMMARY.md` and `docs/plans/CURRENT_STEP.md`.
+3. Open `docs/plans/tasks/TASK-001.md`.
+4. Use `docs/prompts/01_PLAN_TASK.md` in Plan mode.
+5. Do not let Codex implement until you approve the Task 001 plan.
 
-## Three files to use most often
+## Files to use most often
 
-- `docs/creator/QUICK_REFERENCE.md` — one-screen operating guide.
-- `docs/plans/STATUS_BOARD.md` — what is done, active, blocked, or next.
-- `docs/creator/MODEL_AND_PROMPT_GUIDE.md` — model selection and exact prompting method.
+- `docs/creator/QUICK_REFERENCE.md` - one-screen operating guide.
+- `docs/plans/STATUS_BOARD.md` - what is done, active, blocked, or next.
+- `docs/plans/MASTER_PLAN.md` - the concise milestone route.
+- `docs/plans/PRE_1_0_ROADMAP.md` - the in-depth program plan, gates, evidence, and decision boundaries.
+- `docs/plans/DECISION_QUEUE.md` - decisions that are deliberately not being made yet.
+- `docs/creator/MODEL_AND_PROMPT_GUIDE.md` - model selection and prompting method.
 
 ## Safety rule
 
-A box is crossed off only after automated checks, independent review, evidence, and your player-visible acceptance.
-The planning system itself is complete; **game-development tasks are not yet complete**.
+A box is crossed off only after automated checks, independent review, evidence, and creator-visible acceptance. The planning system is complete; **game-development tasks are not yet complete**.

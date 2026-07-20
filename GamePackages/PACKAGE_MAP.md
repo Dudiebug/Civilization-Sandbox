@@ -1,5 +1,8 @@
 # Planned Package Map
 
+> This map describes eventual Version 1.5 ownership if the Unity-shaped package approach is accepted in Milestone 0.1. It is not a Version 1.0 feature checklist and does not settle the engine decision. The active milestone controls which subset may be implemented.
+
+
 | Package | Primary ownership |
 |---|---|
 | `com.civsandbox.simulation.core` | Authoritative clock, stable IDs, units, fixed-point values, scheduler, keyed RNG, deterministic containers, command boundary primitives, and checksums. |

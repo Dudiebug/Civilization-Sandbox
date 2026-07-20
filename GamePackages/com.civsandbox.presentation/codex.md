@@ -7,7 +7,7 @@ Read-only snapshot consumption, 3D terrain/roads/buildings, camera-facing billbo
 No authoritative decisions, time ownership, inventory, AI, save truth, or mutation of simulation state.
 
 ## Dependency rule
-Depends on presentation descriptors/read models and Unity rendering packages; simulation packages never depend on this package.
+Depends on presentation descriptors/read models and the rendering packages accepted in Milestone 0.1; simulation packages never depend on this package.
 
 ## Change requirements
 - Read the active task and relevant behavior/data contracts.

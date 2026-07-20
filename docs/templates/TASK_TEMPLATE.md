@@ -1,11 +1,13 @@
-# TASK-NNN — Title
+# TASK-NNN - Title
 
-**Status:** Not Started  
-**Phase:**  
-**Owner:**  
-**Risk:** Low / Medium / High / Critical  
-**Depends on:**  
-**Blueprint references:**
+**Status:** Not Started
+**Milestone:**
+**Release horizon:**
+**Owner:**
+**Risk:** Low / Medium / High / Critical
+**Depends on:**
+**Decision dependencies:** None / DNN
+**Blueprint/ADR references:**
 
 ## Creator summary
 One plain-language paragraph explaining what changes and why it is next.
@@ -14,13 +16,13 @@ One plain-language paragraph explaining what changes and why it is next.
 One measurable outcome.
 
 ## In scope
-- 
+-
 
 ## Out of scope
-- 
+-
 
 ## Required outputs
-- 
+-
 
 ## Milestones
 - [ ] M1
@@ -36,9 +38,11 @@ One measurable outcome.
 - Creator-visible check:
 
 ## Stop conditions
-- 
+- Required creator decision is unopened or ambiguous.
+- Work exceeds the active milestone or introduces a future-release dependency.
+-
 
 ## Evidence and acceptance
-Evidence folder: `docs/evidence/TASK-NNN/`  
-Independent reviewer:  
+Evidence folder: `docs/evidence/TASK-NNN/`
+Independent reviewer:
 Creator acceptance: Pending

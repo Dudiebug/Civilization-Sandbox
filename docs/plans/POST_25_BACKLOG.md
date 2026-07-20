@@ -1,18 +1,55 @@
-# Work Immediately After TASK-025
+# Work After TASK-025
 
-Create detailed task contracts only after the integrated gate passes.
+TASK-025 ends Milestone 0.3. Do not immediately create detailed contracts for all remaining releases.
 
-1. Story Director candidate selection and Chronicler profile.
-2. Institutions and government thin vertical loop.
-3. Capability opportunity, invention, adoption, loss, and reverse engineering.
-4. Physical commodity economy, markets, shipments, and trade.
-5. Culture, religion, patriotism, legitimacy, factions, and civilization formation.
-6. Contact, believed information, treaties, and three-actor diplomacy.
-7. Limited physical war, supply, occupation, refugees, and rebuilding.
-8. Hybrid ecosystems, disasters, extinction/recovery, and landmark ruins.
-9. Complete 24-power set and Force Outcome reconciliation.
-10. Omniscient-versus-believed comparison UI and full history/chronicle views.
-11. Divergence prototype.
-12. Vertical-slice content, accessibility, performance, persistence, and release stabilization.
+## Gate sequence
+1. Complete the Milestone 0.3 evidence and creator gate.
+2. Open only D05, the decisions required for Milestone 0.4.
+3. Convert the approved Milestone 0.4 candidate work packages into small task contracts.
+4. Complete and review Milestone 0.4 before creating Milestone 0.5 task contracts.
+5. Repeat through Milestone 0.9.
 
-Later-age work remains prohibited.
+## Candidate task packages by milestone
+
+### 0.4 Physical Settlement
+- resource/inventory envelope;
+- production/workplace and occupation slice;
+- building archetypes and project lifecycle;
+- roads/bridge bottleneck and settlement services;
+- damage, salvage, rebuilding, and settlement UI.
+
+### 0.5 Divergent Societies
+- society identity and contrast variables;
+- thin institution/government behavior;
+- alternative problem solutions;
+- leadership/collective priorities;
+- matched-world divergence lab and comparison UI.
+
+### 0.6 Connected Region
+- contact/recognition;
+- shipments and route capacity;
+- trade/allocation abstraction;
+- agreements and migration;
+- bridge/corridor causal gate.
+
+### 0.7 Conflict and Recovery
+- mobilization and small combat groups;
+- supply and route movement;
+- physical encounters, casualties, damage, and flight;
+- peace, demobilization, salvage, and rebuilding.
+
+### 0.8 God Sandbox
+- omniscient search/inspection and explanations;
+- representative Binding Orders;
+- indirect interventions;
+- Force Outcomes and reconciliation;
+- intervention history and consolidated UI.
+
+### 0.9 Release Candidate
+- scope/content freeze;
+- onboarding/accessibility;
+- integrated performance and persistence;
+- external playtest, packaging, and release acceptance.
+
+## Prohibition
+Do not pre-author detailed Version 1.1-1.5 task contracts, later-age work, or exact content catalogs before their gate. The roadmap preserves direction; task contracts are created from evidence.

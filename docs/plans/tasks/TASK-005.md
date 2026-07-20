@@ -1,9 +1,11 @@
-# TASK-005 — Authoritative world clock and scheduler shell
+# TASK-005 - Authoritative world clock and scheduler shell
 
-**Status:** Not Started  
-**Phase:** Phase 1  
-**Risk:** Critical  
-**Depends on:** TASK-004  
+**Status:** Not Started
+**Milestone:** 0.1 - Project Foundation
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** Critical
+**Depends on:** TASK-004
+**Decision dependencies:** None unless the approved task plan identifies an active decision gate
 **Evidence folder:** `docs/evidence/TASK-005/`
 **Blueprint source:** Section 81, Task 005; Sections 10, 17, 47, 51, 55–57, 66–68, 75.2, 80.2, 81, and technical appendices
 
@@ -48,4 +50,4 @@ Typed world time, fixed scheduling, speed controls, deterministic due-event orde
 - [ ] `Build/validate_plan.py` permits Done status.
 
 ## Suggested launch
-Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Max** for Critical planning. After approval, use **5.6 Terra / High** for ordinary implementation and **Terra / Medium** only for exact mechanical work.
+Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Extra High** for planning. After approval, use **5.6 Terra / High** for ordinary implementation unless the plan identifies a critical architecture or migration change.

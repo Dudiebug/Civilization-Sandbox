@@ -1,15 +1,18 @@
 # Current Session Handoff
 
-**Active task:** TASK-001  
-**Status:** Not Started  
+**Active task:** TASK-001
+**Status:** Not Started
+**Milestone:** 0.1 - Project Foundation
 **Last accepted implementation:** None
 
 ## Completed
-- Planning/control kit generated from Blueprint v2.0.
+- Original Blueprint v2.0 planning/control kit generated.
+- Release scope rebaselined through ADR-001.
+- Pre-1.0 Milestones 0.1-0.9, Version 1.0 lean coverage, Version 1.5 horizon, and decision queue created.
 - No gameplay or repository bootstrap task has been implemented.
 
 ## Next single action
-Open the Advanced model picker, then plan TASK-001 in Plan mode using 5.6 Sol, Max reasoning.
+Plan TASK-001. Open only the decisions required for the repository/toolchain bootstrap.
 
 ## Blockers
-The final repository location, source-control host, reference Windows hardware, and exact Unity 6.3 LTS patch/package versions must be confirmed during Task 001 planning.
+Repository location/host, selected engine path, exact tool pins, supported development hosts, and reference hardware are resolved during TASK-001 planning. Product-scope decisions remain closed.

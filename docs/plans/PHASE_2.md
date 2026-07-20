@@ -1,36 +1,38 @@
-# Phase 2 — AI Decision Laboratory
+# Milestone 0.3 - Living Camp
 
-**Status:** Not Started  
-**Estimated duration:** 5–8 weeks
+**Status:** Not Started
+**Task range:** TASK-021 through TASK-025
 
-## Objective
-Validate behavior-contract primitives and evidence before broad autonomous behavior.
+**Detailed program context:** `PRE_1_0_ROADMAP.md`, Section 7.
 
-## Entry condition
-Deterministic core, headless runner, save/replay, state diff, and performance instrumentation accepted.
+## Purpose
+Produce the first recognizable causal simulation: named people survive or fail while physically founding a camp.
 
-## Work checklist
-- [ ] Create versioned behavior-contract schema and catalog.
-- [ ] Implement preconditions, bounded candidate providers, canonical curves, and deterministic selection.
-- [ ] Implement knowledge contexts, observer filters, and forbidden-omniscience checks.
-- [ ] Implement reservations, commitments, invalidation, cooldown, hysteresis, and change penalty.
-- [ ] Implement complete structured decision traces and bounded retail trace policy.
-- [ ] Implement scenario fixture loader and before/after trace reports.
-- [ ] Implement property, metamorphic, and multi-seed statistical runners.
-- [ ] Implement batch performance/allocation measurements.
-- [ ] Implement founding-site selection contract and suites.
-- [ ] Implement urgent-needs action contract and suites.
-- [ ] Implement settlement labor-allocation contract and suites.
-- [ ] Inject at least ten deliberate defects and prove the harness catches them.
-- [ ] Freeze accepted primitives behind versioned APIs.
+## Player-visible outcome
+The player can inspect a small founding group as people choose a site, obtain water and food, allocate work, haul materials, construct shelter and storage, form early paths, become injured, migrate, die, or recover. Major causes and events survive save/load.
+
+## Required work
+- One bounded regional world-generation envelope with terrain, water, resource, route, and hazard diversity needed by the slice.
+- Lean persistent people and households with only fields exercised by the slice.
+- Urgent needs, work, movement, reservations, and basic health/life outcomes.
+- Physical camp projects, material hauling, construction stages, damage, salvage, and ruins.
+- Desire paths/basic road edges and one decision-level project order boundary.
+- Omniscient person/camp inspection, one-line causes, and factual major-event summaries.
+- Multi-year deterministic continuation and save/load through active work and life changes.
+
+## Decisions opened in this milestone
+- D04 person/household detail and initial world-generation envelope.
+
+The exact population count, number of comparison groups, simulation duration, and resource/building list are set in the approved milestone brief from 0.2 evidence. They are not chosen by this document.
 
 ## Exit gate
-All first three decisions pass deterministic, property, metamorphic, statistical, save/replay, trace, performance, and adversarial-review gates.
+A selected seed suite produces an understandable living camp. People do not teleport goods or labor; the camera does not change outcomes; construction and failure are physical; save/load preserves future checksums; and the creator can answer why the camp survived or failed.
 
-## Do not build in this phase
-Giant planners, large policy catalogs, or weight tuning without contract evidence.
+## Stop/redesign triggers
+- The simulation is technically active but visually or causally unreadable.
+- People require unbounded searches or constant replanning.
+- Camp progress is mostly abstract state changes rather than physical work.
+- History cannot link major outcomes to people, places, and interventions.
 
-## Completion record
-Evidence index: Pending  
-Independent phase review: Pending  
-Creator gate decision: Pending
+## Explicitly deferred
+Durable village/town breadth, multiple society divergence, trade, diplomacy, warfare, full player powers, advanced history, ecosystems, and release polish.

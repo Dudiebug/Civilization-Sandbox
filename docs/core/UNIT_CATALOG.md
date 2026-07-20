@@ -1,6 +1,6 @@
 # Authoritative Unit Catalog
 
-The exact numeric representations are accepted during Phase 1. These semantic units are mandatory now.
+The exact numeric representations are accepted during Milestone 0.1 or the first task that needs them. These semantic units are mandatory now.
 
 | Domain | Unit/type rule |
 |---|---|

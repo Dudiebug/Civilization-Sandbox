@@ -1,25 +1,30 @@
-# First-Playable Release Checklist
+# Version 1.0 Release Checklist
+
+## Scope and identity
+- [ ] Final release-scope manifest records all approved quantitative targets and content boundaries.
+- [ ] `IDENTITY_GUARDRAILS.md` passes without exception or with explicit creator-approved exception.
+- [ ] No Version 1.5-only capability is an undocumented blocker.
 
 ## Authority and behavior
-- [ ] Version 1.0 scope map is complete.
 - [ ] No known camera-dependent, hidden-omniscience, authority, or story-truth violation.
 - [ ] Binding Orders, indirect interventions, and Force Outcomes remain distinct and auditable.
+- [ ] Societal divergence is causal and inspectable rather than scripted.
+- [ ] Physical construction, route effects, damage, displacement, and rebuilding are authoritative.
 
 ## Verification
-- [ ] Clean Windows build/test/package.
-- [ ] Supported Linux player smoke build.
-- [ ] 100-year canonical command-log replay.
-- [ ] 24-hour wall-clock soak.
-- [ ] 500-game-year accelerated run.
-- [ ] Multi-seed behavior/divergence distributions.
+- [ ] Clean supported-host build/test/package.
+- [ ] Approved deterministic command-log replay duration.
+- [ ] Approved wall-clock soak and accelerated simulation run.
+- [ ] Approved multi-seed behavior/divergence suites.
 - [ ] Save migration, interruption, corruption, and backup recovery.
-- [ ] Performance/memory/save budgets on reference hardware.
+- [ ] Performance, memory, routing, trace, and save budgets on reference hardware.
 
 ## Product
-- [ ] 13 workspaces and omniscient/belief comparison are usable.
-- [ ] Accessibility baseline passes formal review.
-- [ ] Chronicles/history/ruins remain factual and bounded.
-- [ ] Content, speech, localization, and asset validators pass.
+- [ ] Required information and commands are usable in the approved consolidated UI.
+- [ ] Accessibility baseline passes the approved review level.
+- [ ] Major history, interventions, and protected ruins remain factual and bounded.
+- [ ] Content, localization-safe strings, and asset validators pass.
+- [ ] Onboarding lets a new player understand the core loop.
 - [ ] No unresolved critical risk; high-risk exceptions are creator-approved.
-- [ ] Build manifest records blueprint, content, save, engine, package, and behavior-catalog versions.
+- [ ] Build manifest records blueprint, ADR, release scope, content, save, engine, package, and behavior-catalog versions.
 - [ ] Creator acceptance and release decision recorded.

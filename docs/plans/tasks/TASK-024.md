@@ -1,9 +1,11 @@
-# TASK-024 — Paths, road edges, parcels, and project-order boundary
+# TASK-024 - Paths, road edges, parcels, and project-order boundary
 
-**Status:** Not Started  
-**Phase:** Phase 3  
-**Risk:** Critical  
-**Depends on:** TASK-013, TASK-020, TASK-023  
+**Status:** Not Started
+**Milestone:** 0.3 - Living Camp
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** Critical
+**Depends on:** TASK-013, TASK-020, TASK-023
+**Decision dependencies:** None unless the approved task plan identifies an active decision gate
 **Evidence folder:** `docs/evidence/TASK-024/`
 **Blueprint source:** Section 81, Task 024; Sections 16–27, 47–54, 69–75, 80.4–80.5, 81, and technical appendices
 
@@ -49,4 +51,4 @@ Turn repeated travel into path pressure, formal bounded route proposals, authori
 - [ ] `Build/validate_plan.py` permits Done status.
 
 ## Suggested launch
-Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Max** for Critical planning. After approval, use **5.6 Terra / High** for ordinary implementation and **Terra / Medium** only for exact mechanical work.
+Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Extra High** for planning. After approval, use **5.6 Terra / High** for ordinary implementation unless the plan identifies a critical architecture or migration change.
