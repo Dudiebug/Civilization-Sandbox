@@ -36,7 +36,8 @@ try {
         Remove-Item -LiteralPath $targetDirectory -Recurse -Force
     }
     $arguments = "-batchmode -nographics -quit -projectPath `"$root`" -executeMethod CivSandbox.Tooling.Editor.BaselineBuild.Run -civSandboxBuildTarget $Target -logFile `"$log`""
-    $process = Start-Process -FilePath $unity -ArgumentList $arguments -Wait -PassThru -WindowStyle Hidden
+    $process = Start-Process -FilePath $unity -ArgumentList $arguments -PassThru -WindowStyle Hidden
+    $process.WaitForExit()
     $exitCode = $process.ExitCode
     if ($exitCode -eq 0 -and -not (Test-Path -LiteralPath $artifact -PathType Leaf)) {
         $exitCode = 1

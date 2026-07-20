@@ -55,6 +55,18 @@ try {
         }
     }
 
+    Test-Case 'direct reparse-point guard' {
+        $junction = Join-Path $selfTestArtifacts 'direct-outside-junction'
+        New-Item -ItemType Junction -Path $junction -Target $temp | Out-Null
+        try {
+            $threw = $false
+            try { Assert-Task001PathWithinRoot -RepositoryRoot $root -TargetPath $junction | Out-Null } catch { $threw = $_.Exception.Message -match 'CIV001-PATH-002' }
+            if (-not $threw) { throw 'Direct junction was accepted for repository mutation.' }
+        } finally {
+            if (Test-Path -LiteralPath $junction) { Remove-Item -LiteralPath $junction -Force }
+        }
+    }
+
     Test-Case 'pinned lock hash' {
         $lock = Test-Task001PackageLock -RepositoryRoot $root
         if ($lock.status -ne 'PASS') { throw "Expected PASS, got $($lock.code)." }
@@ -120,6 +132,18 @@ try {
         if ($LASTEXITCODE -eq 0) { throw 'Invalid Unity build returned zero.' }
         $after = @(Get-ChildItem -LiteralPath (Join-Path $root 'Artifacts\logs') -Filter 'build-windows-*.log' -File -ErrorAction SilentlyContinue).Count
         if ($after -le $before) { throw 'Failure log was not retained.' }
+    }
+
+    Test-Case 'Unity wrappers wait only for the editor process' {
+        foreach ($scriptName in @('Build.ps1', 'Test.ps1')) {
+            $source = Get-Content -LiteralPath (Join-Path $root "Build\$scriptName") -Raw
+            if ($source -match 'Start-Process[^\r\n]+-Wait') {
+                throw "$scriptName uses Start-Process -Wait, which can hang on Unity compiler-server descendants."
+            }
+            if ($source -notmatch '\$process\.WaitForExit\(\)') {
+                throw "$scriptName does not wait for the direct Unity process handle."
+            }
+        }
     }
 } finally {
     if (Test-Path -LiteralPath $temp) { Remove-Item -LiteralPath $temp -Recurse -Force }

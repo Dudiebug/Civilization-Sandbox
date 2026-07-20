@@ -28,6 +28,23 @@ function Get-Task001Sha256 {
     return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
 }
 
+function Test-Task001PathRedirector {
+    param([Parameter(Mandatory = $true)][System.IO.FileSystemInfo]$Item)
+    if (($Item.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -eq 0) { return $false }
+
+    # OneDrive uses non-redirecting cloud reparse points for ordinary files and
+    # directories. PowerShell exposes path-redirecting reparse points (junctions
+    # and symbolic links) through LinkType/Target, which are the escape risk.
+    $linkType = $Item.PSObject.Properties['LinkType']
+    if ($linkType -and -not [string]::IsNullOrWhiteSpace([string]$linkType.Value)) { return $true }
+    $target = $Item.PSObject.Properties['Target']
+    if ($target -and $null -ne $target.Value -and @($target.Value).Count -gt 0) {
+        $targetText = (@($target.Value) | ForEach-Object { [string]$_ }) -join ''
+        if (-not [string]::IsNullOrWhiteSpace($targetText)) { return $true }
+    }
+    return $false
+}
+
 function Assert-Task001PathWithinRoot {
     param(
         [Parameter(Mandatory = $true)][string]$RepositoryRoot,
@@ -43,7 +60,7 @@ function Assert-Task001PathWithinRoot {
     while (-not $probe.Equals($root, [System.StringComparison]::OrdinalIgnoreCase)) {
         if (Test-Path -LiteralPath $probe) {
             $probeItem = Get-Item -LiteralPath $probe -Force
-            if (($probeItem.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) {
+            if (Test-Task001PathRedirector -Item $probeItem) {
                 throw "CIV001-PATH-002: Refusing a repository mutation through a reparse point: $probe"
             }
         }
@@ -58,7 +75,7 @@ function Assert-Task001TreeHasNoReparsePoints {
     param([Parameter(Mandatory = $true)][string]$Path)
     if (-not (Test-Path -LiteralPath $Path -PathType Container)) { return }
     $reparsePoints = @(Get-ChildItem -LiteralPath $Path -Recurse -Force -ErrorAction Stop | Where-Object {
-        ($_.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0
+        Test-Task001PathRedirector -Item $_
     })
     if ($reparsePoints.Count -gt 0) {
         throw "CIV001-PATH-003: Refusing recursive mutation because the target tree contains a reparse point: $($reparsePoints[0].FullName)"

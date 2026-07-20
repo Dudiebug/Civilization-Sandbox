@@ -12,7 +12,7 @@
 
 ## Required results
 
-- Build: PENDING — Windows x64 Mono passes locally; Linux x64 Mono is blocked by the incomplete installed module.
+- Build: BLOCKED — both players compile locally, but Unity adds unapproved Linux SDK/toolchain packages to the direct project graph; the committed manifest and lock were restored.
 - Tests: PENDING — exactly one EditMode test and headless Windows smoke pass locally; clean-profile reproduction remains required.
 - Replay/state diff: N/A — TASK-001 creates no authoritative state or replay format.
 - Persistence/migration: N/A — TASK-001 creates no save format.
@@ -25,7 +25,7 @@
 
 - [ ] Clean standard Windows profile and non-OneDrive clone details.
 - [ ] Prerequisite audit/install transcript; no license automation.
-- [ ] Two bootstrap result JSON files with identical tracked state and lock hash.
+- [x] Two local bootstrap result JSON files with identical tracked state and lock hash.
 - [ ] Clean editor import with zero compiler errors.
 - [ ] Windows and Linux build result JSON, logs, binaries, and hashes.
 - [ ] NUnit XML showing exactly one passing deterministic EditMode test.
@@ -49,12 +49,20 @@
 - Full audit negative path: PASS as a negative demonstration; stable missing-tool/module diagnostics and exit code 1 were retained under `Artifacts/negative/`.
 - Evidence omission negative path: PASS as a negative demonstration; `Package-Evidence.ps1` refused to create an archive without the Linux executable.
 
+## Local implementation results — 2026-07-20 PDT
+
+- Pinned prerequisites: PASS — Git `2.55.0.3`, PowerShell `7.6.3`, Python `3.13.14`, GitHub CLI `2.96.0`, and Unity Hub `3.19.5`; GitHub CLI is authenticated as the repository owner.
+- Unity modules: PASS — Windows Mono and Linux Mono are installed. The Hub-downloaded Linux Mono installer matched Unity's published MD5 metadata; observed SHA-256 `d3a70b44912f0ce21ca9b1ea198b20a09072bd6df4ed279d239a37d1cbc95ccd`.
+- Full bootstrap idempotency: PASS — two consecutive audits returned zero, Git state was unchanged, and package-lock SHA-256 remained `5dda07b9b8c1ab85cb77a5353a94a47414866f87ce222b3c8220d3d0d727e8df`.
+- PowerShell guard suite: PASS, 14 tests. Coverage now includes direct and nested path-redirecting reparse points, while allowing non-redirecting OneDrive cloud markers.
+- Linux x64 Mono player compilation: technically PASS in 79.7 seconds; executable SHA-256 `8027f7d1f9ae7dacfc826fb218adcc1ae7464af098a8a59397e7531c0f7ec0bc`.
+- Linux package-integrity gate: BLOCKED — Unity added direct `com.unity.sdk.linux-x86_64@1.1.0` and `com.unity.toolchain.win-x86_64-linux@1.1.0`, with transitive `com.unity.sysroot.base@1.1.0`. These are not in TASK-001's locked direct-package interface, so the generated manifest/lock changes were not accepted.
+- Unity wrapper termination: PASS after correction — build/test scripts wait on the editor process handle, avoiding PowerShell descendant-tree waits on Unity's long-lived Roslyn compiler server.
+
 ## Current blockers
 
-1. The installed Linux support tree lacks `Variations/linux64_player_nondevelopment_mono`, so the Linux Mono build fails honestly with nonzero exit and retained log.
-2. The explicit prerequisite install added pinned PowerShell `7.6.3`, Python `3.13.14`, and GitHub CLI `2.96.0`. Git required an administrator prompt and was cancelled. GitHub CLI is not authenticated; no installed tool was removed or downgraded.
-3. Hub downloaded the exact `c9ba695d4f07` Linux Mono support installer and queued it, but could not start the installer while that unrelated MSI session was active. The bootstrap-owned headless Hub process was stopped; no editor click or license activation was used.
-4. GitHub CLI authentication, protected private-branch enforcement, first workflow run, non-OneDrive clean standard-profile reproduction, independent review, creator acceptance, merge, accepted tag, and recovery rehearsal remain pending.
+1. The locked package interface omits the Linux SDK/toolchain packages Unity `6000.3.20f1` deterministically adds when building the required Linux Mono player. TASK-001 stops on package drift, so accepting those three pins requires an explicit interface amendment.
+2. Protected private-branch enforcement, first workflow run, non-OneDrive clean standard-profile reproduction, independent review, creator acceptance, merge, accepted tag, and recovery rehearsal remain pending.
 
 ## Changed surface
 

@@ -29,7 +29,8 @@ try {
     New-Item -ItemType Directory -Path (Split-Path -Parent $testXml) -Force | Out-Null
     if (Test-Path -LiteralPath $testXml) { Remove-Item -LiteralPath $testXml -Force }
     $arguments = "-batchmode -nographics -projectPath `"$root`" -runTests -testPlatform EditMode -assemblyNames CivSandbox.Tooling.Editor.Tests -testResults `"$testXml`" -logFile `"$log`""
-    $process = Start-Process -FilePath $unity -ArgumentList $arguments -Wait -PassThru -WindowStyle Hidden
+    $process = Start-Process -FilePath $unity -ArgumentList $arguments -PassThru -WindowStyle Hidden
+    $process.WaitForExit()
     $exitCode = $process.ExitCode
     if ($exitCode -ne 0) { throw "CIV001-TEST-001: Unity test runner failed with exit code $exitCode. See $log" }
     if (-not (Test-Path -LiteralPath $testXml -PathType Leaf)) { throw 'CIV001-TEST-002: NUnit XML was not produced.' }
