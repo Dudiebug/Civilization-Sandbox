@@ -1,9 +1,11 @@
-# TASK-003 — Architecture and code-quality gates
+# TASK-003 - Architecture and code-quality gates
 
-**Status:** Not Started  
-**Phase:** Phase 0  
-**Risk:** Critical  
-**Depends on:** TASK-001, TASK-002  
+**Status:** Not Started
+**Milestone:** 0.1 - Project Foundation
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** Critical
+**Depends on:** TASK-001, TASK-002
+**Decision dependencies:** None unless the approved task plan identifies an active decision gate
 **Evidence folder:** `docs/evidence/TASK-003/`
 **Blueprint source:** Section 81, Task 003; Sections 4.7, 65–68, 75.1, 80.1, 81, and Appendix F–H
 
@@ -14,7 +16,7 @@ Make architectural violations fail automatically before they accumulate.
 CI rejects forbidden dependencies, uncontrolled randomness, simulation state in presentation, and invalid content/schema boundaries.
 
 ## In scope
-- Define Unity assemblies/packages and allowed dependency graph.
+- Define selected-engine modules/assemblies/packages and the allowed dependency graph.
 - Add analyzers or architecture tests for forbidden APIs and layers.
 - Forbid uncontrolled RNG and frame/camera inputs in authoritative packages.
 - Add content-schema validation skeleton and stable-ID rules.

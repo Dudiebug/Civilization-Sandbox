@@ -1,9 +1,11 @@
-# TASK-023 — Physical camp and building-construction proof
+# TASK-023 - Physical camp and building-construction proof
 
-**Status:** Not Started  
-**Phase:** Phase 3  
-**Risk:** Critical  
-**Depends on:** TASK-013, TASK-014, TASK-021, TASK-022  
+**Status:** Not Started
+**Milestone:** 0.3 - Living Camp
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** Critical
+**Depends on:** TASK-013, TASK-014, TASK-021, TASK-022
+**Decision dependencies:** None unless the approved task plan identifies an active decision gate
 **Evidence folder:** `docs/evidence/TASK-023/`
 **Blueprint source:** Section 81, Task 023; Sections 16–27, 47–54, 69–75, 80.4–80.5, 81, and technical appendices
 

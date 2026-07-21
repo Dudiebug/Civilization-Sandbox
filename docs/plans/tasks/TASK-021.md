@@ -1,53 +1,40 @@
-# TASK-021 — Procedural world generation and validation
+# TASK-021 - Regional world generation and validation
 
-**Status:** Not Started  
-**Phase:** Phase 3  
-**Risk:** High  
-**Depends on:** TASK-008, TASK-010, TASK-012, TASK-018  
+**Status:** Not Started
+**Milestone:** 0.3 - Living Camp
+**Release horizon:** One regional Living Camp envelope now; broader presets and full environmental breadth later
+**Risk:** High
+**Depends on:** TASK-008, TASK-010, TASK-012, TASK-018
+**Decision dependencies:** D04
 **Evidence folder:** `docs/evidence/TASK-021/`
-**Blueprint source:** Section 81, Task 021; Sections 16–27, 47–54, 69–75, 80.4–80.5, 81, and technical appendices
+**Blueprint/ADR source:** Blueprint Sections 16, 25, 69-75, 81; ADR-001
 
 ## Creator summary
-Create bounded worlds with enough physical and informational diversity for contrasting societies.
+Create only the environmental and informational variation needed to test a living founding camp. Do not build the full Small/Standard/Large world suite yet.
 
 ## Objective
-Generate versioned terrain, hydrology, climate, soils, ecosystems/resources, hidden deposits, hazards, and viable contrasting founding regions.
+Generate a versioned bounded region with terrain, water, fertility/productivity, surface resources, limited hidden information, route constraints, and a small hazard set sufficient for site choice and survival.
 
 ## In scope
-- 128-bit seed and generation version.
-- Elevation, drainage, watersheds, rivers/lakes/coasts.
-- Temperature, moisture, seasonality, soil, vegetation productivity, habitat, surface resources.
-- Hidden deposits with quantity/grade/depth/access cost.
-- Flood/fire/drought/storm/slope/disease pressure.
-- Validity report and deterministic regeneration.
+- Seed and generation version.
+- Elevation, drainage/water, basic moisture/soil/productivity, vegetation/resource fields.
+- Only the deposits/hazards needed by the approved Living Camp slice.
+- Viable and difficult founding areas.
+- Deterministic regeneration, validity report, and save integration.
 
 ## Required outputs
-- [ ] World-generation package and content.
-- [ ] Small/Standard/Large generation presets.
-- [ ] World validator and seed suite.
-- [ ] Generation manifest and save integration.
+- [ ] Regional world-generation package/content.
+- [ ] One approved generation envelope plus test variants.
+- [ ] Validator and seed suite.
+- [ ] Generation manifest and save fixture.
 
 ## Verification and acceptance
-- [ ] Standard valid seeds meet minimum river/watershed/region/site/corridor/diversity rules.
+- [ ] Valid seeds meet the D04 survival/diversity requirements.
 - [ ] Same seed/version reproduces authoritative fields.
-- [ ] AI site choice sees only knowledge.
-- [ ] Invalid structurally unusable worlds are rejected with reasons.
-- [ ] Generation and save fit budgets.
-- [ ] Documentation and relevant `codex.md` instructions match the implementation.
-- [ ] Independent adversarial review reports no blocking findings.
-- [ ] Creator-visible acceptance is recorded.
+- [ ] Founding AI sees only permitted knowledge.
+- [ ] Structurally unusable worlds are rejected with reasons.
+- [ ] Generation and save fit the accepted Version 1.0 target tier.
+- [ ] Independent review and creator acceptance pass.
 
 ## Out of scope
-- Perfect real-world climatology, spherical worlds, final terrain art, or eliminating all difficult sites.
-
-## Required work sequence
-- [ ] Planner produces small milestones, exact files, tests, rollback, and stop conditions.
-- [ ] Creator approves the plan.
-- [ ] Implementer completes one milestone at a time.
-- [ ] Verification agent reproduces evidence from a clean worktree.
-- [ ] Adversarial reviewer challenges architecture and failure cases.
-- [ ] Creator tests the observable result and accepts or requests changes.
-- [ ] `Build/validate_plan.py` permits Done status.
-
-## Suggested launch
-Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Extra High** for planning. After approval, use **5.6 Terra / High** for ordinary implementation unless the plan identifies a critical architecture or migration change.
+Multiple retail presets, full climate/ecosystem simulation, perfect real-world geography, spherical worlds, or final terrain art.

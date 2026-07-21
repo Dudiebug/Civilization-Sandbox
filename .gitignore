@@ -24,6 +24,8 @@ Recordings/
 *.pdb
 *.mdb
 *.opendb
+__pycache__/
+*.pyc
 *.VC.db
 .DS_Store
 Thumbs.db

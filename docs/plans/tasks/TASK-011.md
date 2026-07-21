@@ -1,50 +1,40 @@
-# TASK-011 — Synthetic 10,000-person engine benchmark
+# TASK-011 - Measured scale ladder and engine benchmark
 
-**Status:** Not Started  
-**Phase:** Phase 1  
-**Risk:** Critical  
-**Depends on:** TASK-005, TASK-006, TASK-007, TASK-009, TASK-010  
+**Status:** Not Started
+**Milestone:** 0.2 - Decision and Engine Proof
+**Release horizon:** Select Version 1.0 scale from evidence; measure Version 1.5 horizon without making it a 1.0 blocker
+**Risk:** Critical
+**Depends on:** TASK-005, TASK-006, TASK-007, TASK-009, TASK-010
+**Decision dependencies:** D03 closes after evidence
 **Evidence folder:** `docs/evidence/TASK-011/`
-**Blueprint source:** Section 81, Task 011; Sections 10, 17, 47, 51, 55–57, 66–68, 75.2, 80.2, 81, and technical appendices
+**Blueprint/ADR source:** Blueprint Sections 55-57, 68, 75.2, 81; ADR-001
 
 ## Creator summary
-Measure the real cost shape before implementing complex behavior.
+Measure real cost at several tiers before choosing the Version 1.0 world/population target. Do not assume the original 10,000-person goal is a first-release requirement.
 
 ## Objective
-Run compact synthetic people, households, needs, jobs, locations, and shipments at 10,000-person scale and measure tick, memory, save, and load.
+Run representative synthetic people, households, needs, jobs, locations, structures, and shipments through a configurable scale ladder, then recommend a target and stress tier for Version 1.0.
 
 ## In scope
-- Synthetic data generator with stable seeds.
-- Representative component/access patterns without full AI.
-- Cadence mixes and structural-change stress.
+- Stable-seed synthetic data generator.
+- Representative component/access/cadence patterns without full gameplay AI.
+- Multiple scale tiers named laboratory, candidate 1.0, 1.0 stress, and 1.5 horizon.
 - Memory, allocations, system duration, backlog, save/load, and trace-off measurements.
-- Reference-machine baseline and report.
+- Reference-machine reports and D03 recommendation.
 
 ## Required outputs
-- [ ] Benchmark scenarios and runner.
-- [ ] Machine-readable and human-readable report.
-- [ ] Baseline budget ledger.
+- [ ] Configurable benchmark scenarios and runner.
+- [ ] Machine-readable and creator-readable scale report.
+- [ ] Candidate Version 1.0 budget ADR.
+- [ ] Nonblocking Version 1.5 horizon findings, including the Blueprint 10,000-person target where practical.
 
 ## Verification and acceptance
-- [ ] 10,000 entities remain below working-set and loop budgets or produce a clear gate failure.
-- [ ] Steady-state hot loops allocate zero where required.
-- [ ] Save/load meets provisional size/time targets.
+- [ ] Each tested tier records comparable p50/p95/max, memory, backlog, save, and load evidence.
+- [ ] Steady-state hot loops meet declared allocation rules.
 - [ ] Repeated runs have stable variance and checksums.
-- [ ] Documentation and relevant `codex.md` instructions match the implementation.
-- [ ] Independent adversarial review reports no blocking findings.
-- [ ] Creator-visible acceptance is recorded.
+- [ ] D03 is decided by the creator from evidence; the task does not choose it silently.
+- [ ] Failure at the 1.5 horizon does not fail the 1.0 gate if the accepted 1.0 tier passes.
+- [ ] Independent review and creator acceptance pass.
 
 ## Out of scope
-- Inflating entity count while omitting representative work, or claiming scalability from one screenshot.
-
-## Required work sequence
-- [ ] Planner produces small milestones, exact files, tests, rollback, and stop conditions.
-- [ ] Creator approves the plan.
-- [ ] Implementer completes one milestone at a time.
-- [ ] Verification agent reproduces evidence from a clean worktree.
-- [ ] Adversarial reviewer challenges architecture and failure cases.
-- [ ] Creator tests the observable result and accepts or requests changes.
-- [ ] `Build/validate_plan.py` permits Done status.
-
-## Suggested launch
-Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Extra High** for planning. After approval, use **5.6 Terra / High** for ordinary implementation unless the plan identifies a critical architecture or migration change.
+Claiming scale from record count alone, building full AI, or locking world/population numbers before measurement.

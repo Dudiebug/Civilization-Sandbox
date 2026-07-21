@@ -1,9 +1,11 @@
-# TASK-004 — Command-line and CI harness
+# TASK-004 - Command-line and CI harness
 
-**Status:** Not Started  
-**Phase:** Phase 0  
-**Risk:** Critical  
-**Depends on:** TASK-001, TASK-003  
+**Status:** Not Started
+**Milestone:** 0.1 - Project Foundation
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** Critical
+**Depends on:** TASK-001, TASK-003
+**Decision dependencies:** None unless the approved task plan identifies an active decision gate
 **Evidence folder:** `docs/evidence/TASK-004/`
 **Blueprint source:** Section 81, Task 004; Sections 4.7, 65–68, 75.1, 80.1, 81, and Appendix F–H
 

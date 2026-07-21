@@ -1,9 +1,11 @@
-# TASK-010 — Semantic persistence skeleton
+# TASK-010 - Semantic persistence skeleton
 
-**Status:** Not Started  
-**Phase:** Phase 1  
-**Risk:** Critical  
-**Depends on:** TASK-006, TASK-008, TASK-009  
+**Status:** Not Started
+**Milestone:** 0.1 - Project Foundation
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** Critical
+**Depends on:** TASK-006, TASK-008, TASK-009
+**Decision dependencies:** None unless the approved task plan identifies an active decision gate
 **Evidence folder:** `docs/evidence/TASK-010/`
 **Blueprint source:** Section 81, Task 010; Sections 10, 17, 47, 51, 55–57, 66–68, 75.2, 80.2, 81, and technical appendices
 

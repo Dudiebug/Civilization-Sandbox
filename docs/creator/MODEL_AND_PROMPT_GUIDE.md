@@ -8,7 +8,7 @@ Verified against official OpenAI Codex documentation on 2026-07-17.
 |---|---|---|
 | Architecture, phase planning, risky migrations, root-cause analysis | 5.6 Sol | Extra High; use Max/Ultra only for genuinely decomposable hard work |
 | Adversarial review, security, determinism, save integrity | 5.6 Sol | Extra High |
-| Normal C#/Unity implementation from an approved task | 5.6 Terra | High |
+| Normal engine/project implementation from an approved task | 5.6 Terra | High |
 | Tests, documentation updates, small refactors with clear boundaries | 5.6 Terra | Medium or High |
 | Repetitive schema/content work with exact examples | 5.6 Luna | Medium |
 | Tiny interactive edits or rapid compile-fix loops | 5.3 Codex Spark | Medium; only when available and scope is very small |

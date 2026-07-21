@@ -1,0 +1,40 @@
+# Repository Governance
+
+`main` is the only long-lived integration branch. The sole authoritative checkout and Unity project is `C:\Users\dudie\Projects\Civilization-Sandbox`. Work begins from an accepted `main` commit on a branch named `task/TASK-NNN-description` in that checkout. Persistent sibling worktrees, secondary development clones, and copied Unity project folders are prohibited. Direct pushes, force-pushes, and branch deletion are prohibited. Every change reaches `main` through a pull request.
+
+Branch changes happen in the authoritative checkout only after the current branch is committed and published. A disposable verification clone is permitted only while a guarded verification command is running and must be removed by that command's `finally` cleanup; it is never a development folder or Unity Hub project.
+
+The repository is intentionally configured for a solo creator: a pull request is required, but no approving GitHub review count is required. Independent adversarial review is recorded as task evidence and remains mandatory before a task can be accepted.
+
+## TASK-001 transition
+
+- Remote baseline: `aec44fcb4285767716fbd22715fd96233459ab8e`.
+- Recovery tag: `task-001-start-aec44fc`.
+- Preserved creator edits: `prep/task001-approved-docs`.
+- Implementation branch: `task/TASK-001-bootstrap`.
+- Required check after its first successful report: `repository-policy`.
+
+`Build/Configure-Repository.ps1` audits by default. `-Apply` is required for GitHub mutations, and the script refuses to apply protection when live visibility differs from `Config/repository-governance.json` or when the configured baseline is not present. GitHub CLI authentication is a human prerequisite.
+
+## Recovery
+
+Export the live repository settings before applying a change:
+
+```powershell
+pwsh Build/Configure-Repository.ps1 -ExportPath Artifacts/repository-settings-before.json
+```
+
+To restore the pre-TASK-001 branch shape without rewriting history:
+
+```powershell
+git branch master task-001-start-aec44fc
+git push origin refs/tags/task-001-start-aec44fc refs/heads/master
+gh api --method PATCH repos/Dudiebug/Civilization-Sandbox -f default_branch=master
+pwsh Build/Configure-Repository.ps1 -RollbackSettings Artifacts/repository-settings-before.json -Apply
+```
+
+Remove the required check before reverting the workflow. Never delete `main`, `master`, or either recovery tag until the restored default branch and protection response have been inspected.
+
+## Protection availability
+
+The repository is public by explicit creator approval recorded on 2026-07-20 after GitHub rejected protected branches for the private repository with HTTP 403. Public visibility is now part of the locked governance contract; any future visibility change requires the same ask-first amendment process. If GitHub still rejects protection, TASK-001 is blocked and the script must not weaken the policy.

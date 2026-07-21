@@ -1,50 +1,39 @@
-# TASK-014 — 2.5D presentation proof
+# TASK-014 - Configurable 2.5D presentation proof
 
-**Status:** Not Started  
-**Phase:** Phase 1  
-**Risk:** High  
-**Depends on:** TASK-011, TASK-012, TASK-013  
+**Status:** Not Started
+**Milestone:** 0.2 - Decision and Engine Proof
+**Release horizon:** Prove the locked visual identity at the accepted Version 1.0 tier; retain Version 1.5 stress data separately
+**Risk:** High
+**Depends on:** TASK-011, TASK-012, TASK-013
+**Decision dependencies:** Uses D03 scale tiers; does not set final art direction
 **Evidence folder:** `docs/evidence/TASK-014/`
-**Blueprint source:** Section 81, Task 014; Sections 10, 17, 47, 51, 55–57, 66–68, 75.2, 80.2, 81, and technical appendices
+**Blueprint/ADR source:** Blueprint Sections 41-44, 55-57, 68, 81; ADR-001
 
 ## Creator summary
-Prove the locked visual direction and density can render authoritative snapshots without affecting simulation.
+Prove the 2.5D visual stack can display authoritative snapshots readably at configurable density without making the original 5,000-billboard/1,000-building stress target a Version 1.0 release requirement.
 
 ## Objective
-Display real 3D terrain/elevation/water, angled camera, selection, camera-facing billboards, modular structures, occlusion, LOD, and debug overlays at stress scale.
+Display real 3D terrain/elevation/water, angled camera, selection, camera-facing billboards, modular structures, occlusion, LOD, and debug overlays at the tiers defined by TASK-011.
 
 ## In scope
 - Orthographic/near-orthographic camera and zoom bands.
 - Read-only simulation snapshot bridge.
-- 5,000 moving billboards with direction/action cues.
-- 1,000 modular building instances and LOD.
+- Configurable billboard and structure density tiers.
+- Direction/action cues sufficient for later work, not final animation.
 - Selection, outlines, roof/foreground fading, basic overlays, and CPU/GPU telemetry.
 
 ## Required outputs
-- [ ] Presentation stress scene.
+- [ ] Presentation stress scene with scale presets.
 - [ ] Snapshot contract and visual descriptor mapping.
-- [ ] Performance/occlusion/readability report and screenshots/video.
+- [ ] Performance, occlusion, and readability report for the accepted 1.0 tier and optional 1.5 horizon tier.
 
 ## Verification and acceptance
 - [ ] Camera movement/visibility cannot alter authoritative checksum.
-- [ ] Stress scene fits provisional presentation budget.
-- [ ] Selected entities remain readable across occlusion/zoom.
-- [ ] Billboard movement/work/combat direction is semantically legible in prototype.
-- [ ] Documentation and relevant `codex.md` instructions match the implementation.
-- [ ] Independent adversarial review reports no blocking findings.
-- [ ] Creator-visible acceptance is recorded.
+- [ ] Accepted Version 1.0 tier fits its presentation budget.
+- [ ] Selected entities remain readable across occlusion and zoom.
+- [ ] Movement/work/danger direction is semantically legible in prototype form.
+- [ ] Missing Version 1.5 stress targets are reported, not hidden or treated as a 1.0 failure.
+- [ ] Independent review and creator acceptance pass.
 
 ## Out of scope
-- Final art, final animation library, full UI, or simulation logic in GameObjects/render systems.
-
-## Required work sequence
-- [ ] Planner produces small milestones, exact files, tests, rollback, and stop conditions.
-- [ ] Creator approves the plan.
-- [ ] Implementer completes one milestone at a time.
-- [ ] Verification agent reproduces evidence from a clean worktree.
-- [ ] Adversarial reviewer challenges architecture and failure cases.
-- [ ] Creator tests the observable result and accepts or requests changes.
-- [ ] `Build/validate_plan.py` permits Done status.
-
-## Suggested launch
-Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Extra High** for planning. After approval, use **5.6 Terra / High** for ordinary implementation unless the plan identifies a critical architecture or migration change.
+Final art, final animation library, full UI, or simulation logic in presentation objects.

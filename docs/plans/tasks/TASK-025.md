@@ -1,54 +1,42 @@
-# TASK-025 — Integrated settlement-formation and chronicle gate
+# TASK-025 - Integrated Living Camp gate
 
-**Status:** Not Started  
-**Phase:** Phase 3  
-**Risk:** Critical  
-**Depends on:** TASK-018, TASK-019, TASK-020, TASK-021, TASK-022, TASK-023, TASK-024  
+**Status:** Not Started
+**Milestone:** 0.3 - Living Camp
+**Release horizon:** First complete causal slice; divergence and durable settlement breadth begin later
+**Risk:** Critical
+**Depends on:** TASK-018, TASK-019, TASK-020, TASK-021, TASK-022, TASK-023, TASK-024
+**Decision dependencies:** Uses the approved D03/D04 envelope
 **Evidence folder:** `docs/evidence/TASK-025/`
-**Blueprint source:** Section 81, Task 025; Sections 16–27, 47–54, 69–75, 80.4–80.5, 81, and technical appendices
+**Blueprint/ADR source:** Blueprint Sections 69-75, 80.4, 81; ADR-001
 
 ## Creator summary
-Prove the foundations work together as one causal slice before expanding feature breadth.
+Prove the foundational systems work together as a living camp before adding durable settlement breadth, multiple society divergence, trade, or war.
 
 ## Objective
-Run at least three founding groups across contrasting regions and demonstrate site choice, survival, physical settlement formation or collapse, event history, basic chronicle, save/load, camera independence, and performance.
+Run the approved number of founding groups and regions to demonstrate site choice, survival, physical camp formation or failure, basic paths, event history, one-line causes, save/load, camera independence, and measured performance.
 
 ## In scope
-- Integrated deterministic scenario and multi-seed suite.
-- Three contrasting groups/regions and thin policy variation.
-- Founding, needs, labor, construction, paths/roads, households, death/migration, and failure.
-- Historical event graph promotion and factual template chronicle.
+- Integrated deterministic scenario and bounded seed suite.
+- The group count, population, simulation duration, and region variants accepted in D03/D04.
+- Founding, urgent needs, labor, construction, paths/roads, households, death/migration, damage, and failure.
+- Major event recording and short factual summaries.
 - Omniscient inspection and one-line causes.
-- 100-year continuation, save/load, replay, and performance report.
+- Continuation, save/load, replay, and performance report at the approved milestone envelope.
 
 ## Required outputs
-- [ ] Integrated gate build/scenarios.
-- [ ] Event graph and basic chronicle outputs.
-- [ ] Creator-visible comparison workflow.
-- [ ] Gate evidence and go/no-go review.
+- [ ] Integrated Living Camp build and scenarios.
+- [ ] Major-event timeline and factual summary output.
+- [ ] Creator-visible inspection workflow.
+- [ ] Gate evidence and 0.4 go/no-go review.
 
 ## Verification and acceptance
-- [ ] At least one viable village and explainable failures across configured seed expectations.
-- [ ] Groups develop measurable physical/specialization differences.
-- [ ] Chronicle sentences trace to facts/events.
+- [ ] The accepted seed expectations produce an understandable viable camp and explainable failure cases.
+- [ ] Shelter, food/water access, work, hauling, construction, and early paths are physically attributable.
+- [ ] Event summaries trace to stable facts and actors.
 - [ ] Camera on/off yields identical canonical checkpoints.
-- [ ] Save/replay/performance remain within current budgets.
+- [ ] Save/replay/performance fit the accepted D03/D04 envelope.
+- [ ] Identity guardrails relevant to this milestone pass.
 - [ ] Independent review and creator acceptance pass.
-- [ ] Documentation and relevant `codex.md` instructions match the implementation.
-- [ ] Independent adversarial review reports no blocking findings.
-- [ ] Creator-visible acceptance is recorded.
 
 ## Out of scope
-- Story Director pacing, full institutions/economy, diplomacy, war, later ages, or polishing the slice instead of resolving foundational defects.
-
-## Required work sequence
-- [ ] Planner produces small milestones, exact files, tests, rollback, and stop conditions.
-- [ ] Creator approves the plan.
-- [ ] Implementer completes one milestone at a time.
-- [ ] Verification agent reproduces evidence from a clean worktree.
-- [ ] Adversarial reviewer challenges architecture and failure cases.
-- [ ] Creator tests the observable result and accepts or requests changes.
-- [ ] `Build/validate_plan.py` permits Done status.
-
-## Suggested launch
-Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Extra High** for planning. After approval, use **5.6 Terra / High** for ordinary implementation unless the plan identifies a critical architecture or migration change.
+Multiple society divergence as a release claim, durable village/town breadth, trade, diplomacy, war, Story Director, complete powers, ecosystems, later ages, or polishing around unresolved foundational defects.

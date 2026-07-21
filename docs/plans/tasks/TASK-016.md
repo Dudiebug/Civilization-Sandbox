@@ -1,9 +1,11 @@
-# TASK-016 — Canonical AI primitives
+# TASK-016 - Canonical AI primitives
 
-**Status:** Not Started  
-**Phase:** Phase 2  
-**Risk:** Critical  
-**Depends on:** TASK-005, TASK-007, TASK-012, TASK-015  
+**Status:** Not Started
+**Milestone:** 0.2 - Decision and Engine Proof
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** Critical
+**Depends on:** TASK-005, TASK-007, TASK-012, TASK-015
+**Decision dependencies:** None unless the approved task plan identifies an active decision gate
 **Evidence folder:** `docs/evidence/TASK-016/`
 **Blueprint source:** Section 81, Task 016; Sections 58–64, 67–68, 75.3, 80.3, 81, and Appendix A/B/G
 

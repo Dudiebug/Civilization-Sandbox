@@ -1,9 +1,11 @@
-# TASK-015 — AI Behavior Contract schema and decision catalog
+# TASK-015 - AI Behavior Contract schema and decision catalog
 
-**Status:** Not Started  
-**Phase:** Phase 2  
-**Risk:** Critical  
-**Depends on:** TASK-002, TASK-003, TASK-010  
+**Status:** Not Started
+**Milestone:** 0.2 - Decision and Engine Proof
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** Critical
+**Depends on:** TASK-002, TASK-003, TASK-010
+**Decision dependencies:** None unless the approved task plan identifies an active decision gate
 **Evidence folder:** `docs/evidence/TASK-015/`
 **Blueprint source:** Section 81, Task 015; Sections 58–64, 67–68, 75.3, 80.3, 81, and Appendix A/B/G
 

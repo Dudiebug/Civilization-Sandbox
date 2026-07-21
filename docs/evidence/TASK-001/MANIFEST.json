@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "taskId": "TASK-001",
+  "state": "IN_PROGRESS",
+  "trackedEvidence": [
+    "docs/evidence/TASK-001/EVIDENCE.md",
+    "docs/evidence/TASK-001/MANIFEST.json",
+    "docs/evidence/TASK-001/REVIEW.md",
+    "docs/evidence/TASK-001/ACCEPTANCE.md"
+  ],
+  "ignoredArtifactRoot": "Artifacts/",
+  "requiredGeneratedArtifacts": [
+    "Artifacts/build/windows/CivilizationSandboxBootstrap.exe",
+    "Artifacts/build/linux/CivilizationSandboxBootstrap.x86_64",
+    "Artifacts/tests/bootstrap-editmode.xml",
+    "Artifacts/results/bootstrap-run-1.json",
+    "Artifacts/results/bootstrap-run-2.json",
+    "Artifacts/results/build-windows.json",
+    "Artifacts/results/build-linux.json",
+    "Artifacts/results/test-bootstrap.json",
+    "Artifacts/results/task001-script-self-tests.json"
+  ],
+  "note": "Canonical results must match the exact command, current clean commit, pinned Unity/package state, and current artifact hashes. Build results hash every file in each player output tree. Missing, stale, dirty, failed, incomplete, or mismatched evidence is rejected."
+}

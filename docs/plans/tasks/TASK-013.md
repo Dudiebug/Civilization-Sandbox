@@ -1,9 +1,11 @@
-# TASK-013 — Hierarchical navigation prototype
+# TASK-013 - Hierarchical navigation prototype
 
-**Status:** Not Started  
-**Phase:** Phase 1  
-**Risk:** Critical  
-**Depends on:** TASK-012  
+**Status:** Not Started
+**Milestone:** 0.2 - Decision and Engine Proof
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** Critical
+**Depends on:** TASK-012
+**Decision dependencies:** None unless the approved task plan identifies an active decision gate
 **Evidence folder:** `docs/evidence/TASK-013/`
 **Blueprint source:** Section 81, Task 013; Sections 10, 17, 47, 51, 55–57, 66–68, 75.2, 80.2, 81, and technical appendices
 

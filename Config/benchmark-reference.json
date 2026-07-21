@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "capturedOn": "2026-07-19",
+  "purpose": "Informational TASK-001 import, build, and test timing baseline; not the later eight-core performance gate.",
+  "machine": {
+    "operatingSystem": "Windows 11 Pro",
+    "cpu": "AMD Ryzen 5 7600X",
+    "physicalCores": 6,
+    "logicalProcessors": 12,
+    "memoryGiB": 31.46,
+    "gpu": "NVIDIA GeForce RTX 5070",
+    "gpuMemoryGiB": 12,
+    "gpuDriver": "576.88",
+    "storageClass": "SSD"
+  },
+  "performanceGate": false
+}

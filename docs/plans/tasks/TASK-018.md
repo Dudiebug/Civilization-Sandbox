@@ -1,9 +1,11 @@
-# TASK-018 — Founding-group site-selection contract
+# TASK-018 - Founding-group site-selection contract
 
-**Status:** Not Started  
-**Phase:** Phase 2  
-**Risk:** High  
-**Depends on:** TASK-012, TASK-015, TASK-016, TASK-017  
+**Status:** Not Started
+**Milestone:** 0.2 - Decision and Engine Proof
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** High
+**Depends on:** TASK-012, TASK-015, TASK-016, TASK-017
+**Decision dependencies:** None unless the approved task plan identifies an active decision gate
 **Evidence folder:** `docs/evidence/TASK-018/`
 **Blueprint source:** Section 81, Task 018; Sections 58–64, 67–68, 75.3, 80.3, 81, and Appendix A/B/G
 

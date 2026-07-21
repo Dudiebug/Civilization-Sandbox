@@ -1,48 +1,38 @@
-# TASK-008 — Historical event graph foundation
+# TASK-008 - Causal event record foundation
 
-**Status:** Not Started  
-**Phase:** Phase 1  
-**Risk:** High  
-**Depends on:** TASK-006, TASK-007  
+**Status:** Not Started
+**Milestone:** 0.1 - Project Foundation
+**Release horizon:** Lean Version 1.0 minimum history; full event graph is Version 1.5 horizon
+**Risk:** High
+**Depends on:** TASK-006, TASK-007
+**Decision dependencies:** None
 **Evidence folder:** `docs/evidence/TASK-008/`
-**Blueprint source:** Section 81, Task 008; Sections 10, 17, 47, 51, 55–57, 66–68, 75.2, 80.2, 81, and technical appendices
+**Blueprint/ADR source:** Blueprint Sections 47-54 and 81; ADR-001
 
 ## Creator summary
-Record causal history before complex systems produce events that cannot later be reconstructed.
+Record stable major events early so later causality is not reconstructed from incomplete final state, without building the full historical graph before gameplay exists.
 
 ## Objective
-Persist stable factual event nodes, typed causal edges, participants, locations, significance, perspective hooks, and intervention ancestry.
+Persist a minimal factual event record with stable identity, participants, location, immediate causes/effects, significance, and intervention ancestry; reserve clean extension to the Version 1.5 graph.
 
 ## In scope
-- Event/edge stable IDs and schemas.
-- Typed edges such as caused-by, contributed-to, damaged, displaced, rebuilt-from, and intervention ancestry.
-- Entity/location indexes with query caps.
-- Significance and retention fields.
-- Semantic save integration and integrity validation.
+- Stable event IDs and versioned minimum schema.
+- Event type, time, location, participants, authoritative facts, cause references, state changes, significance, and intervention ancestry.
+- Bounded entity/location indexes and query caps.
+- Semantic save integration and referential validation.
+- Sample command, save, and lifecycle events.
 
 ## Required outputs
-- [ ] Event graph package, DTOs, query API, tests, and sample founding/command events.
+- [ ] Minimum event package/DTOs/query API/tests.
+- [ ] Version 1.5 extension notes for typed edges, perspectives, historical maps, and deeper retention.
 
 ## Verification and acceptance
-- [ ] Round-trip preserves nodes, edges, and references.
-- [ ] Queries enforce depth/time/result caps.
-- [ ] Compaction cannot remove referenced canonical nodes.
-- [ ] Broken causal/entity references fail validation.
-- [ ] Documentation and relevant `codex.md` instructions match the implementation.
-- [ ] Independent adversarial review reports no blocking findings.
-- [ ] Creator-visible acceptance is recorded.
+- [ ] Round-trip preserves events and references.
+- [ ] Queries enforce caps.
+- [ ] Protected major events cannot be removed while referenced by current state or a ruin.
+- [ ] Broken event/entity references fail validation.
+- [ ] No prose generator or full Story Director is introduced.
+- [ ] Independent review and creator acceptance pass.
 
 ## Out of scope
-- Free-form generated prose, unbounded per-entity event lists, or story systems that own outcomes.
-
-## Required work sequence
-- [ ] Planner produces small milestones, exact files, tests, rollback, and stop conditions.
-- [ ] Creator approves the plan.
-- [ ] Implementer completes one milestone at a time.
-- [ ] Verification agent reproduces evidence from a clean worktree.
-- [ ] Adversarial reviewer challenges architecture and failure cases.
-- [ ] Creator tests the observable result and accepts or requests changes.
-- [ ] `Build/validate_plan.py` permits Done status.
-
-## Suggested launch
-Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Extra High** for planning. After approval, use **5.6 Terra / High** for ordinary implementation unless the plan identifies a critical architecture or migration change.
+Full perspective history, long-form chronicles, historical maps, unbounded causal graph queries, or story systems that own outcomes.
