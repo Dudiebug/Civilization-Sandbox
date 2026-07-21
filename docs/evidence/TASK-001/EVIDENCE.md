@@ -54,17 +54,17 @@
 - Pinned prerequisites: PASS — Git `2.55.0.3`, PowerShell `7.6.3`, Python `3.13.14`, GitHub CLI `2.96.0`, and Unity Hub `3.19.5`; GitHub CLI is authenticated as the repository owner.
 - Unity modules: PASS — Windows Mono and Linux Mono are installed. The Hub-downloaded Linux Mono installer matched Unity's published MD5 metadata; observed SHA-256 `d3a70b44912f0ce21ca9b1ea198b20a09072bd6df4ed279d239a37d1cbc95ccd`.
 - Full bootstrap idempotency: PASS after amendment — two consecutive audits returned zero, Git state plus both package files were unchanged, and package-lock SHA-256 remained `b5ab878043267eb78c9ece02004322353aa41947c938bc48c6850d838e206548`.
-- PowerShell guard suite: PASS, 14 tests. Coverage now includes direct and nested path-redirecting reparse points, while allowing non-redirecting OneDrive cloud markers.
+- PowerShell guard suite: PASS, 16 tests. Coverage includes direct and nested path-redirecting reparse points, non-redirecting OneDrive cloud markers, pinned Git discovery, and one-item required-check JSON array preservation.
 - Windows x64 Mono player rebuild: PASS; executable SHA-256 `34c4e304e53e56499267dfd9c975c63dc279ed3011a69a8ca16eb207f1856a8f`.
 - Linux x64 Mono player rebuild: PASS; executable SHA-256 `8027f7d1f9ae7dacfc826fb218adcc1ae7464af098a8a59397e7531c0f7ec0bc`.
 - Linux package-integrity gate: RESOLVED by explicit creator approval. Direct `com.unity.sdk.linux-x86_64@1.1.0` and `com.unity.toolchain.win-x86_64-linux@1.1.0`, with transitive `com.unity.sysroot.base@1.1.0`, are now part of the locked interface and build without tracked-file mutation.
 - Unity wrapper termination: PASS after correction — build/test scripts wait on the editor process handle, avoiding PowerShell descendant-tree waits on Unity's long-lived Roslyn compiler server.
 - Roadmap rebaseline: integrated from preserved branch `prep/roadmap-rebaseline-20260720`; active TASK-001 status and implementation evidence were retained, and `.codex/config.toml` remains absent by creator decision.
+- GitHub governance: PASS — the repository is public by recorded creator approval, `main` is the default branch, pull requests and conversation resolution are required, administrator enforcement is enabled, force-pushes and deletion are disabled, and strict `repository-policy` is required after its first successful run.
 
 ## Current blockers
 
-1. Protected public-branch enforcement and the first successful `repository-policy` run remain pending. GitHub rejected protection while private with HTTP 403; the creator explicitly answered `public` on 2026-07-20, and the visibility amendment is recorded in the task plan and governance contract.
-2. Non-OneDrive clean standard-profile reproduction, independent review, creator acceptance, merge, accepted tag, and recovery rehearsal remain pending.
+1. Non-OneDrive clean standard-profile reproduction, independent review, creator acceptance, merge, accepted tag, and recovery rehearsal remain pending.
 
 ## Changed surface
 
