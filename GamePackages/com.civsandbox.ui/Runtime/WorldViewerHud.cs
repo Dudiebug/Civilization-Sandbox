@@ -40,6 +40,14 @@ namespace CivSandbox.UI
             GUILayout.Label($"World time   {FormatTime(snapshot.Time.Seconds)}", bodyStyle);
             GUILayout.Label($"Company      {snapshot.Count} named people", bodyStyle);
             GUILayout.Label($"State        {session.Speed.Label()}", bodyStyle);
+            GUILayout.Space(6f);
+            GUILayout.BeginHorizontal();
+            DrawSpeedButton("Pause", SimulationSpeed.Paused);
+            DrawSpeedButton("1x", SimulationSpeed.Normal);
+            DrawSpeedButton("2x", SimulationSpeed.Double);
+            DrawSpeedButton("5x", SimulationSpeed.Fast);
+            DrawSpeedButton("10x", SimulationSpeed.VeryFast);
+            GUILayout.EndHorizontal();
             GUILayout.Space(8f);
             GUILayout.Label("Deterministic world seed", bodyStyle);
             seedText = GUILayout.TextField(seedText, 20, GUILayout.Height(24f));
@@ -56,6 +64,22 @@ namespace CivSandbox.UI
             }
 
             GUILayout.EndArea();
+        }
+
+        private void DrawSpeedButton(string label, SimulationSpeed speed)
+        {
+            Color previous = GUI.backgroundColor;
+            if (session.Speed == speed)
+            {
+                GUI.backgroundColor = new Color(0.84f, 0.67f, 0.32f);
+            }
+
+            if (GUILayout.Button(label, buttonStyle, GUILayout.Height(27f)))
+            {
+                session.SetSpeed(speed);
+            }
+
+            GUI.backgroundColor = previous;
         }
 
         private void EnsureStyles()

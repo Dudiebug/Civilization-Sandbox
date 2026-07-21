@@ -8,6 +8,8 @@ namespace CivSandbox.Presentation
     {
         private Camera worldCamera;
         private TextMesh nameLabel;
+        private Vector3 targetPosition;
+        private bool hasPosition;
 
         public StableEntityId Id { get; private set; }
 
@@ -27,12 +29,18 @@ namespace CivSandbox.Presentation
 
             CreateShadow();
             CreateNameLabel(person.Name);
-            Apply(person);
+            Apply(person, true);
         }
 
-        public void Apply(PersonSnapshot person)
+        public void Apply(PersonSnapshot person, bool snap)
         {
-            transform.position = new Vector3(person.Position.EastMillimeters / 1000f, 0.03f, person.Position.NorthMillimeters / 1000f);
+            targetPosition = new Vector3(person.Position.EastMillimeters / 1000f, 0.03f, person.Position.NorthMillimeters / 1000f);
+            if (snap || !hasPosition)
+            {
+                transform.position = targetPosition;
+                hasPosition = true;
+            }
+
             if (nameLabel != null && nameLabel.text != person.Name)
             {
                 nameLabel.text = person.Name;
@@ -41,6 +49,7 @@ namespace CivSandbox.Presentation
 
         private void LateUpdate()
         {
+            transform.position = Vector3.Lerp(transform.position, targetPosition, 1f - Mathf.Exp(-14f * Time.unscaledDeltaTime));
             if (worldCamera == null)
             {
                 return;

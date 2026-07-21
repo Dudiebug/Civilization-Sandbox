@@ -26,12 +26,14 @@ namespace CivSandbox.WorldViewer
     public sealed class WorldViewerRoot : MonoBehaviour, IWorldViewerSession
     {
         private const ulong DefaultSeed = 170601UL;
+        private const double FixedWallTickSeconds = 1.0 / WorldSimulation.FixedWallTicksPerSecond;
         private WorldSimulation simulation;
         private WorldSceneView sceneView;
+        private double wallAccumulator;
 
         public ulong Seed => simulation.Seed.Value;
 
-        public SimulationSpeed Speed { get; private set; } = SimulationSpeed.Paused;
+        public SimulationSpeed Speed { get; private set; } = SimulationSpeed.Normal;
 
         public WorldSnapshot Snapshot { get; private set; }
 
@@ -62,12 +64,31 @@ namespace CivSandbox.WorldViewer
             Application.Quit(0);
         }
 
+        private void Update()
+        {
+            wallAccumulator += Time.unscaledDeltaTime;
+            int processedTicks = 0;
+            while (wallAccumulator >= FixedWallTickSeconds && processedTicks < 8)
+            {
+                simulation.AdvanceFixedWallTick(Speed);
+                wallAccumulator -= FixedWallTickSeconds;
+                processedTicks++;
+            }
+
+            if (processedTicks > 0 && Speed != SimulationSpeed.Paused)
+            {
+                Snapshot = simulation.CreateSnapshot();
+                sceneView.Apply(Snapshot);
+            }
+        }
+
         public void Reset(ulong seed)
         {
             simulation.Reset(seed);
-            Speed = SimulationSpeed.Paused;
+            Speed = SimulationSpeed.Normal;
+            wallAccumulator = 0d;
             Snapshot = simulation.CreateSnapshot();
-            sceneView.Apply(Snapshot);
+            sceneView.Apply(Snapshot, true);
         }
 
         public void SetSpeed(SimulationSpeed speed)

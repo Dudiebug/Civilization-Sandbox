@@ -9,6 +9,7 @@ namespace CivSandbox.People
         public const int FixedWallTicksPerSecond = 20;
         public const int PersonCount = 24;
         public const ulong InitialPeopleStream = 0x70656f706c653031UL;
+        public const ulong MovementStream = 0x6d6f76656d656e74UL;
         private static readonly string[] GivenNames =
         {
             "Alden", "Beata", "Corren", "Davia", "Edric", "Fenna", "Garran", "Hester",
@@ -55,7 +56,11 @@ namespace CivSandbox.People
                 int north = KeyedRandom.Range(seedValue, InitialPeopleStream, localId, 0, 3, Bounds.MinimumNorthMillimeters + 2000, Bounds.MaximumNorthMillimeters - 1999);
                 string name = GivenNames[(givenOffset + index) % GivenNames.Length] + " " + FamilyNames[(familyOffset + index * 7) % FamilyNames.Length];
                 int appearance = KeyedRandom.Range(seedValue, InitialPeopleStream, localId, 0, 4, 0, 12);
-                people[index] = new PersonState(new StableEntityId(worldKey, localId), name, new WorldPosition(east, north), appearance);
+                var person = new PersonState(new StableEntityId(worldKey, localId), name, new WorldPosition(east, north), appearance)
+                {
+                    IdleSecondsRemaining = KeyedRandom.Range(seedValue, MovementStream, localId, 0, 0, 0, 46)
+                };
+                people[index] = person;
             }
         }
 
@@ -123,6 +128,87 @@ namespace CivSandbox.People
         private void AdvanceOneGameSecond()
         {
             worldSeconds++;
+            for (int index = 0; index < people.Length; index++)
+            {
+                AdvancePerson(people[index]);
+            }
+        }
+
+        private void AdvancePerson(PersonState person)
+        {
+            if (person.Action == PersonAction.Waiting)
+            {
+                if (person.IdleSecondsRemaining > 0)
+                {
+                    person.IdleSecondsRemaining--;
+                    return;
+                }
+
+                BeginMove(person);
+                return;
+            }
+
+            person.MoveElapsedSeconds++;
+            if (person.MoveElapsedSeconds >= person.MoveDurationSeconds)
+            {
+                person.Position = person.MoveTarget;
+                person.Action = PersonAction.Waiting;
+                person.IdleSecondsRemaining = KeyedRandom.Range(
+                    seed.Value,
+                    MovementStream,
+                    person.Id.Local,
+                    person.DecisionOrdinal,
+                    4,
+                    30,
+                    151);
+                return;
+            }
+
+            long elapsed = person.MoveElapsedSeconds;
+            long duration = person.MoveDurationSeconds;
+            int east = person.MoveStart.EastMillimeters + (int)(((long)person.MoveTarget.EastMillimeters - person.MoveStart.EastMillimeters) * elapsed / duration);
+            int north = person.MoveStart.NorthMillimeters + (int)(((long)person.MoveTarget.NorthMillimeters - person.MoveStart.NorthMillimeters) * elapsed / duration);
+            person.Position = new WorldPosition(east, north);
+        }
+
+        private void BeginMove(PersonState person)
+        {
+            ulong occurrence = person.DecisionOrdinal;
+            person.DecisionOrdinal++;
+            int margin = 1500;
+            int targetEast = KeyedRandom.Range(
+                seed.Value,
+                MovementStream,
+                person.Id.Local,
+                occurrence,
+                1,
+                Bounds.MinimumEastMillimeters + margin,
+                Bounds.MaximumEastMillimeters - margin + 1);
+            int targetNorth = KeyedRandom.Range(
+                seed.Value,
+                MovementStream,
+                person.Id.Local,
+                occurrence,
+                2,
+                Bounds.MinimumNorthMillimeters + margin,
+                Bounds.MaximumNorthMillimeters - margin + 1);
+            int speedMillimetersPerGameSecond = KeyedRandom.Range(
+                seed.Value,
+                MovementStream,
+                person.Id.Local,
+                occurrence,
+                3,
+                16,
+                25);
+
+            person.MoveStart = person.Position;
+            person.MoveTarget = new WorldPosition(targetEast, targetNorth);
+            person.MoveElapsedSeconds = 0;
+            int eastDistance = Math.Abs(targetEast - person.Position.EastMillimeters);
+            int northDistance = Math.Abs(targetNorth - person.Position.NorthMillimeters);
+            int distance = Math.Max(eastDistance, northDistance);
+            person.MoveDurationSeconds = Math.Max(1, (distance + speedMillimetersPerGameSecond - 1) / speedMillimetersPerGameSecond);
+            person.Action = PersonAction.Walking;
         }
 
         private sealed class PersonState

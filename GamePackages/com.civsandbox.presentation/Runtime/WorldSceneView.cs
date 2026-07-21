@@ -18,10 +18,10 @@ namespace CivSandbox.Presentation
             CreateLight();
             CreateGround(snapshot);
             CreateBoundaryMarkers(snapshot);
-            Apply(snapshot);
+            Apply(snapshot, true);
         }
 
-        public void Apply(WorldSnapshot snapshot)
+        public void Apply(WorldSnapshot snapshot, bool snap = false)
         {
             for (int index = 0; index < snapshot.Count; index++)
             {
@@ -35,7 +35,7 @@ namespace CivSandbox.Presentation
                     people.Add(person.Id, view);
                 }
 
-                view.Apply(person);
+                view.Apply(person, snap);
             }
         }
 
