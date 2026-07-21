@@ -1,6 +1,6 @@
 # TASK-002 Evidence Pack
 
-**State:** IMPLEMENTATION VERIFIED; INDEPENDENT REVIEW AND CREATOR ACCEPTANCE PENDING
+**State:** IMPLEMENTATION VERIFIED; CREATOR APPROVED; INDEPENDENT REVIEW PENDING
 
 ## Scope
 
@@ -8,7 +8,7 @@ TASK-002 establishes the repository documentation authority hierarchy, determini
 
 ## Environment
 
-- Candidate commit verified: `5f6b3ca602e359d4de3a91acaeea5bd98da12be7`
+- Candidate implementation commit verified: recorded after the stale-instruction corrections in this evidence update.
 - Branch: `task/TASK-002-docs`
 - Baseline: protected `main` after accepted TASK-001
 - OS: Microsoft Windows 11 Pro `10.0.26200`
@@ -26,7 +26,7 @@ TASK-002 establishes the repository documentation authority hierarchy, determini
 - Performance: N/A for gameplay — no runtime behavior changed. Documentation validation met its separate seconds-scale target: `python Build/validate_docs.py` completed in 4.771 seconds without network access.
 - Documentation: PASS — `python Build/validate_docs.py` registered 40 documents and passed; `python Build/validate_plan.py` registered 9 milestones, 25 tasks, and 51 scoped instruction files and passed in 5.855 seconds.
 - Independent review: PENDING — see `REVIEW.md`; the implementer cannot self-certify independence.
-- Creator acceptance: PENDING — `ACCEPTANCE.md` must be created only after the creator records `APPROVE` or `CHANGES`.
+- Creator acceptance: PASS — explicit `APPROVE` and merge request are recorded in `ACCEPTANCE.md`.
 
 ## Negative and policy evidence
 
@@ -53,7 +53,6 @@ TASK-002 establishes the repository documentation authority hierarchy, determini
 ## Known limitations and deferred work
 
 - Independent reproduction and adversarial review are not yet recorded.
-- Creator acceptance is not yet recorded and must not be inferred from implementation authorization.
 - Runtime evidence remains intentionally N/A because gameplay/runtime implementation is outside TASK-002.
 
 ## Rollback
@@ -62,4 +61,4 @@ Revert TASK-002's documentation commits in reverse order. No runtime or save dat
 
 ## Final declaration
 
-Implementation and implementer-run validation are complete. TASK-002 remains In Review until an independent verifier records PASS with no blockers and the creator explicitly approves the observable result.
+Implementation and implementer-run validation are complete. TASK-002 remains In Review until an independent verifier records PASS with no blockers; creator approval is recorded separately in `ACCEPTANCE.md`.

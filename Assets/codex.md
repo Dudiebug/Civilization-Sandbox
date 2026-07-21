@@ -1,6 +1,6 @@
 # Assets Scope
 
-This folder is a provisional Unity integration boundary and becomes active only if Milestone 0.1 accepts the Unity path.
+This folder is the accepted Unity integration boundary under ADR-002. It is active for engine integration, scenes, presentation assets, addressable/editor resources, and minimal composition roots that cannot live in packages.
 
 If active, use `Assets/` only for engine integration, scenes, presentation assets, addressable/editor resources, and minimal composition roots that cannot live in packages. Authoritative domain logic and state belong in runtime domain packages.
 

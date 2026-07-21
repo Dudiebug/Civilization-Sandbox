@@ -291,6 +291,15 @@ def _validate_registry(root: Path, registry: dict, graph: dict[str, set[str]], d
                 queue.append(target)
 
     index_links = direct.get(INDEX_REL.as_posix(), set())
+    registered_paths = {
+        document.get("path")
+        for document in documents
+        if isinstance(document, dict) and isinstance(document.get("path"), str)
+    }
+    for indexed_path in sorted(index_links - registered_paths):
+        errors.append(
+            f"UNREGISTERED_INDEX_DOCUMENT {INDEX_REL.as_posix()} links to a document not in the registry: {indexed_path}"
+        )
     for document in documents:
         if not isinstance(document, dict) or not isinstance(document.get("path"), str):
             continue

@@ -109,6 +109,15 @@ class DocumentationValidatorTests(unittest.TestCase):
             registry_path.write_text(json.dumps(registry), encoding="utf-8")
             self.assert_code(validate_repository(root), "UNREACHABLE_DOCUMENT")
 
+    def test_unregistered_index_document_fails(self) -> None:
+        temporary, root = self.make_repo()
+        with temporary:
+            extra = root / "docs/extra.md"
+            extra.write_text("# Extra\n", encoding="utf-8")
+            index = root / "docs/DOCUMENT_INDEX.md"
+            index.write_text(index.read_text(encoding="utf-8") + "\n[Extra](extra.md)\n", encoding="utf-8")
+            self.assert_code(validate_repository(root), "UNREGISTERED_INDEX_DOCUMENT")
+
     def test_duplicate_adr_number_fails(self) -> None:
         temporary, root = self.make_repo()
         with temporary:
