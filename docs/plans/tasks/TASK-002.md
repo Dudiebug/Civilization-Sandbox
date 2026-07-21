@@ -45,7 +45,8 @@ Every future task can locate the authoritative north star, release scope, active
 - [x] ~~No `AGENTS.md` or `.codex/config.toml` file exists.~~
 - [x] ~~Deliberately broken internal reference fails with a path/line diagnostic.~~
 - [x] ~~Future decisions are not embedded as hidden defaults.~~
-- [ ] Independent review and creator acceptance pass.
+- [ ] Independent review passes with no blocker.
+- [x] ~~Creator acceptance: APPROVE; merge to `main` requested.~~
 
 ## Out of scope
 Implementing game behavior, selecting unopened product decisions, or rewriting the Blueprint PDF.

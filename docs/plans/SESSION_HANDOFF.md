@@ -22,4 +22,4 @@
 Run independent verification and adversarial review from a clean checkout, then ask the creator for explicit acceptance. Do not mark Done or create `ACCEPTANCE.md` before those gates pass.
 
 ## Blockers
-Independent review and creator acceptance are pending. These are acceptance gates, not implementation failures.
+Independent review is pending. Creator acceptance is APPROVE with a merge-to-`main` request; merge remains gated on independent review.
