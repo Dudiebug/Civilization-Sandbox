@@ -48,10 +48,15 @@ A fresh supported development environment can clone, bootstrap, build a baseline
 - Required transitive Linux sysroot: `com.unity.sysroot.base@1.1.0`.
 - The committed `Packages/packages-lock.json` hash in `Config/toolchain.json` is the package-integrity authority.
 - `.codex/config.toml` must remain absent; scoped `codex.md` files are the repository instruction authority.
+- Repository visibility is public, with protected `main`; this replaces the original private-repository assumption by explicit creator approval on 2026-07-20 after GitHub returned HTTP 403 for private branch protection.
 
 ## Change control
 
 Before changing any locked interface, pin, authority file, required output, or acceptance boundary, the implementer must ask the creator an explicit question and wait for recorded approval. The approved amendment and reason must then be recorded in this plan and TASK-001 evidence.
+
+Recorded amendments:
+
+- 2026-07-20: the creator answered `public`, approving public repository visibility so GitHub branch protection can be enforced without weakening the protected-`main` requirement.
 
 ## Out of scope
 World size, population target, content counts, gameplay systems, terrain, people, buildings, AI behavior, art, public release configuration, or Version 1.1-1.5 planning.

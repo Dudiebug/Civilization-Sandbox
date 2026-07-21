@@ -35,7 +35,10 @@ function Invoke-GhJson([string[]]$Arguments) {
 }
 
 $repositoryJson = Invoke-GhJson @('api', "repos/$repo") | ConvertFrom-Json
-if (-not $repositoryJson.private) { throw 'CIV001-GOV-007: Repository must remain private.' }
+$configuredVisibility = [string]$policy.visibility
+if ($configuredVisibility -notin @('private', 'public')) { throw 'CIV001-GOV-007: Configured repository visibility must be private or public.' }
+$expectedPrivate = $configuredVisibility -eq 'private'
+if ([bool]$repositoryJson.private -ne $expectedPrivate) { throw "CIV001-GOV-007: Live repository visibility does not match configured visibility '$configuredVisibility'." }
 
 if ($ExportPath) {
     $protection = $null
@@ -138,7 +141,7 @@ $temp = Join-Path ([System.IO.Path]::GetTempPath()) ("task001-protection-" + [gu
 try {
     $body | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $temp -Encoding UTF8
     $null = Get-Content -LiteralPath $temp -Raw | & $gh.Source api --method PUT "repos/$repo/branches/main/protection" --input -
-    if ($LASTEXITCODE -ne 0) { throw 'CIV001-GOV-011: GitHub rejected private branch protection. TASK-001 is blocked.' }
+    if ($LASTEXITCODE -ne 0) { throw 'CIV001-GOV-011: GitHub rejected branch protection. TASK-001 is blocked.' }
 } finally {
     if (Test-Path -LiteralPath $temp) { Remove-Item -LiteralPath $temp -Force }
 }

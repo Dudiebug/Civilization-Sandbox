@@ -12,7 +12,7 @@ The repository is intentionally configured for a solo creator: a pull request is
 - Implementation branch: `task/TASK-001-bootstrap`.
 - Required check after its first successful report: `repository-policy`.
 
-`Build/Configure-Repository.ps1` audits by default. `-Apply` is required for GitHub mutations, and the script refuses to apply protection to a non-private repository or when the configured baseline is not present. GitHub CLI authentication is a human prerequisite.
+`Build/Configure-Repository.ps1` audits by default. `-Apply` is required for GitHub mutations, and the script refuses to apply protection when live visibility differs from `Config/repository-governance.json` or when the configured baseline is not present. GitHub CLI authentication is a human prerequisite.
 
 ## Recovery
 
@@ -35,4 +35,4 @@ Remove the required check before reverting the workflow. Never delete `main`, `m
 
 ## Protection availability
 
-The repository must remain private and its GitHub plan must support protected private branches. If GitHub rejects protection, TASK-001 is blocked; the script must not weaken the policy or make the repository public as a workaround.
+The repository is public by explicit creator approval recorded on 2026-07-20 after GitHub rejected protected branches for the private repository with HTTP 403. Public visibility is now part of the locked governance contract; any future visibility change requires the same ask-first amendment process. If GitHub still rejects protection, TASK-001 is blocked and the script must not weaken the policy.

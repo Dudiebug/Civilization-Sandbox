@@ -63,7 +63,7 @@
 
 ## Current blockers
 
-1. Protected private-branch enforcement and the first successful `repository-policy` run remain pending.
+1. Protected public-branch enforcement and the first successful `repository-policy` run remain pending. GitHub rejected protection while private with HTTP 403; the creator explicitly answered `public` on 2026-07-20, and the visibility amendment is recorded in the task plan and governance contract.
 2. Non-OneDrive clean standard-profile reproduction, independent review, creator acceptance, merge, accepted tag, and recovery rehearsal remain pending.
 
 ## Changed surface
