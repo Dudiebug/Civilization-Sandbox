@@ -17,32 +17,50 @@ $stamp = [datetime]::UtcNow.ToString('yyyyMMddTHHmmssZ')
 $evidenceRoot = Join-Path $ArtifactRoot 'evidence'
 $archive = Join-Path $evidenceRoot "$TaskId-$stamp.zip"
 $packageManifest = Join-Path $evidenceRoot "$TaskId-$stamp.manifest.json"
+$evidenceRoot = Assert-Task001PathWithinRoot -RepositoryRoot $root -TargetPath $evidenceRoot
+$archive = Assert-Task001PathWithinRoot -RepositoryRoot $root -TargetPath $archive
+$packageManifest = Assert-Task001PathWithinRoot -RepositoryRoot $root -TargetPath $packageManifest
 if (-not $ResultPath) { $ResultPath = Join-Path $ArtifactRoot "results\package-evidence-$stamp.json" }
 $ResultPath = Assert-Task001PathWithinRoot -RepositoryRoot $root -TargetPath $ResultPath
 $diagnostics = @()
 $exitCode = 1
 
 try {
+    if (Test-Path -LiteralPath $ArtifactRoot -PathType Container) { Assert-Task001TreeHasNoReparsePoints -Path $ArtifactRoot }
     $required = Get-Task001EvidenceRequirements -RepositoryRoot $root -ArtifactRoot $ArtifactRoot
     $missing = @($required | Where-Object { -not (Test-Path -LiteralPath $_ -PathType Leaf) })
     if ($missing.Count -gt 0) {
         throw "CIV001-EVIDENCE-002: Required evidence is absent: $($missing -join ', ')"
     }
 
-    $resultFiles = @(Get-ChildItem -LiteralPath (Join-Path $ArtifactRoot 'results') -Filter '*.json' -File -ErrorAction SilentlyContinue)
-    $failedResults = @($resultFiles | Where-Object {
-        try { (Get-Content -LiteralPath $_.FullName -Raw | ConvertFrom-Json).status -ne 'PASS' } catch { $true }
-    })
-    if ($failedResults.Count -gt 0) {
-        throw "CIV001-EVIDENCE-003: Evidence contains failed or unreadable command results: $($failedResults.Name -join ', ')"
+    $resultsDirectory = Assert-Task001PathWithinRoot -RepositoryRoot $root -TargetPath (Join-Path $ArtifactRoot 'results')
+    $canonicalCommands = @{
+        'bootstrap-run-1.json' = 'Build/Bootstrap.ps1'
+        'bootstrap-run-2.json' = 'Build/Bootstrap.ps1'
+        'build-windows.json' = 'Build/Build.ps1 -Target Windows'
+        'build-linux.json' = 'Build/Build.ps1 -Target Linux'
+        'test-bootstrap.json' = 'Build/Test.ps1 -Suite Bootstrap'
+        'task001-script-self-tests.json' = 'Tests/Bootstrap/Task001.Bootstrap.Tests.ps1'
+    }
+    foreach ($name in $canonicalCommands.Keys) {
+        $path = Join-Path $resultsDirectory $name
+        $artifactDirectory = if ($name -eq 'build-windows.json') { Join-Path $ArtifactRoot 'build\windows' } elseif ($name -eq 'build-linux.json') { Join-Path $ArtifactRoot 'build\linux' } else { $null }
+        Assert-Task001CommandResultIntegrity -Path $path -ExpectedCommand $canonicalCommands[$name] -ArtifactDirectory $artifactDirectory -RepositoryRoot $root | Out-Null
+    }
+    $currentResultFull = [System.IO.Path]::GetFullPath($ResultPath)
+    $resultFiles = @(Get-ChildItem -LiteralPath $resultsDirectory -Filter '*.json' -File -ErrorAction SilentlyContinue | Where-Object { $_.FullName -ne $currentResultFull })
+    foreach ($resultFile in $resultFiles) {
+        $expected = if ($canonicalCommands.ContainsKey($resultFile.Name)) { [string]$canonicalCommands[$resultFile.Name] } else { $null }
+        Assert-Task001CommandResultIntegrity -Path $resultFile.FullName -ExpectedCommand $expected -RepositoryRoot $root | Out-Null
     }
 
     New-Item -ItemType Directory -Path $evidenceRoot -Force | Out-Null
     $files = New-Object System.Collections.Generic.List[string]
     foreach ($path in $required) { $files.Add([System.IO.Path]::GetFullPath($path)) }
     foreach ($directory in @('logs', 'results', 'tests', 'negative')) {
-        $dir = Join-Path $ArtifactRoot $directory
+        $dir = Assert-Task001PathWithinRoot -RepositoryRoot $root -TargetPath (Join-Path $ArtifactRoot $directory)
         if (Test-Path -LiteralPath $dir -PathType Container) {
+            Assert-Task001TreeHasNoReparsePoints -Path $dir
             Get-ChildItem -LiteralPath $dir -File -Recurse | ForEach-Object { $files.Add($_.FullName) }
         }
     }
@@ -55,7 +73,7 @@ try {
         files = $records
     } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $packageManifest -Encoding UTF8
 
-    $staging = Join-Path $evidenceRoot ".staging-$stamp"
+    $staging = Assert-Task001PathWithinRoot -RepositoryRoot $root -TargetPath (Join-Path $evidenceRoot ".staging-$stamp")
     New-Item -ItemType Directory -Path $staging -Force | Out-Null
     try {
         foreach ($file in $uniqueFiles + @($packageManifest)) {
@@ -63,13 +81,16 @@ try {
             $relative = if ($full.StartsWith([System.IO.Path]::GetFullPath($root), [System.StringComparison]::OrdinalIgnoreCase)) {
                 $full.Substring([System.IO.Path]::GetFullPath($root).TrimEnd('\', '/').Length).TrimStart('\', '/')
             } else { Join-Path 'external-artifacts' (Split-Path -Leaf $full) }
-            $destination = Join-Path $staging $relative
+            $destination = Assert-Task001PathWithinRoot -RepositoryRoot $root -TargetPath (Join-Path $staging $relative)
             New-Item -ItemType Directory -Path (Split-Path -Parent $destination) -Force | Out-Null
             Copy-Item -LiteralPath $full -Destination $destination -Force
         }
         Compress-Archive -Path (Join-Path $staging '*') -DestinationPath $archive -CompressionLevel Optimal -Force
     } finally {
-        if (Test-Path -LiteralPath $staging) { Remove-Item -LiteralPath $staging -Recurse -Force }
+        if (Test-Path -LiteralPath $staging) {
+            Assert-Task001TreeHasNoReparsePoints -Path $staging
+            Remove-Item -LiteralPath $staging -Recurse -Force
+        }
     }
     $diagnostics += [pscustomobject]@{ status = 'PASS'; code = 'CIV001-EVIDENCE-000'; message = 'Complete TASK-001 evidence archive created.'; details = @{ archive = $archive; files = $uniqueFiles.Count } }
     $exitCode = 0

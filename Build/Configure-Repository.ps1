@@ -12,9 +12,35 @@ $ErrorActionPreference = 'Stop'
 Import-Module (Join-Path $PSScriptRoot 'Task001.Common.psm1') -Force
 $root = Get-Task001RepositoryRoot
 $policy = Get-Task001Governance -RepositoryRoot $root
+$githubActionsAppId = 15368
 
-if ($policy.defaultBranch -ne 'main' -or $policy.protection.allowForcePushes -or $policy.protection.allowDeletions -or -not $policy.protection.requirePullRequest) {
-    throw 'CIV001-GOV-002: Committed governance policy does not meet TASK-001 safeguards.'
+$policyErrors = New-Object System.Collections.Generic.List[string]
+if ([string]$policy.visibility -notin @('private', 'public')) { $policyErrors.Add('visibility must be private or public') }
+if ([string]$policy.defaultBranch -ne 'main') { $policyErrors.Add('default branch must be main') }
+if ([string]$policy.taskBranchPattern -ne 'task/TASK-NNN-description') { $policyErrors.Add('task branch pattern changed') }
+if ([string]$policy.worktreePolicy -ne 'sibling') { $policyErrors.Add('worktree policy changed') }
+if (-not $policy.protection.requirePullRequest) { $policyErrors.Add('pull requests are not required') }
+if ([int]$policy.protection.requiredApprovingReviewCount -ne 0) { $policyErrors.Add('solo approval count must remain zero') }
+if ([string]$policy.protection.requireStatusCheckAfterFirstRun -ne 'repository-policy') { $policyErrors.Add('required status-check name changed') }
+if (-not $policy.protection.requireBranchesUpToDate) { $policyErrors.Add('strict status checks are disabled') }
+if (-not $policy.protection.enforceAdmins) { $policyErrors.Add('administrator enforcement is disabled') }
+if ($policy.protection.allowForcePushes) { $policyErrors.Add('force-pushes are enabled') }
+if ($policy.protection.allowDeletions) { $policyErrors.Add('branch deletion is enabled') }
+if ([string]$policy.workflow.path -ne '.github/workflows/repository-policy.yml') { $policyErrors.Add('workflow path changed') }
+if ([string]$policy.workflow.jobName -ne 'repository-policy') { $policyErrors.Add('workflow job name changed') }
+if ([string]$policy.workflow.checkoutAction -ne 'actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8') { $policyErrors.Add('checkout action pin changed') }
+$workflowPath = Join-Path $root ([string]$policy.workflow.path).Replace('/', '\')
+if (-not (Test-Path -LiteralPath $workflowPath -PathType Leaf)) {
+    $policyErrors.Add('repository-policy workflow is absent')
+} else {
+    $workflowSource = Get-Content -LiteralPath $workflowPath -Raw
+    if (@([regex]::Matches($workflowSource, '(?m)^\s*uses:\s*actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8\s*$')).Count -ne 1) { $policyErrors.Add('workflow checkout pin is absent or duplicated') }
+    if ($workflowSource -notmatch '(?m)^\s{2}repository-policy:\s*$' -or $workflowSource -notmatch '(?m)^\s{4}name:\s*repository-policy\s*$') { $policyErrors.Add('workflow job key or check name changed') }
+    if ($workflowSource -notmatch '(?ms)^permissions:\s*\r?\n\s{2}contents:\s*read\s*$') { $policyErrors.Add('workflow permissions are not read-only contents') }
+    if ($workflowSource -match '(?i)\bsecrets\s*\.' -or $workflowSource -match '(?i)\$\{\{\s*secrets\.') { $policyErrors.Add('workflow references secrets') }
+}
+if ($policyErrors.Count -gt 0) {
+    throw "CIV001-GOV-002: Committed governance policy does not meet TASK-001 safeguards: $($policyErrors -join '; ')"
 }
 if ($Offline) {
     if ($Apply -or $RollbackSettings -or $ExportPath) { throw 'CIV001-GOV-003: Offline mode is audit-only.' }
@@ -66,7 +92,7 @@ if ($RollbackSettings) {
         $review = $priorProtection.required_pull_request_reviews
         $statusChecks = $priorProtection.required_status_checks
         $restoreBody = [pscustomobject][ordered]@{
-            required_status_checks = if ($statusChecks) { @{ strict = [bool]$statusChecks.strict; contexts = @($statusChecks.contexts) } } else { $null }
+            required_status_checks = if ($statusChecks) { @{ strict = [bool]$statusChecks.strict; checks = [object[]]@($statusChecks.checks | ForEach-Object { @{ context = [string]$_.context; app_id = [int]$_.app_id } }) } } else { $null }
             enforce_admins = [bool]$priorProtection.enforce_admins.enabled
             required_pull_request_reviews = if ($review) {
                 @{
@@ -117,8 +143,17 @@ if (-not $Apply) {
     if ($protectionJson.allow_force_pushes.enabled) { $errors += 'force-pushes are enabled' }
     if ($protectionJson.allow_deletions.enabled) { $errors += 'deletion is enabled' }
     if (-not $protectionJson.required_pull_request_reviews) { $errors += 'pull requests are not required' }
+    if ($protectionJson.required_pull_request_reviews -and [int]$protectionJson.required_pull_request_reviews.required_approving_review_count -ne [int]$policy.protection.requiredApprovingReviewCount) { $errors += 'approval count differs from policy' }
     if (-not $protectionJson.enforce_admins.enabled) { $errors += 'administrator enforcement is disabled' }
-    if ($RequireCheck -and @($protectionJson.required_status_checks.contexts) -notcontains 'repository-policy') { $errors += 'repository-policy is not required' }
+    if (-not $protectionJson.required_conversation_resolution.enabled) { $errors += 'conversation resolution is not required' }
+    if ($RequireCheck) {
+        $expectedContext = [string]$policy.protection.requireStatusCheckAfterFirstRun
+        $contexts = @($protectionJson.required_status_checks.contexts)
+        $boundChecks = @($protectionJson.required_status_checks.checks | Where-Object { [string]$_.context -eq $expectedContext -and [int]$_.app_id -eq $githubActionsAppId })
+        if ($contexts.Count -ne 1 -or $contexts -notcontains $expectedContext) { $errors += 'repository-policy is not the unique required check' }
+        if (-not $protectionJson.required_status_checks.strict) { $errors += 'required status checks are not strict' }
+        if ($boundChecks.Count -ne 1) { $errors += 'repository-policy is not bound to the GitHub Actions app' }
+    }
     if ($errors.Count) { throw "CIV001-GOV-010: Live governance audit failed: $($errors -join '; ')" }
     Write-Host 'PASS: live main branch governance matches TASK-001 safeguards.'
     exit 0
@@ -127,11 +162,11 @@ if (-not $Apply) {
 if ($repositoryJson.default_branch -ne 'main') {
     Invoke-GhJson @('api', '--method', 'PATCH', "repos/$repo", '-f', 'default_branch=main') | Out-Null
 }
-$contexts = if ($RequireCheck) { @('repository-policy') } else { @() }
+$requiredContext = [string]$policy.protection.requireStatusCheckAfterFirstRun
 $body = [pscustomobject][ordered]@{
-    required_status_checks = if ($RequireCheck) { @{ strict = $true; contexts = @($contexts) } } else { $null }
-    enforce_admins = $true
-    required_pull_request_reviews = @{ dismiss_stale_reviews = $false; require_code_owner_reviews = $false; required_approving_review_count = 0 }
+    required_status_checks = if ($RequireCheck) { @{ strict = [bool]$policy.protection.requireBranchesUpToDate; checks = [object[]]@(@{ context = $requiredContext; app_id = $githubActionsAppId }) } } else { $null }
+    enforce_admins = [bool]$policy.protection.enforceAdmins
+    required_pull_request_reviews = @{ dismiss_stale_reviews = $false; require_code_owner_reviews = $false; required_approving_review_count = [int]$policy.protection.requiredApprovingReviewCount }
     restrictions = $null
     allow_force_pushes = $false
     allow_deletions = $false

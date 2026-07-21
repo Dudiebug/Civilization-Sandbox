@@ -80,6 +80,20 @@ try {
         if ($lock.status -ne 'FAIL' -or $lock.code -ne 'CIV001-LOCK-003') { throw 'Tampered lock did not fail with CIV001-LOCK-003.' }
     }
 
+    Test-Case 'pinned direct package manifest' {
+        $manifest = Test-Task001PackageManifest -RepositoryRoot $root
+        if ($manifest.status -ne 'PASS') { throw "Expected PASS, got $($manifest.code): $($manifest.mismatches -join '; ')" }
+    }
+
+    Test-Case 'copied manifest drift' {
+        $copy = Join-Path $temp 'manifest.json'
+        $manifest = Get-Content -LiteralPath (Join-Path $root 'Packages\manifest.json') -Raw | ConvertFrom-Json
+        $manifest.dependencies.'com.unity.burst' = '0.0.0-tampered'
+        $manifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $copy -Encoding UTF8
+        $check = Test-Task001PackageManifest -RepositoryRoot $root -ManifestPath $copy
+        if ($check.status -ne 'FAIL' -or $check.code -ne 'CIV001-MANIFEST-003') { throw 'Tampered direct manifest did not fail with CIV001-MANIFEST-003.' }
+    }
+
     Test-Case 'invalid Unity path' {
         $threw = $false
         try { Resolve-Task001Unity -RepositoryRoot $root -UnityPath (Join-Path $temp 'missing-unity.exe') | Out-Null } catch { $threw = $_.Exception.Message -match 'CIV001-UNITY-001' }
@@ -103,6 +117,31 @@ try {
         $state = Get-Task001GitState -RepositoryRoot $root
         if ($state.commit -notmatch '^[0-9a-f]{40}$') { throw 'Result Git commit is absent or invalid.' }
         if ($null -eq $state.dirty) { throw 'Result Git dirty state is null.' }
+    }
+
+    Test-Case 'stale command result provenance is rejected' {
+        $resultPath = Join-Path $selfTestArtifacts 'stale-result.json'
+        Write-Task001CommandResult -Path $resultPath -Command 'self-test' -Status PASS -ExitCode 0 -StartedAt (Get-Date) -RepositoryRoot $root | Out-Null
+        $record = Get-Content -LiteralPath $resultPath -Raw | ConvertFrom-Json
+        $record.git.commit = '0000000000000000000000000000000000000000'
+        $record | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $resultPath -Encoding UTF8
+        $threw = $false
+        try { Assert-Task001CommandResultIntegrity -Path $resultPath -ExpectedCommand 'self-test' -RepositoryRoot $root | Out-Null } catch { $threw = $_.Exception.Message -match 'CIV001-RESULT-005' }
+        if (-not $threw) { throw 'Stale command result provenance was accepted.' }
+    }
+
+    Test-Case 'incomplete build tree hashes are rejected' {
+        $tree = Join-Path $selfTestArtifacts 'build-tree'
+        New-Item -ItemType Directory -Path $tree -Force | Out-Null
+        $first = Join-Path $tree 'launcher.exe'
+        $second = Join-Path $tree 'support.data'
+        Set-Content -LiteralPath $first -Value 'launcher' -Encoding UTF8
+        Set-Content -LiteralPath $second -Value 'support' -Encoding UTF8
+        $resultPath = Join-Path $selfTestArtifacts 'incomplete-build-result.json'
+        Write-Task001CommandResult -Path $resultPath -Command 'self-test-build' -Status PASS -ExitCode 0 -StartedAt (Get-Date) -ArtifactPaths @($first) -RepositoryRoot $root | Out-Null
+        $threw = $false
+        try { Assert-Task001CommandResultIntegrity -Path $resultPath -ExpectedCommand 'self-test-build' -ArtifactDirectory $tree -RepositoryRoot $root | Out-Null } catch { $threw = $_.Exception.Message -match 'CIV001-RESULT-012' }
+        if (-not $threw) { throw 'Incomplete build output hashes were accepted.' }
     }
 
     Test-Case 'cleanup defaults to dry-run' {
@@ -152,15 +191,25 @@ try {
         }
     }
 
-    Test-Case 'required status-check context remains a JSON array' {
+    Test-Case 'required status-check binding remains a JSON array' {
         $source = Get-Content -LiteralPath (Join-Path $root 'Build\Configure-Repository.ps1') -Raw
-        if ($source -notmatch 'contexts\s*=\s*@\(\$contexts\)') {
-            throw 'Configure-Repository.ps1 can collapse the one-item required-check context into a JSON string.'
+        if ($source -notmatch 'checks\s*=\s*\[object\[\]\]@\(') {
+            throw 'Configure-Repository.ps1 can collapse the one-item required-check binding into a JSON object.'
         }
-        $context = 'repository-policy'
-        $body = @{ required_status_checks = @{ strict = $true; contexts = @($context) } } | ConvertTo-Json -Depth 5 | ConvertFrom-Json
-        if ($body.required_status_checks.contexts -is [string] -or @($body.required_status_checks.contexts).Count -ne 1) {
-            throw 'Required status-check context did not round-trip as a one-item JSON array.'
+        $body = @{ required_status_checks = @{ strict = $true; checks = [object[]]@(@{ context = 'repository-policy'; app_id = 15368 }) } } | ConvertTo-Json -Depth 5 | ConvertFrom-Json
+        if ($body.required_status_checks.checks -isnot [array] -or @($body.required_status_checks.checks).Count -ne 1) {
+            throw 'Required status-check binding did not round-trip as a one-item JSON array.'
+        }
+    }
+
+    Test-Case 'artifact-mutating scripts apply path guards' {
+        $testSource = Get-Content -LiteralPath (Join-Path $root 'Build\Test.ps1') -Raw
+        $packageSource = Get-Content -LiteralPath (Join-Path $root 'Build\Package-Evidence.ps1') -Raw
+        if (@([regex]::Matches($testSource, 'Assert-Task001PathWithinRoot')).Count -lt 8 -or $testSource -notmatch 'Assert-Task001CommandResultIntegrity') {
+            throw 'Test.ps1 does not guard all fixed artifact paths and player provenance.'
+        }
+        if ($packageSource -notmatch 'Assert-Task001TreeHasNoReparsePoints -Path \$ArtifactRoot' -or $packageSource -notmatch 'Assert-Task001TreeHasNoReparsePoints -Path \$staging') {
+            throw 'Package-Evidence.ps1 does not guard recursive artifact and staging operations.'
         }
     }
 } finally {

@@ -227,6 +227,40 @@ function Test-Task001PackageLock {
     return [pscustomobject]@{ status = $status; code = $code; expected = $expected; actual = $actual; path = $LockPath }
 }
 
+function Test-Task001PackageManifest {
+    param(
+        [string]$RepositoryRoot = (Get-Task001RepositoryRoot),
+        [string]$ManifestPath
+    )
+    $contract = Get-Task001Toolchain -RepositoryRoot $RepositoryRoot
+    if (-not $ManifestPath) { $ManifestPath = Join-Path $RepositoryRoot 'Packages\manifest.json' }
+    if (-not (Test-Path -LiteralPath $ManifestPath -PathType Leaf)) {
+        return [pscustomobject]@{ status = 'FAIL'; code = 'CIV001-MANIFEST-001'; path = $ManifestPath; mismatches = @('manifest is absent') }
+    }
+    try {
+        $manifest = Get-Content -LiteralPath $ManifestPath -Raw | ConvertFrom-Json
+        $expectedNames = @($contract.packages.PSObject.Properties.Name | Sort-Object)
+        $actualNames = @($manifest.dependencies.PSObject.Properties.Name | Sort-Object)
+        $mismatches = New-Object System.Collections.Generic.List[string]
+        $nameDiff = @(Compare-Object -ReferenceObject $expectedNames -DifferenceObject $actualNames)
+        if ($nameDiff.Count -gt 0) { $mismatches.Add('direct dependency names differ from Config/toolchain.json') }
+        foreach ($name in $expectedNames) {
+            $expected = [string]$contract.packages.$name
+            $actualProperty = $manifest.dependencies.PSObject.Properties[$name]
+            $actual = if ($actualProperty) { [string]$actualProperty.Value } else { $null }
+            if ($actual -ne $expected) { $mismatches.Add("$name expected '$expected' but found '$actual'") }
+        }
+        if (@($manifest.testables).Count -ne 1 -or [string]$manifest.testables[0] -ne 'com.civsandbox.tooling') {
+            $mismatches.Add('testables must contain only com.civsandbox.tooling')
+        }
+        $status = if ($mismatches.Count -eq 0) { 'PASS' } else { 'FAIL' }
+        $code = if ($status -eq 'PASS') { 'CIV001-MANIFEST-000' } else { 'CIV001-MANIFEST-003' }
+        return [pscustomobject]@{ status = $status; code = $code; path = $ManifestPath; mismatches = @($mismatches) }
+    } catch {
+        return [pscustomobject]@{ status = 'FAIL'; code = 'CIV001-MANIFEST-002'; path = $ManifestPath; mismatches = @($_.Exception.Message) }
+    }
+}
+
 function Get-Task001GitState {
     param([string]$RepositoryRoot = (Get-Task001RepositoryRoot))
     try {
@@ -248,12 +282,67 @@ function New-Task001ArtifactRecord {
         [string]$RepositoryRoot = (Get-Task001RepositoryRoot)
     )
     if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { return $null }
-    $full = [System.IO.Path]::GetFullPath($Path)
+    $full = Assert-Task001PathWithinRoot -RepositoryRoot $RepositoryRoot -TargetPath $Path
     $relative = $full
     $rootPrefix = [System.IO.Path]::GetFullPath($RepositoryRoot).TrimEnd('\', '/') + [System.IO.Path]::DirectorySeparatorChar
     if ($full.StartsWith($rootPrefix, [System.StringComparison]::OrdinalIgnoreCase)) { $relative = $full.Substring($rootPrefix.Length).Replace('\', '/') }
     $item = Get-Item -LiteralPath $full
     return [pscustomobject][ordered]@{ path = $relative; sha256 = Get-Task001Sha256 -Path $full; bytes = $item.Length }
+}
+
+function Assert-Task001CommandResultIntegrity {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [string]$ExpectedCommand,
+        [string]$ArtifactDirectory,
+        [string]$RepositoryRoot = (Get-Task001RepositoryRoot)
+    )
+    $Path = Assert-Task001PathWithinRoot -RepositoryRoot $RepositoryRoot -TargetPath $Path
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { throw "CIV001-RESULT-001: Required command result is absent: $Path" }
+    try { $result = Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json } catch { throw "CIV001-RESULT-002: Command result is unreadable: $Path" }
+    $git = Get-Task001GitState -RepositoryRoot $RepositoryRoot
+    $contract = Get-Task001Toolchain -RepositoryRoot $RepositoryRoot
+    $lock = Test-Task001PackageLock -RepositoryRoot $RepositoryRoot
+    if ($result.schemaVersion -ne 1 -or $result.status -ne 'PASS' -or [int]$result.exitCode -ne 0) {
+        throw "CIV001-RESULT-003: Command result is not a versioned zero-exit PASS: $Path"
+    }
+    if ($ExpectedCommand -and [string]$result.command -ne $ExpectedCommand) {
+        throw "CIV001-RESULT-004: Command result '$Path' does not record '$ExpectedCommand'."
+    }
+    if ($git.commit -notmatch '^[0-9a-f]{40}$' -or $git.dirty -ne $false -or [string]$result.git.commit -ne [string]$git.commit -or $result.git.dirty -ne $false) {
+        throw "CIV001-RESULT-005: Command result is stale, dirty, or not tied to the clean candidate commit: $Path"
+    }
+    if ([string]$result.unityVersion -ne [string]$contract.unity.version -or [string]$result.packageLockSha256 -ne [string]$lock.expected -or $lock.status -ne 'PASS') {
+        throw "CIV001-RESULT-006: Command result toolchain or package-lock provenance does not match the candidate: $Path"
+    }
+    $seen = @{}
+    foreach ($artifact in @($result.artifacts)) {
+        $relative = [string]$artifact.path
+        if ([string]::IsNullOrWhiteSpace($relative) -or [System.IO.Path]::IsPathRooted($relative)) { throw "CIV001-RESULT-007: Artifact path is not repository-relative in $Path" }
+        $full = Assert-Task001PathWithinRoot -RepositoryRoot $RepositoryRoot -TargetPath (Join-Path $RepositoryRoot $relative.Replace('/', '\'))
+        if (-not (Test-Path -LiteralPath $full -PathType Leaf)) { throw "CIV001-RESULT-008: Recorded artifact is absent: $relative" }
+        $normalized = $relative.Replace('\', '/').ToLowerInvariant()
+        if ($seen.ContainsKey($normalized)) { throw "CIV001-RESULT-009: Duplicate artifact record: $relative" }
+        $seen[$normalized] = $true
+        $item = Get-Item -LiteralPath $full
+        if ([string]$artifact.sha256 -ne (Get-Task001Sha256 -Path $full) -or [int64]$artifact.bytes -ne [int64]$item.Length) {
+            throw "CIV001-RESULT-010: Recorded artifact hash or size does not match: $relative"
+        }
+    }
+    if ($ArtifactDirectory) {
+        $ArtifactDirectory = Assert-Task001PathWithinRoot -RepositoryRoot $RepositoryRoot -TargetPath $ArtifactDirectory
+        if (-not (Test-Path -LiteralPath $ArtifactDirectory -PathType Container)) { throw "CIV001-RESULT-011: Artifact directory is absent: $ArtifactDirectory" }
+        Assert-Task001TreeHasNoReparsePoints -Path $ArtifactDirectory
+        $actual = @(Get-ChildItem -LiteralPath $ArtifactDirectory -File -Recurse | ForEach-Object {
+            $_.FullName.Substring([System.IO.Path]::GetFullPath($RepositoryRoot).TrimEnd('\', '/').Length + 1).Replace('\', '/').ToLowerInvariant()
+        } | Sort-Object)
+        $directoryPrefix = ([System.IO.Path]::GetFullPath($ArtifactDirectory).Substring([System.IO.Path]::GetFullPath($RepositoryRoot).TrimEnd('\', '/').Length + 1).Replace('\', '/').TrimEnd('/') + '/').ToLowerInvariant()
+        $recorded = @(@($result.artifacts) | ForEach-Object { ([string]$_.path).Replace('\', '/').ToLowerInvariant() } | Where-Object { $_.StartsWith($directoryPrefix) } | Sort-Object)
+        if (@(Compare-Object -ReferenceObject $actual -DifferenceObject $recorded).Count -gt 0) {
+            throw "CIV001-RESULT-012: Result does not hash the complete build output tree: $ArtifactDirectory"
+        }
+    }
+    return $result
 }
 
 function Write-Task001CommandResult {
@@ -302,13 +391,19 @@ function Get-Task001EvidenceRequirements {
         (Join-Path $RepositoryRoot 'docs\evidence\TASK-001\ACCEPTANCE.md'),
         (Join-Path $ArtifactRoot 'build\windows\CivilizationSandboxBootstrap.exe'),
         (Join-Path $ArtifactRoot 'build\linux\CivilizationSandboxBootstrap.x86_64'),
-        (Join-Path $ArtifactRoot 'tests\bootstrap-editmode.xml')
+        (Join-Path $ArtifactRoot 'tests\bootstrap-editmode.xml'),
+        (Join-Path $ArtifactRoot 'results\bootstrap-run-1.json'),
+        (Join-Path $ArtifactRoot 'results\bootstrap-run-2.json'),
+        (Join-Path $ArtifactRoot 'results\build-windows.json'),
+        (Join-Path $ArtifactRoot 'results\build-linux.json'),
+        (Join-Path $ArtifactRoot 'results\test-bootstrap.json'),
+        (Join-Path $ArtifactRoot 'results\task001-script-self-tests.json')
     )
 }
 
 Export-ModuleMember -Function @(
     'Get-Task001RepositoryRoot', 'Get-Task001Toolchain', 'Get-Task001Governance', 'Get-Task001Sha256',
     'Assert-Task001PathWithinRoot', 'Assert-Task001TreeHasNoReparsePoints', 'Resolve-Task001ToolExecutable', 'Get-Task001ToolVersion', 'Test-Task001Tool',
-    'Resolve-Task001Unity', 'Test-Task001PackageLock', 'Get-Task001GitState', 'New-Task001ArtifactRecord',
-    'Write-Task001CommandResult', 'Get-Task001EvidenceRequirements'
+    'Resolve-Task001Unity', 'Test-Task001PackageLock', 'Test-Task001PackageManifest', 'Get-Task001GitState', 'New-Task001ArtifactRecord',
+    'Assert-Task001CommandResultIntegrity', 'Write-Task001CommandResult', 'Get-Task001EvidenceRequirements'
 )

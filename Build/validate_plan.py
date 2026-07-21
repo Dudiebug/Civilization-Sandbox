@@ -13,6 +13,8 @@ REGISTRY_PATH = ROOT / "Config" / "task-registry.json"
 VALID_STATUSES = {"Not Started", "In Progress", "Blocked", "In Review", "Done"}
 EXPECTED_MILESTONES = [f"0.{i}" for i in range(1, 10)]
 BLUEPRINT_SHA256 = "6c71f41ad6f4cecbfd1aaa0c3c0474d6b4be4d63dd9a418a28174d9f2fa0ac6e"
+CHECKOUT_ACTION = "actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8"
+POLICY_JOB = "repository-policy"
 REQUIRED_EVIDENCE = {
     "Build": {"PASS", "N/A"},
     "Tests": {"PASS", "N/A"},
@@ -266,6 +268,67 @@ def main() -> int:
     for rel in required_paths:
         if not (ROOT / rel).exists():
             errors.append(f"Missing required file: {rel}")
+
+    toolchain_path = ROOT / "Config" / "toolchain.json"
+    package_manifest_path = ROOT / "Packages" / "manifest.json"
+    package_lock_path = ROOT / "Packages" / "packages-lock.json"
+    try:
+        toolchain = json.loads(toolchain_path.read_text(encoding="utf-8"))
+        package_manifest = json.loads(package_manifest_path.read_text(encoding="utf-8"))
+        package_lock = json.loads(package_lock_path.read_text(encoding="utf-8"))
+        expected_packages = toolchain.get("packages", {})
+        actual_packages = package_manifest.get("dependencies", {})
+        if actual_packages != expected_packages:
+            errors.append("Packages/manifest.json dependencies do not exactly match Config/toolchain.json packages")
+        if package_manifest.get("testables") != ["com.civsandbox.tooling"]:
+            errors.append("Packages/manifest.json testables must contain only com.civsandbox.tooling")
+        locked = package_lock.get("dependencies", {})
+        for package_name, expected_version in expected_packages.items():
+            record = locked.get(package_name)
+            if not isinstance(record, dict):
+                errors.append(f"Packages/packages-lock.json is missing direct package {package_name}")
+                continue
+            if record.get("depth") != 0 or record.get("version") != expected_version:
+                errors.append(
+                    f"Packages/packages-lock.json direct package {package_name} must be depth 0 at {expected_version}"
+                )
+        expected_lock_hash = str(toolchain.get("unity", {}).get("packageLockSha256", "")).lower()
+        if not re.fullmatch(r"[0-9a-f]{64}", expected_lock_hash) or sha256(package_lock_path) != expected_lock_hash:
+            errors.append("Packages/packages-lock.json SHA-256 does not match Config/toolchain.json")
+    except Exception as exc:
+        errors.append(f"Toolchain/package contract is unreadable: {exc}")
+
+    governance_path = ROOT / "Config" / "repository-governance.json"
+    workflow_path = ROOT / ".github" / "workflows" / "repository-policy.yml"
+    try:
+        governance = json.loads(governance_path.read_text(encoding="utf-8"))
+        workflow = governance.get("workflow", {})
+        protection = governance.get("protection", {})
+        if governance.get("defaultBranch") != "main" or governance.get("visibility") not in {"private", "public"}:
+            errors.append("Repository governance must declare supported visibility and main as default")
+        if not protection.get("requirePullRequest") or not protection.get("enforceAdmins"):
+            errors.append("Repository governance must require pull requests and administrator enforcement")
+        if protection.get("allowForcePushes") or protection.get("allowDeletions"):
+            errors.append("Repository governance must prohibit force-pushes and branch deletion")
+        if not protection.get("requireBranchesUpToDate") or protection.get("requireStatusCheckAfterFirstRun") != POLICY_JOB:
+            errors.append("Repository governance must require strict repository-policy status checks")
+        if workflow.get("path") != ".github/workflows/repository-policy.yml":
+            errors.append("Repository governance workflow path changed")
+        if workflow.get("jobName") != POLICY_JOB or workflow.get("checkoutAction") != CHECKOUT_ACTION:
+            errors.append("Repository governance workflow job or checkout pin changed")
+        workflow_text = workflow_path.read_text(encoding="utf-8")
+        if len(re.findall(rf"^\s*uses:\s*{re.escape(CHECKOUT_ACTION)}\s*$", workflow_text, re.MULTILINE)) != 1:
+            errors.append("repository-policy workflow must use the immutable checkout SHA exactly once")
+        if not re.search(rf"^  {re.escape(POLICY_JOB)}:\s*$", workflow_text, re.MULTILINE):
+            errors.append("repository-policy workflow job key changed")
+        if not re.search(rf"^    name:\s*{re.escape(POLICY_JOB)}\s*$", workflow_text, re.MULTILINE):
+            errors.append("repository-policy workflow check name changed")
+        if not re.search(r"^permissions:\s*\n  contents:\s*read\s*$", workflow_text, re.MULTILINE):
+            errors.append("repository-policy workflow permissions must remain contents: read")
+        if re.search(r"\$\{\{\s*secrets\.", workflow_text, re.IGNORECASE):
+            errors.append("repository-policy workflow must not reference secrets")
+    except Exception as exc:
+        errors.append(f"Repository governance/workflow contract is unreadable: {exc}")
 
     adr = ROOT / "docs" / "decisions" / "ADR-001_RELEASE_SCOPE_REBASELINE.md"
     if adr.exists() and field_from(adr, "Status") != "Accepted":

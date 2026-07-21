@@ -102,6 +102,13 @@ try {
     } else {
         Add-Diagnostic 'FAIL' $lock.code 'Committed package-lock hash is missing, unresolved, or tampered.' $lock
     }
+
+    $manifest = Test-Task001PackageManifest -RepositoryRoot $root
+    if ($manifest.status -eq 'PASS') {
+        Add-Diagnostic 'PASS' $manifest.code 'Direct package manifest matches the pinned toolchain contract.' $manifest
+    } else {
+        Add-Diagnostic 'FAIL' $manifest.code 'Direct package manifest is missing, unreadable, or drifted from the pinned contract.' $manifest
+    }
 } catch {
     Add-Diagnostic 'FAIL' 'CIV001-BOOTSTRAP-099' $_.Exception.Message $null
 }
