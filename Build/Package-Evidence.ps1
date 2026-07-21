@@ -61,7 +61,7 @@ try {
         $dir = Assert-Task001PathWithinRoot -RepositoryRoot $root -TargetPath (Join-Path $ArtifactRoot $directory)
         if (Test-Path -LiteralPath $dir -PathType Container) {
             Assert-Task001TreeHasNoReparsePoints -Path $dir
-            Get-ChildItem -LiteralPath $dir -File -Recurse | ForEach-Object { $files.Add($_.FullName) }
+            Get-ChildItem -LiteralPath $dir -File -Recurse | Where-Object { $_.FullName -ne $currentResultFull } | ForEach-Object { $files.Add($_.FullName) }
         }
     }
     $uniqueFiles = @($files | Select-Object -Unique)

@@ -211,6 +211,9 @@ try {
         if ($packageSource -notmatch 'Assert-Task001TreeHasNoReparsePoints -Path \$ArtifactRoot' -or $packageSource -notmatch 'Assert-Task001TreeHasNoReparsePoints -Path \$staging') {
             throw 'Package-Evidence.ps1 does not guard recursive artifact and staging operations.'
         }
+        if ($packageSource -notmatch '\$_.FullName -ne \$currentResultFull') {
+            throw 'Package-Evidence.ps1 can include its stale pre-overwrite result in the new archive.'
+        }
     }
 } finally {
     if (Test-Path -LiteralPath $temp) { Remove-Item -LiteralPath $temp -Recurse -Force }
