@@ -6,7 +6,6 @@ namespace CivSandbox.People
 {
     public sealed class WorldSimulation
     {
-        public const int FixedWallTicksPerSecond = 20;
         public const int PersonCount = 24;
         public const ulong InitialPeopleStream = 0x70656f706c653031UL;
         public const ulong MovementStream = 0x6d6f76656d656e74UL;
@@ -25,8 +24,8 @@ namespace CivSandbox.People
         };
 
         private readonly PersonState[] people = new PersonState[PersonCount];
+        private readonly SimulationClock clock = new SimulationClock();
         private ulong nextLocalId;
-        private long worldSeconds;
         private WorldSeed seed;
 
         public WorldSimulation(ulong seedValue)
@@ -36,14 +35,14 @@ namespace CivSandbox.People
 
         public WorldBounds Bounds { get; } = new WorldBounds(-22000, 22000, -22000, 22000);
 
-        public WorldTime Time => new WorldTime(worldSeconds);
+        public WorldTime Time => clock.Time;
 
         public WorldSeed Seed => seed;
 
         public void Reset(ulong seedValue)
         {
             seed = new WorldSeed(seedValue);
-            worldSeconds = 0;
+            clock.Reset();
             nextLocalId = 1;
             ulong worldKey = KeyedRandom.Mix(seedValue ^ 0x776f726c642d3031UL);
             int givenOffset = KeyedRandom.Range(seedValue, InitialPeopleStream, 0, 0, 0, 0, GivenNames.Length);
@@ -66,7 +65,7 @@ namespace CivSandbox.People
 
         public void AdvanceFixedWallTick(SimulationSpeed speed)
         {
-            int seconds = speed.GameSecondsPerFixedTick();
+            int seconds = clock.AdvanceFixedWallTick(speed);
             if (seconds <= 0)
             {
                 return;
@@ -87,7 +86,7 @@ namespace CivSandbox.People
                 copy[index] = new PersonSnapshot(person.Id, person.Name, person.Position, person.Action, person.AppearanceVariant);
             }
 
-            return new WorldSnapshot(seed, new WorldTime(worldSeconds), Bounds, copy);
+            return new WorldSnapshot(seed, clock.Time, Bounds, copy);
         }
 
         public ulong ComputeChecksum()
@@ -95,7 +94,7 @@ namespace CivSandbox.People
             CanonicalChecksum checksum = CanonicalChecksum.Create();
             checksum.Add("CIV-BUILD01-WORLD-v1");
             checksum.Add(seed.Value);
-            checksum.Add(worldSeconds);
+            checksum.Add(clock.Time.Seconds);
             checksum.Add(nextLocalId);
             checksum.Add(Bounds.MinimumEastMillimeters);
             checksum.Add(Bounds.MaximumEastMillimeters);
@@ -127,7 +126,6 @@ namespace CivSandbox.People
 
         private void AdvanceOneGameSecond()
         {
-            worldSeconds++;
             for (int index = 0; index < people.Length; index++)
             {
                 AdvancePerson(people[index]);

@@ -4,6 +4,9 @@ namespace CivSandbox.Presentation
 {
     internal static class EarlyModernSpriteFactory
     {
+        private const int VariantCount = 12;
+        private static readonly Sprite[] Sprites = new Sprite[VariantCount];
+
         private static readonly Color32[] Cloth =
         {
             new Color32(111, 57, 43, 255),
@@ -24,18 +27,30 @@ namespace CivSandbox.Presentation
 
         public static Sprite Create(int appearanceVariant)
         {
+            int normalizedVariant = appearanceVariant % VariantCount;
+            if (normalizedVariant < 0)
+            {
+                normalizedVariant += VariantCount;
+            }
+
+            Sprite cached = Sprites[normalizedVariant];
+            if (cached != null)
+            {
+                return cached;
+            }
+
             const int width = 12;
             const int height = 20;
             var texture = new Texture2D(width, height, TextureFormat.RGBA32, false)
             {
-                name = $"Early-modern person {appearanceVariant}",
+                name = $"Early-modern person texture {normalizedVariant}",
                 filterMode = FilterMode.Point,
                 wrapMode = TextureWrapMode.Clamp
             };
 
             var pixels = new Color32[width * height];
-            Color32 cloth = Cloth[appearanceVariant % Cloth.Length];
-            Color32 skin = Skin[(appearanceVariant / 2) % Skin.Length];
+            Color32 cloth = Cloth[normalizedVariant % Cloth.Length];
+            Color32 skin = Skin[(normalizedVariant / 2) % Skin.Length];
             Color32 dark = new Color32(40, 31, 27, 255);
             Color32 leather = new Color32(74, 48, 31, 255);
 
@@ -47,7 +62,7 @@ namespace CivSandbox.Presentation
             Fill(pixels, width, 9, 10, 2, 4, cloth);
             Fill(pixels, width, 4, 12, 4, 4, skin);
             Fill(pixels, width, 3, 15, 6, 2, dark);
-            if ((appearanceVariant & 1) == 0)
+            if ((normalizedVariant & 1) == 0)
             {
                 Fill(pixels, width, 2, 16, 8, 2, cloth);
                 Fill(pixels, width, 4, 18, 4, 1, cloth);
@@ -61,7 +76,27 @@ namespace CivSandbox.Presentation
             pixels[7 + 14 * width] = dark;
             texture.SetPixels32(pixels);
             texture.Apply(false, true);
-            return Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.05f), 12f, 0, SpriteMeshType.FullRect);
+            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.05f), 12f, 0, SpriteMeshType.FullRect);
+            sprite.name = $"Early-modern person {normalizedVariant}";
+            Sprites[normalizedVariant] = sprite;
+            return sprite;
+        }
+
+        internal static int CachedSpriteCount
+        {
+            get
+            {
+                int count = 0;
+                for (int index = 0; index < Sprites.Length; index++)
+                {
+                    if (Sprites[index] != null)
+                    {
+                        count++;
+                    }
+                }
+
+                return count;
+            }
         }
 
         private static void Fill(Color32[] pixels, int width, int x, int y, int blockWidth, int blockHeight, Color32 color)

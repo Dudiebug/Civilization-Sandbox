@@ -31,7 +31,7 @@ namespace CivSandbox.UI
 
             EnsureStyles();
             const float width = 340f;
-            GUILayout.BeginArea(new Rect(18f, 18f, width, 278f), panelStyle);
+            GUILayout.BeginArea(new Rect(18f, 18f, width, 364f), panelStyle);
             GUILayout.Label("CIVILIZATION SANDBOX", titleStyle);
             GUILayout.Label("WORLD VIEWER  •  EARLY-MODERN COMPANY", headingStyle);
             GUILayout.Space(8f);
@@ -40,6 +40,7 @@ namespace CivSandbox.UI
             GUILayout.Label($"World time   {FormatTime(snapshot.Time.Seconds)}", bodyStyle);
             GUILayout.Label($"Company      {snapshot.Count} named people", bodyStyle);
             GUILayout.Label($"State        {session.Speed.Label()}", bodyStyle);
+            GUILayout.Label(FormatClockHealth(), headingStyle);
             GUILayout.Space(6f);
             GUILayout.BeginHorizontal();
             DrawSpeedButton("Pause", SimulationSpeed.Paused);
@@ -64,7 +65,8 @@ namespace CivSandbox.UI
             }
 
             GUILayout.Space(6f);
-            GUILayout.Label("WASD / arrows pan  •  middle-drag  •  wheel zoom", headingStyle);
+            GUILayout.Label("Pan     WASD / arrows / middle-drag", headingStyle);
+            GUILayout.Label("Zoom   mouse wheel", headingStyle);
 
             GUILayout.EndArea();
             DrawInspector();
@@ -129,6 +131,23 @@ namespace CivSandbox.UI
             GUI.backgroundColor = previous;
         }
 
+        private string FormatClockHealth()
+        {
+            if (session.IsClockOverloaded && session.TotalDroppedWallTime > TimeSpan.Zero)
+            {
+                return $"CLOCK OVERLOAD  •  {session.TotalDroppedWallTime.TotalMilliseconds:0} ms wall time dropped";
+            }
+
+            if (session.IsClockOverloaded)
+            {
+                return "CLOCK CATCHING UP  •  bounded backlog";
+            }
+
+            return session.TotalDroppedWallTime > TimeSpan.Zero
+                ? $"CLOCK STEADY  •  {session.TotalDroppedWallTime.TotalMilliseconds:0} ms wall time skipped"
+                : "CLOCK STEADY  •  fixed 20 Hz";
+        }
+
         private void EnsureStyles()
         {
             if (panelStyle != null)
@@ -169,7 +188,10 @@ namespace CivSandbox.UI
             {
                 fontSize = 14,
                 fontStyle = FontStyle.Bold,
-                normal = { textColor = new Color(0.18f, 0.12f, 0.07f) }
+                normal = { textColor = new Color(0.95f, 0.86f, 0.64f) },
+                hover = { textColor = Color.white },
+                active = { textColor = Color.white },
+                focused = { textColor = new Color(0.95f, 0.86f, 0.64f) }
             };
         }
 

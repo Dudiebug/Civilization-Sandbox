@@ -1,5 +1,17 @@
 # TASK-001 Windows Commands
 
+## Build 01 World Viewer
+
+Run the complete focused verification path (deterministic simulation tests, camera/selection independence tests, Windows player build, and first-frame smoke):
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Build/Verify-WorldViewer.ps1
+```
+
+Open `Assets/WorldViewer/WorldViewer.unity` in Unity and press Play for the creator-facing experience.
+
+## Foundation commands
+
 Run commands from the repository root. All commands are compatible with Windows PowerShell 5.1; `pwsh` is the pinned shell for normal creator use.
 
 ```powershell

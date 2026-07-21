@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using CivSandbox.People;
 using CivSandbox.Presentation;
@@ -13,7 +14,7 @@ namespace CivSandbox.WorldViewer
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void CreateWorldViewer()
         {
-            if (SceneManager.GetActiveScene().name != "WorldViewer" || Object.FindFirstObjectByType<WorldViewerRoot>() != null)
+            if (SceneManager.GetActiveScene().name != "WorldViewer" || UnityEngine.Object.FindFirstObjectByType<WorldViewerRoot>() != null)
             {
                 return;
             }
@@ -26,24 +27,26 @@ namespace CivSandbox.WorldViewer
     public sealed class WorldViewerRoot : MonoBehaviour, IWorldViewerSession
     {
         private const ulong DefaultSeed = 170601UL;
-        private const double FixedWallTickSeconds = 1.0 / WorldSimulation.FixedWallTicksPerSecond;
-        private WorldSimulation simulation;
+        private WorldViewerSession session;
         private WorldSceneView sceneView;
-        private readonly WorldSelectionState selection = new WorldSelectionState();
-        private double wallAccumulator;
+        private bool overloadWarningActive;
+        private double nextOverloadWarningWallTime;
 
-        public ulong Seed => simulation.Seed.Value;
+        public ulong Seed => session.Seed;
 
-        public SimulationSpeed Speed { get; private set; } = SimulationSpeed.Normal;
+        public SimulationSpeed Speed => session.Speed;
 
-        public WorldSnapshot Snapshot { get; private set; }
+        public WorldSnapshot Snapshot => session.Snapshot;
 
-        public StableEntityId? SelectedPersonId => selection.SelectedPersonId;
+        public StableEntityId? SelectedPersonId => session.SelectedPersonId;
+
+        public bool IsClockOverloaded => session.IsClockOverloaded;
+
+        public TimeSpan TotalDroppedWallTime => session.TotalDroppedWallTime;
 
         private void Awake()
         {
-            simulation = new WorldSimulation(DefaultSeed);
-            Snapshot = simulation.CreateSnapshot();
+            session = new WorldViewerSession(DefaultSeed);
 
             var sceneObject = new GameObject("Read-only world presentation");
             sceneObject.transform.SetParent(transform, false);
@@ -70,51 +73,57 @@ namespace CivSandbox.WorldViewer
 
         private void Update()
         {
-            wallAccumulator += Time.unscaledDeltaTime;
-            int processedTicks = 0;
-            while (wallAccumulator >= FixedWallTickSeconds && processedTicks < 8)
+            FixedStepPumpReport pumpReport = session.AdvanceWallTime(TimeSpan.FromSeconds(Time.unscaledDeltaTime));
+
+            double wallTime = Time.unscaledTimeAsDouble;
+            if (pumpReport.IsOverloaded && (!overloadWarningActive || wallTime >= nextOverloadWarningWallTime))
             {
-                simulation.AdvanceFixedWallTick(Speed);
-                wallAccumulator -= FixedWallTickSeconds;
-                processedTicks++;
+                string code = pumpReport.TotalDroppedWallTime > TimeSpan.Zero
+                    ? "CIV-BUILD01-CLOCK-001"
+                    : "CIV-BUILD01-CLOCK-000";
+                Debug.LogWarning(
+                    $"{code}: Fixed-step overload has {pumpReport.PendingWholeSteps} whole steps in the bounded backlog; " +
+                    $"cumulative dropped wall time is {pumpReport.TotalDroppedWallTime.TotalMilliseconds:0.###} ms.");
+                nextOverloadWarningWallTime = wallTime + 5d;
             }
 
-            if (processedTicks > 0 && Speed != SimulationSpeed.Paused)
+            overloadWarningActive = pumpReport.IsOverloaded;
+
+            if (pumpReport.StepsToRun > 0 && Speed != SimulationSpeed.Paused)
             {
-                Snapshot = simulation.CreateSnapshot();
                 sceneView.Apply(Snapshot);
             }
         }
 
         public void Reset(ulong seed)
         {
-            simulation.Reset(seed);
-            Speed = SimulationSpeed.Normal;
-            wallAccumulator = 0d;
-            SelectPerson(null);
-            Snapshot = simulation.CreateSnapshot();
+            session.Reset(seed);
+            overloadWarningActive = false;
+            nextOverloadWarningWallTime = 0d;
             sceneView.Apply(Snapshot, true);
+            sceneView.SetSelected(null);
         }
 
         public void SetSpeed(SimulationSpeed speed)
         {
-            Speed = speed;
+            TimeSpan previousDroppedWallTime = session.TotalDroppedWallTime;
+            session.SetSpeed(speed);
+            TimeSpan discardedWallTime = session.TotalDroppedWallTime - previousDroppedWallTime;
+            if (discardedWallTime > TimeSpan.Zero)
+            {
+                Debug.LogWarning(
+                    $"CIV-BUILD01-CLOCK-002: Speed changed to {speed.Label()}; discarded " +
+                    $"{discardedWallTime.TotalMilliseconds:0.###} ms of retained wall time.");
+            }
         }
 
         public void SelectPerson(StableEntityId? personId)
         {
-            if (personId.HasValue)
-            {
-                selection.Select(personId.Value);
-            }
-            else
-            {
-                selection.Clear();
-            }
+            session.SelectPerson(personId);
 
             if (sceneView != null)
             {
-                sceneView.SetSelected(selection.SelectedPersonId);
+                sceneView.SetSelected(session.SelectedPersonId);
             }
         }
     }

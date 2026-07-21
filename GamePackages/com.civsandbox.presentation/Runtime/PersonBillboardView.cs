@@ -91,7 +91,7 @@ namespace CivSandbox.Presentation
             shadow.transform.SetParent(transform, false);
             shadow.transform.localPosition = new Vector3(0f, -0.01f, 0f);
             shadow.transform.localScale = new Vector3(0.45f, 0.01f, 0.25f);
-            Object.Destroy(shadow.GetComponent<Collider>());
+            RuntimeObjectLifecycle.Destroy(shadow.GetComponent<Collider>());
             shadow.GetComponent<MeshRenderer>().sharedMaterial = EraMaterialFactory.CreateUnlit(new Color(0.12f, 0.10f, 0.07f, 0.55f));
         }
 
@@ -102,7 +102,7 @@ namespace CivSandbox.Presentation
             selectionMarker.transform.SetParent(transform, false);
             selectionMarker.transform.localPosition = new Vector3(0f, 0f, 0f);
             selectionMarker.transform.localScale = new Vector3(0.72f, 0.015f, 0.52f);
-            Object.Destroy(selectionMarker.GetComponent<Collider>());
+            RuntimeObjectLifecycle.Destroy(selectionMarker.GetComponent<Collider>());
             selectionMarker.GetComponent<MeshRenderer>().sharedMaterial = EraMaterialFactory.CreateUnlit(new Color(0.95f, 0.57f, 0.10f, 0.9f));
             selectionMarker.SetActive(false);
         }

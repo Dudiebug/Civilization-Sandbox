@@ -10,22 +10,21 @@ namespace CivSandbox.WorldViewer.Tests
         [Test]
         public void SelectSwitchAndClearDoNotMutateSimulation()
         {
-            var simulation = new WorldSimulation(170601UL);
-            WorldSnapshot snapshot = simulation.CreateSnapshot();
-            ulong before = simulation.ComputeChecksum();
-            var selection = new WorldSelectionState();
+            var session = new WorldViewerSession(170601UL);
+            WorldSnapshot snapshot = session.Snapshot;
+            ulong before = session.ComputeAuthoritativeChecksum();
 
-            selection.Select(snapshot[0].Id);
-            Assert.That(selection.SelectedPersonId, Is.EqualTo(snapshot[0].Id));
-            Assert.That(simulation.ComputeChecksum(), Is.EqualTo(before));
+            session.SelectPerson(snapshot[0].Id);
+            Assert.That(session.SelectedPersonId, Is.EqualTo(snapshot[0].Id));
+            Assert.That(session.ComputeAuthoritativeChecksum(), Is.EqualTo(before));
 
-            selection.Select(snapshot[11].Id);
-            Assert.That(selection.SelectedPersonId, Is.EqualTo(snapshot[11].Id));
-            Assert.That(simulation.ComputeChecksum(), Is.EqualTo(before));
+            session.SelectPerson(snapshot[11].Id);
+            Assert.That(session.SelectedPersonId, Is.EqualTo(snapshot[11].Id));
+            Assert.That(session.ComputeAuthoritativeChecksum(), Is.EqualTo(before));
 
-            selection.Clear();
-            Assert.That(selection.SelectedPersonId, Is.Null);
-            Assert.That(simulation.ComputeChecksum(), Is.EqualTo(before));
+            session.SelectPerson(null);
+            Assert.That(session.SelectedPersonId, Is.Null);
+            Assert.That(session.ComputeAuthoritativeChecksum(), Is.EqualTo(before));
         }
 
         [Test]

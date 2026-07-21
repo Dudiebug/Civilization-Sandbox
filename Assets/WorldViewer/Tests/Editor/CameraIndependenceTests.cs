@@ -1,3 +1,4 @@
+using System;
 using CivSandbox.People;
 using CivSandbox.Presentation;
 using CivSandbox.Simulation;
@@ -12,8 +13,8 @@ namespace CivSandbox.WorldViewer.Tests
         [Test]
         public void MovingZoomingAndHidingCameraCannotChangeAuthoritativeCheckpoint()
         {
-            var observed = new WorldSimulation(170601UL);
-            var headless = new WorldSimulation(170601UL);
+            var observed = new WorldViewerSession(170601UL);
+            var headless = new WorldViewerSession(170601UL);
             var cameraObject = new GameObject("Camera independence probe");
 
             try
@@ -26,22 +27,21 @@ namespace CivSandbox.WorldViewer.Tests
 
                 for (int tick = 0; tick < 240; tick++)
                 {
-                    observed.AdvanceFixedWallTick(SimulationSpeed.Normal);
-                    observed.CreateSnapshot();
+                    observed.AdvanceWallTime(TimeSpan.FromMilliseconds(50));
                     controller.SetViewForVerification(
                         new Vector3((tick % 17) - 8f, 34f + tick % 3, (tick % 23) - 11f),
                         7f + tick % 25);
                     cameraObject.SetActive((tick & 3) != 0);
 
-                    headless.AdvanceFixedWallTick(SimulationSpeed.Normal);
+                    headless.AdvanceWallTime(TimeSpan.FromMilliseconds(50));
                 }
 
-                Assert.That(observed.Time, Is.EqualTo(headless.Time));
-                Assert.That(observed.ComputeChecksum(), Is.EqualTo(headless.ComputeChecksum()));
+                Assert.That(observed.Snapshot.Time, Is.EqualTo(headless.Snapshot.Time));
+                Assert.That(observed.ComputeAuthoritativeChecksum(), Is.EqualTo(headless.ComputeAuthoritativeChecksum()));
             }
             finally
             {
-                Object.DestroyImmediate(cameraObject);
+                UnityEngine.Object.DestroyImmediate(cameraObject);
             }
         }
 

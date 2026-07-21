@@ -12,6 +12,8 @@ namespace CivSandbox.Presentation
 
         public Camera WorldCamera => worldCamera;
 
+        public int PersonViewCount => people.Count;
+
         public void SetSelected(StableEntityId? selectedPersonId)
         {
             foreach (KeyValuePair<StableEntityId, PersonBillboardView> pair in people)
@@ -32,6 +34,7 @@ namespace CivSandbox.Presentation
 
         public void Apply(WorldSnapshot snapshot, bool snap = false)
         {
+            RemoveStalePeople(snapshot);
             for (int index = 0; index < snapshot.Count; index++)
             {
                 PersonSnapshot person = snapshot[index];
@@ -48,7 +51,38 @@ namespace CivSandbox.Presentation
             }
         }
 
-        private static Camera CreateCamera()
+        private void RemoveStalePeople(WorldSnapshot snapshot)
+        {
+            var staleIds = new List<StableEntityId>();
+            foreach (KeyValuePair<StableEntityId, PersonBillboardView> pair in people)
+            {
+                bool stillPresent = false;
+                for (int index = 0; index < snapshot.Count; index++)
+                {
+                    if (snapshot[index].Id == pair.Key)
+                    {
+                        stillPresent = true;
+                        break;
+                    }
+                }
+
+                if (!stillPresent)
+                {
+                    staleIds.Add(pair.Key);
+                }
+            }
+
+            for (int index = 0; index < staleIds.Count; index++)
+            {
+                StableEntityId id = staleIds[index];
+                PersonBillboardView stale = people[id];
+                stale.gameObject.SetActive(false);
+                RuntimeObjectLifecycle.Destroy(stale.gameObject);
+                people.Remove(id);
+            }
+        }
+
+        private Camera CreateCamera()
         {
             var cameraObject = new GameObject("World Camera");
             cameraObject.tag = "MainCamera";
@@ -61,10 +95,11 @@ namespace CivSandbox.Presentation
             camera.clearFlags = CameraClearFlags.SolidColor;
             camera.transform.position = new Vector3(31f, 36f, -31f);
             camera.transform.rotation = Quaternion.LookRotation(new Vector3(-31f, -36f, 31f), Vector3.up);
+            cameraObject.transform.SetParent(transform, true);
             return camera;
         }
 
-        private static void CreateLight()
+        private void CreateLight()
         {
             var lightObject = new GameObject("Late afternoon sun");
             var light = lightObject.AddComponent<Light>();
@@ -73,6 +108,7 @@ namespace CivSandbox.Presentation
             light.intensity = 1.1f;
             light.shadows = LightShadows.Soft;
             lightObject.transform.rotation = Quaternion.Euler(46f, -32f, 0f);
+            lightObject.transform.SetParent(transform, true);
             RenderSettings.ambientLight = new Color(0.34f, 0.35f, 0.28f);
         }
 
@@ -107,7 +143,7 @@ namespace CivSandbox.Presentation
             rail.transform.SetParent(transform, false);
             rail.transform.localPosition = position;
             rail.transform.localScale = scale;
-            Object.Destroy(rail.GetComponent<Collider>());
+            RuntimeObjectLifecycle.Destroy(rail.GetComponent<Collider>());
             rail.GetComponent<MeshRenderer>().sharedMaterial = EraMaterialFactory.CreateLit(new Color(0.25f, 0.14f, 0.07f));
         }
     }

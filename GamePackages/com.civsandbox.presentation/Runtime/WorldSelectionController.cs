@@ -47,7 +47,7 @@ namespace CivSandbox.Presentation
 
         private static bool IsPointerOverHud(Vector3 pointer)
         {
-            bool inTopBand = pointer.y >= Screen.height - 330f;
+            bool inTopBand = pointer.y >= Screen.height - 380f;
             return inTopBand && (pointer.x <= 380f || pointer.x >= Screen.width - 360f);
         }
     }
