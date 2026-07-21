@@ -12,6 +12,14 @@ namespace CivSandbox.Presentation
 
         public Camera WorldCamera => worldCamera;
 
+        public void SetSelected(StableEntityId? selectedPersonId)
+        {
+            foreach (KeyValuePair<StableEntityId, PersonBillboardView> pair in people)
+            {
+                pair.Value.SetSelected(selectedPersonId.HasValue && pair.Key == selectedPersonId.Value);
+            }
+        }
+
         public void Initialize(WorldSnapshot snapshot)
         {
             worldCamera = CreateCamera();

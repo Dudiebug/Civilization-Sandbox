@@ -8,7 +8,9 @@ namespace CivSandbox.UI
         ulong Seed { get; }
         SimulationSpeed Speed { get; }
         WorldSnapshot Snapshot { get; }
+        StableEntityId? SelectedPersonId { get; }
         void Reset(ulong seed);
         void SetSpeed(SimulationSpeed speed);
+        void SelectPerson(StableEntityId? personId);
     }
 }

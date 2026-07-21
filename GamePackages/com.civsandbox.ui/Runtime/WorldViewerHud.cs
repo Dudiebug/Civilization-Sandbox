@@ -67,6 +67,50 @@ namespace CivSandbox.UI
             GUILayout.Label("WASD / arrows pan  •  middle-drag  •  wheel zoom", headingStyle);
 
             GUILayout.EndArea();
+            DrawInspector();
+        }
+
+        private void DrawInspector()
+        {
+            const float width = 320f;
+            GUILayout.BeginArea(new Rect(Screen.width - width - 18f, 18f, width, 246f), panelStyle);
+            GUILayout.Label("OMNISCIENT INSPECTION", headingStyle);
+
+            if (!session.SelectedPersonId.HasValue || !TryFindPerson(session.Snapshot, session.SelectedPersonId.Value, out PersonSnapshot person))
+            {
+                GUILayout.Space(12f);
+                GUILayout.Label("Select any named person", titleStyle);
+                GUILayout.Label("Click a person in the world to inspect authoritative state. Selection cannot change it.", bodyStyle);
+                GUILayout.Space(10f);
+                GUILayout.Label("Escape or click empty ground to clear.", headingStyle);
+                GUILayout.EndArea();
+                return;
+            }
+
+            GUILayout.Space(6f);
+            GUILayout.Label(person.Name, titleStyle);
+            GUILayout.Label($"Stable ID      {person.Id}", bodyStyle);
+            GUILayout.Label($"Position       {person.Position}", bodyStyle);
+            GUILayout.Label($"Current action {person.Action}", bodyStyle);
+            GUILayout.Label($"World time     {FormatTime(session.Snapshot.Time.Seconds)}", bodyStyle);
+            GUILayout.Space(10f);
+            GUILayout.Label("READ-ONLY • AUTHORITATIVE SNAPSHOT", headingStyle);
+            GUILayout.EndArea();
+        }
+
+        private static bool TryFindPerson(WorldSnapshot snapshot, StableEntityId id, out PersonSnapshot person)
+        {
+            for (int index = 0; index < snapshot.Count; index++)
+            {
+                if (snapshot[index].Id == id)
+                {
+                    person = snapshot[index];
+                    return true;
+                }
+            }
+
+            person = default;
+            return false;
         }
 
         private void DrawSpeedButton(string label, SimulationSpeed speed)

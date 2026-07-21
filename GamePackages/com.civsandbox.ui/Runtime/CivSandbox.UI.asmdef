@@ -3,6 +3,7 @@
   "rootNamespace": "CivSandbox.UI",
   "references": [
     "CivSandbox.Simulation.Core",
+    "CivSandbox.World",
     "CivSandbox.People",
     "CivSandbox.Presentation"
   ],

@@ -29,6 +29,7 @@ namespace CivSandbox.WorldViewer
         private const double FixedWallTickSeconds = 1.0 / WorldSimulation.FixedWallTicksPerSecond;
         private WorldSimulation simulation;
         private WorldSceneView sceneView;
+        private readonly WorldSelectionState selection = new WorldSelectionState();
         private double wallAccumulator;
 
         public ulong Seed => simulation.Seed.Value;
@@ -36,6 +37,8 @@ namespace CivSandbox.WorldViewer
         public SimulationSpeed Speed { get; private set; } = SimulationSpeed.Normal;
 
         public WorldSnapshot Snapshot { get; private set; }
+
+        public StableEntityId? SelectedPersonId => selection.SelectedPersonId;
 
         private void Awake()
         {
@@ -46,6 +49,7 @@ namespace CivSandbox.WorldViewer
             sceneObject.transform.SetParent(transform, false);
             sceneView = sceneObject.AddComponent<WorldSceneView>();
             sceneView.Initialize(Snapshot);
+            sceneView.WorldCamera.gameObject.AddComponent<WorldSelectionController>().Configure(sceneView.WorldCamera, SelectPerson);
 
             var hudObject = new GameObject("World Viewer HUD");
             hudObject.transform.SetParent(transform, false);
@@ -87,6 +91,7 @@ namespace CivSandbox.WorldViewer
             simulation.Reset(seed);
             Speed = SimulationSpeed.Normal;
             wallAccumulator = 0d;
+            SelectPerson(null);
             Snapshot = simulation.CreateSnapshot();
             sceneView.Apply(Snapshot, true);
         }
@@ -94,6 +99,23 @@ namespace CivSandbox.WorldViewer
         public void SetSpeed(SimulationSpeed speed)
         {
             Speed = speed;
+        }
+
+        public void SelectPerson(StableEntityId? personId)
+        {
+            if (personId.HasValue)
+            {
+                selection.Select(personId.Value);
+            }
+            else
+            {
+                selection.Clear();
+            }
+
+            if (sceneView != null)
+            {
+                sceneView.SetSelected(selection.SelectedPersonId);
+            }
         }
     }
 }
