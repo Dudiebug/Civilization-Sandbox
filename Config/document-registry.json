@@ -15,7 +15,11 @@
       "status": "Current",
       "release_scope": "Repository",
       "required": true,
-      "source_refs": ["Blueprint 65-68", "ADR-001", "ADR-003"]
+      "source_refs": [
+        "Blueprint 65-68",
+        "ADR-001",
+        "ADR-003"
+      ]
     },
     {
       "id": "START-HERE",
@@ -26,7 +30,9 @@
       "status": "Current",
       "release_scope": "Repository",
       "required": true,
-      "source_refs": ["ROOT-README"]
+      "source_refs": [
+        "ROOT-README"
+      ]
     },
     {
       "id": "ROOT-INSTRUCTIONS",
@@ -37,7 +43,11 @@
       "status": "Current",
       "release_scope": "Repository",
       "required": true,
-      "source_refs": ["Blueprint 65-68", "ADR-001", "ADR-003"]
+      "source_refs": [
+        "Blueprint 65-68",
+        "ADR-001",
+        "ADR-003"
+      ]
     },
     {
       "id": "DOCUMENT-INDEX",
@@ -48,7 +58,10 @@
       "status": "Current",
       "release_scope": "Repository",
       "required": true,
-      "source_refs": ["Blueprint 66.3", "TASK-002"]
+      "source_refs": [
+        "Blueprint 66.3",
+        "TASK-002"
+      ]
     },
     {
       "id": "BLUEPRINT-V2",
@@ -59,7 +72,9 @@
       "status": "Immutable",
       "release_scope": "Version 1.5",
       "required": true,
-      "source_refs": ["Blueprint document control"]
+      "source_refs": [
+        "Blueprint document control"
+      ]
     },
     {
       "id": "ADR-001",
@@ -70,7 +85,10 @@
       "status": "Accepted",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 69-75", "Creator decision 2026-07-20"]
+      "source_refs": [
+        "Blueprint 69-75",
+        "Creator decision 2026-07-20"
+      ]
     },
     {
       "id": "ADR-002",
@@ -81,7 +99,10 @@
       "status": "Accepted",
       "release_scope": "Milestone 0.1-0.3",
       "required": true,
-      "source_refs": ["D01", "TASK-001 evidence"]
+      "source_refs": [
+        "D01",
+        "TASK-001 evidence"
+      ]
     },
     {
       "id": "ADR-003",
@@ -92,84 +113,10 @@
       "status": "Accepted",
       "release_scope": "Repository",
       "required": true,
-      "source_refs": ["Creator decision 2026-07-20", "OpenAI Codex instruction discovery"]
-    },
-    {
-      "id": "MASTER-PLAN",
-      "path": "docs/plans/MASTER_PLAN.md",
-      "title": "Master Plan",
-      "authority": "plan",
-      "owner": "Product planning",
-      "status": "Current",
-      "release_scope": "Version 1.0",
-      "required": true,
-      "source_refs": ["ADR-001"]
-    },
-    {
-      "id": "PRE-1-0-ROADMAP",
-      "path": "docs/plans/PRE_1_0_ROADMAP.md",
-      "title": "Pre-1.0 Roadmap",
-      "authority": "plan",
-      "owner": "Product planning",
-      "status": "Current",
-      "release_scope": "Version 1.0",
-      "required": true,
-      "source_refs": ["ADR-001", "Blueprint 69-75"]
-    },
-    {
-      "id": "RELEASE-LADDER",
-      "path": "docs/plans/RELEASE_LADDER.md",
-      "title": "Early-Modern Release Ladder",
-      "authority": "plan",
-      "owner": "Product planning",
-      "status": "Current",
-      "release_scope": "All",
-      "required": true,
-      "source_refs": ["ADR-001"]
-    },
-    {
-      "id": "DECISION-QUEUE",
-      "path": "docs/plans/DECISION_QUEUE.md",
-      "title": "Milestone-Timed Decision Queue",
-      "authority": "plan",
-      "owner": "Creator",
-      "status": "Current",
-      "release_scope": "Version 1.0",
-      "required": true,
-      "source_refs": ["ADR-001"]
-    },
-    {
-      "id": "IDENTITY-GUARDRAILS",
-      "path": "docs/plans/IDENTITY_GUARDRAILS.md",
-      "title": "Version 1.0 Identity Guardrails",
-      "authority": "plan",
-      "owner": "Product design",
-      "status": "Accepted",
-      "release_scope": "Version 1.0",
-      "required": true,
-      "source_refs": ["ADR-001", "Blueprint 4-8"]
-    },
-    {
-      "id": "CURRENT-STEP",
-      "path": "docs/plans/CURRENT_STEP.md",
-      "title": "Current Step",
-      "authority": "plan",
-      "owner": "Development process",
-      "status": "Active",
-      "release_scope": "Repository",
-      "required": true,
-      "source_refs": ["STATUS-BOARD", "TASK-002"]
-    },
-    {
-      "id": "TASK-002",
-      "path": "docs/plans/tasks/TASK-002.md",
-      "title": "TASK-002 - Source-of-truth, release-scope, story, and AI document set",
-      "authority": "task-contract",
-      "owner": "Development process",
-      "status": "Active",
-      "release_scope": "Milestone 0.1-0.3",
-      "required": true,
-      "source_refs": ["Blueprint 65-68", "Blueprint 81", "ADR-001", "ADR-003"]
+      "source_refs": [
+        "Creator decision 2026-07-20",
+        "OpenAI Codex instruction discovery"
+      ]
     },
     {
       "id": "TECHNICAL-ARCHITECTURE",
@@ -180,7 +127,11 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 55-57", "Blueprint 66", "ADR-002"]
+      "source_refs": [
+        "Blueprint 55-57",
+        "Blueprint 66",
+        "ADR-002"
+      ]
     },
     {
       "id": "PACKAGE-MAP",
@@ -191,7 +142,10 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["TECHNICAL-ARCHITECTURE", "ADR-002"]
+      "source_refs": [
+        "TECHNICAL-ARCHITECTURE",
+        "ADR-002"
+      ]
     },
     {
       "id": "UNIT-CATALOG",
@@ -202,7 +156,10 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 55", "Blueprint 66"]
+      "source_refs": [
+        "Blueprint 55",
+        "Blueprint 66"
+      ]
     },
     {
       "id": "SIMULATION-CONTRACTS",
@@ -213,7 +170,9 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 55-64"]
+      "source_refs": [
+        "Blueprint 55-64"
+      ]
     },
     {
       "id": "DATA-AND-SAVE",
@@ -224,7 +183,10 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 47", "Blueprint 66"]
+      "source_refs": [
+        "Blueprint 47",
+        "Blueprint 66"
+      ]
     },
     {
       "id": "PERFORMANCE-BUDGETS",
@@ -235,7 +197,10 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 68", "D03 deferred"]
+      "source_refs": [
+        "Blueprint 68",
+        "D03 deferred"
+      ]
     },
     {
       "id": "RISK-REGISTER",
@@ -246,7 +211,10 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 77-78", "ADR-001"]
+      "source_refs": [
+        "Blueprint 77-78",
+        "ADR-001"
+      ]
     },
     {
       "id": "TESTING-EVIDENCE",
@@ -257,7 +225,10 @@
       "status": "Current",
       "release_scope": "Repository",
       "required": true,
-      "source_refs": ["Blueprint 67", "Blueprint 80"]
+      "source_refs": [
+        "Blueprint 67",
+        "Blueprint 80"
+      ]
     },
     {
       "id": "AI-GOLDEN-RULES",
@@ -268,7 +239,9 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 58-64"]
+      "source_refs": [
+        "Blueprint 58-64"
+      ]
     },
     {
       "id": "AI-DECISION-AUTHORITY",
@@ -279,7 +252,9 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 58-64"]
+      "source_refs": [
+        "Blueprint 58-64"
+      ]
     },
     {
       "id": "AI-CONTRACT-TEMPLATE",
@@ -290,7 +265,10 @@
       "status": "Template",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 60", "Blueprint Appendix C"]
+      "source_refs": [
+        "Blueprint 60",
+        "Blueprint Appendix C"
+      ]
     },
     {
       "id": "AI-BEHAVIOR-CATALOG",
@@ -301,7 +279,12 @@
       "status": "Current",
       "release_scope": "Milestone 0.1-0.3",
       "required": true,
-      "source_refs": ["TASK-015", "TASK-018", "TASK-019", "TASK-020"]
+      "source_refs": [
+        "TASK-015",
+        "TASK-018",
+        "TASK-019",
+        "TASK-020"
+      ]
     },
     {
       "id": "AI-TRACE-SCHEMA",
@@ -312,7 +295,10 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 61", "Blueprint Appendix D"]
+      "source_refs": [
+        "Blueprint 61",
+        "Blueprint Appendix D"
+      ]
     },
     {
       "id": "AI-DECISION-LAB",
@@ -323,7 +309,10 @@
       "status": "Current",
       "release_scope": "Milestone 0.2",
       "required": true,
-      "source_refs": ["Blueprint 63-64", "TASK-017"]
+      "source_refs": [
+        "Blueprint 63-64",
+        "TASK-017"
+      ]
     },
     {
       "id": "AI-REGRESSION-STRATEGY",
@@ -334,7 +323,9 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 67"]
+      "source_refs": [
+        "Blueprint 67"
+      ]
     },
     {
       "id": "REGRESSION-LEDGER",
@@ -345,7 +336,9 @@
       "status": "Current",
       "release_scope": "Repository",
       "required": true,
-      "source_refs": ["AI-REGRESSION-STRATEGY"]
+      "source_refs": [
+        "AI-REGRESSION-STRATEGY"
+      ]
     },
     {
       "id": "STORY-AUTHORITY",
@@ -356,7 +349,9 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 48-54"]
+      "source_refs": [
+        "Blueprint 48-54"
+      ]
     },
     {
       "id": "EVENT-SCHEMA",
@@ -367,7 +362,11 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 47", "Blueprint 51", "Blueprint Appendix K"]
+      "source_refs": [
+        "Blueprint 47",
+        "Blueprint 51",
+        "Blueprint Appendix K"
+      ]
     },
     {
       "id": "HISTORY-RETENTION",
@@ -378,7 +377,10 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 54", "D10 deferred"]
+      "source_refs": [
+        "Blueprint 54",
+        "D10 deferred"
+      ]
     },
     {
       "id": "CHRONICLE-RULES",
@@ -389,7 +391,9 @@
       "status": "Current",
       "release_scope": "All",
       "required": true,
-      "source_refs": ["Blueprint 52-54"]
+      "source_refs": [
+        "Blueprint 52-54"
+      ]
     },
     {
       "id": "INCIDENT-CONTRACT-TEMPLATE",
@@ -400,7 +404,10 @@
       "status": "Template",
       "release_scope": "Version 1.5",
       "required": true,
-      "source_refs": ["Blueprint 48-50", "Blueprint Appendix K"]
+      "source_refs": [
+        "Blueprint 48-50",
+        "Blueprint Appendix K"
+      ]
     },
     {
       "id": "MODEL-PROMPT-GUIDE",
@@ -411,7 +418,10 @@
       "status": "Current",
       "release_scope": "Repository",
       "required": true,
-      "source_refs": ["OpenAI model guidance", "ADR-003"]
+      "source_refs": [
+        "OpenAI model guidance",
+        "ADR-003"
+      ]
     },
     {
       "id": "CREATOR-QUICK-REFERENCE",
@@ -422,7 +432,9 @@
       "status": "Current",
       "release_scope": "Repository",
       "required": true,
-      "source_refs": ["MODEL-PROMPT-GUIDE"]
+      "source_refs": [
+        "MODEL-PROMPT-GUIDE"
+      ]
     },
     {
       "id": "EVIDENCE-TEMPLATE",
@@ -433,7 +445,10 @@
       "status": "Template",
       "release_scope": "Repository",
       "required": true,
-      "source_refs": ["Blueprint 65.7", "Blueprint 80"]
+      "source_refs": [
+        "Blueprint 65.7",
+        "Blueprint 80"
+      ]
     },
     {
       "id": "REVIEW-TEMPLATE",
@@ -444,7 +459,133 @@
       "status": "Template",
       "release_scope": "Repository",
       "required": true,
-      "source_refs": ["Blueprint 65.2", "Blueprint Appendix I"]
+      "source_refs": [
+        "Blueprint 65.2",
+        "Blueprint Appendix I"
+      ]
+    },
+    {
+      "id": "VIBE-ROADMAP-README",
+      "path": "docs/plans/README.md",
+      "status": "Current",
+      "source_refs": [
+        "BLUEPRINT-V2",
+        "ADR-001"
+      ],
+      "title": "Civilization Sandbox - Vibe-First Full Roadmap Kit",
+      "required": true,
+      "authority": "plan",
+      "release_scope": "All",
+      "owner": "Product planning"
+    },
+    {
+      "id": "FULL-ROADMAP",
+      "path": "docs/plans/FULL_ROADMAP.md",
+      "status": "Current",
+      "source_refs": [
+        "BLUEPRINT-V2",
+        "ADR-001"
+      ],
+      "title": "Full Playable-Build Roadmap",
+      "required": true,
+      "authority": "plan",
+      "release_scope": "All",
+      "owner": "Product planning"
+    },
+    {
+      "id": "VISION-AUTHORITY",
+      "path": "docs/plans/VISION_AUTHORITY.md",
+      "status": "Current",
+      "source_refs": [
+        "BLUEPRINT-V2"
+      ],
+      "title": "Vision Authority and Preservation Contract",
+      "required": true,
+      "authority": "plan",
+      "release_scope": "All",
+      "owner": "Creator"
+    },
+    {
+      "id": "SCOPE-COVERAGE",
+      "path": "docs/plans/SCOPE_COVERAGE.md",
+      "status": "Current",
+      "source_refs": [
+        "BLUEPRINT-V2",
+        "FULL-ROADMAP"
+      ],
+      "title": "Full Scope Coverage Matrix",
+      "required": true,
+      "authority": "plan",
+      "release_scope": "All",
+      "owner": "Product planning"
+    },
+    {
+      "id": "VIBE-WORKFLOW",
+      "path": "docs/plans/VIBE_WORKFLOW.md",
+      "status": "Current",
+      "source_refs": [
+        "FULL-ROADMAP"
+      ],
+      "title": "Vibe-First Unity and Codex Workflow",
+      "required": true,
+      "authority": "instruction",
+      "release_scope": "Repository",
+      "owner": "Development process"
+    },
+    {
+      "id": "DECISION-GATES",
+      "path": "docs/plans/DECISION_GATES.md",
+      "status": "Current",
+      "source_refs": [
+        "VISION-AUTHORITY"
+      ],
+      "title": "Creator Decision Gates",
+      "required": true,
+      "authority": "plan",
+      "release_scope": "All",
+      "owner": "Creator"
+    },
+    {
+      "id": "SOURCE-CHANGE-NOTES",
+      "path": "docs/plans/SOURCE_AND_CHANGE_NOTES.md",
+      "status": "Current",
+      "source_refs": [
+        "BLUEPRINT-V2",
+        "FULL-ROADMAP"
+      ],
+      "title": "Source and Change Notes",
+      "required": true,
+      "authority": "plan",
+      "release_scope": "All",
+      "owner": "Product planning"
+    },
+    {
+      "id": "BUILD-PROMPTS",
+      "path": "docs/plans/tasks/README.md",
+      "status": "Current",
+      "source_refs": [
+        "FULL-ROADMAP",
+        "VISION-AUTHORITY"
+      ],
+      "title": "Playable Build Prompts",
+      "required": true,
+      "authority": "instruction",
+      "release_scope": "All",
+      "owner": "Development process"
+    },
+    {
+      "id": "ROADMAP-ZIP",
+      "path": "docs/plans/Civilization_Sandbox_Vibe_First_Full_Roadmap_Kit.zip",
+      "status": "Current",
+      "source_refs": [
+        "FULL-ROADMAP",
+        "BLUEPRINT-V2"
+      ],
+      "title": "Civilization Sandbox Vibe-First Full Roadmap Kit ZIP",
+      "required": true,
+      "authority": "plan",
+      "release_scope": "All",
+      "owner": "Product planning"
     }
   ]
 }

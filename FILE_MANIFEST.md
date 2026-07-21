@@ -1,7 +1,7 @@
 # File Manifest
 
-**Total files:** 256
-**Scoped `codex.md` files:** 50
+**Total files:** 235
+**Scoped `codex.md` files:** 51
 **Forbidden `AGENTS.md` files:** 0
 
 ## Top-level groups
@@ -12,12 +12,12 @@
 | `.github` | 2 |
 | `.gitignore` | 1 |
 | `Assets` | 9 |
-| `Build` | 17 |
+| `Build` | 16 |
 | `CHANGELOG.md` | 1 |
 | `codex.md` | 1 |
 | `Config` | 6 |
 | `CONTRIBUTING.md` | 1 |
-| `docs` | 132 |
+| `docs` | 112 |
 | `FILE_MANIFEST.md` | 1 |
 | `GamePackages` | 43 |
 | `KIT_AUDIT.md` | 1 |
@@ -28,7 +28,7 @@
 | `START_HERE.md` | 1 |
 | `Tests` | 10 |
 
-## Full path list
+## Complete inventory
 
 - `.gitattributes`
 - `.github/workflows/codex.md`
@@ -53,11 +53,10 @@
 - `Build/README.md`
 - `Build/Task001.Common.psm1`
 - `Build/Test.ps1`
-- `Build/update_status.py`
 - `Build/Update-Status.ps1`
 - `Build/validate_docs.py`
-- `Build/Validate-Docs.ps1`
 - `Build/validate_plan.py`
+- `Build/Validate-Docs.ps1`
 - `Build/Validate-Plan.ps1`
 - `Build/Verify-CleanCheckout.ps1`
 - `CHANGELOG.md`
@@ -115,58 +114,38 @@
 - `docs/evidence/TASK-002/ACCEPTANCE.md`
 - `docs/evidence/TASK-002/EVIDENCE.md`
 - `docs/evidence/TASK-002/REVIEW.md`
+- `docs/plans/Civilization_Sandbox_Vibe_First_Full_Roadmap_Kit.zip`
 - `docs/plans/codex.md`
-- `docs/plans/CREATOR_DECISIONS.md`
-- `docs/plans/CURRENT_STEP.md`
-- `docs/plans/DECISION_QUEUE.md`
-- `docs/plans/DEFINITION_OF_DONE.md`
-- `docs/plans/IDENTITY_GUARDRAILS.md`
-- `docs/plans/LATER_AGES.md`
-- `docs/plans/MASTER_PLAN.md`
-- `docs/plans/PHASE_0.md`
-- `docs/plans/PHASE_1.md`
-- `docs/plans/PHASE_2.md`
-- `docs/plans/PHASE_3.md`
-- `docs/plans/PHASE_4.md`
-- `docs/plans/PHASE_5.md`
-- `docs/plans/PHASE_6.md`
-- `docs/plans/PHASE_7.md`
-- `docs/plans/PHASE_8.md`
-- `docs/plans/POST_25_BACKLOG.md`
-- `docs/plans/PRE_1_0_ROADMAP.md`
-- `docs/plans/RELEASE_CHECKLIST.md`
-- `docs/plans/RELEASE_LADDER.md`
-- `docs/plans/SESSION_HANDOFF.md`
-- `docs/plans/STATUS_BOARD.md`
-- `docs/plans/TASK_INDEX.md`
+- `docs/plans/DECISION_GATES.md`
+- `docs/plans/FULL_ROADMAP.md`
+- `docs/plans/README.md`
+- `docs/plans/SCOPE_COVERAGE.md`
+- `docs/plans/SOURCE_AND_CHANGE_NOTES.md`
+- `docs/plans/tasks/BUILD-00_FOUNDATION.md`
+- `docs/plans/tasks/BUILD-01_WORLD_VIEWER.md`
+- `docs/plans/tasks/BUILD-02_FOUNDING_CAMP.md`
+- `docs/plans/tasks/BUILD-03_LIVING_CAMP.md`
+- `docs/plans/tasks/BUILD-04_PHYSICAL_SETTLEMENT.md`
+- `docs/plans/tasks/BUILD-05_DIVERGENT_SOCIETIES.md`
+- `docs/plans/tasks/BUILD-06_CONNECTED_REGION.md`
+- `docs/plans/tasks/BUILD-07_CONFLICT_AND_RECOVERY.md`
+- `docs/plans/tasks/BUILD-08_GOD_SANDBOX.md`
+- `docs/plans/tasks/BUILD-09_FOUNDING_WORLDS_1_0.md`
+- `docs/plans/tasks/BUILD-10_LIVING_PEOPLE_1_1.md`
+- `docs/plans/tasks/BUILD-11_ROADS_AND_MARKETS_1_2.md`
+- `docs/plans/tasks/BUILD-12_STATES_AND_BELIEFS_1_3.md`
+- `docs/plans/tasks/BUILD-13_WAR_AND_WORLD_1_4.md`
+- `docs/plans/tasks/BUILD-14_COMPLETE_EARLY_MODERN_1_5.md`
+- `docs/plans/tasks/BUILD-15_INDUSTRIAL_TRANSITION_2_0.md`
+- `docs/plans/tasks/BUILD-16_ELECTRIFICATION_3_0.md`
+- `docs/plans/tasks/BUILD-17_MECHANIZATION_4_0.md`
+- `docs/plans/tasks/BUILD-18_ATOMIC_INFORMATION_5_0.md`
+- `docs/plans/tasks/BUILD-19_DIVERGENT_FUTURES_6_0.md`
+- `docs/plans/tasks/BUILD-20_DISTANT_EXPANSION.md`
 - `docs/plans/tasks/codex.md`
-- `docs/plans/tasks/TASK-001.md`
-- `docs/plans/tasks/TASK-002.md`
-- `docs/plans/tasks/TASK-003.md`
-- `docs/plans/tasks/TASK-004.md`
-- `docs/plans/tasks/TASK-005.md`
-- `docs/plans/tasks/TASK-006.md`
-- `docs/plans/tasks/TASK-007.md`
-- `docs/plans/tasks/TASK-008.md`
-- `docs/plans/tasks/TASK-009.md`
-- `docs/plans/tasks/TASK-010.md`
-- `docs/plans/tasks/TASK-011.md`
-- `docs/plans/tasks/TASK-012.md`
-- `docs/plans/tasks/TASK-013.md`
-- `docs/plans/tasks/TASK-014.md`
-- `docs/plans/tasks/TASK-015.md`
-- `docs/plans/tasks/TASK-016.md`
-- `docs/plans/tasks/TASK-017.md`
-- `docs/plans/tasks/TASK-018.md`
-- `docs/plans/tasks/TASK-019.md`
-- `docs/plans/tasks/TASK-020.md`
-- `docs/plans/tasks/TASK-021.md`
-- `docs/plans/tasks/TASK-022.md`
-- `docs/plans/tasks/TASK-023.md`
-- `docs/plans/tasks/TASK-024.md`
-- `docs/plans/tasks/TASK-025.md`
-- `docs/plans/VERSION_1_5_PRODUCTION.md`
-- `docs/plans/VERSION_1_PRODUCTION.md`
+- `docs/plans/tasks/README.md`
+- `docs/plans/VIBE_WORKFLOW.md`
+- `docs/plans/VISION_AUTHORITY.md`
 - `docs/prompts/00_START_SESSION.md`
 - `docs/prompts/01_PLAN_TASK.md`
 - `docs/prompts/02_IMPLEMENT_TASK.md`

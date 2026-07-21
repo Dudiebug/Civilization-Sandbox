@@ -1,11 +1,9 @@
-# Planning Scope Instructions
+# Vibe-First Roadmap Instructions
 
-- `CURRENT_STEP.md` names the only creator-facing next task.
-- `MASTER_PLAN.md`, `PRE_1_0_ROADMAP.md`, and `PHASE_0.md` through `PHASE_8.md` define the milestone sequence and gates.
-- `DECISION_QUEUE.md` controls when product decisions may be opened.
-- Task status is evidence-gated. Do not cross off a task because code exists or tests passed locally.
-- Create detailed task contracts for a future milestone only after the prior gate passes and the required creator decisions are recorded.
-- A task may be Done only when validation, independent review, and creator acceptance are recorded.
-- When blocked, state one blocker and one safest next action.
-- Update the handoff at every session end.
-- Never silently restore the original Blueprint Version 1.0 breadth as a lean Version 1.0 requirement; that breadth is Version 1.5 under ADR-001.
+- Treat `../blueprint/Civilization_Sandbox_Game_Development_Blueprint_v2.0.pdf` as the immutable north-star vision.
+- Read `VISION_AUTHORITY.md`, `SCOPE_COVERAGE.md`, and the selected build prompt before planning implementation.
+- Work on one build prompt at a time. Split it into 3-8 playable vertical slices and implement one approved slice at a time.
+- Keep Unity runnable after every accepted slice. Run the game, inspect the diff, test proportionally, and preserve a rollback commit.
+- Architecture, tests, persistence, tooling, and documentation are just-in-time parts of the playable slice that needs them.
+- Never silently delete, narrow, or reinterpret Blueprint scope. Record deferrals in the coverage matrix and ask the creator before a material vision change.
+- The creator judges player-visible behavior and product direction. Codex owns implementation detail, automated verification, and concise handoff notes.

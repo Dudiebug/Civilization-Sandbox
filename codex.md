@@ -1,25 +1,26 @@
 # Repository Instructions - Civilization Sandbox
 
 ## Mission
-Build the lean regional Version 1.0 defined by ADR-001 while preserving the Blueprint v2.0 identity and architecture needed for the Version 1.5 complete early-modern target. Work one measured milestone and one approved task at a time. The repository, not conversation memory, is authoritative.
+Build the complete Civilization Sandbox vision through the vibe-first playable-build roadmap. Work on one selected build and one playable implementation slice at a time. The Blueprint and repository, not conversation memory, are authoritative.
 
 ## Read before acting
 1. `START_HERE.md`
 2. `docs/DOCUMENT_INDEX.md`
 3. `REVISION_SUMMARY.md`
-4. `docs/plans/CURRENT_STEP.md`
-5. The active `docs/plans/tasks/TASK-*.md`
-6. Relevant scoped `codex.md`
-7. Relevant specification, behavior contract, ADR, decision record, and tests
+4. `docs/plans/VISION_AUTHORITY.md`
+5. `docs/plans/FULL_ROADMAP.md`
+6. The selected `docs/plans/tasks/BUILD-*.md`
+7. Relevant scoped `codex.md`
+8. Relevant specification, behavior contract, ADR, decision record, and tests
 
 ## Authority and release scope
 - Blueprint v2.0 remains authoritative for north-star identity, technical principles, and Version 1.5 completeness.
 - `docs/decisions/ADR-001_RELEASE_SCOPE_REBASELINE.md` governs release labels and staged scope.
 - `docs/decisions/ADR-002_UNITY_TOOLCHAIN_BASELINE.md` governs the accepted Unity/toolchain baseline.
 - `docs/decisions/ADR-003_CODEX_INSTRUCTION_DISCOVERY.md` requires manual prompt routing and forbids repository `AGENTS.md` and `.codex/config.toml`.
-- The active milestone defines what may be implemented now.
+- The selected playable build defines what may be implemented now.
 - A future package or schema doorway is not permission to build the future system.
-- Do not invent unresolved product decisions. Check `docs/plans/DECISION_QUEUE.md`; stop when an open decision is required.
+- Do not silently make a product decision that changes the vision. Use `docs/plans/DECISION_GATES.md` and ask the creator when required.
 
 ## Non-negotiable architecture
 - D01 selects Unity `6000.3.20f1` for the Milestone 0.1 baseline; any later reconsideration requires an explicit creator decision and superseding ADR.
@@ -47,11 +48,11 @@ Build the lean regional Version 1.0 defined by ADR-001 while preserving the Blue
 Do not implement Version 1.1-1.5 breadth, later ages, final art, live-LLM citizens, a universal technology tree, manual normal-city placement, full interiors, multiplayer, or black-box civilization intelligence during the pre-1.0 program unless the current milestone explicitly authorizes it.
 
 ## Work protocol
-- One active task contract at a time unless the plan explicitly declares safe parallel work.
-- Plan before editing. List touched files, tests, risks, rollback, exclusions, and decision dependencies.
+- One active playable build at a time. Split it into 3-8 playable slices and implement one slice at a time.
+- Plan each slice before editing. State the player-visible result, touched boundaries, verification, rollback, and exclusions.
 - Keep diffs small and coherent. Do not perform opportunistic refactors.
-- Never self-certify consequential work. Implementation and adversarial review are separate passes.
-- Do not mark a task complete without an evidence pack and creator acceptance.
+- Run Unity and preserve a working commit after each accepted slice. Revert failed directions early.
+- Use formal independent review and creator acceptance at playable-build and release gates, proportional to risk.
 - Stop when scope, source-of-truth, expected behavior, or an unopened creator decision is required.
 
 ## Permanent project location

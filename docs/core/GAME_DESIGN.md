@@ -19,7 +19,7 @@ Version 1.0 is a regional causal sandbox rather than the full Blueprint early-mo
 - omniscient inspection, basic causal explanations, and all three player-control classes;
 - reliable semantic saves and durable major-event/ruin history.
 
-The exact world size, population target, content counts, government abstraction, technology breadth, power roster, UI layout, and long-run test duration are not fixed here. They are selected through `docs/plans/DECISION_QUEUE.md` after relevant evidence exists.
+The Blueprint's complete target remains preserved. Exact intermediate build counts, ordering, and depth are selected through `docs/plans/DECISION_GATES.md` after play and measurement provide relevant evidence; material scope changes require creator approval.
 
 ## Version 1.5 horizon
 The Blueprint v2.0 baselines - including the larger worlds, 10,000-person scale gate, 18 resource classes, 16 buildings, 16 occupations, broad institutions/governments/culture/technology/diplomacy, 24 powers, and 13 UI workspaces - remain the complete early-modern horizon, not Version 1.0 release blockers.

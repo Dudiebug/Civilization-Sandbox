@@ -53,6 +53,4 @@ Command results use schema version 1 JSON under `Artifacts/results/` and include
 
 `validate_docs.py` verifies the document registry, internal Markdown links and anchors, required-document reachability, ADR identity, the file manifest, and the absence of `AGENTS.md` and `.codex/config.toml`. It never fetches external links.
 
-`validate_plan.py` verifies the milestone-aware first-task registry, required roadmap files, evidence-gated completion, and all documentation findings. The `codex.md` suite is manually routed under ADR-003; automatic fallback loading is not claimed.
-
-`update_status.py` regenerates `docs/plans/STATUS_BOARD.md` from task contracts and the milestone registry. Do not hand-edit completion state.
+`validate_plan.py` verifies the 21-build vibe-first registry, prompt structure, required vision/coverage documents, included Blueprint hash, packaged roadmap ZIP, and all documentation findings. The `codex.md` suite is manually routed under ADR-003; automatic fallback loading is not claimed.

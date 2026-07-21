@@ -19,8 +19,8 @@ When two sources conflict, stop at the highest conflicting layer, record the exa
 - [Repository overview](../README.md)
 - [Start Here](../START_HERE.md)
 - [Repository instructions](../codex.md)
-- [Current step](plans/CURRENT_STEP.md)
-- [TASK-002 contract](plans/tasks/TASK-002.md)
+- [Vision authority](plans/VISION_AUTHORITY.md)
+- [Playable build prompts](plans/tasks/README.md)
 - [Creator quick reference](creator/QUICK_REFERENCE.md)
 - [Model and prompt guide](creator/MODEL_AND_PROMPT_GUIDE.md)
 
@@ -32,13 +32,16 @@ When two sources conflict, stop at the highest conflicting layer, record the exa
 - [ADR-002 - Unity and toolchain baseline](decisions/ADR-002_UNITY_TOOLCHAIN_BASELINE.md)
 - [ADR-003 - Manual Codex instruction routing](decisions/ADR-003_CODEX_INSTRUCTION_DISCOVERY.md)
 
-## Release and milestone control
+## Playable-build roadmap
 
-- [Master plan](plans/MASTER_PLAN.md)
-- [Pre-1.0 roadmap](plans/PRE_1_0_ROADMAP.md)
-- [Release ladder](plans/RELEASE_LADDER.md)
-- [Milestone-timed decision queue](plans/DECISION_QUEUE.md)
-- [Version 1.0 identity guardrails](plans/IDENTITY_GUARDRAILS.md)
+- [Roadmap kit overview](plans/README.md)
+- [Full roadmap](plans/FULL_ROADMAP.md)
+- [Vision authority](plans/VISION_AUTHORITY.md)
+- [Scope coverage](plans/SCOPE_COVERAGE.md)
+- [Vibe workflow](plans/VIBE_WORKFLOW.md)
+- [Decision gates](plans/DECISION_GATES.md)
+- [Source and change notes](plans/SOURCE_AND_CHANGE_NOTES.md)
+- [Downloadable roadmap ZIP](plans/Civilization_Sandbox_Vibe_First_Full_Roadmap_Kit.zip)
 
 ## Architecture, data, and verification
 
