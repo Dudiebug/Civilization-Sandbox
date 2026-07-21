@@ -18,7 +18,7 @@
 - Persistence/migration: N/A — TASK-001 creates no save format.
 - Performance: PENDING — local timings are recorded below; clean-profile timings remain required and no runtime gate is established.
 - Documentation: PASS — governance, ADR, command contract, CI, rollback, and deferred scopes are committed.
-- Independent review: PENDING — see `REVIEW.md`.
+- Independent review: PASS — initial blockers were corrected and the final focused re-review passed at implementation commit `60b852c2c5613eab8a81ace16bc929125f105ccb`; see `REVIEW.md`.
 - Creator acceptance: PENDING — see `ACCEPTANCE.md`.
 
 ## Evidence checklist
@@ -33,8 +33,8 @@
 - [x] Copied-lock tamper failure with `CIV001-LOCK-003`.
 - [x] Cleanup dry-run, whitelist, and outside-root refusal demonstration.
 - [x] Missing-evidence packaging failure.
-- [ ] Live branch-rule export and successful `repository-policy` run.
-- [ ] Evidence archive manifest and SHA-256.
+- [x] Live branch-rule export and successful required `repository-policy` run.
+- [x] Evidence archive manifest and SHA-256.
 - [ ] Recovery rehearsal from `baseline/task-001-accepted` after acceptance.
 
 ## Local implementation results — 2026-07-19 PDT
@@ -54,17 +54,19 @@
 - Pinned prerequisites: PASS — Git `2.55.0.3`, PowerShell `7.6.3`, Python `3.13.14`, GitHub CLI `2.96.0`, and Unity Hub `3.19.5`; GitHub CLI is authenticated as the repository owner.
 - Unity modules: PASS — Windows Mono and Linux Mono are installed. The Hub-downloaded Linux Mono installer matched Unity's published MD5 metadata; observed SHA-256 `d3a70b44912f0ce21ca9b1ea198b20a09072bd6df4ed279d239a37d1cbc95ccd`.
 - Full bootstrap idempotency: PASS after amendment — two consecutive audits returned zero, Git state plus both package files were unchanged, and package-lock SHA-256 remained `b5ab878043267eb78c9ece02004322353aa41947c938bc48c6850d838e206548`.
-- PowerShell guard suite: PASS, 16 tests. Coverage includes direct and nested path-redirecting reparse points, non-redirecting OneDrive cloud markers, pinned Git discovery, and one-item required-check JSON array preservation.
+- PowerShell guard suite: PASS, 22 tests. Coverage includes direct and nested path-redirecting reparse points, non-redirecting OneDrive cloud markers, manifest drift, stale command provenance, incomplete build-tree hashes, pinned Git discovery, required-check JSON array preservation, artifact mutation guards, and CI-command anchoring.
 - Windows x64 Mono player rebuild: PASS; executable SHA-256 `34c4e304e53e56499267dfd9c975c63dc279ed3011a69a8ca16eb207f1856a8f`.
 - Linux x64 Mono player rebuild: PASS; executable SHA-256 `8027f7d1f9ae7dacfc826fb218adcc1ae7464af098a8a59397e7531c0f7ec0bc`.
 - Linux package-integrity gate: RESOLVED by explicit creator approval. Direct `com.unity.sdk.linux-x86_64@1.1.0` and `com.unity.toolchain.win-x86_64-linux@1.1.0`, with transitive `com.unity.sysroot.base@1.1.0`, are now part of the locked interface and build without tracked-file mutation.
 - Unity wrapper termination: PASS after correction — build/test scripts wait on the editor process handle, avoiding PowerShell descendant-tree waits on Unity's long-lived Roslyn compiler server.
 - Roadmap rebaseline: integrated from preserved branch `prep/roadmap-rebaseline-20260720`; active TASK-001 status and implementation evidence were retained, and `.codex/config.toml` remains absent by creator decision.
 - GitHub governance: PASS — the repository is public by recorded creator approval, `main` is the default branch, pull requests and conversation resolution are required, administrator enforcement is enabled, force-pushes and deletion are disabled, and strict `repository-policy` is required after its first successful run.
+- Evidence hardening: PASS — an explicit stale-result demonstration failed with `CIV001-RESULT-005`; canonical evidence is bound to one clean commit, complete player output trees are hashed, smoke provenance is verified before launch, and the archive excludes its own stale pre-overwrite result.
+- Independent adversarial review: PASS after the evidence, path, manifest, and governance blockers above were corrected and re-reviewed.
 
 ## Current blockers
 
-1. Non-OneDrive clean standard-profile reproduction, independent review, creator acceptance, merge, accepted tag, and recovery rehearsal remain pending.
+1. Non-OneDrive clean standard-profile reproduction, creator acceptance, merge, accepted tag, and recovery rehearsal remain pending.
 
 ## Changed surface
 
