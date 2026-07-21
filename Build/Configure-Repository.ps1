@@ -18,7 +18,8 @@ $policyErrors = New-Object System.Collections.Generic.List[string]
 if ([string]$policy.visibility -notin @('private', 'public')) { $policyErrors.Add('visibility must be private or public') }
 if ([string]$policy.defaultBranch -ne 'main') { $policyErrors.Add('default branch must be main') }
 if ([string]$policy.taskBranchPattern -ne 'task/TASK-NNN-description') { $policyErrors.Add('task branch pattern changed') }
-if ([string]$policy.worktreePolicy -ne 'sibling') { $policyErrors.Add('worktree policy changed') }
+if ([string]$policy.worktreePolicy -ne 'single-authoritative-project') { $policyErrors.Add('worktree policy must prohibit persistent secondary checkouts') }
+if ([string]$policy.authoritativeProjectPath -ne 'C:\Users\dudie\Projects\Civilization-Sandbox') { $policyErrors.Add('authoritative project path changed') }
 if (-not $policy.protection.requirePullRequest) { $policyErrors.Add('pull requests are not required') }
 if ([int]$policy.protection.requiredApprovingReviewCount -ne 0) { $policyErrors.Add('solo approval count must remain zero') }
 if ([string]$policy.protection.requireStatusCheckAfterFirstRun -ne 'repository-policy') { $policyErrors.Add('required status-check name changed') }

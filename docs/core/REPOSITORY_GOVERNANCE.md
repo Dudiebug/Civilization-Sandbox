@@ -1,6 +1,8 @@
 # Repository Governance
 
-`main` is the only long-lived integration branch. Work begins from an accepted `main` commit on a branch named `task/TASK-NNN-description` in a sibling Git worktree. Direct pushes, force-pushes, and branch deletion are prohibited. Every change reaches `main` through a pull request.
+`main` is the only long-lived integration branch. The sole authoritative checkout and Unity project is `C:\Users\dudie\Projects\Civilization-Sandbox`. Work begins from an accepted `main` commit on a branch named `task/TASK-NNN-description` in that checkout. Persistent sibling worktrees, secondary development clones, and copied Unity project folders are prohibited. Direct pushes, force-pushes, and branch deletion are prohibited. Every change reaches `main` through a pull request.
+
+Branch changes happen in the authoritative checkout only after the current branch is committed and published. A disposable verification clone is permitted only while a guarded verification command is running and must be removed by that command's `finally` cleanup; it is never a development folder or Unity Hub project.
 
 The repository is intentionally configured for a solo creator: a pull request is required, but no approving GitHub review count is required. Independent adversarial review is recorded as task evidence and remains mandatory before a task can be accepted.
 

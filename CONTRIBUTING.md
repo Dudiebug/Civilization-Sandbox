@@ -12,7 +12,7 @@
 10. Obtain creator-visible acceptance.
 11. Merge only through the protected process and update status/release notes.
 
-Branches use `task/TASK-NNN-description` and sibling worktrees. `main` requires a pull request and the `repository-policy` check after its first successful run; direct pushes, force-pushes, and deletion are prohibited. See `docs/core/REPOSITORY_GOVERNANCE.md`.
+Branches use `task/TASK-NNN-description` in the single authoritative checkout at `C:\Users\dudie\Projects\Civilization-Sandbox`; switch branches only after preserving and publishing the current branch. Persistent sibling worktrees, secondary clones, and copied Unity project folders are prohibited. `main` requires a pull request and the `repository-policy` check after its first successful run; direct pushes, force-pushes, and deletion are prohibited. See `docs/core/REPOSITORY_GOVERNANCE.md`.
 
 High-risk changes may not be planned, implemented, verified, and approved by one uninterrupted role/session. Agents may not answer milestone product questions on the creator's behalf.
 

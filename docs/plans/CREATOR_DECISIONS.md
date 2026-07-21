@@ -19,7 +19,7 @@ This file is not a questionnaire. Most decisions are intentionally unopened. Use
 ## Decisions recorded during TASK-001
 - D01: Unity `6000.3.20f1` with the exact editor, module, package, and dependency-lock pins in `Config/toolchain.json`.
 - D02: pinned Windows development host; creator reference hardware is recorded in `Config/benchmark-reference.json` and is informational rather than the later performance-gate machine.
-- Repository: public GitHub repository `Dudiebug/Civilization-Sandbox`, protected `main`, task branches, and sibling worktrees as specified in `Config/repository-governance.json`. The creator approved public visibility on 2026-07-20 after GitHub returned HTTP 403 for branch protection while private.
+- Repository: public GitHub repository `Dudiebug/Civilization-Sandbox`, protected `main`, task branches, and one authoritative project folder at `C:\Users\dudie\Projects\Civilization-Sandbox` as specified in `Config/repository-governance.json`. The creator approved public visibility on 2026-07-20 after GitHub returned HTTP 403 for branch protection while private, then directed Codex on 2026-07-20 to choose and record one permanent project location with no persistent copies across the PC.
 - Change control: any future locked-interface amendment requires an explicit creator question and recorded approval before editing.
 
 Do not open world scale, content counts, society models, economy depth, combat scope, power roster, UI count, or post-1.0 release allocation during TASK-001.

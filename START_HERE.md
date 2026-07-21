@@ -14,7 +14,7 @@ The release plan has been rebaselined:
 
 1. Read `REVISION_SUMMARY.md` and `docs/plans/CURRENT_STEP.md`.
 2. Run `powershell -NoProfile -File Build/Bootstrap.ps1 -RepositoryOnly` for a read-only repository audit.
-3. Continue only on the active TASK-001 branch/worktree and follow its approved stop conditions.
+3. Work only in the authoritative project at `C:\Users\dudie\Projects\Civilization-Sandbox`; do not create or retain another project checkout or Unity project folder.
 
 ## Files to use most often
 

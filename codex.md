@@ -51,6 +51,13 @@ Do not implement Version 1.1-1.5 breadth, later ages, final art, live-LLM citize
 - Do not mark a task complete without an evidence pack and creator acceptance.
 - Stop when scope, source-of-truth, expected behavior, or an unopened creator decision is required.
 
+## Permanent project location
+- The sole authoritative checkout and Unity project is `C:\Users\dudie\Projects\Civilization-Sandbox`.
+- Do not create sibling worktrees, secondary development clones, copied Unity projects, or alternate project folders anywhere else on the creator's PC.
+- All branches are handled by switching branches in this one checkout after preserving and publishing the current branch.
+- The only permitted local duplicate is a disposable verification clone created and removed within one guarded verification command; it must never be registered in Unity Hub or retained as a development copy.
+- Any change to this location or one-folder policy requires an explicit creator question and recorded approval before acting.
+
 ## Required completion evidence
 Build, tests, deterministic replay/state diff, persistence impact, performance measurement, documentation, independent review, and creator-visible acceptance, proportional to the task's actual risk. Use `docs/templates/EVIDENCE_TEMPLATE.md`; mark genuinely irrelevant fields N/A with a reason.
 

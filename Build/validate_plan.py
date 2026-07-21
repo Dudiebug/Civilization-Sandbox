@@ -306,6 +306,10 @@ def main() -> int:
         protection = governance.get("protection", {})
         if governance.get("defaultBranch") != "main" or governance.get("visibility") not in {"private", "public"}:
             errors.append("Repository governance must declare supported visibility and main as default")
+        if governance.get("worktreePolicy") != "single-authoritative-project":
+            errors.append("Repository governance must prohibit persistent secondary project checkouts")
+        if governance.get("authoritativeProjectPath") != r"C:\Users\dudie\Projects\Civilization-Sandbox":
+            errors.append("Repository governance authoritative project path changed")
         if not protection.get("requirePullRequest") or not protection.get("enforceAdmins"):
             errors.append("Repository governance must require pull requests and administrator enforcement")
         if protection.get("allowForcePushes") or protection.get("allowDeletions"):

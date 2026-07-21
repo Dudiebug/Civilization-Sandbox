@@ -4,7 +4,8 @@
   "visibility": "public",
   "defaultBranch": "main",
   "taskBranchPattern": "task/TASK-NNN-description",
-  "worktreePolicy": "sibling",
+  "worktreePolicy": "single-authoritative-project",
+  "authoritativeProjectPath": "C:\\Users\\dudie\\Projects\\Civilization-Sandbox",
   "recoveryTag": "task-001-start-aec44fc",
   "baselineCommit": "aec44fcb4285767716fbd22715fd96233459ab8e",
   "protection": {

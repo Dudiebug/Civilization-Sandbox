@@ -57,6 +57,7 @@ Before changing any locked interface, pin, authority file, required output, or a
 Recorded amendments:
 
 - 2026-07-20: the creator answered `public`, approving public repository visibility so GitHub branch protection can be enforced without weakening the protected-`main` requirement.
+- 2026-07-20: the creator directed Codex to choose one permanent project location and prohibit copies across the PC. `C:\Users\dudie\Projects\Civilization-Sandbox` is the sole authoritative checkout and Unity project; persistent sibling worktrees and secondary development clones are retired. A guarded disposable verification clone may exist only for one verification command and must be removed before that command returns.
 
 ## Out of scope
 World size, population target, content counts, gameplay systems, terrain, people, buildings, AI behavior, art, public release configuration, or Version 1.1-1.5 planning.
