@@ -11,6 +11,8 @@
 Alliance/international → civilization → government → region → settlement → institution/workplace → household → person.
 Higher layers set strategy, law, budgets, and constraints. Lower layers own exact local execution.
 
+The hierarchy describes the long-lived authority model, not current implementation breadth. Milestones 0.2-0.3 activate only the layers needed by the first three AI contracts and Living Camp proof; unopened later layers remain reserved.
+
 ## Decision sequence
 Validate commitment → bounded candidates → knowledge-filtered observations → preconditions → canonical normalized considerations → traits/attitudes/policy → inertia/cooldown → keyed variation → stable selection → reservations/commitment → trace.
 

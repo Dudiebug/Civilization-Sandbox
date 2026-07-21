@@ -11,6 +11,15 @@ Authoritative simulation -> persistence/history/traces/tests
 Versioned content -> validators -> runtime definitions
 ```
 
+## Dependency direction
+
+- `simulation.core` supplies stable time, identity, units, deterministic primitives, command boundaries, and checksums; it does not depend on domain or presentation packages.
+- Versioned content definitions feed domain packages through validated stable IDs.
+- Domain packages may use the minimal simulation and AI foundations and expose commands, semantic persistence DTOs, events, and immutable read models.
+- Persistence serializes semantic DTOs rather than engine memory. Telemetry observes declared interfaces and may not become a hidden command path.
+- Presentation and UI consume read models and send validated commands. Authoritative packages never reference camera, rendering, scene, audio, editor, or mutable UI state.
+- Circular package references and cross-domain store mutation are forbidden. TASK-003 converts these rules into automated gates.
+
 ## Required properties
 - Fixed authoritative scheduling with typed game time and due-time work.
 - Headless batch execution and clean-checkout command-line build/test.

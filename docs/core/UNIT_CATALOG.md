@@ -1,6 +1,6 @@
 # Authoritative Unit Catalog
 
-The exact numeric representations are accepted during Milestone 0.1 or the first task that needs them. These semantic units are mandatory now.
+These semantic units are mandatory now. Exact fixed-point ranges, scales, and serialized encodings are accepted by the first owning implementation task or a measured ADR; TASK-002 does not invent them. D03 still owns the later Version 1.0 scale envelope.
 
 | Domain | Unit/type rule |
 |---|---|
@@ -17,4 +17,4 @@ The exact numeric representations are accepted during Milestone 0.1 or the first
 | Capacity/throughput | Quantity per typed time with route/building/equipment scope |
 | Confidence | Bounded value plus observation time and source |
 
-Every serialized field and content definition declares units. Conversions are centralized and tested.
+Every serialized field and content definition declares units. Conversions are centralized and tested. A placeholder package or schema field may reserve the semantic unit without choosing an unapproved numeric range.

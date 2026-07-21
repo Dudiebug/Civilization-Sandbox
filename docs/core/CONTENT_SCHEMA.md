@@ -10,3 +10,5 @@
 - Every policy has authority, administrative cost, enforcement, and expected transaction/service effects.
 - Every speech line has context, knowledge safety, grammar/localization, provenance, cooldown, and repetition family.
 - Content outside the active milestone remains excluded. Version 1.1-1.5 and later-era definitions are not activated early merely to reserve schemas.
+
+Schema doorways may reserve stable IDs and compatibility fields for later early-modern depth, but an entry appears in an active catalog only when an approved milestone needs it. Reserved structure is not implemented content.

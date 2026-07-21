@@ -18,3 +18,6 @@
 
 ## High-risk review questions
 Did the change add hidden knowledge, bypass an authority layer, enlarge candidates, introduce order-dependent RNG, alter save semantics, create camera dependence, or move cost into another system?
+
+## Ledger rule
+Confirmed defects receive a never-reused `REG-NNN` identity, failing-then-passing fixture, affected contract/version, root cause, and resolution evidence. Closing or superseding a record never deletes it.
