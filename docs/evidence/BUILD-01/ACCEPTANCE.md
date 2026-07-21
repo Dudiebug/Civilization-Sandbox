@@ -1,10 +1,10 @@
 # Creator Acceptance — BUILD-01
 
-**State:** PENDING
+**State:** APPROVED
 
 ## What I should see
 
-- One angled 2.5D early-modern prototype field containing 24 visible, named pixel people who wait and walk.
+- One angled 2.5D early-modern prototype field containing 24 visible placeholder people who wait and walk; names appear only in the inspector.
 - Camera pan and zoom that never change the simulated world.
 - Pause, 1x, 2x, 5x, and 10x controls plus deterministic seed reset.
 - A read-only omniscient inspector showing the selected person's name, stable ID, position, current action, and world time.
@@ -21,12 +21,12 @@
 
 ## Result
 
-- [ ] Behavior matches the Build 01 task contract.
-- [ ] The early-modern placeholder presentation feels directionally correct.
-- [ ] Camera, time, selection, inspection, and reset controls are understandable.
-- [ ] No obvious unrelated regression is visible.
-- [ ] I approve the tradeoff and player experience.
+- [x] Behavior matches the Build 01 task contract.
+- [x] The early-modern placeholder presentation is acceptable for this stage.
+- [x] Camera, time, selection, inspection, and reset controls are understandable.
+- [x] No obvious unrelated regression is visible.
+- [x] I approve the tradeoff and player experience for Build 01.
 
-**Decision:** PENDING
+**Decision:** APPROVE
 
-**Notes:** Reply `APPROVE`, `CHANGES`, `STOP`, or `ROLL BACK` after the playtest.
+**Notes:** Creator approval recorded after the rejected sprite and clothing revision was reverted. The remaining placeholder character models are visually rough and have no meaningful animation, but this is accepted because Build 01 is the first simulation viewer and character art/animation has not entered production scope yet. Treat improved character models and animation as later presentation work, not a blocker for Build 01.
