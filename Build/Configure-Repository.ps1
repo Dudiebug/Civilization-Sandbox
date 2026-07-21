@@ -36,8 +36,21 @@ if (-not (Test-Path -LiteralPath $workflowPath -PathType Leaf)) {
     $workflowSource = Get-Content -LiteralPath $workflowPath -Raw
     if (@([regex]::Matches($workflowSource, '(?m)^\s*uses:\s*actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8\s*$')).Count -ne 1) { $policyErrors.Add('workflow checkout pin is absent or duplicated') }
     if ($workflowSource -notmatch '(?m)^\s{2}repository-policy:\s*$' -or $workflowSource -notmatch '(?m)^\s{4}name:\s*repository-policy\s*$') { $policyErrors.Add('workflow job key or check name changed') }
-    if ($workflowSource -notmatch '(?ms)^permissions:\s*\r?\n\s{2}contents:\s*read\s*$') { $policyErrors.Add('workflow permissions are not read-only contents') }
+    if ($workflowSource -notmatch '(?m)^permissions:\s*\r?\n\s{2}contents:\s*read\s*$') { $policyErrors.Add('workflow permissions are not read-only contents') }
     if ($workflowSource -match '(?i)\bsecrets\s*\.' -or $workflowSource -match '(?i)\$\{\{\s*secrets\.') { $policyErrors.Add('workflow references secrets') }
+    $requiredRuns = @(
+        'python Build/validate_plan.py',
+        'powershell -NoProfile -ExecutionPolicy Bypass -File Build/Configure-Repository.ps1 -Offline',
+        'powershell -NoProfile -ExecutionPolicy Bypass -File Build/Bootstrap.ps1 -RepositoryOnly',
+        'powershell -NoProfile -ExecutionPolicy Bypass -File Tests/Bootstrap/Task001.Bootstrap.Tests.ps1'
+    )
+    foreach ($run in $requiredRuns) {
+        $pattern = '(?m)^\s{8}run:\s*' + [regex]::Escape($run) + '\s*$'
+        if (@([regex]::Matches($workflowSource, $pattern)).Count -ne 1) { $policyErrors.Add("workflow validation command is absent or duplicated: $run") }
+    }
+    if ($workflowSource -match '(?im)^\s*continue-on-error:\s*true\s*$' -or $workflowSource -match '(?im)^\s*if:\s*(false|\$\{\{\s*false\s*\}\})\s*$') {
+        $policyErrors.Add('workflow validation can be skipped or converted to a pass')
+    }
 }
 if ($policyErrors.Count -gt 0) {
     throw "CIV001-GOV-002: Committed governance policy does not meet TASK-001 safeguards: $($policyErrors -join '; ')"

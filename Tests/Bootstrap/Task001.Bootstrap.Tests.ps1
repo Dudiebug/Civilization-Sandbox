@@ -215,6 +215,16 @@ try {
             throw 'Package-Evidence.ps1 can include its stale pre-overwrite result in the new archive.'
         }
     }
+
+    Test-Case 'governance auditors anchor every CI validation command' {
+        $governanceSource = Get-Content -LiteralPath (Join-Path $root 'Build\Configure-Repository.ps1') -Raw
+        $validatorSource = Get-Content -LiteralPath (Join-Path $root 'Build\validate_plan.py') -Raw
+        foreach ($needle in @('Build/validate_plan.py', 'Build/Configure-Repository.ps1 -Offline', 'Build/Bootstrap.ps1 -RepositoryOnly', 'Tests/Bootstrap/Task001.Bootstrap.Tests.ps1')) {
+            if ($governanceSource -notmatch [regex]::Escape($needle) -or $validatorSource -notmatch [regex]::Escape($needle)) {
+                throw "Governance auditors do not both anchor required CI command: $needle"
+            }
+        }
+    }
 } finally {
     if (Test-Path -LiteralPath $temp) { Remove-Item -LiteralPath $temp -Recurse -Force }
     if (Test-Path -LiteralPath $selfTestArtifacts) { Remove-Item -LiteralPath $selfTestArtifacts -Recurse -Force }

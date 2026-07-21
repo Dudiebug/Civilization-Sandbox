@@ -327,6 +327,19 @@ def main() -> int:
             errors.append("repository-policy workflow permissions must remain contents: read")
         if re.search(r"\$\{\{\s*secrets\.", workflow_text, re.IGNORECASE):
             errors.append("repository-policy workflow must not reference secrets")
+        required_workflow_runs = [
+            "python Build/validate_plan.py",
+            "powershell -NoProfile -ExecutionPolicy Bypass -File Build/Configure-Repository.ps1 -Offline",
+            "powershell -NoProfile -ExecutionPolicy Bypass -File Build/Bootstrap.ps1 -RepositoryOnly",
+            "powershell -NoProfile -ExecutionPolicy Bypass -File Tests/Bootstrap/Task001.Bootstrap.Tests.ps1",
+        ]
+        for run in required_workflow_runs:
+            if len(re.findall(rf"^\s{{8}}run:\s*{re.escape(run)}\s*$", workflow_text, re.MULTILINE)) != 1:
+                errors.append(f"repository-policy workflow command is absent or duplicated: {run}")
+        if re.search(r"^\s*continue-on-error:\s*true\s*$", workflow_text, re.IGNORECASE | re.MULTILINE):
+            errors.append("repository-policy workflow cannot convert validation failures to passes")
+        if re.search(r"^\s*if:\s*(?:false|\$\{\{\s*false\s*\}\})\s*$", workflow_text, re.IGNORECASE | re.MULTILINE):
+            errors.append("repository-policy workflow cannot disable validation steps")
     except Exception as exc:
         errors.append(f"Repository governance/workflow contract is unreadable: {exc}")
 
