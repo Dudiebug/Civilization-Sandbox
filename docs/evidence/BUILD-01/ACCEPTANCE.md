@@ -1,6 +1,6 @@
 # Creator Acceptance — BUILD-01
 
-**State:** PENDING
+**State:** APPROVED
 
 ## What I should see
 
@@ -22,12 +22,12 @@
 
 ## Result
 
-- [ ] Behavior matches the Build 01 task contract.
-- [ ] The early-modern placeholder presentation feels directionally correct.
-- [ ] Camera, time, selection, inspection, and reset controls are understandable.
-- [ ] No obvious unrelated regression is visible.
-- [ ] I approve the tradeoff and player experience.
+- [x] Behavior matches the Build 01 task contract.
+- [x] The early-modern placeholder presentation is acceptable for this stage.
+- [x] Camera, time, selection, inspection, and reset controls are understandable.
+- [x] No obvious unrelated regression is visible.
+- [x] I approve the tradeoff and player experience for Build 01.
 
-**Decision:** PENDING
+**Decision:** APPROVE
 
-**Notes:** The first placeholder character design was rejected. Revision 01 removes overhead names and introduces the modular clothing direction requested by the creator. Reply `APPROVE`, `CHANGES`, `STOP`, or `ROLL BACK` after replaying it.
+**Notes:** Creator approval recorded. The current character models are visually rough and have no meaningful animation, but this is accepted because Build 01 is the first simulation viewer and character art/animation has not entered production scope yet. Treat improved character models and animation as later presentation work, not a blocker for Build 01.
