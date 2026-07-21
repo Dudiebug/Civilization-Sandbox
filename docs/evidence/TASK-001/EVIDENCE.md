@@ -61,7 +61,7 @@
 - Unity wrapper termination: PASS after correction — build/test scripts wait on the editor process handle, avoiding PowerShell descendant-tree waits on Unity's long-lived Roslyn compiler server.
 - Roadmap rebaseline: integrated from preserved branch `prep/roadmap-rebaseline-20260720`; active TASK-001 status and implementation evidence were retained, and `.codex/config.toml` remains absent by creator decision.
 - GitHub governance: PASS — the repository is public by recorded creator approval, `main` is the default branch, pull requests and conversation resolution are required, administrator enforcement is enabled, force-pushes and deletion are disabled, and strict `repository-policy` is required after its first successful run.
-- Project-location amendment: APPROVED — the creator directed Codex to consolidate all persistent project work into `C:\Users\dudie\Projects\Civilization-Sandbox`; sibling worktrees and secondary development copies are prohibited after consolidation.
+- Project-location amendment: COMPLETED — the sole registered Git worktree, Unity project, generated cache, and recoverable evidence now reside at `C:\Users\dudie\Projects\Civilization-Sandbox`. The former TASK-001 and roadmap worktree contents were removed after their branches were verified on GitHub; no persistent secondary project copy remains.
 - Evidence hardening: PASS — an explicit stale-result demonstration failed with `CIV001-RESULT-005`; canonical evidence is bound to one clean commit, complete player output trees are hashed, smoke provenance is verified before launch, and the archive excludes its own stale pre-overwrite result.
 - Independent adversarial review: PASS after the evidence, path, manifest, and governance blockers above were corrected and re-reviewed.
 
