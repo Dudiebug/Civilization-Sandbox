@@ -20,11 +20,11 @@ TASK-002 establishes the repository documentation authority hierarchy, determini
 ## Required results
 
 - Build: N/A — no runtime or player code changed. Repository-only bootstrap audit PASS; `powershell -NoProfile -ExecutionPolicy Bypass -File Build/Bootstrap.ps1 -RepositoryOnly` exited 0 in 1.249 seconds and wrote `Artifacts/results/bootstrap-20260721T031959Z.json`.
-- Tests: PASS — `python -m unittest discover -s Tests/Documentation -p "test_*.py"` ran 9 tests in 0.113 seconds (0.189-second process measurement), all passing.
+- Tests: PASS — `python -m unittest discover -s Tests/Documentation -p "test_*.py"` ran 10 tests, including the unregistered-index negative fixture, in 0.181 seconds (0.288-second process measurement), all passing.
 - Replay/state diff: N/A — no authoritative state, replay logic, or runtime behavior changed.
 - Persistence/migration: N/A — no save schema, migration, or serialized data changed.
-- Performance: N/A for gameplay — no runtime behavior changed. Documentation validation met its separate seconds-scale target: `python Build/validate_docs.py` completed in 4.771 seconds without network access.
-- Documentation: PASS — `python Build/validate_docs.py` registered 40 documents and passed; `python Build/validate_plan.py` registered 9 milestones, 25 tasks, and 51 scoped instruction files and passed in 5.855 seconds.
+- Performance: N/A for gameplay — no runtime behavior changed. Documentation validation met its separate seconds-scale target: `python Build/validate_docs.py` completed in 7.070 seconds without network access.
+- Documentation: PASS — `python Build/validate_docs.py` registered 40 documents and passed; `python Build/validate_plan.py` registered 9 milestones, 25 tasks, and 51 scoped instruction files and passed in 8.075 seconds.
 - Independent review: PENDING — see `REVIEW.md`; the implementer cannot self-certify independence.
 - Creator acceptance: PASS — explicit `APPROVE` and merge request are recorded in `ACCEPTANCE.md`.
 
@@ -32,6 +32,7 @@ TASK-002 establishes the repository documentation authority hierarchy, determini
 
 - The deliberate broken-link fixture passed its negative assertion and requires the exact actionable diagnostic `BROKEN_LINK docs/DOCUMENT_INDEX.md:3 target does not exist: missing.md`.
 - Additional fixtures reject a missing anchor, unreachable required document, duplicate ADR number, path-case mismatch, case-insensitive `AGENTS.md`, `.codex/config.toml`, and stale file manifest.
+- The registry/index consistency fixture rejects a valid document linked from `DOCUMENT_INDEX.md` when that document is omitted from `Config/document-registry.json`.
 - Filesystem scan after validation found `AGENTS_COUNT=0` and `CODEX_CONFIG_COUNT=0`.
 - External URLs were not fetched by tests or validators.
 
