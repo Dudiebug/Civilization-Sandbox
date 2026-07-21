@@ -31,7 +31,7 @@ namespace CivSandbox.UI
 
             EnsureStyles();
             const float width = 340f;
-            GUILayout.BeginArea(new Rect(18f, 18f, width, 246f), panelStyle);
+            GUILayout.BeginArea(new Rect(18f, 18f, width, 278f), panelStyle);
             GUILayout.Label("CIVILIZATION SANDBOX", titleStyle);
             GUILayout.Label("WORLD VIEWER  •  EARLY-MODERN COMPANY", headingStyle);
             GUILayout.Space(8f);
@@ -62,6 +62,9 @@ namespace CivSandbox.UI
                     seedText = session.Seed.ToString();
                 }
             }
+
+            GUILayout.Space(6f);
+            GUILayout.Label("WASD / arrows pan  •  middle-drag  •  wheel zoom", headingStyle);
 
             GUILayout.EndArea();
         }

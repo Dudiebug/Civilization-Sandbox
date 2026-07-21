@@ -15,6 +15,7 @@ namespace CivSandbox.Presentation
         public void Initialize(WorldSnapshot snapshot)
         {
             worldCamera = CreateCamera();
+            worldCamera.gameObject.AddComponent<WorldCameraController>().Configure(snapshot.Bounds);
             CreateLight();
             CreateGround(snapshot);
             CreateBoundaryMarkers(snapshot);
