@@ -137,6 +137,7 @@
 - `docs/decisions/README.md`
 - `docs/DOCUMENT_INDEX.md`
 - `docs/evidence/BUILD-01/ACCEPTANCE.md`
+- `docs/evidence/BUILD-01/ACCEPTANCE-2026-07-21.md`
 - `docs/evidence/BUILD-01/EVIDENCE.md`
 - `docs/evidence/BUILD-01/REVIEW.md`
 - `docs/evidence/codex.md`
