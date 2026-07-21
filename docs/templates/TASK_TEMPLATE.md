@@ -5,6 +5,7 @@
 **Release horizon:**
 **Owner:**
 **Risk:** Low / Medium / High / Critical
+**Recommended model/reasoning:**
 **Depends on:**
 **Decision dependencies:** None / DNN
 **Blueprint/ADR references:**

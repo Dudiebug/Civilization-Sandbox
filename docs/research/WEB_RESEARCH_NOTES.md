@@ -1,28 +1,42 @@
-# Web Research Notes — 2026-07-17
+# Web Research Notes — 2026-07-20
 
-## OpenAI Codex workflow
-Official OpenAI documentation currently lists:
+External URLs are research references only. Repository and CI validation do not fetch them.
 
-- **GPT-5.6 Sol** (`gpt-5.6-sol`) as the flagship/strongest option for complex coding, computer use, research, and security work.
-- **GPT-5.6 Terra** (`gpt-5.6-terra`) as the balanced everyday option.
-- **GPT-5.6 Luna** (`gpt-5.6-luna`) as the fast, lowest-cost option in the family.
-- **GPT-5.3 Codex Spark** (`gpt-5.3-codex-spark`) as a text-only research preview for near-instant iteration.
-- Higher reasoning effort improves hard tasks at additional time/token cost; Plan mode and scoped milestones are recommended for complex work.
-- The Codex config key `project_doc_fallback_filenames` allows `codex.md` to be loaded when `AGENTS.md` is absent.
-- `review_model`, `plan_mode_reasoning_effort`, workspace-write sandboxing, approval policy, and network controls are supported project configuration concepts.
+## OpenAI model guidance
 
-Official sources:
-- https://learn.chatgpt.com/docs/models
-- https://learn.chatgpt.com/guides/best-practices
-- https://learn.chatgpt.com/docs/config-file/config-reference
+The current official model guide positions:
+
+- **5.6 Sol** as the frontier choice for the most demanding, ambiguous work;
+- **5.6 Terra** as the balance of intelligence, speed, and cost for everyday work;
+- **5.6 Luna** as the efficient choice for high-volume, cost-sensitive work; and
+- reasoning effort as a separate control, with Max reserved for the hardest tasks.
+
+Codex documentation also describes **5.3 Codex Spark** as a limited-availability, near-instant text-only option. Availability can vary by account, so repository guidance treats it as optional rather than required.
+
+Official sources, accessed 2026-07-20:
+
+- [Latest model guide](https://developers.openai.com/api/docs/guides/latest-model)
+- [Codex models](https://learn.chatgpt.com/docs/models)
+
+## Codex instruction discovery
+
+Official Codex discovery normally uses `AGENTS.md` or configured fallback filenames. The creator permanently chose not to commit `AGENTS.md` or `.codex/config.toml`, so this repository does not claim that `codex.md` loads automatically. Supplied prompts must tell agents to read root and nearest scoped `codex.md` files manually.
+
+There is no project configuration that disables networking. Network access and approval are controlled by the active session. Current external facts may be researched in a bounded task with authoritative sources and access dates; documentation validation itself remains deterministic and offline-safe.
+
+Official source, accessed 2026-07-20:
+
+- [Codex project-instruction discovery](https://learn.chatgpt.com/docs/config-file/config-advanced#project-instructions-discovery)
 
 ## Unity production stack
-Official Unity sources support the blueprint's provisional direction: Unity 6.3 is an LTS release, Entities is the data-oriented ECS package, Entities Graphics supports DOTS rendering/LOD workflows, and Unity supports command-line build/test operation. Exact editor patch and package versions must be re-verified and pinned in TASK-001 rather than copied from a web page into this kit.
 
-Official starting sources:
-- https://unity.com/releases/unity-6/support
-- https://docs.unity3d.com/Manual/EditorCommandLineArguments.html
-- Unity Test Framework and Entities package documentation for the exact pinned editor/package versions.
+The accepted editor and package baseline is recorded in `docs/decisions/ADR-002_UNITY_TOOLCHAIN_BASELINE.md`. Web sources are not permitted to silently replace that accepted record. Future upgrades require a superseding ADR with exact versions and compatibility evidence.
+
+Official starting sources, accessed 2026-07-20:
+
+- [Unity 6 release support](https://unity.com/releases/unity-6/support)
+- [Unity command-line arguments](https://docs.unity3d.com/Manual/EditorCommandLineArguments.html)
 
 ## Decision impact
-The repository defaults to Terra/High for normal implementation and Sol/Extra High for planning/review. Web access is disabled in normal project execution; bounded research tasks may enable it deliberately and record sources.
+
+Use Sol/Extra High for ambiguous or consequential decisions and adversarial review, Terra/High for bounded implementation, and Terra/Medium for tests, documentation, read-heavy scans, and clean verification. Use Luna only for exact high-volume transformations, and optional Spark only for tiny text-only loops. These are recommendations in prompts and task metadata, never committed model configuration.
