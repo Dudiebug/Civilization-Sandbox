@@ -24,6 +24,8 @@ namespace CivSandbox.WorldViewer.Tests
 
                 Assert.That(sceneView.PersonViewCount, Is.EqualTo(WorldSimulation.PersonCount));
                 Assert.That(sceneObject.GetComponentsInChildren<PersonBillboardView>(false).Length, Is.EqualTo(WorldSimulation.PersonCount));
+                Assert.That(sceneObject.GetComponentsInChildren<TextMesh>(false), Is.Empty,
+                    "Names should remain available through selection and the inspector, not float above people.");
             }
             finally
             {
