@@ -4,10 +4,10 @@
 
 ## What I should see
 
-- One angled 2.5D early-modern prototype field containing 24 visible pixel people who wait and walk in varied layered clothing.
+- One angled 2.5D early-modern prototype field containing 24 visible, named pixel people who wait and walk.
 - Camera pan and zoom that never change the simulated world.
 - Pause, 1x, 2x, 5x, and 10x controls plus deterministic seed reset.
-- No names floating above people. A read-only omniscient inspector shows the selected person's name, stable ID, position, current action, world time, and clothing.
+- A read-only omniscient inspector showing the selected person's name, stable ID, position, current action, and world time.
 - A clock-health line that stays steady in ordinary play and clearly reports bounded catch-up or skipped wall time if the player is overloaded.
 
 ## Test steps
@@ -18,7 +18,6 @@
 4. Try Pause, 1x, 2x, 5x, and 10x. Confirm world time stops only on Pause and movement accelerates at higher speeds.
 5. Click several people. Confirm the inspector switches cleanly and that selection itself does not move or alter anyone.
 6. Enter seed `170601`, reset, observe the initial company, change to another seed, then return to `170601`. Confirm the original names and starting arrangement return without ghost people.
-7. Confirm clothing uses crisp 32 x 48 pixel layers and plausible early-modern pieces; reset seed `170601` and confirm the same outfits return.
 
 ## Result
 
@@ -30,4 +29,4 @@
 
 **Decision:** PENDING
 
-**Notes:** The first placeholder character design was rejected. Revision 01 removes overhead names and introduces the modular clothing direction requested by the creator. Reply `APPROVE`, `CHANGES`, `STOP`, or `ROLL BACK` after replaying it.
+**Notes:** Reply `APPROVE`, `CHANGES`, `STOP`, or `ROLL BACK` after the playtest.

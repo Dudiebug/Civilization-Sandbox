@@ -1,6 +1,6 @@
 # File Manifest
 
-**Total files:** 370
+**Total files:** 368
 **Scoped `codex.md` files:** 51
 **Forbidden `AGENTS.md` files:** 0
 
@@ -17,7 +17,7 @@
 | `codex.md` | 1 |
 | `Config` | 6 |
 | `CONTRIBUTING.md` | 1 |
-| `docs` | 117 |
+| `docs` | 115 |
 | `FILE_MANIFEST.md` | 1 |
 | `GamePackages` | 134 |
 | `KIT_AUDIT.md` | 1 |
@@ -143,10 +143,8 @@
 - `docs/decisions/README.md`
 - `docs/DOCUMENT_INDEX.md`
 - `docs/evidence/BUILD-01/ACCEPTANCE.md`
-- `docs/evidence/BUILD-01/CLOTHING_REVISION.md`
 - `docs/evidence/BUILD-01/EVIDENCE.md`
 - `docs/evidence/BUILD-01/REVIEW.md`
-- `docs/evidence/BUILD-01/clothing-preview.png`
 - `docs/evidence/codex.md`
 - `docs/evidence/PLANNING-KIT/EVIDENCE.md`
 - `docs/evidence/README.md`
