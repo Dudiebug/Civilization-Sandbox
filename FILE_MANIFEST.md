@@ -1,6 +1,6 @@
 # File Manifest
 
-**Total files:** 360
+**Total files:** 368
 **Scoped `codex.md` files:** 51
 **Forbidden `AGENTS.md` files:** 0
 
@@ -11,7 +11,7 @@
 | `.gitattributes` | 1 |
 | `.github` | 2 |
 | `.gitignore` | 1 |
-| `Assets` | 41 |
+| `Assets` | 47 |
 | `Build` | 17 |
 | `CHANGELOG.md` | 1 |
 | `codex.md` | 1 |
@@ -19,7 +19,7 @@
 | `CONTRIBUTING.md` | 1 |
 | `docs` | 115 |
 | `FILE_MANIFEST.md` | 1 |
-| `GamePackages` | 132 |
+| `GamePackages` | 134 |
 | `KIT_AUDIT.md` | 1 |
 | `Packages` | 3 |
 | `ProjectSettings` | 24 |
@@ -44,6 +44,12 @@
 - `Assets/UniversalRenderPipelineGlobalSettings.asset`
 - `Assets/UniversalRenderPipelineGlobalSettings.asset.meta`
 - `Assets/WorldViewer.meta`
+- `Assets/WorldViewer/Art.meta`
+- `Assets/WorldViewer/Art/Concepts.meta`
+- `Assets/WorldViewer/Art/Concepts/early-modern-wardrobe-concept-v1.png`
+- `Assets/WorldViewer/Art/Concepts/early-modern-wardrobe-concept-v1.png.meta`
+- `Assets/WorldViewer/Art/README.md`
+- `Assets/WorldViewer/Art/README.md.meta`
 - `Assets/WorldViewer/Editor.meta`
 - `Assets/WorldViewer/Editor/CivSandbox.WorldViewer.Editor.asmdef`
 - `Assets/WorldViewer/Editor/CivSandbox.WorldViewer.Editor.asmdef.meta`
@@ -233,6 +239,8 @@
 - `GamePackages/com.civsandbox.people/Runtime.meta`
 - `GamePackages/com.civsandbox.people/Runtime/CivSandbox.People.asmdef`
 - `GamePackages/com.civsandbox.people/Runtime/CivSandbox.People.asmdef.meta`
+- `GamePackages/com.civsandbox.people/Runtime/ClothingAppearance.cs`
+- `GamePackages/com.civsandbox.people/Runtime/ClothingAppearance.cs.meta`
 - `GamePackages/com.civsandbox.people/Runtime/PersonAction.cs`
 - `GamePackages/com.civsandbox.people/Runtime/PersonAction.cs.meta`
 - `GamePackages/com.civsandbox.people/Runtime/PersonSnapshot.cs`

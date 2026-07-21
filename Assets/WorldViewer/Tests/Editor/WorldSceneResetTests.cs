@@ -56,8 +56,8 @@ namespace CivSandbox.WorldViewer.Tests
                     sceneView.Apply(new WorldSimulation(seed).CreateSnapshot(), true);
                 }
 
-                Assert.That(spriteCount, Is.InRange(1, 12));
-                Assert.That(EarlyModernSpriteFactory.CachedSpriteCount, Is.EqualTo(spriteCount));
+                Assert.That(spriteCount, Is.InRange(1, 112));
+                Assert.That(EarlyModernSpriteFactory.CachedSpriteCount, Is.InRange(spriteCount, 112));
                 Assert.That(litMaterialCount, Is.InRange(1, 2));
                 Assert.That(EraMaterialFactory.CachedLitMaterialCount, Is.EqualTo(litMaterialCount));
                 Assert.That(unlitMaterialCount, Is.InRange(1, 2));
@@ -66,6 +66,35 @@ namespace CivSandbox.WorldViewer.Tests
             finally
             {
                 Object.DestroyImmediate(sceneObject);
+            }
+        }
+
+
+        [Test]
+        public void PeopleUseSixPointFilteredRgba32LayersWithoutOverheadNames()
+        {
+            var personObject = new GameObject("Wardrobe presentation test");
+            try
+            {
+                PersonSnapshot person = new WorldSimulation(170601UL).CreateSnapshot()[0];
+                PersonBillboardView view = personObject.AddComponent<PersonBillboardView>();
+                view.Initialize(person, null);
+
+                Assert.That(personObject.GetComponentsInChildren<TextMesh>(true), Is.Empty);
+                SpriteRenderer[] renderers = personObject.GetComponentsInChildren<SpriteRenderer>(true);
+                Assert.That(renderers.Length, Is.EqualTo(6));
+                foreach (SpriteRenderer renderer in renderers)
+                {
+                    Texture2D texture = renderer.sprite.texture;
+                    Assert.That(texture.width, Is.EqualTo(32));
+                    Assert.That(texture.height, Is.EqualTo(48));
+                    Assert.That(texture.format, Is.EqualTo(TextureFormat.RGBA32));
+                    Assert.That(texture.filterMode, Is.EqualTo(FilterMode.Point));
+                }
+            }
+            finally
+            {
+                Object.DestroyImmediate(personObject);
             }
         }
     }

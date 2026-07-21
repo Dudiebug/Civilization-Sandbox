@@ -9,6 +9,7 @@ namespace CivSandbox.People
         public const int PersonCount = 24;
         public const ulong InitialPeopleStream = 0x70656f706c653031UL;
         public const ulong MovementStream = 0x6d6f76656d656e74UL;
+        public const ulong ClothingStream = 0x636c6f7468696e67UL;
         private static readonly string[] GivenNames =
         {
             "Alden", "Beata", "Corren", "Davia", "Edric", "Fenna", "Garran", "Hester",
@@ -55,7 +56,16 @@ namespace CivSandbox.People
                 int north = KeyedRandom.Range(seedValue, InitialPeopleStream, localId, 0, 3, Bounds.MinimumNorthMillimeters + 2000, Bounds.MaximumNorthMillimeters - 1999);
                 string name = GivenNames[(givenOffset + index) % GivenNames.Length] + " " + FamilyNames[(familyOffset + index * 7) % FamilyNames.Length];
                 int appearance = KeyedRandom.Range(seedValue, InitialPeopleStream, localId, 0, 4, 0, 12);
-                var person = new PersonState(new StableEntityId(worldKey, localId), name, new WorldPosition(east, north), appearance)
+                var clothing = new ClothingAppearance(
+                    (UpperGarment)KeyedRandom.Range(seedValue, ClothingStream, localId, 0, 0, 0, 6),
+                    (LowerGarment)KeyedRandom.Range(seedValue, ClothingStream, localId, 0, 1, 0, 4),
+                    (OuterGarment)KeyedRandom.Range(seedValue, ClothingStream, localId, 0, 2, 0, 3),
+                    (Headwear)KeyedRandom.Range(seedValue, ClothingStream, localId, 0, 3, 0, 5),
+                    (Footwear)KeyedRandom.Range(seedValue, ClothingStream, localId, 0, 4, 0, 2),
+                    (byte)KeyedRandom.Range(seedValue, ClothingStream, localId, 0, 5, 0, 6),
+                    (byte)KeyedRandom.Range(seedValue, ClothingStream, localId, 0, 6, 0, 6),
+                    (byte)KeyedRandom.Range(seedValue, ClothingStream, localId, 0, 7, 0, 6));
+                var person = new PersonState(new StableEntityId(worldKey, localId), name, new WorldPosition(east, north), appearance, clothing)
                 {
                     IdleSecondsRemaining = KeyedRandom.Range(seedValue, MovementStream, localId, 0, 0, 0, 46)
                 };
@@ -83,7 +93,7 @@ namespace CivSandbox.People
             for (int index = 0; index < people.Length; index++)
             {
                 PersonState person = people[index];
-                copy[index] = new PersonSnapshot(person.Id, person.Name, person.Position, person.Action, person.AppearanceVariant);
+                copy[index] = new PersonSnapshot(person.Id, person.Name, person.Position, person.Action, person.AppearanceVariant, person.Clothing);
             }
 
             return new WorldSnapshot(seed, clock.Time, Bounds, copy);
@@ -111,6 +121,14 @@ namespace CivSandbox.People
                 checksum.Add(person.Position.NorthMillimeters);
                 checksum.Add((byte)person.Action);
                 checksum.Add(person.AppearanceVariant);
+                checksum.Add((byte)person.Clothing.Upper);
+                checksum.Add((byte)person.Clothing.Lower);
+                checksum.Add((byte)person.Clothing.Outer);
+                checksum.Add((byte)person.Clothing.Headwear);
+                checksum.Add((byte)person.Clothing.Footwear);
+                checksum.Add(person.Clothing.UpperColor);
+                checksum.Add(person.Clothing.LowerColor);
+                checksum.Add(person.Clothing.OuterColor);
                 checksum.Add(person.DecisionOrdinal);
                 checksum.Add(person.IdleSecondsRemaining);
                 checksum.Add(person.MoveStart.EastMillimeters);
@@ -211,12 +229,13 @@ namespace CivSandbox.People
 
         private sealed class PersonState
         {
-            public PersonState(StableEntityId id, string name, WorldPosition position, int appearanceVariant)
+            public PersonState(StableEntityId id, string name, WorldPosition position, int appearanceVariant, ClothingAppearance clothing)
             {
                 Id = id;
                 Name = name;
                 Position = position;
                 AppearanceVariant = appearanceVariant;
+                Clothing = clothing;
                 Action = PersonAction.Waiting;
                 MoveStart = position;
                 MoveTarget = position;
@@ -225,6 +244,7 @@ namespace CivSandbox.People
             public StableEntityId Id { get; }
             public string Name { get; }
             public int AppearanceVariant { get; }
+            public ClothingAppearance Clothing { get; }
             public WorldPosition Position { get; set; }
             public PersonAction Action { get; set; }
             public ulong DecisionOrdinal { get; set; }

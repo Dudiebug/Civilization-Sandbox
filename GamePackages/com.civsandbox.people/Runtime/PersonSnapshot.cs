@@ -5,13 +5,14 @@ namespace CivSandbox.People
 {
     public readonly struct PersonSnapshot
     {
-        public PersonSnapshot(StableEntityId id, string name, WorldPosition position, PersonAction action, int appearanceVariant)
+        public PersonSnapshot(StableEntityId id, string name, WorldPosition position, PersonAction action, int appearanceVariant, ClothingAppearance clothing)
         {
             Id = id;
             Name = name;
             Position = position;
             Action = action;
             AppearanceVariant = appearanceVariant;
+            Clothing = clothing;
         }
 
         public StableEntityId Id { get; }
@@ -23,5 +24,7 @@ namespace CivSandbox.People
         public PersonAction Action { get; }
 
         public int AppearanceVariant { get; }
+
+        public ClothingAppearance Clothing { get; }
     }
 }

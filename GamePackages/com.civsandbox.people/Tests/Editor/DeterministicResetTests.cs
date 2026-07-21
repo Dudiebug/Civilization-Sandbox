@@ -24,7 +24,39 @@ namespace CivSandbox.People.Tests
                 Assert.That(reset[index].Name, Is.EqualTo(first[index].Name));
                 Assert.That(reset[index].Position, Is.EqualTo(first[index].Position));
                 Assert.That(reset[index].Action, Is.EqualTo(first[index].Action));
+                Assert.That(reset[index].AppearanceVariant, Is.EqualTo(first[index].AppearanceVariant));
+                Assert.That(reset[index].Clothing.Upper, Is.EqualTo(first[index].Clothing.Upper));
+                Assert.That(reset[index].Clothing.Lower, Is.EqualTo(first[index].Clothing.Lower));
+                Assert.That(reset[index].Clothing.Outer, Is.EqualTo(first[index].Clothing.Outer));
+                Assert.That(reset[index].Clothing.Headwear, Is.EqualTo(first[index].Clothing.Headwear));
+                Assert.That(reset[index].Clothing.Footwear, Is.EqualTo(first[index].Clothing.Footwear));
+                Assert.That(reset[index].Clothing.UpperColor, Is.EqualTo(first[index].Clothing.UpperColor));
+                Assert.That(reset[index].Clothing.LowerColor, Is.EqualTo(first[index].Clothing.LowerColor));
+                Assert.That(reset[index].Clothing.OuterColor, Is.EqualTo(first[index].Clothing.OuterColor));
             }
+        }
+
+        [Test]
+        public void SeededCompanyUsesAValidDiverseEarlyModernWardrobe()
+        {
+            WorldSnapshot snapshot = new WorldSimulation(170601UL).CreateSnapshot();
+            var combinations = new HashSet<string>();
+
+            for (int index = 0; index < snapshot.Count; index++)
+            {
+                ClothingAppearance clothing = snapshot[index].Clothing;
+                Assert.That((int)clothing.Upper, Is.InRange(0, 5));
+                Assert.That((int)clothing.Lower, Is.InRange(0, 3));
+                Assert.That((int)clothing.Outer, Is.InRange(0, 2));
+                Assert.That((int)clothing.Headwear, Is.InRange(0, 4));
+                Assert.That((int)clothing.Footwear, Is.InRange(0, 1));
+                Assert.That(clothing.UpperColor, Is.LessThan(6));
+                Assert.That(clothing.LowerColor, Is.LessThan(6));
+                Assert.That(clothing.OuterColor, Is.LessThan(6));
+                combinations.Add($"{clothing.Upper}:{clothing.Lower}:{clothing.Outer}:{clothing.Headwear}:{clothing.Footwear}:{clothing.UpperColor}:{clothing.LowerColor}");
+            }
+
+            Assert.That(combinations.Count, Is.GreaterThanOrEqualTo(18));
         }
 
         [Test]

@@ -75,7 +75,7 @@ namespace CivSandbox.UI
         private void DrawInspector()
         {
             const float width = 320f;
-            GUILayout.BeginArea(new Rect(Screen.width - width - 18f, 18f, width, 246f), panelStyle);
+            GUILayout.BeginArea(new Rect(Screen.width - width - 18f, 18f, width, 332f), panelStyle);
             GUILayout.Label("OMNISCIENT INSPECTION", headingStyle);
 
             if (!session.SelectedPersonId.HasValue || !TryFindPerson(session.Snapshot, session.SelectedPersonId.Value, out PersonSnapshot person))
@@ -95,6 +95,12 @@ namespace CivSandbox.UI
             GUILayout.Label($"Position       {person.Position}", bodyStyle);
             GUILayout.Label($"Current action {person.Action}", bodyStyle);
             GUILayout.Label($"World time     {FormatTime(session.Snapshot.Time.Seconds)}", bodyStyle);
+            GUILayout.Space(7f);
+            GUILayout.Label($"Upper          {FormatGarment(person.Clothing.Upper)}", bodyStyle);
+            GUILayout.Label($"Lower          {FormatGarment(person.Clothing.Lower)}", bodyStyle);
+            GUILayout.Label($"Outer          {FormatGarment(person.Clothing.Outer)}", bodyStyle);
+            GUILayout.Label($"Headwear       {FormatGarment(person.Clothing.Headwear)}", bodyStyle);
+            GUILayout.Label($"Footwear       {FormatGarment(person.Clothing.Footwear)}", bodyStyle);
             GUILayout.Space(10f);
             GUILayout.Label("READ-ONLY • AUTHORITATIVE SNAPSHOT", headingStyle);
             GUILayout.EndArea();
@@ -203,6 +209,21 @@ namespace CivSandbox.UI
             long minute = inDay % 3600L / 60L;
             long second = inDay % 60L;
             return $"Day {day}, {hour:00}:{minute:00}:{second:00}";
+        }
+
+        private static string FormatGarment<T>(T garment) where T : struct
+        {
+            string value = garment.ToString();
+            for (int index = 1; index < value.Length; index++)
+            {
+                if (char.IsUpper(value[index]))
+                {
+                    value = value.Insert(index, " ");
+                    index++;
+                }
+            }
+
+            return value;
         }
     }
 }
