@@ -1,6 +1,6 @@
 # TASK-002 - Source-of-truth, release-scope, story, and AI document set
 
-**Status:** In Progress
+**Status:** In Review
 **Milestone:** 0.1 - Project Foundation
 **Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
 **Risk:** High
@@ -25,11 +25,11 @@ Every future task can locate the authoritative north star, release scope, active
 - Add document validation and stale-link checks.
 
 ## Required outputs
-- [ ] Approved repository documentation hierarchy.
-- [ ] Current architecture and domain maps with active-vs-reserved scope notes.
-- [ ] Release ladder, decision queue, and identity guardrails.
-- [ ] Minimum story/history and AI authority contracts.
-- [ ] Documentation validator and index.
+- [x] ~~Approved repository documentation hierarchy.~~
+- [x] ~~Current architecture and domain maps with active-vs-reserved scope notes.~~
+- [x] ~~Release ladder, decision queue, and identity guardrails.~~
+- [x] ~~Minimum story/history and AI authority contracts.~~
+- [x] ~~Documentation validator and index.~~
 
 ## Approved milestones
 - [x] ~~M1 - Establish authority, unique ADR identity, index, and registry.~~
@@ -39,12 +39,12 @@ Every future task can locate the authoritative north star, release scope, active
 - [~] M5 - Reproduce evidence, independent review, and creator acceptance.
 
 ## Verification and acceptance
-- [ ] No conflicting source-of-truth statements.
-- [ ] Blueprint 1.5 horizon and ADR-001 lean 1.0 precedence are clear.
-- [ ] All required files are reachable from root instructions.
-- [ ] No `AGENTS.md` file exists.
-- [ ] Deliberately broken internal reference fails validation.
-- [ ] Future decisions are not embedded as hidden defaults.
+- [x] ~~No conflicting source-of-truth statements found by implementation validation.~~
+- [x] ~~Blueprint 1.5 horizon and ADR-001 lean 1.0 precedence are clear.~~
+- [x] ~~All required files are reachable from root instructions.~~
+- [x] ~~No `AGENTS.md` or `.codex/config.toml` file exists.~~
+- [x] ~~Deliberately broken internal reference fails with a path/line diagnostic.~~
+- [x] ~~Future decisions are not embedded as hidden defaults.~~
 - [ ] Independent review and creator acceptance pass.
 
 ## Out of scope

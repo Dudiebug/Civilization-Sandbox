@@ -1,6 +1,6 @@
 # File Manifest
 
-**Total files:** 253
+**Total files:** 255
 **Scoped `codex.md` files:** 50
 **Forbidden `AGENTS.md` files:** 0
 
@@ -17,7 +17,7 @@
 | `codex.md` | 1 |
 | `Config` | 6 |
 | `CONTRIBUTING.md` | 1 |
-| `docs` | 129 |
+| `docs` | 131 |
 | `FILE_MANIFEST.md` | 1 |
 | `GamePackages` | 43 |
 | `KIT_AUDIT.md` | 1 |
@@ -112,6 +112,8 @@
 - `docs/evidence/TASK-001/EVIDENCE.md`
 - `docs/evidence/TASK-001/MANIFEST.json`
 - `docs/evidence/TASK-001/REVIEW.md`
+- `docs/evidence/TASK-002/EVIDENCE.md`
+- `docs/evidence/TASK-002/REVIEW.md`
 - `docs/plans/codex.md`
 - `docs/plans/CREATOR_DECISIONS.md`
 - `docs/plans/CURRENT_STEP.md`

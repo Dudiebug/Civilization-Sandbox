@@ -1,6 +1,6 @@
 # Status Board
 
-**Generated:** 2026-07-21 03:07 UTC
+**Generated:** 2026-07-21 03:21 UTC
 **Roadmap revision:** ADR-001-lean-1.0
 **Active implementation task:** TASK-002
 **Completed implementation tasks:** 1 / 25
@@ -16,7 +16,7 @@
 ## Pre-1.0 milestone summary
 | Milestone | Working name | Done | Active | Review | Blocked | Contracts | Contract state |
 |---:|---|---:|---:|---:|---:|---:|---|
-| 0.1 | Project Foundation | 1 | 1 | 0 | 0 | 10 | Active |
+| 0.1 | Project Foundation | 1 | 0 | 1 | 0 | 10 | Active |
 | 0.2 | Decision and Engine Proof | 0 | 0 | 0 | 0 | 10 | Defined; not started |
 | 0.3 | Living Camp | 0 | 0 | 0 | 0 | 5 | Defined; not started |
 | 0.4 | Physical Settlement | 0 | 0 | 0 | 0 | 0 | Deferred until prior gate |
@@ -30,7 +30,7 @@
 The first 25 contracts cover Milestones 0.1-0.3. Milestones 0.4-0.9 receive detailed contracts only after the prior gate and required creator decisions pass.
 
 - [x] ~~**TASK-001** — Repository governance and reproducible bootstrap~~ — Milestone 0.1
-- [~] **TASK-002** — Source-of-truth, release-scope, story, and AI document set — **IN PROGRESS** — Milestone 0.1
+- [?] **TASK-002** — Source-of-truth, release-scope, story, and AI document set — **IN REVIEW** — Milestone 0.1
 - [ ] **TASK-003** — Architecture and code-quality gates — Milestone 0.1
 - [ ] **TASK-004** — Command-line and CI harness — Milestone 0.1
 - [ ] **TASK-005** — Authoritative world clock and scheduler shell — Milestone 0.1
