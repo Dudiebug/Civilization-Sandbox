@@ -1,6 +1,6 @@
 # Planned Package Map
 
-> This map describes eventual Version 1.5 ownership if the Unity-shaped package approach is accepted in Milestone 0.1. It is not a Version 1.0 feature checklist and does not settle the engine decision. The active milestone controls which subset may be implemented.
+> ADR-002 accepts the Unity-shaped package baseline. This map describes eventual Version 1.5 ownership, not a Version 1.0 feature checklist. The active milestone controls which packages and capabilities may be implemented.
 
 
 | Package | Primary ownership |
@@ -26,4 +26,4 @@
 | `com.civsandbox.telemetry` | System timing, backlog, allocations, memory, query counts, candidate counts, trace volume, save metrics, performance reports, and diagnostic state diff integration. |
 | `com.civsandbox.tooling` | Editor/content authoring, validators, previews, fixture builders, benchmark launchers, evidence packaging, and migration tools. |
 
-Exact manifests, versions, and dependency arrows are accepted during TASK-001/TASK-003. This map defines intended ownership, not completed implementation.
+TASK-001 accepted the engine/package pins. TASK-003 owns enforceable dependency arrows. This map defines intended ownership, not completed implementation or permission to activate reserved Version 1.5 scope.

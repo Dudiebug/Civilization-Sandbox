@@ -1,6 +1,6 @@
 # File Manifest
 
-**Total files:** 246
+**Total files:** 249
 **Scoped `codex.md` files:** 50
 **Forbidden `AGENTS.md` files:** 0
 
@@ -15,9 +15,9 @@
 | `Build` | 15 |
 | `CHANGELOG.md` | 1 |
 | `codex.md` | 1 |
-| `Config` | 5 |
+| `Config` | 6 |
 | `CONTRIBUTING.md` | 1 |
-| `docs` | 127 |
+| `docs` | 129 |
 | `FILE_MANIFEST.md` | 1 |
 | `GamePackages` | 43 |
 | `KIT_AUDIT.md` | 1 |
@@ -62,6 +62,7 @@
 - `codex.md`
 - `Config/benchmark-reference.json`
 - `Config/codex.md`
+- `Config/document-registry.json`
 - `Config/repository-governance.json`
 - `Config/task-registry.json`
 - `Config/toolchain.json`
@@ -96,9 +97,11 @@
 - `docs/creator/MODEL_AND_PROMPT_GUIDE.md`
 - `docs/creator/QUICK_REFERENCE.md`
 - `docs/decisions/ADR-001_RELEASE_SCOPE_REBASELINE.md`
-- `docs/decisions/ADR-001-unity-toolchain-baseline.md`
+- `docs/decisions/ADR-002_UNITY_TOOLCHAIN_BASELINE.md`
+- `docs/decisions/ADR-003_CODEX_INSTRUCTION_DISCOVERY.md`
 - `docs/decisions/codex.md`
 - `docs/decisions/README.md`
+- `docs/DOCUMENT_INDEX.md`
 - `docs/evidence/codex.md`
 - `docs/evidence/PLANNING-KIT/EVIDENCE.md`
 - `docs/evidence/README.md`

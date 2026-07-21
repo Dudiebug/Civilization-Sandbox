@@ -1,7 +1,7 @@
 # Current Session Handoff
 
 **Active task:** TASK-002
-**Status:** Not Started
+**Status:** In Progress
 **Milestone:** 0.1 - Project Foundation
 **Last accepted implementation:** TASK-001 at `baseline/task-001-accepted`
 
@@ -16,7 +16,7 @@
 - TASK-001 clean-profile verification, independent review, creator approval, protected PR #1 merge, accepted tag, and recovery rehearsal passed.
 
 ## Next single action
-Plan TASK-002's smallest documentation milestone from the accepted `main` baseline; do not implement gameplay or reopen TASK-001 pins without an explicit creator-approved amendment.
+Complete TASK-002's offline documentation validator and negative fixtures; do not implement gameplay or reopen TASK-001 pins.
 
 ## Blockers
-None for TASK-001. TASK-002 has not started.
+None. TASK-002 began from protected `main` on `task/TASK-002-docs`.
