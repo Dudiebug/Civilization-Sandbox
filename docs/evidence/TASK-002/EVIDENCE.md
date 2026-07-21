@@ -8,7 +8,7 @@ TASK-002 establishes the repository documentation authority hierarchy, determini
 
 ## Environment
 
-- Candidate implementation commit verified: recorded after the stale-instruction corrections in this evidence update.
+- Candidate implementation commit verified: `a13fee1` (`TASK-002 resolve review findings`).
 - Branch: `task/TASK-002-docs`
 - Baseline: protected `main` after accepted TASK-001
 - OS: Microsoft Windows 11 Pro `10.0.26200`
