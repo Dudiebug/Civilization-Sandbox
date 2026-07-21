@@ -151,6 +151,18 @@ try {
             }
         }
     }
+
+    Test-Case 'required status-check context remains a JSON array' {
+        $source = Get-Content -LiteralPath (Join-Path $root 'Build\Configure-Repository.ps1') -Raw
+        if ($source -notmatch 'contexts\s*=\s*@\(\$contexts\)') {
+            throw 'Configure-Repository.ps1 can collapse the one-item required-check context into a JSON string.'
+        }
+        $context = 'repository-policy'
+        $body = @{ required_status_checks = @{ strict = $true; contexts = @($context) } } | ConvertTo-Json -Depth 5 | ConvertFrom-Json
+        if ($body.required_status_checks.contexts -is [string] -or @($body.required_status_checks.contexts).Count -ne 1) {
+            throw 'Required status-check context did not round-trip as a one-item JSON array.'
+        }
+    }
 } finally {
     if (Test-Path -LiteralPath $temp) { Remove-Item -LiteralPath $temp -Recurse -Force }
     if (Test-Path -LiteralPath $selfTestArtifacts) { Remove-Item -LiteralPath $selfTestArtifacts -Recurse -Force }

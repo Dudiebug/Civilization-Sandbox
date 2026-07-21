@@ -129,7 +129,7 @@ if ($repositoryJson.default_branch -ne 'main') {
 }
 $contexts = if ($RequireCheck) { @('repository-policy') } else { @() }
 $body = [pscustomobject][ordered]@{
-    required_status_checks = if ($RequireCheck) { @{ strict = $true; contexts = $contexts } } else { $null }
+    required_status_checks = if ($RequireCheck) { @{ strict = $true; contexts = @($contexts) } } else { $null }
     enforce_admins = $true
     required_pull_request_reviews = @{ dismiss_stale_reviews = $false; require_code_owner_reviews = $false; required_approving_review_count = 0 }
     restrictions = $null
