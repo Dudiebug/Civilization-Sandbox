@@ -72,7 +72,12 @@ class DocumentationValidatorTests(unittest.TestCase):
         temporary, root = self.make_repo()
         with temporary:
             (root / "docs/DOCUMENT_INDEX.md").write_text("# Index\n\n[Missing](missing.md)\n", encoding="utf-8")
-            self.assert_code(validate_repository(root), "BROKEN_LINK")
+            errors = validate_repository(root)
+            self.assert_code(errors, "BROKEN_LINK")
+            self.assertIn(
+                "BROKEN_LINK docs/DOCUMENT_INDEX.md:3 target does not exist: missing.md",
+                errors,
+            )
 
     def test_missing_anchor_fails(self) -> None:
         temporary, root = self.make_repo()
