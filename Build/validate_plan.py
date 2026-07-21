@@ -16,6 +16,13 @@ REGISTRY = ROOT / "Config" / "task-registry.json"
 BLUEPRINT = ROOT / "docs" / "blueprint" / "Civilization_Sandbox_Game_Development_Blueprint_v2.0.pdf"
 PLAN_ROOT = ROOT / "docs" / "plans"
 ROADMAP_ZIP = PLAN_ROOT / "Civilization_Sandbox_Vibe_First_Full_Roadmap_Kit.zip"
+WORKFLOW = ROOT / ".github" / "workflows" / "repository-policy.yml"
+REQUIRED_WORKFLOW_RUNS = [
+    "python Build/validate_plan.py",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File Build/Configure-Repository.ps1 -Offline",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File Build/Bootstrap.ps1 -RepositoryOnly",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File Tests/Bootstrap/Task001.Bootstrap.Tests.ps1",
+]
 REQUIRED_PLAN_FILES = [
     "README.md",
     "FULL_ROADMAP.md",
@@ -113,6 +120,15 @@ def main() -> int:
                     errors.append("Blueprint inside roadmap ZIP differs from the immutable source")
         except Exception as exc:
             errors.append(f"Roadmap ZIP is unreadable: {exc}")
+
+    if not WORKFLOW.is_file():
+        errors.append("Repository policy workflow is missing")
+    else:
+        workflow_text = WORKFLOW.read_text(encoding="utf-8")
+        for command in REQUIRED_WORKFLOW_RUNS:
+            pattern = rf"^\s{{8}}run:\s*{re.escape(command)}\s*$"
+            if len(re.findall(pattern, workflow_text, re.MULTILINE)) != 1:
+                errors.append(f"Repository policy command is absent or duplicated: {command}")
 
     print(f"Roadmap revision: {registry.get('roadmap_revision', 'Unspecified')}")
     print(f"Playable build prompts: {len(builds)}")
