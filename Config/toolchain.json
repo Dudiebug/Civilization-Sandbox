@@ -46,9 +46,12 @@
       "windows-mono",
       "linux-mono"
     ],
-    "packageLockSha256": "b5ab878043267eb78c9ece02004322353aa41947c938bc48c6850d838e206548"
+    "packageLockSha256": "67f53f79c0086058666733aa34e60e26e592ef177501603f7e0f78a8880a5402"
   },
   "packages": {
+    "com.civsandbox.people": "file:../GamePackages/com.civsandbox.people",
+    "com.civsandbox.presentation": "file:../GamePackages/com.civsandbox.presentation",
+    "com.civsandbox.simulation.core": "file:../GamePackages/com.civsandbox.simulation.core",
     "com.unity.burst": "1.8.29",
     "com.unity.collections": "2.6.8",
     "com.unity.entities": "1.4.8",
@@ -57,6 +60,12 @@
     "com.unity.sdk.linux-x86_64": "1.1.0",
     "com.unity.test-framework": "1.6.0",
     "com.unity.toolchain.win-x86_64-linux": "1.1.0",
-    "com.civsandbox.tooling": "file:../GamePackages/com.civsandbox.tooling"
-  }
+    "com.civsandbox.tooling": "file:../GamePackages/com.civsandbox.tooling",
+    "com.civsandbox.ui": "file:../GamePackages/com.civsandbox.ui",
+    "com.civsandbox.world": "file:../GamePackages/com.civsandbox.world"
+  },
+  "testables": [
+    "com.civsandbox.people",
+    "com.civsandbox.tooling"
+  ]
 }
