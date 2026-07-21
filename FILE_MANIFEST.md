@@ -1,6 +1,6 @@
 # File Manifest
 
-**Total files:** 249
+**Total files:** 253
 **Scoped `codex.md` files:** 50
 **Forbidden `AGENTS.md` files:** 0
 
@@ -12,7 +12,7 @@
 | `.github` | 2 |
 | `.gitignore` | 1 |
 | `Assets` | 9 |
-| `Build` | 15 |
+| `Build` | 17 |
 | `CHANGELOG.md` | 1 |
 | `codex.md` | 1 |
 | `Config` | 6 |
@@ -26,7 +26,7 @@
 | `README.md` | 1 |
 | `REVISION_SUMMARY.md` | 1 |
 | `START_HERE.md` | 1 |
-| `Tests` | 8 |
+| `Tests` | 10 |
 
 ## Full path list
 
@@ -55,6 +55,8 @@
 - `Build/Test.ps1`
 - `Build/update_status.py`
 - `Build/Update-Status.ps1`
+- `Build/validate_docs.py`
+- `Build/Validate-Docs.ps1`
 - `Build/validate_plan.py`
 - `Build/Validate-Plan.ps1`
 - `Build/Verify-CleanCheckout.ps1`
@@ -274,6 +276,8 @@
 - `Tests/Benchmarks/codex.md`
 - `Tests/Bootstrap/Task001.Bootstrap.Tests.ps1`
 - `Tests/codex.md`
+- `Tests/Documentation/codex.md`
+- `Tests/Documentation/test_validate_docs.py`
 - `Tests/Migrations/codex.md`
 - `Tests/Presentation/codex.md`
 - `Tests/Properties/codex.md`

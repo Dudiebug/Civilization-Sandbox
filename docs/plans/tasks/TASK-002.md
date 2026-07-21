@@ -32,9 +32,9 @@ Every future task can locate the authoritative north star, release scope, active
 - [ ] Documentation validator and index.
 
 ## Approved milestones
-- [~] M1 - Establish authority, unique ADR identity, index, and registry.
-- [ ] M2 - Add offline documentation validation and negative fixtures.
-- [ ] M3 - Normalize core, story, and AI contracts.
+- [x] ~~M1 - Establish authority, unique ADR identity, index, and registry.~~
+- [x] ~~M2 - Add offline documentation validation and negative fixtures.~~
+- [~] M3 - Normalize core, story, and AI contracts.
 - [ ] M4 - Add model-selection and manual-routing guidance.
 - [ ] M5 - Reproduce evidence, independent review, and creator acceptance.
 

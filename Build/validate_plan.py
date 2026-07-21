@@ -8,6 +8,8 @@ import re
 import sys
 from pathlib import Path
 
+from validate_docs import validate_repository
+
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "Config" / "task-registry.json"
 VALID_STATUSES = {"Not Started", "In Progress", "Blocked", "In Review", "Done"}
@@ -80,6 +82,8 @@ def sha256(path: Path) -> str:
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
+
+    errors.extend(f"Documentation: {error}" for error in validate_repository(ROOT, check_manifest=False))
 
     if not REGISTRY_PATH.exists():
         errors.append("Missing Config/task-registry.json")
