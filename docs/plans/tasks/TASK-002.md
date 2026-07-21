@@ -1,6 +1,6 @@
 # TASK-002 - Source-of-truth, release-scope, story, and AI document set
 
-**Status:** In Review
+**Status:** Done
 **Milestone:** 0.1 - Project Foundation
 **Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
 **Risk:** High
@@ -36,7 +36,7 @@ Every future task can locate the authoritative north star, release scope, active
 - [x] ~~M2 - Add offline documentation validation and negative fixtures.~~
 - [x] ~~M3 - Normalize core, story, and AI contracts.~~
 - [x] ~~M4 - Add model-selection and manual-routing guidance.~~
-- [~] M5 - Reproduce evidence, independent review, and creator acceptance.
+- [x] ~~M5 - Reproduce evidence, independent review, and creator acceptance.~~
 
 ## Verification and acceptance
 - [x] ~~No conflicting source-of-truth statements found by implementation validation.~~
@@ -45,7 +45,7 @@ Every future task can locate the authoritative north star, release scope, active
 - [x] ~~No `AGENTS.md` or `.codex/config.toml` file exists.~~
 - [x] ~~Deliberately broken internal reference fails with a path/line diagnostic.~~
 - [x] ~~Future decisions are not embedded as hidden defaults.~~
-- [ ] Independent review passes with no blocker.
+- [x] ~~Independent review passes with no blocker.~~
 - [x] ~~Creator acceptance: APPROVE; merge to `main` requested.~~
 
 ## Out of scope

@@ -1,6 +1,6 @@
 # TASK-002 Independent Review
 
-**Status:** PENDING
+**Status:** PASS — independent adversarial review completed against clean HEAD `3e946ab9a5c3176859da6dfd870343f09adc493a`.
 
 The implementer has not self-certified this gate. An independent verifier must reproduce the evidence commands from a clean checkout and inspect the candidate diff.
 
@@ -19,8 +19,15 @@ The implementer has not self-certified this gate. An independent verifier must r
 
 ## Findings
 
-PENDING — reviewer must classify findings as BLOCKING, MAJOR, MINOR, or NOTE with exact locations.
+- BLOCKING: none.
+- MAJOR: none.
+- MINOR: none.
+- NOTE: none.
+
+The independent verifier reproduced 10 documentation unit tests, `Build/validate_docs.py`, `Build/validate_plan.py`, and repository-only bootstrap successfully. The forbidden-file scan found zero case-insensitive `AGENTS.md` and `.codex/config.toml` files. The broken-link fixture produced `BROKEN_LINK docs/DOCUMENT_INDEX.md:3 target does not exist: missing.md`; the registry/index negative fixture also passed.
+
+The reviewer inspected authority precedence and ADR-001/002/003 identity/indexing, deferred D03-D11, Story Director factual/owner/no-fabrication limits, AI authority-before-utility and reserved layers, exact-case links/reachability, manual `codex.md` routing, and model/reasoning guidance as non-configuration recommendations.
 
 ## Decision
 
-PENDING — TASK-002 cannot become Done until this report records an independent PASS with no blocker.
+PASS — no BLOCKING, MAJOR, or MINOR finding remains.

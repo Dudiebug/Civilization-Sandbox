@@ -1,6 +1,6 @@
 # TASK-002 Evidence Pack
 
-**State:** IMPLEMENTATION VERIFIED; CREATOR APPROVED; INDEPENDENT REVIEW PENDING
+**State:** COMPLETE — IMPLEMENTATION VERIFIED; INDEPENDENT REVIEW PASS; CREATOR APPROVED
 
 ## Scope
 
@@ -25,7 +25,7 @@ TASK-002 establishes the repository documentation authority hierarchy, determini
 - Persistence/migration: N/A — no save schema, migration, or serialized data changed.
 - Performance: N/A for gameplay — no runtime behavior changed. Documentation validation met its separate seconds-scale target: `python Build/validate_docs.py` completed in 7.070 seconds without network access.
 - Documentation: PASS — `python Build/validate_docs.py` registered 40 documents and passed; `python Build/validate_plan.py` registered 9 milestones, 25 tasks, and 51 scoped instruction files and passed in 8.075 seconds.
-- Independent review: PENDING — see `REVIEW.md`; the implementer cannot self-certify independence.
+- Independent review: PASS — separate reviewer reproduced the validation commands and found no BLOCKING, MAJOR, or MINOR finding; see `REVIEW.md`.
 - Creator acceptance: PASS — explicit `APPROVE` and merge request are recorded in `ACCEPTANCE.md`.
 
 ## Negative and policy evidence
@@ -53,7 +53,7 @@ TASK-002 establishes the repository documentation authority hierarchy, determini
 
 ## Known limitations and deferred work
 
-- Independent reproduction and adversarial review are not yet recorded.
+- Independent reproduction and adversarial review are recorded as PASS in `REVIEW.md`.
 - Runtime evidence remains intentionally N/A because gameplay/runtime implementation is outside TASK-002.
 
 ## Rollback
@@ -62,4 +62,4 @@ Revert TASK-002's documentation commits in reverse order. No runtime or save dat
 
 ## Final declaration
 
-Implementation and implementer-run validation are complete. TASK-002 remains In Review until an independent verifier records PASS with no blockers; creator approval is recorded separately in `ACCEPTANCE.md`.
+Implementation, independent review, and creator acceptance are complete. TASK-002 is eligible for merge to `main`.
