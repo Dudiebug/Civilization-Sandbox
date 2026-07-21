@@ -7,8 +7,10 @@ namespace CivSandbox.Presentation
     public sealed class PersonBillboardView : MonoBehaviour
     {
         private Camera worldCamera;
+        private TextMesh nameLabel;
         private Vector3 targetPosition;
         private bool hasPosition;
+        private string canonicalName;
         private GameObject selectionMarker;
 
         public StableEntityId Id { get; private set; }
@@ -16,10 +18,13 @@ namespace CivSandbox.Presentation
         public void Initialize(PersonSnapshot person, Camera camera)
         {
             Id = person.Id;
+            canonicalName = person.Name;
             worldCamera = camera;
             gameObject.name = $"Person - {person.Name}";
 
-            CreateVisualLayers(person);
+            var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = EarlyModernSpriteFactory.Create(person.AppearanceVariant);
+            spriteRenderer.sortingOrder = 10;
 
             var collider = gameObject.AddComponent<BoxCollider>();
             collider.center = new Vector3(0f, 0.9f, 0f);
@@ -27,6 +32,7 @@ namespace CivSandbox.Presentation
 
             CreateShadow();
             CreateSelectionMarker();
+            CreateNameLabel(person.Name);
             Apply(person, true);
         }
 
@@ -39,6 +45,11 @@ namespace CivSandbox.Presentation
                 hasPosition = true;
             }
 
+            if (nameLabel != null && nameLabel.text != person.Name)
+            {
+                canonicalName = person.Name;
+                nameLabel.text = selectionMarker != null && selectionMarker.activeSelf ? $"> {canonicalName} <" : canonicalName;
+            }
         }
 
         public void SetSelected(bool selected)
@@ -48,22 +59,12 @@ namespace CivSandbox.Presentation
                 selectionMarker.SetActive(selected);
             }
 
-        }
-
-        private void CreateVisualLayers(PersonSnapshot person)
-        {
-            PersonVisualLayer[] layers =
+            if (nameLabel != null)
             {
-                PersonVisualLayer.Body, PersonVisualLayer.Lower, PersonVisualLayer.Upper,
-                PersonVisualLayer.Outer, PersonVisualLayer.Footwear, PersonVisualLayer.Headwear
-            };
-            for (int index = 0; index < layers.Length; index++)
-            {
-                var layerObject = new GameObject(layers[index].ToString());
-                layerObject.transform.SetParent(transform, false);
-                var renderer = layerObject.AddComponent<SpriteRenderer>();
-                renderer.sprite = EarlyModernSpriteFactory.Create(layers[index], person.AppearanceVariant, person.Clothing);
-                renderer.sortingOrder = 10 + index;
+                nameLabel.text = selected ? $"> {canonicalName} <" : canonicalName;
+                nameLabel.color = selected
+                    ? new Color(1f, 0.73f, 0.22f, 1f)
+                    : new Color(0.96f, 0.90f, 0.71f, 0.95f);
             }
         }
 
@@ -106,5 +107,20 @@ namespace CivSandbox.Presentation
             selectionMarker.SetActive(false);
         }
 
+        private void CreateNameLabel(string personName)
+        {
+            var labelObject = new GameObject("Name");
+            labelObject.transform.SetParent(transform, false);
+            labelObject.transform.localPosition = new Vector3(0f, 2.05f, 0f);
+            nameLabel = labelObject.AddComponent<TextMesh>();
+            nameLabel.text = personName;
+            nameLabel.anchor = TextAnchor.LowerCenter;
+            nameLabel.alignment = TextAlignment.Center;
+            nameLabel.fontSize = 32;
+            nameLabel.characterSize = 0.045f;
+            nameLabel.color = new Color(0.96f, 0.90f, 0.71f, 0.95f);
+            nameLabel.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            labelObject.GetComponent<MeshRenderer>().sharedMaterial = nameLabel.font.material;
+        }
     }
 }
