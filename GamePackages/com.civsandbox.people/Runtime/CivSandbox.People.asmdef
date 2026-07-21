@@ -1,0 +1,10 @@
+{
+  "name": "CivSandbox.People",
+  "rootNamespace": "CivSandbox.People",
+  "references": [
+    "CivSandbox.Simulation.Core",
+    "CivSandbox.World"
+  ],
+  "noEngineReferences": true,
+  "autoReferenced": true
+}

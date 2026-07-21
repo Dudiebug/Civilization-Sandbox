@@ -1,0 +1,10 @@
+{
+  "name": "com.civsandbox.simulation.core",
+  "version": "0.1.0",
+  "displayName": "Civilization Sandbox Simulation Core",
+  "description": "Engine-independent deterministic time, identity, keyed randomness, and checksums.",
+  "unity": "6000.3",
+  "author": {
+    "name": "Civilization Sandbox"
+  }
+}

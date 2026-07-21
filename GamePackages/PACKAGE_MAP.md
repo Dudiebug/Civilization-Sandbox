@@ -27,3 +27,5 @@
 | `com.civsandbox.tooling` | Editor/content authoring, validators, previews, fixture builders, benchmark launchers, evidence packaging, and migration tools. | Milestone 0.1 bootstrap and validators. |
 
 TASK-001 accepted the engine/package pins. TASK-003 owns enforceable dependency arrows. This map defines intended ownership, not completed implementation or permission to activate reserved Version 1.5 scope.
+
+Build 01 activates only the fixed clock, stable identity, keyed seed/reset, bounded coordinates, named-person movement, read-only snapshot, 2.5D presentation, and World Viewer UI portions of `simulation.core`, `world`, `people`, `presentation`, and `ui`. Every broader ownership area in those packages remains reserved for its named later build.
