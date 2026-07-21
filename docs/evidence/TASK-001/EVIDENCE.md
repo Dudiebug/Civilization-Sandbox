@@ -1,6 +1,6 @@
 # TASK-001 Evidence Pack
 
-**State:** IN PROGRESS — this file does not claim task completion.
+**State:** COMPLETE
 
 ## Environment
 
@@ -12,14 +12,14 @@
 
 ## Required results
 
-- Build: PASS locally — Windows and Linux x64 Mono players compile without package drift; clean-profile reproduction remains required.
-- Tests: PASS locally — exactly one EditMode test and headless Windows smoke pass; clean-profile reproduction remains required.
+- Build: PASS — Windows and Linux x64 Mono players compile without package drift on the creator-approved clean profile.
+- Tests: PASS — exactly one EditMode test and the headless Windows smoke pass on the creator-approved clean profile.
 - Replay/state diff: N/A — TASK-001 creates no authoritative state or replay format.
 - Persistence/migration: N/A — TASK-001 creates no save format.
-- Performance: PENDING — local timings are recorded below; clean-profile timings remain required and no runtime gate is established.
+- Performance: PASS for TASK-001 scope — import/build/test durations are recorded below; no runtime performance gate is introduced.
 - Documentation: PASS — governance, ADR, command contract, CI, rollback, and deferred scopes are committed.
 - Independent review: PASS — initial blockers were corrected and the final focused re-review passed at implementation commit `60b852c2c5613eab8a81ace16bc929125f105ccb`; see `REVIEW.md`.
-- Creator acceptance: APPROVE — explicitly recorded on 2026-07-20 PDT; recovery closeout remains pending in `ACCEPTANCE.md`.
+- Creator acceptance: APPROVE — explicitly recorded on 2026-07-20 PDT and closed after the requested recovery rehearsal.
 
 ## Evidence checklist
 
@@ -35,7 +35,7 @@
 - [x] Missing-evidence packaging failure.
 - [x] Live branch-rule export and successful required `repository-policy` run.
 - [x] Evidence archive manifest and SHA-256.
-- [ ] Recovery rehearsal from `baseline/task-001-accepted` after acceptance.
+- [x] Recovery rehearsal from `baseline/task-001-accepted` after acceptance.
 
 ## Local implementation results — 2026-07-19 PDT
 
@@ -77,9 +77,16 @@
 - Script guards: PASS, 22 tests. Offline and live governance audits passed with strict `repository-policy`; plan validation passed.
 - Evidence packaging: PASS; archive `Artifacts/evidence/TASK-001-20260721T023047Z.zip`, SHA-256 `cdbcf719b541511cacdcbde7f51cf6c2b959afb00a8a8f61ad68c576fb5585e2`.
 
+## Merge and recovery closeout — 2026-07-20 PDT
+
+- Protected merge: PASS — PR #1 merged to `main` as `7f70576e49ba6f398e11050272678515c0eed83a` after the unique required `repository-policy` check passed.
+- Accepted tag: PASS — annotated tag `baseline/task-001-accepted` resolves to merge commit `7f70576e49ba6f398e11050272678515c0eed83a`.
+- Recovery rehearsal: PASS — a shallow, detached checkout of the accepted tag under `C:\Users\dudie\AppData\Local\CivSandboxTask001Recovery` passed the full pinned-tool/bootstrap audit, offline governance audit, plan validation, and clean tracked-state check.
+- Recovery cleanup: PASS — the disposable recovery clone and temporary rehearsal script were removed before closeout. The retained ignored result is `Artifacts/recovery/baseline-task-001-accepted-bootstrap.json`, SHA-256 `c06b73fc33d81fea3276e1603126509c156d62c4964e53812fdc067b6844e7c2`.
+
 ## Current blockers
 
-1. Protected merge, accepted tag, and recovery rehearsal remain pending.
+None.
 
 ## Changed surface
 
@@ -91,4 +98,4 @@ Follow `docs/core/REPOSITORY_GOVERNANCE.md`. Revert TASK-001 commits, remove onl
 
 ## Final declaration
 
-TASK-001 remains open until every pending line has reproducible evidence, independent review has no blocker, the creator records `Decision: APPROVE`, protected merge succeeds, and recovery from the accepted tag is rehearsed.
+TASK-001 is complete: evidence is reproducible, independent review has no blocker, creator approval is recorded, protected merge succeeded, and recovery from the accepted tag passed.

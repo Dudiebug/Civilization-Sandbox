@@ -1,6 +1,6 @@
 # Creator Acceptance — TASK-001
 
-**State:** APPROVED — recovery rehearsal remains an implementation closeout gate.
+**State:** APPROVED AND CLOSED
 
 ## Observe
 
@@ -17,7 +17,7 @@
 - [x] Windows and Linux Mono players exist and Windows exits headlessly.
 - [x] Evidence package is complete and Git is clean.
 - [x] Independent review has no blocker.
-- [ ] Recovery rehearsal succeeds.
+- [x] Recovery rehearsal succeeds.
 
 **Decision:** APPROVE
-**Creator notes:** On 2026-07-20 PDT, the creator stated: “APPROVE TASK-001. Publish, merge, tag, and complete the recovery rehearsal.” The recovery line remains open until Codex completes and records the requested post-merge rehearsal.
+**Creator notes:** On 2026-07-20 PDT, the creator stated: “APPROVE TASK-001. Publish, merge, tag, and complete the recovery rehearsal.” PR #1 merged through protected `main`; the accepted tag was recovered in a disposable clone, all recovery audits passed, and the clone was removed.

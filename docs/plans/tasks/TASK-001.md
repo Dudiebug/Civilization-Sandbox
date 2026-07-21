@@ -1,6 +1,6 @@
 # TASK-001 - Repository governance and reproducible bootstrap
 
-**Status:** In Progress
+**Status:** Done
 **Milestone:** 0.1 - Project Foundation
 **Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
 **Risk:** Critical
@@ -37,7 +37,7 @@ A fresh supported development environment can clone, bootstrap, build a baseline
 - [x] ~~Repeated bootstrap is idempotent on the creator machine.~~
 - [x] ~~Broken prerequisite or package hash fails with a useful diagnosis.~~
 - [x] ~~Documentation and relevant `codex.md` instructions match the implementation.~~
-- [ ] Placeholder engine-specific folders are accepted, adapted, or removed consistently with D01.
+- [x] ~~Placeholder engine-specific folders are accepted, adapted, or removed consistently with D01.~~
 - [x] ~~Independent adversarial review reports no blocking findings.~~
 - [x] ~~Creator-visible acceptance is recorded.~~
 
@@ -76,7 +76,7 @@ World size, population target, content counts, gameplay systems, terrain, people
 - [x] ~~Verification reproduces evidence from the creator-approved clean profile and sole authoritative checkout.~~
 - [x] ~~Adversarial reviewer challenges architecture and failure cases.~~
 - [x] ~~Creator tests the observable result and accepts or requests changes.~~
-- [ ] `Build/validate_plan.py` permits Done status.
+- [x] ~~`Build/validate_plan.py` permits Done status.~~
 
 ## Suggested launch
 Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Max** for Critical planning. After approval, use **5.6 Terra / High** for ordinary implementation and **Terra / Medium** only for exact mechanical work.
