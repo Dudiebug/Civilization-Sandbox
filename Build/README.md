@@ -43,12 +43,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File Build/Configure-Repository.p
 powershell -NoProfile -ExecutionPolicy Bypass -File Build/Verify-CleanCheckout.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File Tests/Bootstrap/Task001.Bootstrap.Tests.ps1
 python Build/validate_plan.py
+python Build/validate_docs.py
+python -m unittest discover -s Tests/Documentation -p "test_*.py"
 ```
 
 Live governance audit and `-Apply` require authenticated GitHub CLI `2.96.0`. Run `-Apply` without `-RequireCheck` for initial protection; add `-RequireCheck` only after the workflow has reported successfully once.
 
 Command results use schema version 1 JSON under `Artifacts/results/` and include command, status, exit code, UTC timestamps, Git commit/dirty state, Unity version, package-lock hash, stable diagnostics, and artifact hashes. Logs remain under `Artifacts/logs/` after failures.
 
-`validate_plan.py` verifies the milestone-aware first-task registry, required roadmap files, evidence-gated completion, scoped `codex.md` fallback, and the absence of `AGENTS.md`.
+`validate_docs.py` verifies the document registry, internal Markdown links and anchors, required-document reachability, ADR identity, the file manifest, and the absence of `AGENTS.md` and `.codex/config.toml`. It never fetches external links.
+
+`validate_plan.py` verifies the milestone-aware first-task registry, required roadmap files, evidence-gated completion, and all documentation findings. The `codex.md` suite is manually routed under ADR-003; automatic fallback loading is not claimed.
 
 `update_status.py` regenerates `docs/plans/STATUS_BOARD.md` from task contracts and the milestone registry. Do not hand-edit completion state.

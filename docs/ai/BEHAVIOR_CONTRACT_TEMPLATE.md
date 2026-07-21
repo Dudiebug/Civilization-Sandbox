@@ -2,6 +2,7 @@
 
 ## Identity
 - Contract ID / version:
+- Status and active release/milestone:
 - Decision owner and authority layer:
 - Trigger and cadence:
 - Source specification:
@@ -42,3 +43,5 @@
 - Multi-seed distribution expectation:
 - Save/load and replay fixture:
 - p95 budget and allocation target:
+
+An unresolved field is written `TBD - owning task/decision`, never filled with an agent-invented temporary default. A Proposed catalog row does not authorize implementation.

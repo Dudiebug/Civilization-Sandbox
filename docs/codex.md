@@ -1,8 +1,8 @@
 # Documentation Scope
 
-Documents in this tree are source-of-truth assets, not commentary.
+Documents in this tree are source-of-truth assets, not commentary. `docs/DOCUMENT_INDEX.md` is the human routing map and `Config/document-registry.json` owns document identity, owner, status, release scope, and reachability metadata.
 
-- Preserve explicit status, version, owner, and acceptance criteria.
+- Update registry metadata in the same change as a document's identity, owner, status, or release scope.
 - Prefer short linked documents over one enormous document.
 - Update affected specifications in the same change as behavior.
 - Never claim code is complete without evidence.

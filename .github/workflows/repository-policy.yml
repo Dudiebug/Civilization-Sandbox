@@ -22,7 +22,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
 
-      - name: Validate task plan
+      - name: Run documentation validator tests
+        shell: pwsh
+        run: python -m unittest discover -s Tests/Documentation -p "test_*.py"
+
+      - name: Validate task plan and documentation
         shell: pwsh
         run: python Build/validate_plan.py
 

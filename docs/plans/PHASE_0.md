@@ -13,7 +13,7 @@ No finished gameplay is required. A headless baseline can advance deterministic 
 
 ## Required work
 - Repository governance, clean bootstrap, build/test/evidence commands, and CI.
-- Resolve and pin the engine/toolchain path through D01; current Unity-shaped files are placeholders until then.
+- Maintain the accepted Unity/toolchain path and exact pins recorded by D01 and ADR-002; current Unity-shaped files are governed integration boundaries.
 - Architecture and dependency gates.
 - Typed authoritative time and scheduler shell.
 - Stable nonreused identity.
@@ -23,8 +23,8 @@ No finished gameplay is required. A headless baseline can advance deterministic 
 - Semantic atomic persistence skeleton.
 
 ## Decisions opened in this milestone
-- D01 engine/toolchain path and exact pins.
-- D02 reference development hardware and supported build hosts.
+- D01 engine/toolchain path and exact pins — accepted and locked by ADR-002.
+- D02 reference development hardware and supported build hosts — accepted in TASK-001 evidence.
 
 No world-size, population, art, economy, politics, combat, content-count, or release decisions are opened.
 

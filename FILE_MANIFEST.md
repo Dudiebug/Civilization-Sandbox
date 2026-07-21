@@ -1,6 +1,6 @@
 # File Manifest
 
-**Total files:** 246
+**Total files:** 256
 **Scoped `codex.md` files:** 50
 **Forbidden `AGENTS.md` files:** 0
 
@@ -12,12 +12,12 @@
 | `.github` | 2 |
 | `.gitignore` | 1 |
 | `Assets` | 9 |
-| `Build` | 15 |
+| `Build` | 17 |
 | `CHANGELOG.md` | 1 |
 | `codex.md` | 1 |
-| `Config` | 5 |
+| `Config` | 6 |
 | `CONTRIBUTING.md` | 1 |
-| `docs` | 127 |
+| `docs` | 132 |
 | `FILE_MANIFEST.md` | 1 |
 | `GamePackages` | 43 |
 | `KIT_AUDIT.md` | 1 |
@@ -26,7 +26,7 @@
 | `README.md` | 1 |
 | `REVISION_SUMMARY.md` | 1 |
 | `START_HERE.md` | 1 |
-| `Tests` | 8 |
+| `Tests` | 10 |
 
 ## Full path list
 
@@ -55,6 +55,8 @@
 - `Build/Test.ps1`
 - `Build/update_status.py`
 - `Build/Update-Status.ps1`
+- `Build/validate_docs.py`
+- `Build/Validate-Docs.ps1`
 - `Build/validate_plan.py`
 - `Build/Validate-Plan.ps1`
 - `Build/Verify-CleanCheckout.ps1`
@@ -62,6 +64,7 @@
 - `codex.md`
 - `Config/benchmark-reference.json`
 - `Config/codex.md`
+- `Config/document-registry.json`
 - `Config/repository-governance.json`
 - `Config/task-registry.json`
 - `Config/toolchain.json`
@@ -96,9 +99,11 @@
 - `docs/creator/MODEL_AND_PROMPT_GUIDE.md`
 - `docs/creator/QUICK_REFERENCE.md`
 - `docs/decisions/ADR-001_RELEASE_SCOPE_REBASELINE.md`
-- `docs/decisions/ADR-001-unity-toolchain-baseline.md`
+- `docs/decisions/ADR-002_UNITY_TOOLCHAIN_BASELINE.md`
+- `docs/decisions/ADR-003_CODEX_INSTRUCTION_DISCOVERY.md`
 - `docs/decisions/codex.md`
 - `docs/decisions/README.md`
+- `docs/DOCUMENT_INDEX.md`
 - `docs/evidence/codex.md`
 - `docs/evidence/PLANNING-KIT/EVIDENCE.md`
 - `docs/evidence/README.md`
@@ -107,6 +112,9 @@
 - `docs/evidence/TASK-001/EVIDENCE.md`
 - `docs/evidence/TASK-001/MANIFEST.json`
 - `docs/evidence/TASK-001/REVIEW.md`
+- `docs/evidence/TASK-002/ACCEPTANCE.md`
+- `docs/evidence/TASK-002/EVIDENCE.md`
+- `docs/evidence/TASK-002/REVIEW.md`
 - `docs/plans/codex.md`
 - `docs/plans/CREATOR_DECISIONS.md`
 - `docs/plans/CURRENT_STEP.md`
@@ -271,6 +279,8 @@
 - `Tests/Benchmarks/codex.md`
 - `Tests/Bootstrap/Task001.Bootstrap.Tests.ps1`
 - `Tests/codex.md`
+- `Tests/Documentation/codex.md`
+- `Tests/Documentation/test_validate_docs.py`
 - `Tests/Migrations/codex.md`
 - `Tests/Presentation/codex.md`
 - `Tests/Properties/codex.md`

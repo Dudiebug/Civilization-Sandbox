@@ -10,3 +10,5 @@
 8. **Explain while deciding.** Losing candidates and rejected preconditions are captured when they still exist.
 9. **No camera effect.** Visible, selected, or observed status never changes authoritative choice.
 10. **Regression is a behavior defect.** Every confirmed defect becomes a fixture.
+
+These rules apply to every implemented coded decision. They do not activate a decision layer or authorize a candidate cap, weight, cadence, or policy before its behavior contract and owning task are approved.

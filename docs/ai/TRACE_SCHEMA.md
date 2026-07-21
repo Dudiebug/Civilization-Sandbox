@@ -16,3 +16,5 @@ A consequential trace contains:
 - player-intervention ancestry where relevant.
 
 Retail storage is bounded. Test builds may retain full traces. Major causes are promoted to the historical event graph before compaction.
+
+TASK-015 owns the machine-readable schema and versioning rules. Individual contracts declare which optional terms apply; they may not omit authority, knowledge provenance, selected/rejected preconditions, deterministic selection evidence, or budget counters needed to prove their behavior.

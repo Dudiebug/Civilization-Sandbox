@@ -5,15 +5,18 @@ Build the lean regional Version 1.0 defined by ADR-001 while preserving the Blue
 
 ## Read before acting
 1. `START_HERE.md`
-2. `REVISION_SUMMARY.md`
-3. `docs/plans/CURRENT_STEP.md`
-4. The active `docs/plans/tasks/TASK-*.md`
-5. Relevant scoped `codex.md`
-6. Relevant specification, behavior contract, ADR, decision record, and tests
+2. `docs/DOCUMENT_INDEX.md`
+3. `REVISION_SUMMARY.md`
+4. `docs/plans/CURRENT_STEP.md`
+5. The active `docs/plans/tasks/TASK-*.md`
+6. Relevant scoped `codex.md`
+7. Relevant specification, behavior contract, ADR, decision record, and tests
 
 ## Authority and release scope
 - Blueprint v2.0 remains authoritative for north-star identity, technical principles, and Version 1.5 completeness.
 - `docs/decisions/ADR-001_RELEASE_SCOPE_REBASELINE.md` governs release labels and staged scope.
+- `docs/decisions/ADR-002_UNITY_TOOLCHAIN_BASELINE.md` governs the accepted Unity/toolchain baseline.
+- `docs/decisions/ADR-003_CODEX_INSTRUCTION_DISCOVERY.md` requires manual prompt routing and forbids repository `AGENTS.md` and `.codex/config.toml`.
 - The active milestone defines what may be implemented now.
 - A future package or schema doorway is not permission to build the future system.
 - Do not invent unresolved product decisions. Check `docs/plans/DECISION_QUEUE.md`; stop when an open decision is required.
