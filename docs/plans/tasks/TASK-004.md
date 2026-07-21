@@ -1,9 +1,11 @@
-# TASK-004 — Command-line and CI harness
+# TASK-004 - Command-line and CI harness
 
-**Status:** Not Started  
-**Phase:** Phase 0  
-**Risk:** Critical  
-**Depends on:** TASK-001, TASK-003  
+**Status:** Not Started
+**Milestone:** 0.1 - Project Foundation
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** Critical
+**Depends on:** TASK-001, TASK-003
+**Decision dependencies:** None unless the approved task plan identifies an active decision gate
 **Evidence folder:** `docs/evidence/TASK-004/`
 **Blueprint source:** Section 81, Task 004; Sections 4.7, 65–68, 75.1, 80.1, 81, and Appendix F–H
 
@@ -48,4 +50,4 @@ Local and CI runs use the same commands and produce retained, diagnosable artifa
 - [ ] `Build/validate_plan.py` permits Done status.
 
 ## Suggested launch
-Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Max** for Critical planning. After approval, use **5.6 Terra / High** for ordinary implementation and **Terra / Medium** only for exact mechanical work.
+Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Extra High** for planning. After approval, use **5.6 Terra / High** for ordinary implementation unless the plan identifies a critical architecture or migration change.

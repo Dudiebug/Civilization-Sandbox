@@ -1,33 +1,41 @@
-# Phase 0 — Governance and Reproducible Toolchain
+# Milestone 0.1 - Project Foundation
 
-**Status:** Not Started  
-**Estimated duration:** 2–3 weeks
+**Status:** Not Started
+**Task range:** TASK-001 through TASK-010
 
-## Objective
-Create a repository that coding agents can safely modify and independent sessions can reproduce.
+**Detailed program context:** `PRE_1_0_ROADMAP.md`, Section 5.
 
-## Entry condition
-Authoritative blueprint and this planning kit are available; creator approves repository creation.
+## Purpose
+Create a reproducible, deterministic, migration-aware project shell before gameplay state exists.
 
-## Work checklist
-- [ ] Initialize protected Git repository and branch/worktree conventions.
-- [ ] Pin Unity 6.3 LTS patch, Unity Hub/editor installation method, .NET/PowerShell prerequisites, and package-lock policy.
-- [ ] Create idempotent Windows bootstrap, build, test, and evidence commands.
-- [ ] Create Linux player smoke-build path and document unsupported host assumptions.
-- [ ] Establish assembly/package boundaries and dependency checks.
-- [ ] Install analyzers and forbid uncontrolled RNG, presentation-to-simulation mutation, and forbidden dependencies.
-- [ ] Create source-of-truth, ADR, task, behavior-contract, evidence, and regression workflows.
-- [ ] Configure CI with retained logs/reports and clean-checkout validation.
-- [ ] Record reference hardware and baseline environment.
-- [ ] Deliberately inject one forbidden dependency and one unauthorized RNG call; prove CI rejects both.
+## Player-visible outcome
+No finished gameplay is required. A headless baseline can advance deterministic state, record a simple event, save, load, replay, and explain the first divergence.
+
+## Required work
+- Repository governance, clean bootstrap, build/test/evidence commands, and CI.
+- Resolve and pin the engine/toolchain path through D01; current Unity-shaped files are placeholders until then.
+- Architecture and dependency gates.
+- Typed authoritative time and scheduler shell.
+- Stable nonreused identity.
+- Keyed random streams.
+- Minimum causal event record.
+- Canonical checksum/state diff.
+- Semantic atomic persistence skeleton.
+
+## Decisions opened in this milestone
+- D01 engine/toolchain path and exact pins.
+- D02 reference development hardware and supported build hosts.
+
+No world-size, population, art, economy, politics, combat, content-count, or release decisions are opened.
 
 ## Exit gate
-A fresh Windows account can clone, bootstrap, build, run one headless test, and package evidence without manual repair. Deliberate policy violations fail CI.
+From a clean supported environment, the selected engine/toolchain can bootstrap, build, run a headless deterministic fixture, record a stable event, save/load with checksum equality, diagnose a deliberate divergence, and package evidence. Deliberate architecture and RNG violations fail automatically.
 
-## Do not build in this phase
-Terrain, citizens, buildings, art, or gameplay features.
+## Stop/redesign triggers
+- Clean bootstrap depends on undocumented manual repair.
+- Engine/toolchain cannot support headless tests or semantic state separation.
+- Replay changes with scheduling or presentation.
+- Save/load cannot preserve stable identity and event references.
 
-## Completion record
-Evidence index: Pending  
-Independent phase review: Pending  
-Creator gate decision: Pending
+## Explicitly deferred
+Spatial scale, full routing, rendering density, gameplay AI, people, terrain, settlements, and all content breadth.

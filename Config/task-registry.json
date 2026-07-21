@@ -1,23 +1,25 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "tasks": [
     {
       "id": "TASK-001",
-      "title": "Repository governance and reproducible Windows bootstrap",
+      "title": "Repository governance and reproducible bootstrap",
       "phase": 0,
       "risk": "Critical",
       "depends_on": [],
-      "path": "docs/plans/tasks/TASK-001.md"
+      "path": "docs/plans/tasks/TASK-001.md",
+      "milestone": "0.1"
     },
     {
       "id": "TASK-002",
-      "title": "Source-of-truth, story, and AI document set",
+      "title": "Source-of-truth, release-scope, story, and AI document set",
       "phase": 0,
       "risk": "High",
       "depends_on": [
         "TASK-001"
       ],
-      "path": "docs/plans/tasks/TASK-002.md"
+      "path": "docs/plans/tasks/TASK-002.md",
+      "milestone": "0.1"
     },
     {
       "id": "TASK-003",
@@ -28,7 +30,8 @@
         "TASK-001",
         "TASK-002"
       ],
-      "path": "docs/plans/tasks/TASK-003.md"
+      "path": "docs/plans/tasks/TASK-003.md",
+      "milestone": "0.1"
     },
     {
       "id": "TASK-004",
@@ -39,54 +42,59 @@
         "TASK-001",
         "TASK-003"
       ],
-      "path": "docs/plans/tasks/TASK-004.md"
+      "path": "docs/plans/tasks/TASK-004.md",
+      "milestone": "0.1"
     },
     {
       "id": "TASK-005",
       "title": "Authoritative world clock and scheduler shell",
-      "phase": 1,
+      "phase": 0,
       "risk": "Critical",
       "depends_on": [
         "TASK-004"
       ],
-      "path": "docs/plans/tasks/TASK-005.md"
+      "path": "docs/plans/tasks/TASK-005.md",
+      "milestone": "0.1"
     },
     {
       "id": "TASK-006",
       "title": "Stable identity registry",
-      "phase": 1,
+      "phase": 0,
       "risk": "Critical",
       "depends_on": [
         "TASK-005"
       ],
-      "path": "docs/plans/tasks/TASK-006.md"
+      "path": "docs/plans/tasks/TASK-006.md",
+      "milestone": "0.1"
     },
     {
       "id": "TASK-007",
       "title": "Keyed deterministic random streams",
-      "phase": 1,
+      "phase": 0,
       "risk": "Critical",
       "depends_on": [
         "TASK-005",
         "TASK-006"
       ],
-      "path": "docs/plans/tasks/TASK-007.md"
+      "path": "docs/plans/tasks/TASK-007.md",
+      "milestone": "0.1"
     },
     {
       "id": "TASK-008",
-      "title": "Historical event graph foundation",
-      "phase": 1,
+      "title": "Causal event record foundation",
+      "phase": 0,
       "risk": "High",
       "depends_on": [
         "TASK-006",
         "TASK-007"
       ],
-      "path": "docs/plans/tasks/TASK-008.md"
+      "path": "docs/plans/tasks/TASK-008.md",
+      "milestone": "0.1"
     },
     {
       "id": "TASK-009",
       "title": "Canonical checksum and state diff",
-      "phase": 1,
+      "phase": 0,
       "risk": "Critical",
       "depends_on": [
         "TASK-005",
@@ -94,23 +102,25 @@
         "TASK-007",
         "TASK-008"
       ],
-      "path": "docs/plans/tasks/TASK-009.md"
+      "path": "docs/plans/tasks/TASK-009.md",
+      "milestone": "0.1"
     },
     {
       "id": "TASK-010",
       "title": "Semantic persistence skeleton",
-      "phase": 1,
+      "phase": 0,
       "risk": "Critical",
       "depends_on": [
         "TASK-006",
         "TASK-008",
         "TASK-009"
       ],
-      "path": "docs/plans/tasks/TASK-010.md"
+      "path": "docs/plans/tasks/TASK-010.md",
+      "milestone": "0.1"
     },
     {
       "id": "TASK-011",
-      "title": "Synthetic 10,000-person engine benchmark",
+      "title": "Measured scale ladder and engine benchmark",
       "phase": 1,
       "risk": "Critical",
       "depends_on": [
@@ -120,7 +130,8 @@
         "TASK-009",
         "TASK-010"
       ],
-      "path": "docs/plans/tasks/TASK-011.md"
+      "path": "docs/plans/tasks/TASK-011.md",
+      "milestone": "0.2"
     },
     {
       "id": "TASK-012",
@@ -132,7 +143,8 @@
         "TASK-006",
         "TASK-011"
       ],
-      "path": "docs/plans/tasks/TASK-012.md"
+      "path": "docs/plans/tasks/TASK-012.md",
+      "milestone": "0.2"
     },
     {
       "id": "TASK-013",
@@ -142,11 +154,12 @@
       "depends_on": [
         "TASK-012"
       ],
-      "path": "docs/plans/tasks/TASK-013.md"
+      "path": "docs/plans/tasks/TASK-013.md",
+      "milestone": "0.2"
     },
     {
       "id": "TASK-014",
-      "title": "2.5D presentation proof",
+      "title": "Configurable 2.5D presentation proof",
       "phase": 1,
       "risk": "High",
       "depends_on": [
@@ -154,24 +167,26 @@
         "TASK-012",
         "TASK-013"
       ],
-      "path": "docs/plans/tasks/TASK-014.md"
+      "path": "docs/plans/tasks/TASK-014.md",
+      "milestone": "0.2"
     },
     {
       "id": "TASK-015",
       "title": "AI Behavior Contract schema and decision catalog",
-      "phase": 2,
+      "phase": 1,
       "risk": "Critical",
       "depends_on": [
         "TASK-002",
         "TASK-003",
         "TASK-010"
       ],
-      "path": "docs/plans/tasks/TASK-015.md"
+      "path": "docs/plans/tasks/TASK-015.md",
+      "milestone": "0.2"
     },
     {
       "id": "TASK-016",
       "title": "Canonical AI primitives",
-      "phase": 2,
+      "phase": 1,
       "risk": "Critical",
       "depends_on": [
         "TASK-005",
@@ -179,12 +194,13 @@
         "TASK-012",
         "TASK-015"
       ],
-      "path": "docs/plans/tasks/TASK-016.md"
+      "path": "docs/plans/tasks/TASK-016.md",
+      "milestone": "0.2"
     },
     {
       "id": "TASK-017",
       "title": "AI Decision Laboratory runner",
-      "phase": 2,
+      "phase": 1,
       "risk": "Critical",
       "depends_on": [
         "TASK-009",
@@ -192,12 +208,13 @@
         "TASK-015",
         "TASK-016"
       ],
-      "path": "docs/plans/tasks/TASK-017.md"
+      "path": "docs/plans/tasks/TASK-017.md",
+      "milestone": "0.2"
     },
     {
       "id": "TASK-018",
       "title": "Founding-group site-selection contract",
-      "phase": 2,
+      "phase": 1,
       "risk": "High",
       "depends_on": [
         "TASK-012",
@@ -205,24 +222,26 @@
         "TASK-016",
         "TASK-017"
       ],
-      "path": "docs/plans/tasks/TASK-018.md"
+      "path": "docs/plans/tasks/TASK-018.md",
+      "milestone": "0.2"
     },
     {
       "id": "TASK-019",
       "title": "Urgent individual-needs contract",
-      "phase": 2,
+      "phase": 1,
       "risk": "High",
       "depends_on": [
         "TASK-015",
         "TASK-016",
         "TASK-017"
       ],
-      "path": "docs/plans/tasks/TASK-019.md"
+      "path": "docs/plans/tasks/TASK-019.md",
+      "milestone": "0.2"
     },
     {
       "id": "TASK-020",
       "title": "Settlement labor-allocation contract",
-      "phase": 2,
+      "phase": 1,
       "risk": "Critical",
       "depends_on": [
         "TASK-015",
@@ -230,12 +249,13 @@
         "TASK-017",
         "TASK-019"
       ],
-      "path": "docs/plans/tasks/TASK-020.md"
+      "path": "docs/plans/tasks/TASK-020.md",
+      "milestone": "0.2"
     },
     {
       "id": "TASK-021",
-      "title": "Procedural world generation and validation",
-      "phase": 3,
+      "title": "Regional world generation and validation",
+      "phase": 2,
       "risk": "High",
       "depends_on": [
         "TASK-008",
@@ -243,12 +263,13 @@
         "TASK-012",
         "TASK-018"
       ],
-      "path": "docs/plans/tasks/TASK-021.md"
+      "path": "docs/plans/tasks/TASK-021.md",
+      "milestone": "0.3"
     },
     {
       "id": "TASK-022",
-      "title": "Persistent people, households, inheritance, and traits",
-      "phase": 3,
+      "title": "Lean persistent people and households",
+      "phase": 2,
       "risk": "Critical",
       "depends_on": [
         "TASK-006",
@@ -256,12 +277,13 @@
         "TASK-019",
         "TASK-021"
       ],
-      "path": "docs/plans/tasks/TASK-022.md"
+      "path": "docs/plans/tasks/TASK-022.md",
+      "milestone": "0.3"
     },
     {
       "id": "TASK-023",
       "title": "Physical camp and building-construction proof",
-      "phase": 3,
+      "phase": 2,
       "risk": "Critical",
       "depends_on": [
         "TASK-013",
@@ -269,24 +291,26 @@
         "TASK-021",
         "TASK-022"
       ],
-      "path": "docs/plans/tasks/TASK-023.md"
+      "path": "docs/plans/tasks/TASK-023.md",
+      "milestone": "0.3"
     },
     {
       "id": "TASK-024",
       "title": "Paths, road edges, parcels, and project-order boundary",
-      "phase": 3,
+      "phase": 2,
       "risk": "Critical",
       "depends_on": [
         "TASK-013",
         "TASK-020",
         "TASK-023"
       ],
-      "path": "docs/plans/tasks/TASK-024.md"
+      "path": "docs/plans/tasks/TASK-024.md",
+      "milestone": "0.3"
     },
     {
       "id": "TASK-025",
-      "title": "Integrated settlement-formation and chronicle gate",
-      "phase": 3,
+      "title": "Integrated Living Camp gate",
+      "phase": 2,
       "risk": "Critical",
       "depends_on": [
         "TASK-018",
@@ -297,7 +321,56 @@
         "TASK-023",
         "TASK-024"
       ],
-      "path": "docs/plans/tasks/TASK-025.md"
+      "path": "docs/plans/tasks/TASK-025.md",
+      "milestone": "0.3"
+    }
+  ],
+  "roadmap_revision": "ADR-001-lean-1.0",
+  "milestones": [
+    {
+      "id": "0.1",
+      "title": "Project Foundation",
+      "plan": "docs/plans/PHASE_0.md"
+    },
+    {
+      "id": "0.2",
+      "title": "Decision and Engine Proof",
+      "plan": "docs/plans/PHASE_1.md"
+    },
+    {
+      "id": "0.3",
+      "title": "Living Camp",
+      "plan": "docs/plans/PHASE_2.md"
+    },
+    {
+      "id": "0.4",
+      "title": "Physical Settlement",
+      "plan": "docs/plans/PHASE_3.md"
+    },
+    {
+      "id": "0.5",
+      "title": "Divergent Societies",
+      "plan": "docs/plans/PHASE_4.md"
+    },
+    {
+      "id": "0.6",
+      "title": "Connected Region",
+      "plan": "docs/plans/PHASE_5.md"
+    },
+    {
+      "id": "0.7",
+      "title": "Conflict and Recovery",
+      "plan": "docs/plans/PHASE_6.md"
+    },
+    {
+      "id": "0.8",
+      "title": "God Sandbox",
+      "plan": "docs/plans/PHASE_7.md"
+    },
+    {
+      "id": "0.9",
+      "title": "Release Candidate",
+      "plan": "docs/plans/PHASE_8.md"
     }
   ]
 }

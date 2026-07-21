@@ -4,10 +4,10 @@
 Authoritative clock, stable IDs, units, fixed-point values, scheduler, keyed RNG, deterministic containers, command boundary primitives, and checksums.
 
 ## Forbidden
-No Unity presentation, gameplay-domain policy, file-format implementation, or unmanaged global mutable state.
+No engine presentation layer, gameplay-domain policy, file-format implementation, or unmanaged global mutable state.
 
 ## Dependency rule
-All domain packages; may depend only on minimal Unity Collections/Entities/runtime abstractions approved by ADR.
+All domain packages; may depend only on the minimal runtime/data abstractions accepted by the engine/toolchain ADR.
 
 ## Change requirements
 - Read the active task and relevant behavior/data contracts.

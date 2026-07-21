@@ -99,6 +99,12 @@ try {
         if ($result.schemaVersion -ne 1 -or $result.status -ne 'PASS' -or $result.exitCode -ne 0 -or -not $result.finishedAtUtc) { throw 'Result schema fields are incomplete.' }
     }
 
+    Test-Case 'result Git state uses pinned executable discovery' {
+        $state = Get-Task001GitState -RepositoryRoot $root
+        if ($state.commit -notmatch '^[0-9a-f]{40}$') { throw 'Result Git commit is absent or invalid.' }
+        if ($null -eq $state.dirty) { throw 'Result Git dirty state is null.' }
+    }
+
     Test-Case 'cleanup defaults to dry-run' {
         $sentinel = Join-Path $root 'Artifacts\task001-clean-dry-run\sentinel.txt'
         New-Item -ItemType Directory -Path (Split-Path -Parent $sentinel) -Force | Out-Null

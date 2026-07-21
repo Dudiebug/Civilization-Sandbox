@@ -46,7 +46,7 @@
       "windows-mono",
       "linux-mono"
     ],
-    "packageLockSha256": "5dda07b9b8c1ab85cb77a5353a94a47414866f87ce222b3c8220d3d0d727e8df"
+    "packageLockSha256": "b5ab878043267eb78c9ece02004322353aa41947c938bc48c6850d838e206548"
   },
   "packages": {
     "com.unity.burst": "1.8.29",
@@ -54,7 +54,9 @@
     "com.unity.entities": "1.4.8",
     "com.unity.entities.graphics": "1.4.21",
     "com.unity.render-pipelines.universal": "17.3.0",
+    "com.unity.sdk.linux-x86_64": "1.1.0",
     "com.unity.test-framework": "1.6.0",
+    "com.unity.toolchain.win-x86_64-linux": "1.1.0",
     "com.civsandbox.tooling": "file:../GamePackages/com.civsandbox.tooling"
   }
 }

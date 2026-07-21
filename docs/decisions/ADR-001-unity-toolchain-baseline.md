@@ -9,7 +9,7 @@ The first repository task needs a Windows bootstrap that can diagnose drift befo
 
 ## Decision
 
-Use Unity `6000.3.20f1` changeset `c9ba695d4f07`, Windows Mono, Linux Mono, and the exact direct packages recorded in `Config/toolchain.json`. Pin Git `2.55.0.3`, PowerShell `7.6.3`, Python `3.13.14`, GitHub CLI `2.96.0`, and Unity Hub `3.19.5` with the recorded installer hashes.
+Use Unity `6000.3.20f1` changeset `c9ba695d4f07`, Windows Mono, Linux Mono, and the exact direct packages recorded in `Config/toolchain.json`. The direct package graph includes Linux SDK `1.1.0` and the Windows-to-Linux toolchain `1.1.0`; both require transitive sysroot base `1.1.0`. Pin Git `2.55.0.3`, PowerShell `7.6.3`, Python `3.13.14`, GitHub CLI `2.96.0`, and Unity Hub `3.19.5` with the recorded installer hashes.
 
 The bootstrap is an audit unless `-InstallPrerequisites` is supplied. An install never activates a Unity license, downgrades a newer tool, or removes software. A mismatch remains a failure requiring a human decision.
 

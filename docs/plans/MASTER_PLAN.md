@@ -1,36 +1,52 @@
 # Master Development Plan
 
-**Program target:** a robust first playable of the complete early-modern Version 1.0 game.  
-**Critical-path estimate from the blueprint:** approximately 70–102 working weeks, or about 18–30 months under disciplined AI-heavy solo direction.  
-**Current program status:** planning/control kit complete; implementation not started.
+**Program target:** Version 1.0 - a lean regional civilization sandbox that preserves the full identity.
+**North-star early-modern target:** Version 1.5, matching the original Blueprint v2.0 Version 1.0 breadth.
+**Current program status:** roadmap/control kit revised; implementation not started.
 
 ## Program controls
-- [x] ~~Authoritative blueprint stored in repository.~~
+- [x] ~~Authoritative Blueprint v2.0 stored in the repository kit.~~
 - [x] ~~Scoped `codex.md` instruction system created without `AGENTS.md`.~~
 - [x] ~~Evidence-gated task, review, prompt, and status templates created.~~
+- [x] ~~Release scope rebaselined through accepted ADR-001.~~
+- [x] ~~Milestone-timed decision queue created.~~
 - [ ] Complete TASK-001 and establish the real repository/toolchain baseline.
 
-## Phase sequence
+## Pre-1.0 milestone sequence
 
-| Phase | Duration | Outcome | Gate state |
-|---|---:|---|---|
-| 0. Governance and reproducible toolchain | 2–3 weeks | Safe clean-checkout repository | Not started |
-| 1. Deterministic simulation core and engine proof | 5–7 weeks | Unity/architecture benchmark evidence | Not started |
-| 2. AI Decision Laboratory | 5–8 weeks | Verified decision runtime | Not started |
-| 3. World, people, households, and survival | 8–12 weeks | Traceable autonomous founding groups | Not started |
-| 4. Physical settlement, economy, and logistics | 12–18 weeks | Distinct physical villages and causal flows | Not started |
-| 5. Knowledge, culture, politics, and civilization | 12–18 weeks | Long-horizon divergence | Not started |
-| 6. Diplomacy, war, ecosystems, and powers | 14–20 weeks | Interacting civilizations and full agency | Not started |
-| 7. Vertical-slice stabilization | 12–16 weeks | Coherent indefinitely runnable first playable | Not started |
+| Milestone | Working name | Player-visible result | Task-contract state |
+|---|---|---|---|
+| 0.1 | Project Foundation | Reproducible deterministic project shell; no gameplay required | TASK-001 through TASK-010 defined |
+| 0.2 | Decision and Engine Proof | Measured scale/presentation path and verified decision runtime | TASK-011 through TASK-020 defined |
+| 0.3 | Living Camp | Named people survive or fail while physically founding a camp | TASK-021 through TASK-025 defined |
+| 0.4 | Physical Settlement | A camp autonomously becomes a durable settlement | Candidate work packages only |
+| 0.5 | Divergent Societies | Multiple societies visibly develop differently | Candidate work packages only |
+| 0.6 | Connected Region | Trade, route failure, shortage, and migration connect societies | Candidate work packages only |
+| 0.7 | Conflict and Recovery | Physical conflict causes death, displacement, peace, and rebuilding | Candidate work packages only |
+| 0.8 | God Sandbox | Omniscience, orders, interventions, force powers, and history form the player loop | Candidate work packages only |
+| 0.9 | Release Candidate | Integrated, accessible, stable, supported build | Candidate work packages only |
+| 1.0 | Founding Worlds | Complete lean regional release | Gate after 0.9 |
 
 ## Gate rule
-A later phase may begin only when the prior phase's gate evidence is accepted. Parallel work is allowed only for explicitly independent content/tooling after shared interfaces stabilize.
+A later milestone begins only after the prior milestone's gate evidence and creator decision are accepted. Task contracts for Milestones 0.4-0.9 are intentionally not fully authored now; they are created from measured evidence immediately before that milestone.
+
+## Decision rule
+Only decisions required by the active task or next milestone may be opened. `DECISION_QUEUE.md` controls timing. Planning agents stop rather than filling unknowns with assumptions.
+
+## Identity rule
+Every milestone must preserve or advance `IDENTITY_GUARDRAILS.md`. Scope is reduced through fewer systems and smaller counts, not by replacing physical causality, divergence, autonomy, omniscience, layered powers, or durable consequences.
 
 ## Release rule
-Do not tag `first-playable-1.0` until all Version 1.0 acceptance criteria pass, no unresolved critical risk remains, the 24-hour and 500-year soaks pass, saves migrate and recover, performance is within budget, and the creator accepts the player-visible experience.
+Do not tag Version 1.0 until the approved release-scope manifest, identity review, integrated tests, save/recovery, performance envelope, accessibility baseline, and creator acceptance pass. The Blueprint's full Version 1.5 targets do not block Version 1.0 unless promoted by an explicit creator decision.
+
+## Detailed roadmap
+The complete pre-1.0 workstream, gate, evidence, decision, and handoff plan is in `PRE_1_0_ROADMAP.md`.
 
 ## Where detail lives
-- Phase checklists: `PHASE_0.md` through `PHASE_7.md`
-- First 25 contracts: `tasks/TASK-001.md` through `TASK-025.md`
+- Milestone plans: `PHASE_0.md` through `PHASE_8.md` (legacy filenames retained for tooling compatibility)
+- First 25 contracts: `tasks/TASK-001.md` through `docs/plans/tasks/TASK-025.md`
+- Release ladder: `RELEASE_LADDER.md`
+- Deferred decisions: `DECISION_QUEUE.md`
+- Version 1.0 coverage: `VERSION_1_PRODUCTION.md`
+- Version 1.5 horizon: `VERSION_1_5_PRODUCTION.md`
 - Current status: `STATUS_BOARD.md`
-- Later ages: `LATER_AGES.md`

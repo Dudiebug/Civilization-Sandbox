@@ -230,9 +230,12 @@ function Test-Task001PackageLock {
 function Get-Task001GitState {
     param([string]$RepositoryRoot = (Get-Task001RepositoryRoot))
     try {
-        $git = Get-Command git -CommandType Application -ErrorAction Stop | Select-Object -First 1
-        $commit = (& $git.Source -C $RepositoryRoot rev-parse HEAD 2>$null | Out-String).Trim()
-        $dirty = [bool]((& $git.Source -C $RepositoryRoot status --porcelain 2>$null | Out-String).Trim())
+        $contract = Get-Task001Toolchain -RepositoryRoot $RepositoryRoot
+        $gitTool = $contract.tools | Where-Object { $_.wingetId -eq 'Git.Git' } | Select-Object -First 1
+        $git = if ($gitTool) { Resolve-Task001ToolExecutable -Tool $gitTool } else { $null }
+        if (-not $git) { throw 'Pinned Git executable was not found.' }
+        $commit = (& $git -C $RepositoryRoot rev-parse HEAD 2>$null | Out-String).Trim()
+        $dirty = [bool]((& $git -C $RepositoryRoot status --porcelain 2>$null | Out-String).Trim())
         return [pscustomobject]@{ commit = $commit; dirty = $dirty }
     } catch {
         return [pscustomobject]@{ commit = $null; dirty = $null }

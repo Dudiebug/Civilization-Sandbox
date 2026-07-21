@@ -1,14 +1,16 @@
-# TASK-006 — Stable identity registry
+# TASK-006 - Stable identity registry
 
-**Status:** Not Started  
-**Phase:** Phase 1  
-**Risk:** Critical  
-**Depends on:** TASK-005  
+**Status:** Not Started
+**Milestone:** 0.1 - Project Foundation
+**Release horizon:** Lean Version 1.0; complete Blueprint early-modern breadth is Version 1.5
+**Risk:** Critical
+**Depends on:** TASK-005
+**Decision dependencies:** None unless the approved task plan identifies an active decision gate
 **Evidence folder:** `docs/evidence/TASK-006/`
 **Blueprint source:** Section 81, Task 006; Sections 10, 17, 47, 51, 55–57, 66–68, 75.2, 80.2, 81, and technical appendices
 
 ## Creator summary
-Give every durable world object a nonreused identity independent of Unity ECS handles.
+Give every durable world object a nonreused identity independent of transient engine/ECS handles.
 
 ## Objective
 Create typed stable IDs, reference resolution, tombstones, and migration fixtures that survive entity rebuild and long history.
@@ -48,4 +50,4 @@ Create typed stable IDs, reference resolution, tombstones, and migration fixture
 - [ ] `Build/validate_plan.py` permits Done status.
 
 ## Suggested launch
-Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Max** for Critical planning. After approval, use **5.6 Terra / High** for ordinary implementation and **Terra / Medium** only for exact mechanical work.
+Use `docs/prompts/01_PLAN_TASK.md` with **5.6 Sol / Extra High** for planning. After approval, use **5.6 Terra / High** for ordinary implementation unless the plan identifies a critical architecture or migration change.

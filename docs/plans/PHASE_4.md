@@ -1,40 +1,51 @@
-# Phase 4 — Physical Settlement, Economy, and Logistics
+# Milestone 0.5 - Divergent Societies
 
-**Status:** Not Started  
-**Estimated duration:** 12–18 weeks
+**Status:** Planned; task contracts intentionally deferred until Milestone 0.4 passes.
+**Detailed program context:** `PRE_1_0_ROADMAP.md`, Section 9.
 
-## Objective
-Transform survival groups into visibly distinct villages through physical projects, ownership, labor, goods, and routes.
+## Purpose
+Prove that shared simulation primitives can produce materially different societies rather than copies of one optimizer with cosmetic labels.
 
-## Entry condition
-Autonomous founding/survival gate accepted.
+## Entry conditions
+- The Physical Settlement gate passes under a neutral/reference policy set.
+- Common project, resource, route, service, save, and explanation interfaces are stable.
+- D06 is decided from matched-world prototype evidence.
 
-## Work checklist
-- [ ] Implement parcels, claims, land-right bundles, and mixed ownership/control.
-- [ ] Implement bounded settlement project generation and authorization.
-- [ ] Implement 16 early-modern building archetypes with validated footprints, entrances, construction, damage, repair, abandonment, salvage, and LOD.
-- [ ] Implement paths from travel heat plus formal road/bridge projects.
-- [ ] Implement hierarchical road graph, entrances, capacity, condition, access, ownership, and maintenance.
-- [ ] Implement 18 commodity/resource classes and conservation diagnostics.
-- [ ] Implement workplaces, recipes, equipment, production lots, by-products, pollution, and maintenance.
-- [ ] Implement 16 occupations, local labor matching, compensation/entitlement, and scarcity effects.
-- [ ] Implement inventory reservations, priority classes, shipments, manifests, transport modes, and route failure.
-- [ ] Implement markets, bounded price updates, basic currency/entitlement, debt, and reconciliation.
-- [ ] Implement six institution types and four composable government presets in thin form.
-- [ ] Implement settlement services from reachable physical capacity.
-- [ ] Implement society-dependent location/project policies and measurable layout divergence.
-- [ ] Implement Binding Orders for housing and roads without direct ordinary placement.
-- [ ] Implement settlement/economy/logistics inspectors and overlays.
-- [ ] Implement destruction, displacement, ruins, salvage, and rebuilding.
-- [ ] Run Large-world city, route, save, and performance gates.
+## Player-visible result
+Multiple societies facing comparable pressures develop visibly different settlement forms, priorities, resource strategies, or capabilities for understandable reasons tied to geography, resources, institutions, and previous events.
 
-## Exit gate
-At least two society presets create materially different layouts from the same terrain; destruction causes traceable displacement/rebuilding; Large benchmark remains within budget.
+## Workstreams
+1. Stable society identity, membership, settlement/territory association, and minimum authority ownership.
+2. Small approved set of composable institutional/government patterns using shared code.
+3. Small approved culture/policy variable set with declared decision effects and contextual tradeoffs.
+4. Multiple feasible physical solutions to a few shared pressures.
+5. Collective priorities, leadership or assembly decisions, blocked goals, and thin succession/continuity as required.
+6. Matched-world, multi-seed divergence laboratory and anti-script negative tests.
+7. Comparison UI/history linking visible differences to causal terms.
 
-## Do not build in this phase
-Skyscrapers, rail, electricity, banks, advanced corporations, or final building art.
+## Integrated gate scenario
+Run accepted societies on matched terrain/resources, then apply the same shortage or infrastructure shock. Their layouts, investments, or responses differ for traceable reasons. Removing or neutralizing the contrast variables narrows the differences. No bespoke faction script or hidden omniscience is required.
 
-## Completion record
-Evidence index: Pending  
-Independent phase review: Pending  
-Creator gate decision: Pending
+## Required gate evidence
+- variable-to-decision effect map;
+- matched-world and multi-seed divergence metrics;
+- candidate/trace comparison and randomness accounting;
+- visual layout and crisis-response comparison;
+- replay/save through authority changes;
+- adversarial review for stereotypes, hidden scripts, and accidental moral scoring;
+- creator acceptance.
+
+## Decisions opened
+- D06 number of societies, contrast variables, and thin institutional/government abstraction.
+
+## Decisions intentionally left open
+Full government composition, large culture catalog, factions, religion, complete technology graph, broad diplomacy, warfare, historical perspectives, and final world-society count.
+
+## Stop or redesign triggers
+- Differences are cosmetic, arbitrary, or caused mainly by random seed noise.
+- Each society needs bespoke code rather than shared primitives and policy data.
+- Institutional rules bypass physical capability or lower-layer authority.
+- The player cannot inspect the causes of divergence.
+
+## Handoff to 0.6
+Deliver accepted society configurations, causal comparison metrics, sparse relationship hooks, and stable read models for regional exchange, contact, and migration.
