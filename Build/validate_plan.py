@@ -327,6 +327,17 @@ def main() -> int:
             errors.append("repository-policy workflow permissions must remain contents: read")
         if re.search(r"\$\{\{\s*secrets\.", workflow_text, re.IGNORECASE):
             errors.append("repository-policy workflow must not reference secrets")
+        jobs_match = re.search(r"^jobs:\s*$", workflow_text, re.MULTILINE)
+        job_text = ""
+        if not jobs_match:
+            errors.append("repository-policy workflow jobs section is absent")
+        else:
+            jobs_text = workflow_text[jobs_match.end():]
+            job_headers = list(re.finditer(r"^  ([A-Za-z0-9_-]+):\s*$", jobs_text, re.MULTILINE))
+            if len(job_headers) != 1 or job_headers[0].group(1) != POLICY_JOB:
+                errors.append("repository-policy workflow must contain exactly one job named repository-policy")
+            else:
+                job_text = jobs_text[job_headers[0].start():]
         required_workflow_runs = [
             "python Build/validate_plan.py",
             "powershell -NoProfile -ExecutionPolicy Bypass -File Build/Configure-Repository.ps1 -Offline",
@@ -334,12 +345,10 @@ def main() -> int:
             "powershell -NoProfile -ExecutionPolicy Bypass -File Tests/Bootstrap/Task001.Bootstrap.Tests.ps1",
         ]
         for run in required_workflow_runs:
-            if len(re.findall(rf"^\s{{8}}run:\s*{re.escape(run)}\s*$", workflow_text, re.MULTILINE)) != 1:
+            if len(re.findall(rf"^\s{{8}}run:\s*{re.escape(run)}\s*$", job_text, re.MULTILINE)) != 1:
                 errors.append(f"repository-policy workflow command is absent or duplicated: {run}")
-        if re.search(r"^\s*continue-on-error:\s*true\s*$", workflow_text, re.IGNORECASE | re.MULTILINE):
-            errors.append("repository-policy workflow cannot convert validation failures to passes")
-        if re.search(r"^\s*if:\s*(?:false|\$\{\{\s*false\s*\}\})\s*$", workflow_text, re.IGNORECASE | re.MULTILINE):
-            errors.append("repository-policy workflow cannot disable validation steps")
+        if re.search(r"^\s+(?:continue-on-error|if):", job_text, re.IGNORECASE | re.MULTILINE):
+            errors.append("repository-policy job may not contain if or continue-on-error bypasses")
     except Exception as exc:
         errors.append(f"Repository governance/workflow contract is unreadable: {exc}")
 

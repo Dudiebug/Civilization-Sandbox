@@ -38,6 +38,19 @@ if (-not (Test-Path -LiteralPath $workflowPath -PathType Leaf)) {
     if ($workflowSource -notmatch '(?m)^\s{2}repository-policy:\s*$' -or $workflowSource -notmatch '(?m)^\s{4}name:\s*repository-policy\s*$') { $policyErrors.Add('workflow job key or check name changed') }
     if ($workflowSource -notmatch '(?m)^permissions:\s*\r?\n\s{2}contents:\s*read\s*$') { $policyErrors.Add('workflow permissions are not read-only contents') }
     if ($workflowSource -match '(?i)\bsecrets\s*\.' -or $workflowSource -match '(?i)\$\{\{\s*secrets\.') { $policyErrors.Add('workflow references secrets') }
+    $jobsMatch = [regex]::Match($workflowSource, '(?m)^jobs:\s*$')
+    $jobSource = ''
+    if (-not $jobsMatch.Success) {
+        $policyErrors.Add('workflow jobs section is absent')
+    } else {
+        $jobsSource = $workflowSource.Substring($jobsMatch.Index + $jobsMatch.Length)
+        $jobHeaders = @([regex]::Matches($jobsSource, '(?m)^\s{2}([A-Za-z0-9_-]+):\s*$'))
+        if ($jobHeaders.Count -ne 1 -or $jobHeaders[0].Groups[1].Value -ne 'repository-policy') {
+            $policyErrors.Add('workflow must contain exactly one job named repository-policy')
+        } else {
+            $jobSource = $jobsSource.Substring($jobHeaders[0].Index)
+        }
+    }
     $requiredRuns = @(
         'python Build/validate_plan.py',
         'powershell -NoProfile -ExecutionPolicy Bypass -File Build/Configure-Repository.ps1 -Offline',
@@ -46,10 +59,10 @@ if (-not (Test-Path -LiteralPath $workflowPath -PathType Leaf)) {
     )
     foreach ($run in $requiredRuns) {
         $pattern = '(?m)^\s{8}run:\s*' + [regex]::Escape($run) + '\s*$'
-        if (@([regex]::Matches($workflowSource, $pattern)).Count -ne 1) { $policyErrors.Add("workflow validation command is absent or duplicated: $run") }
+        if (@([regex]::Matches($jobSource, $pattern)).Count -ne 1) { $policyErrors.Add("repository-policy validation command is absent or duplicated: $run") }
     }
-    if ($workflowSource -match '(?im)^\s*continue-on-error:\s*true\s*$' -or $workflowSource -match '(?im)^\s*if:\s*(false|\$\{\{\s*false\s*\}\})\s*$') {
-        $policyErrors.Add('workflow validation can be skipped or converted to a pass')
+    if ($jobSource -match '(?im)^\s+(continue-on-error|if):') {
+        $policyErrors.Add('repository-policy job may not contain if or continue-on-error bypasses')
     }
 }
 if ($policyErrors.Count -gt 0) {

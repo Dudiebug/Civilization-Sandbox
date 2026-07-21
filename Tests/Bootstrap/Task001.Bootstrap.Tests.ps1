@@ -211,8 +211,8 @@ try {
         if ($packageSource -notmatch 'Assert-Task001TreeHasNoReparsePoints -Path \$ArtifactRoot' -or $packageSource -notmatch 'Assert-Task001TreeHasNoReparsePoints -Path \$staging') {
             throw 'Package-Evidence.ps1 does not guard recursive artifact and staging operations.'
         }
-        if ($packageSource -notmatch '\$_.FullName -ne \$currentResultFull') {
-            throw 'Package-Evidence.ps1 can include its stale pre-overwrite result in the new archive.'
+        if (@([regex]::Matches($packageSource, '\$_.FullName -ne \$currentResultFull')).Count -lt 2) {
+            throw 'Package-Evidence.ps1 does not exclude its current result from both validation and archive enumeration.'
         }
     }
 
