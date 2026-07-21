@@ -12,9 +12,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File Build/Bootstrap.ps1 -Install
 # Repository/package-integrity audit used by minimal CI.
 powershell -NoProfile -ExecutionPolicy Bypass -File Build/Bootstrap.ps1 -RepositoryOnly
 
-powershell -NoProfile -ExecutionPolicy Bypass -File Build/Build.ps1 -Target Windows
-powershell -NoProfile -ExecutionPolicy Bypass -File Build/Build.ps1 -Target Linux
-powershell -NoProfile -ExecutionPolicy Bypass -File Build/Test.ps1 -Suite Bootstrap
+powershell -NoProfile -ExecutionPolicy Bypass -File Build/Bootstrap.ps1 -ResultPath Artifacts/results/bootstrap-run-1.json
+powershell -NoProfile -ExecutionPolicy Bypass -File Build/Bootstrap.ps1 -ResultPath Artifacts/results/bootstrap-run-2.json
+powershell -NoProfile -ExecutionPolicy Bypass -File Build/Build.ps1 -Target Windows -ResultPath Artifacts/results/build-windows.json
+powershell -NoProfile -ExecutionPolicy Bypass -File Build/Build.ps1 -Target Linux -ResultPath Artifacts/results/build-linux.json
+powershell -NoProfile -ExecutionPolicy Bypass -File Build/Test.ps1 -Suite Bootstrap -ResultPath Artifacts/results/test-bootstrap.json
+powershell -NoProfile -ExecutionPolicy Bypass -File Tests/Bootstrap/Task001.Bootstrap.Tests.ps1 -ResultPath Artifacts/results/task001-script-self-tests.json
 powershell -NoProfile -ExecutionPolicy Bypass -File Build/Package-Evidence.ps1 -TaskId TASK-001
 ```
 

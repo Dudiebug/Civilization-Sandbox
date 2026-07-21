@@ -19,11 +19,11 @@
 - Performance: PENDING — local timings are recorded below; clean-profile timings remain required and no runtime gate is established.
 - Documentation: PASS — governance, ADR, command contract, CI, rollback, and deferred scopes are committed.
 - Independent review: PASS — initial blockers were corrected and the final focused re-review passed at implementation commit `60b852c2c5613eab8a81ace16bc929125f105ccb`; see `REVIEW.md`.
-- Creator acceptance: PENDING — see `ACCEPTANCE.md`.
+- Creator acceptance: APPROVE — explicitly recorded on 2026-07-20 PDT; recovery closeout remains pending in `ACCEPTANCE.md`.
 
 ## Evidence checklist
 
-- [ ] Clean standard Windows profile and non-OneDrive clone details.
+- [x] Creator-approved clean standard Windows profile and sole authoritative non-OneDrive checkout details.
 - [x] Prerequisite audit/install transcript; no license automation.
 - [x] Two local bootstrap result JSON files with identical tracked state and lock hash.
 - [x] Clean editor import with zero compiler errors.
@@ -65,9 +65,21 @@
 - Evidence hardening: PASS — an explicit stale-result demonstration failed with `CIV001-RESULT-005`; canonical evidence is bound to one clean commit, complete player output trees are hashed, smoke provenance is verified before launch, and the archive excludes its own stale pre-overwrite result.
 - Independent adversarial review: PASS after the evidence, path, manifest, and governance blockers above were corrected and re-reviewed.
 
+## Creator-approved clean-profile results — 2026-07-20 PDT
+
+- Profile boundary amendment: APPROVED after an explicit question. The creator confirmed this is a fresh Windows installation dedicated to the project and authorized the current standard, non-administrator `DYLANSPC\dudie` profile as the clean profile; a second Windows user and a second project copy are not required.
+- Environment: Windows 11 Pro `10.0.26200` build `26200`, installed 2026-07-19 PDT; authoritative project `C:\Users\dudie\Projects\Civilization-Sandbox`, outside OneDrive; candidate commit `2ef5e4017db6c148f02f605b93dd888b642033cb`.
+- Starting-state guard: PASS after an unexpected untracked nested Unity project was identified, explicitly approved for removal, and moved to the Windows Recycle Bin. The retained authoritative repository then reported clean tracked and untracked state.
+- Full bootstrap idempotency: PASS twice with zero exit codes, identical clean commit state, and package-lock SHA-256 `b5ab878043267eb78c9ece02004322353aa41947c938bc48c6850d838e206548`.
+- Windows x64 Mono: PASS in 50.61 seconds; executable SHA-256 `34c4e304e53e56499267dfd9c975c63dc279ed3011a69a8ca16eb207f1856a8f`.
+- Linux x64 Mono: PASS in 54.12 seconds; executable SHA-256 `8027f7d1f9ae7dacfc826fb218adcc1ae7464af098a8a59397e7531c0f7ec0bc`.
+- EditMode/headless smoke: PASS in 16.10 seconds; exactly one deterministic test passed and the provenance-checked Windows player exited successfully.
+- Script guards: PASS, 22 tests. Offline and live governance audits passed with strict `repository-policy`; plan validation passed.
+- Evidence packaging: PASS; archive `Artifacts/evidence/TASK-001-20260721T023047Z.zip`, SHA-256 `cdbcf719b541511cacdcbde7f51cf6c2b959afb00a8a8f61ad68c576fb5585e2`.
+
 ## Current blockers
 
-1. Non-OneDrive clean standard-profile reproduction, creator acceptance, merge, accepted tag, and recovery rehearsal remain pending.
+1. Protected merge, accepted tag, and recovery rehearsal remain pending.
 
 ## Changed surface
 

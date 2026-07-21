@@ -18,4 +18,4 @@
 Pin the approved Linux SDK/toolchain dependency graph, rerun all build/test/evidence checks, then complete protected GitHub governance and clean-profile verification.
 
 ## Blockers
-Remote protection, a successful `repository-policy` run, clean standard-profile reproduction, independent review, creator acceptance, accepted tag, and recovery rehearsal remain gates.
+Remote protection, a successful `repository-policy` run, creator-approved clean-profile reproduction, independent review, and creator acceptance now pass. Protected merge, accepted tag, and recovery rehearsal remain gates.

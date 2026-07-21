@@ -27,19 +27,19 @@ A fresh supported development environment can clone, bootstrap, build a baseline
 - [x] ~~Repository root and Unity project skeleton.~~
 - [x] ~~Accepted engine/toolchain ADR and exact dependency locks.~~
 - [x] ~~Windows bootstrap/build/test/package scripts.~~
-- [ ] Clean-account verification procedure and first evidence pack.
+- [x] ~~Clean-profile verification procedure and first evidence pack.~~
 - [x] ~~Baseline build manifest and rollback instructions.~~
 
 ## Verification and acceptance
-- [ ] Run from a fresh Windows user profile and clean clone.
-- [ ] Baseline editor/player build succeeds non-interactively.
+- [x] ~~Run from the creator-confirmed clean standard profile on the dedicated fresh Windows installation, using the sole authoritative non-OneDrive checkout.~~
+- [x] ~~Baseline editor/player build succeeds non-interactively.~~
 - [x] ~~One headless test executes and reports deterministically on the creator machine.~~
 - [x] ~~Repeated bootstrap is idempotent on the creator machine.~~
 - [x] ~~Broken prerequisite or package hash fails with a useful diagnosis.~~
 - [x] ~~Documentation and relevant `codex.md` instructions match the implementation.~~
 - [ ] Placeholder engine-specific folders are accepted, adapted, or removed consistently with D01.
-- [ ] Independent adversarial review reports no blocking findings.
-- [ ] Creator-visible acceptance is recorded.
+- [x] ~~Independent adversarial review reports no blocking findings.~~
+- [x] ~~Creator-visible acceptance is recorded.~~
 
 ## Locked implementation contract
 
@@ -58,6 +58,7 @@ Recorded amendments:
 
 - 2026-07-20: the creator answered `public`, approving public repository visibility so GitHub branch protection can be enforced without weakening the protected-`main` requirement.
 - 2026-07-20: the creator directed Codex to choose one permanent project location and prohibit copies across the PC. `C:\Users\dudie\Projects\Civilization-Sandbox` is the sole authoritative checkout and Unity project; persistent sibling worktrees and secondary development clones are retired. A guarded disposable verification clone may exist only for one verification command and must be removed before that command returns.
+- 2026-07-20: after Codex explicitly stopped and asked about the separate-user requirement, the creator confirmed that this Windows installation is fresh and dedicated to the project and directed verification to proceed in the current non-administrator `DYLANSPC\dudie` profile. This profile is the accepted clean-profile boundary; no second Windows account or project copy is required. Verification must still run from the sole authoritative non-OneDrive project folder with clean tracked state.
 
 ## Out of scope
 World size, population target, content counts, gameplay systems, terrain, people, buildings, AI behavior, art, public release configuration, or Version 1.1-1.5 planning.
@@ -71,10 +72,10 @@ World size, population target, content counts, gameplay systems, terrain, people
 ## Required work sequence
 - [x] ~~Planner produces small milestones, exact files, tests, rollback, and stop conditions.~~
 - [x] ~~Creator approves the plan.~~
-- [ ] Implementer completes one milestone at a time.
-- [ ] Verification agent reproduces evidence from a clean worktree.
-- [ ] Adversarial reviewer challenges architecture and failure cases.
-- [ ] Creator tests the observable result and accepts or requests changes.
+- [x] ~~Implementer completes one milestone at a time.~~
+- [x] ~~Verification reproduces evidence from the creator-approved clean profile and sole authoritative checkout.~~
+- [x] ~~Adversarial reviewer challenges architecture and failure cases.~~
+- [x] ~~Creator tests the observable result and accepts or requests changes.~~
 - [ ] `Build/validate_plan.py` permits Done status.
 
 ## Suggested launch
