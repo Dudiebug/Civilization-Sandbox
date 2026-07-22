@@ -1,0 +1,44 @@
+#WorldCreationRoot .unity-base-text-field__input,
+#WorldViewerHudRoot .unity-base-text-field__input {
+    background-color: rgb(31, 23, 16);
+    color: rgb(244, 220, 161);
+    border-top-color: rgb(111, 79, 38);
+    border-right-color: rgb(111, 79, 38);
+    border-bottom-color: rgb(111, 79, 38);
+    border-left-color: rgb(111, 79, 38);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+}
+
+#WorldCreationRoot .unity-base-text-field__input:hover,
+#WorldCreationRoot .unity-base-text-field__input:focus,
+#WorldViewerHudRoot .unity-base-text-field__input:hover,
+#WorldViewerHudRoot .unity-base-text-field__input:focus {
+    background-color: rgb(43, 31, 19);
+    border-top-color: rgb(179, 129, 55);
+    border-right-color: rgb(179, 129, 55);
+    border-bottom-color: rgb(179, 129, 55);
+    border-left-color: rgb(179, 129, 55);
+}
+
+#WorldCreationRoot .unity-base-text-field__input > .unity-text-element,
+#WorldViewerHudRoot .unity-base-text-field__input > .unity-text-element {
+    color: rgb(244, 220, 161);
+}
+
+#WorldSeedField .unity-base-text-field__input {
+    min-height: 34px;
+    padding-top: 6px;
+    padding-right: 9px;
+    padding-bottom: 6px;
+    padding-left: 9px;
+    font-size: 14px;
+    -unity-text-align: middle-left;
+}
+
+#WorldSeedField .unity-base-text-field__input > .unity-text-element {
+    font-size: 14px;
+    -unity-text-align: middle-left;
+}

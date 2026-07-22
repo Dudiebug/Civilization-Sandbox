@@ -1,0 +1,9 @@
+{
+  "name": "CivSandbox.World",
+  "rootNamespace": "CivSandbox.World",
+  "references": [
+    "CivSandbox.Simulation.Core"
+  ],
+  "noEngineReferences": true,
+  "autoReferenced": true
+}

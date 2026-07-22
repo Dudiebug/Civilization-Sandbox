@@ -1,5 +1,19 @@
 # TASK-001 Windows Commands
 
+## Build 01 World Viewer
+
+Run the complete focused verification path (deterministic simulation tests, camera/selection independence tests, Windows player build, and first-frame smoke):
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Build/Verify-WorldViewer.ps1
+```
+
+Open `Assets/WorldViewer/WorldViewer.unity` in Unity and press Play for the creator-facing experience.
+
+Build 02 now starts at a provisional Title Screen and New Game world creator in normal Play Mode. Generate World enters one continuous, camera-navigable map at a deterministic random valid starting location. At normal speed the calendar advances five seconds per real second while person movement and work remain real-time. Founders reserve reachable water, food, timber, and stone; walk, gather, haul, stockpile, consume, and build the first communal shelter. Batch-mode smoke testing bypasses creator input with the canonical default world and the same seeded starting-location rule.
+
+## Foundation commands
+
 Run commands from the repository root. All commands are compatible with Windows PowerShell 5.1; `pwsh` is the pinned shell for normal creator use.
 
 ```powershell

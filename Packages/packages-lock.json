@@ -1,10 +1,54 @@
 {
   "dependencies": {
+    "com.civsandbox.people": {
+      "version": "file:../GamePackages/com.civsandbox.people",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.civsandbox.simulation.core": "0.1.0",
+        "com.civsandbox.world": "0.1.0"
+      }
+    },
+    "com.civsandbox.presentation": {
+      "version": "file:../GamePackages/com.civsandbox.presentation",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.civsandbox.people": "0.1.0",
+        "com.civsandbox.simulation.core": "0.1.0",
+        "com.civsandbox.world": "0.1.0"
+      }
+    },
+    "com.civsandbox.simulation.core": {
+      "version": "file:../GamePackages/com.civsandbox.simulation.core",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.civsandbox.tooling": {
       "version": "file:../GamePackages/com.civsandbox.tooling",
       "depth": 0,
       "source": "local",
       "dependencies": {}
+    },
+    "com.civsandbox.ui": {
+      "version": "file:../GamePackages/com.civsandbox.ui",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.civsandbox.people": "0.1.0",
+        "com.civsandbox.presentation": "0.1.0",
+        "com.civsandbox.simulation.core": "0.1.0",
+        "com.civsandbox.world": "0.1.0"
+      }
+    },
+    "com.civsandbox.world": {
+      "version": "file:../GamePackages/com.civsandbox.world",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.civsandbox.simulation.core": "0.1.0"
+      }
     },
     "com.unity.burst": {
       "version": "1.8.29",

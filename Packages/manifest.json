@@ -1,6 +1,11 @@
 {
   "dependencies": {
+    "com.civsandbox.people": "file:../GamePackages/com.civsandbox.people",
+    "com.civsandbox.presentation": "file:../GamePackages/com.civsandbox.presentation",
+    "com.civsandbox.simulation.core": "file:../GamePackages/com.civsandbox.simulation.core",
     "com.civsandbox.tooling": "file:../GamePackages/com.civsandbox.tooling",
+    "com.civsandbox.ui": "file:../GamePackages/com.civsandbox.ui",
+    "com.civsandbox.world": "file:../GamePackages/com.civsandbox.world",
     "com.unity.burst": "1.8.29",
     "com.unity.collections": "2.6.8",
     "com.unity.entities": "1.4.8",
@@ -11,6 +16,7 @@
     "com.unity.toolchain.win-x86_64-linux": "1.1.0"
   },
   "testables": [
+    "com.civsandbox.people",
     "com.civsandbox.tooling"
   ]
 }

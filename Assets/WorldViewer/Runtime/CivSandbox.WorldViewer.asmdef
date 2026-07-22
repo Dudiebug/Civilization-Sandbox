@@ -1,0 +1,12 @@
+{
+  "name": "CivSandbox.WorldViewer",
+  "rootNamespace": "CivSandbox.WorldViewer",
+  "references": [
+    "CivSandbox.Simulation.Core",
+    "CivSandbox.World",
+    "CivSandbox.People",
+    "CivSandbox.Presentation",
+    "CivSandbox.UI"
+  ],
+  "autoReferenced": true
+}

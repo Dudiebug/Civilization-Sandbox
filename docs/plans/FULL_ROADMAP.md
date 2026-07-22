@@ -30,11 +30,11 @@ This roadmap covers the complete scoped vision. It preserves the Blueprint and r
 
 ## Build 02 - Founding Camp
 
-**Playable result:** a small group searches for food and water, gathers resources, shares a stockpile, creates shelter, and either stabilizes or fails for understandable reasons.
+**Playable result:** from the title screen, create a deterministic world from bounded size and generation controls, inspect its living top-down 2.5D geography, choose a founding site, and watch a small group search for food and water, gather resources, share a stockpile, create shelter, and either stabilize or fail for understandable reasons.
 
-**Scope:** regional test terrain, resources, hunger/thirst/health, reachable-resource decisions, gathering, hauling, stockpile, simple reservations, shelter construction, action reasons, event log, and minimum save/reload.
+**Scope:** minimum New Game flow, named world-size presets, bounded procedural-generation controls, deterministic world preview, founding-site selection, semantic geography, initial hybrid 2.5D terrain presentation, resources, hunger/thirst/health, reachable-resource decisions, gathering, hauling, stockpile, simple reservations, shelter construction, action reasons, event log, and minimum save/reload.
 
-**Gate:** one seed produces a viable camp and one produces an explainable failure; save/reload during a critical need preserves subsequent outcomes.
+**Gate:** identical settings reproduce identical semantic geography independent of presentation; preview and play share stable world/site identity; each enabled size meets its provisional budget; one seed produces a viable camp and one produces an explainable failure; save/reload during a critical need preserves subsequent outcomes.
 
 ## Build 03 - Living Camp
 

@@ -1,0 +1,11 @@
+{
+  "name": "CivSandbox.WorldViewer.Editor",
+  "rootNamespace": "CivSandbox.WorldViewer.Editor",
+  "references": [
+    "CivSandbox.WorldViewer"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "autoReferenced": true
+}

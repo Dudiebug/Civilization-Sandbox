@@ -1,0 +1,15 @@
+{
+  "name": "com.civsandbox.presentation",
+  "version": "0.1.0",
+  "displayName": "Civilization Sandbox Presentation",
+  "description": "Read-only 2.5D world generation, terrain, people, camera, and selection presentation.",
+  "unity": "6000.3",
+  "dependencies": {
+    "com.civsandbox.people": "0.1.0",
+    "com.civsandbox.simulation.core": "0.1.0",
+    "com.civsandbox.world": "0.1.0"
+  },
+  "author": {
+    "name": "Civilization Sandbox"
+  }
+}

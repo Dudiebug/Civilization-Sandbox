@@ -1,0 +1,16 @@
+{
+  "name": "CivSandbox.People.Tests",
+  "rootNamespace": "CivSandbox.People.Tests",
+  "references": [
+    "CivSandbox.Simulation.Core",
+    "CivSandbox.World",
+    "CivSandbox.People"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "autoReferenced": false
+}

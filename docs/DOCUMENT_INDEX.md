@@ -31,6 +31,7 @@ When two sources conflict, stop at the highest conflicting layer, record the exa
 - [ADR-001 - Release-scope rebaseline](decisions/ADR-001_RELEASE_SCOPE_REBASELINE.md)
 - [ADR-002 - Unity and toolchain baseline](decisions/ADR-002_UNITY_TOOLCHAIN_BASELINE.md)
 - [ADR-003 - Manual Codex instruction routing](decisions/ADR-003_CODEX_INSTRUCTION_DISCOVERY.md)
+- [ADR-004 - Configurable hierarchical world creation](decisions/ADR-004_CONFIGURABLE_HIERARCHICAL_WORLD_CREATION.md)
 
 ## Playable-build roadmap
 

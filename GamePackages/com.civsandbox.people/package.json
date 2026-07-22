@@ -1,0 +1,14 @@
+{
+  "name": "com.civsandbox.people",
+  "version": "0.1.0",
+  "displayName": "Civilization Sandbox People",
+  "description": "Stable named people, survival state, and the deterministic Founding Camp work loop.",
+  "unity": "6000.3",
+  "dependencies": {
+    "com.civsandbox.simulation.core": "0.1.0",
+    "com.civsandbox.world": "0.1.0"
+  },
+  "author": {
+    "name": "Civilization Sandbox"
+  }
+}

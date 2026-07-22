@@ -250,9 +250,14 @@ function Test-Task001PackageManifest {
             $actual = if ($actualProperty) { [string]$actualProperty.Value } else { $null }
             if ($actual -ne $expected) { $mismatches.Add("$name expected '$expected' but found '$actual'") }
         }
-        if (@($manifest.testables).Count -ne 1 -or [string]$manifest.testables[0] -ne 'com.civsandbox.tooling') {
-            $mismatches.Add('testables must contain only com.civsandbox.tooling')
+        $expectedTestables = if ($contract.PSObject.Properties['testables']) {
+            @($contract.testables | ForEach-Object { [string]$_ } | Sort-Object)
+        } else {
+            @('com.civsandbox.tooling')
         }
+        $actualTestables = @($manifest.testables | ForEach-Object { [string]$_ } | Sort-Object)
+        $testableDiff = @(Compare-Object -ReferenceObject $expectedTestables -DifferenceObject $actualTestables)
+        if ($testableDiff.Count -gt 0) { $mismatches.Add('testables differ from Config/toolchain.json') }
         $status = if ($mismatches.Count -eq 0) { 'PASS' } else { 'FAIL' }
         $code = if ($status -eq 'PASS') { 'CIV001-MANIFEST-000' } else { 'CIV001-MANIFEST-003' }
         return [pscustomobject]@{ status = $status; code = $code; path = $ManifestPath; mismatches = @($mismatches) }

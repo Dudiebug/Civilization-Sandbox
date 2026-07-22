@@ -12,7 +12,7 @@ Open a decision only when the next playable slice cannot proceed safely without 
 |---|---|
 | Foundation | Unity/toolchain and supported development host |
 | World Viewer | Initial simulation scale used for development, not final marketing scale |
-| Founding Camp | Minimum person detail, starting group size, and initial terrain/resource envelope |
+| Founding Camp | Minimum person detail, starting group size, provisional world-size presets, procedural-control envelope, and initial terrain/resource/2.5D presentation depth |
 | Physical Settlement | Resource, occupation, building, and settlement-depth envelope |
 | Divergent Societies | Number of societies and minimum cultural/institutional contrast |
 | Connected Region | Trade, price, route, and migration depth |
