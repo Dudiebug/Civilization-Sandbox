@@ -9,6 +9,10 @@ namespace CivSandbox.People
         public const int PersonCount = 24;
         public const ulong InitialPeopleStream = 0x70656f706c653031UL;
         public const ulong MovementStream = 0x6d6f76656d656e74UL;
+        public const ulong SurvivalNeedsStream = 0x737572766976616cUL;
+        public const int NeedReviewSeconds = 60;
+        public const int NutritionLossPerReview = 5;
+        public const int HydrationLossPerReview = 10;
         private static readonly string[] GivenNames =
         {
             "Alden", "Beata", "Corren", "Davia", "Edric", "Fenna", "Garran", "Hester",
@@ -57,7 +61,10 @@ namespace CivSandbox.People
                 int appearance = KeyedRandom.Range(seedValue, InitialPeopleStream, localId, 0, 4, 0, 12);
                 var person = new PersonState(new StableEntityId(worldKey, localId), name, new WorldPosition(east, north), appearance)
                 {
-                    IdleSecondsRemaining = KeyedRandom.Range(seedValue, MovementStream, localId, 0, 0, 0, 46)
+                    IdleSecondsRemaining = KeyedRandom.Range(seedValue, MovementStream, localId, 0, 0, 0, 46),
+                    NutritionUnits = KeyedRandom.Range(seedValue, SurvivalNeedsStream, localId, 0, 0, 7800, SurvivalNeedsSnapshot.CapacityUnits + 1),
+                    HydrationUnits = KeyedRandom.Range(seedValue, SurvivalNeedsStream, localId, 0, 1, 7000, SurvivalNeedsSnapshot.CapacityUnits + 1),
+                    NeedReviewOffsetSeconds = KeyedRandom.Range(seedValue, SurvivalNeedsStream, localId, 0, 2, 0, NeedReviewSeconds)
                 };
                 people[index] = person;
             }
@@ -71,9 +78,10 @@ namespace CivSandbox.People
                 return;
             }
 
+            long firstAdvancedSecond = clock.Time.Seconds - seconds + 1L;
             for (int step = 0; step < seconds; step++)
             {
-                AdvanceOneGameSecond();
+                AdvanceOneGameSecond(firstAdvancedSecond + step);
             }
         }
 
@@ -83,7 +91,15 @@ namespace CivSandbox.People
             for (int index = 0; index < people.Length; index++)
             {
                 PersonState person = people[index];
-                copy[index] = new PersonSnapshot(person.Id, person.Name, person.Position, person.Action, person.AppearanceVariant);
+                var needs = new SurvivalNeedsSnapshot(person.NutritionUnits, person.HydrationUnits);
+                copy[index] = new PersonSnapshot(
+                    person.Id,
+                    person.Name,
+                    person.Position,
+                    person.Action,
+                    DetermineActionReason(person, needs),
+                    needs,
+                    person.AppearanceVariant);
             }
 
             return new WorldSnapshot(seed, clock.Time, Bounds, copy);
@@ -92,7 +108,7 @@ namespace CivSandbox.People
         public ulong ComputeChecksum()
         {
             CanonicalChecksum checksum = CanonicalChecksum.Create();
-            checksum.Add("CIV-BUILD01-WORLD-v1");
+            checksum.Add("CIV-BUILD02-WORLD-v1");
             checksum.Add(seed.Value);
             checksum.Add(clock.Time.Seconds);
             checksum.Add(nextLocalId);
@@ -119,17 +135,50 @@ namespace CivSandbox.People
                 checksum.Add(person.MoveTarget.NorthMillimeters);
                 checksum.Add(person.MoveDurationSeconds);
                 checksum.Add(person.MoveElapsedSeconds);
+                checksum.Add(person.NutritionUnits);
+                checksum.Add(person.HydrationUnits);
+                checksum.Add(person.NeedReviewOffsetSeconds);
             }
 
             return checksum.Value;
         }
 
-        private void AdvanceOneGameSecond()
+        private void AdvanceOneGameSecond(long gameSecond)
         {
             for (int index = 0; index < people.Length; index++)
             {
-                AdvancePerson(people[index]);
+                PersonState person = people[index];
+                AdvanceNeeds(person, gameSecond);
+                AdvancePerson(person);
             }
+        }
+
+        private static void AdvanceNeeds(PersonState person, long gameSecond)
+        {
+            if (gameSecond % NeedReviewSeconds != person.NeedReviewOffsetSeconds)
+            {
+                return;
+            }
+
+            person.NutritionUnits = Math.Max(0, person.NutritionUnits - NutritionLossPerReview);
+            person.HydrationUnits = Math.Max(0, person.HydrationUnits - HydrationLossPerReview);
+        }
+
+        private static PersonActionReason DetermineActionReason(PersonState person, SurvivalNeedsSnapshot needs)
+        {
+            if (needs.HydrationUrgency >= NeedUrgency.Urgent)
+            {
+                return PersonActionReason.WaterUnavailable;
+            }
+
+            if (needs.NutritionUrgency >= NeedUrgency.Urgent)
+            {
+                return PersonActionReason.FoodUnavailable;
+            }
+
+            return person.Action == PersonAction.Walking
+                ? PersonActionReason.ExploringBoundedArea
+                : PersonActionReason.RestingBetweenWalks;
         }
 
         private void AdvancePerson(PersonState person)
@@ -233,6 +282,9 @@ namespace CivSandbox.People
             public WorldPosition MoveTarget { get; set; }
             public int MoveDurationSeconds { get; set; }
             public int MoveElapsedSeconds { get; set; }
+            public int NutritionUnits { get; set; }
+            public int HydrationUnits { get; set; }
+            public int NeedReviewOffsetSeconds { get; set; }
         }
     }
 }

@@ -133,6 +133,7 @@
 - `docs/decisions/ADR-001_RELEASE_SCOPE_REBASELINE.md`
 - `docs/decisions/ADR-002_UNITY_TOOLCHAIN_BASELINE.md`
 - `docs/decisions/ADR-003_CODEX_INSTRUCTION_DISCOVERY.md`
+- `docs/decisions/ADR-004_CONFIGURABLE_HIERARCHICAL_WORLD_CREATION.md`
 - `docs/decisions/codex.md`
 - `docs/decisions/README.md`
 - `docs/DOCUMENT_INDEX.md`
@@ -238,6 +239,8 @@
 - `GamePackages/com.civsandbox.people/Runtime/PersonAction.cs.meta`
 - `GamePackages/com.civsandbox.people/Runtime/PersonSnapshot.cs`
 - `GamePackages/com.civsandbox.people/Runtime/PersonSnapshot.cs.meta`
+- `GamePackages/com.civsandbox.people/Runtime/SurvivalNeedsSnapshot.cs`
+- `GamePackages/com.civsandbox.people/Runtime/SurvivalNeedsSnapshot.cs.meta`
 - `GamePackages/com.civsandbox.people/Runtime/WorldSimulation.cs`
 - `GamePackages/com.civsandbox.people/Runtime/WorldSimulation.cs.meta`
 - `GamePackages/com.civsandbox.people/Runtime/WorldSnapshot.cs`
@@ -250,6 +253,8 @@
 - `GamePackages/com.civsandbox.people/Tests/Editor/DeterministicResetTests.cs.meta`
 - `GamePackages/com.civsandbox.people/Tests/Editor/MovementAndClockTests.cs`
 - `GamePackages/com.civsandbox.people/Tests/Editor/MovementAndClockTests.cs.meta`
+- `GamePackages/com.civsandbox.people/Tests/Editor/SurvivalNeedsTests.cs`
+- `GamePackages/com.civsandbox.people/Tests/Editor/SurvivalNeedsTests.cs.meta`
 - `GamePackages/com.civsandbox.persistence/codex.md`
 - `GamePackages/com.civsandbox.playerpowers/codex.md`
 - `GamePackages/com.civsandbox.politics/codex.md`
@@ -330,6 +335,9 @@
 - `GamePackages/com.civsandbox.ui/package.json`
 - `GamePackages/com.civsandbox.ui/package.json.meta`
 - `GamePackages/com.civsandbox.ui/Runtime.meta`
+- `GamePackages/com.civsandbox.ui/Runtime/Resources.meta`
+- `GamePackages/com.civsandbox.ui/Runtime/Resources/WorldViewerRuntimeTheme.tss`
+- `GamePackages/com.civsandbox.ui/Runtime/Resources/WorldViewerRuntimeTheme.tss.meta`
 - `GamePackages/com.civsandbox.ui/Runtime/CivSandbox.UI.asmdef`
 - `GamePackages/com.civsandbox.ui/Runtime/CivSandbox.UI.asmdef.meta`
 - `GamePackages/com.civsandbox.ui/Runtime/IWorldViewerSession.cs`

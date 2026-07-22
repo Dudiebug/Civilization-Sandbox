@@ -24,6 +24,9 @@ namespace CivSandbox.People.Tests
                 Assert.That(reset[index].Name, Is.EqualTo(first[index].Name));
                 Assert.That(reset[index].Position, Is.EqualTo(first[index].Position));
                 Assert.That(reset[index].Action, Is.EqualTo(first[index].Action));
+                Assert.That(reset[index].ActionReason, Is.EqualTo(first[index].ActionReason));
+                Assert.That(reset[index].Needs.NutritionUnits, Is.EqualTo(first[index].Needs.NutritionUnits));
+                Assert.That(reset[index].Needs.HydrationUnits, Is.EqualTo(first[index].Needs.HydrationUnits));
             }
         }
 
@@ -40,6 +43,8 @@ namespace CivSandbox.People.Tests
                 Assert.That(ids.Add(snapshot[index].Id), Is.True);
                 Assert.That(snapshot.Bounds.Contains(snapshot[index].Position), Is.True);
                 Assert.That(snapshot[index].Name, Is.Not.Empty);
+                Assert.That(snapshot[index].Needs.NutritionUrgency, Is.EqualTo(NeedUrgency.Safe));
+                Assert.That(snapshot[index].Needs.HydrationUrgency, Is.EqualTo(NeedUrgency.Safe));
             }
 
             var otherSeed = new WorldSimulation(43UL);

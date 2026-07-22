@@ -2,7 +2,7 @@
   "name": "com.civsandbox.ui",
   "version": "0.1.0",
   "displayName": "Civilization Sandbox UI",
-  "description": "World Viewer HUD and read-only inspector surfaces for Build 01.",
+  "description": "Runtime HUD and read-only survival inspector surfaces for the World Viewer and Founding Camp builds.",
   "unity": "6000.3",
   "dependencies": {
     "com.civsandbox.people": "0.1.0",

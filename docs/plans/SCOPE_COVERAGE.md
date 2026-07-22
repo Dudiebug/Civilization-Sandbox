@@ -5,6 +5,7 @@ This matrix prevents the vibe-first roadmap from losing the Blueprint vision.
 | Vision area | First playable expression | Full early-modern completion | Later expansion |
 |---|---|---|---|
 | Time, determinism, IDs and scheduling | World Viewer | 1.5 scale/replay/soak gates | All ages preserve compatibility |
+| World creation, semantic geography and terrain presentation | Founding Camp | War and World / 1.5 environment depth | Later-age worlds, orbital topology and multi-planet geography |
 | People, needs, health and work | Founding Camp | Living People / 1.5 | Education, industrial labor, modern/future life |
 | Households, inheritance and relationships | Living Camp | Living People / 1.5 | Later demographic/social forms |
 | Physical construction and settlements | Founding Camp / Physical Settlement | Roads and Markets / 1.5 | Industrial through multi-planet settlement forms |

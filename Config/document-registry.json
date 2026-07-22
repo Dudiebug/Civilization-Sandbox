@@ -119,6 +119,20 @@
       ]
     },
     {
+      "id": "ADR-004",
+      "path": "docs/decisions/ADR-004_CONFIGURABLE_HIERARCHICAL_WORLD_CREATION.md",
+      "title": "ADR-004 - Configurable Hierarchical World Creation",
+      "authority": "decision",
+      "owner": "Creator",
+      "status": "Accepted",
+      "release_scope": "Build 02 through Build 20",
+      "required": true,
+      "source_refs": [
+        "Blueprint physical causality and deterministic world principles",
+        "Creator decision 2026-07-21"
+      ]
+    },
+    {
       "id": "TECHNICAL-ARCHITECTURE",
       "path": "docs/core/TECHNICAL_ARCHITECTURE.md",
       "title": "Technical Architecture",
