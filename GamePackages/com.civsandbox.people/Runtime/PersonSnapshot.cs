@@ -12,7 +12,9 @@ namespace CivSandbox.People
             PersonAction action,
             PersonActionReason actionReason,
             SurvivalNeedsSnapshot needs,
-            int appearanceVariant)
+            int appearanceVariant,
+            CampCommodity carriedCommodity = CampCommodity.None,
+            int carriedUnits = 0)
         {
             Id = id;
             Name = name;
@@ -21,6 +23,8 @@ namespace CivSandbox.People
             ActionReason = actionReason;
             Needs = needs;
             AppearanceVariant = appearanceVariant;
+            CarriedCommodity = carriedCommodity;
+            CarriedUnits = carriedUnits;
         }
 
         public StableEntityId Id { get; }
@@ -36,5 +40,9 @@ namespace CivSandbox.People
         public SurvivalNeedsSnapshot Needs { get; }
 
         public int AppearanceVariant { get; }
+
+        public CampCommodity CarriedCommodity { get; }
+
+        public int CarriedUnits { get; }
     }
 }

@@ -11,23 +11,10 @@ namespace CivSandbox.Simulation
 
     public static class SimulationSpeedExtensions
     {
-        public static int GameSecondsPerFixedTick(this SimulationSpeed speed)
+        public static int Multiplier(this SimulationSpeed speed)
         {
-            switch (speed)
-            {
-                case SimulationSpeed.Paused:
-                    return 0;
-                case SimulationSpeed.Normal:
-                    return 3;
-                case SimulationSpeed.Double:
-                    return 6;
-                case SimulationSpeed.Fast:
-                    return 15;
-                case SimulationSpeed.VeryFast:
-                    return 30;
-                default:
-                    return 0;
-            }
+            int value = (int)speed;
+            return value < 0 ? 0 : value;
         }
 
         public static string Label(this SimulationSpeed speed)

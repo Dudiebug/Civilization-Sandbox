@@ -1,6 +1,6 @@
 # File Manifest
 
-**Total files:** 360
+**Total files:** 368
 **Scoped `codex.md` files:** 51
 **Forbidden `AGENTS.md` files:** 0
 
@@ -19,7 +19,7 @@
 | `CONTRIBUTING.md` | 1 |
 | `docs` | 115 |
 | `FILE_MANIFEST.md` | 1 |
-| `GamePackages` | 132 |
+| `GamePackages` | 140 |
 | `KIT_AUDIT.md` | 1 |
 | `Packages` | 3 |
 | `ProjectSettings` | 24 |
@@ -72,6 +72,12 @@
 - `Assets/WorldViewer/Tests/Editor/SimulationClockTests.cs.meta`
 - `Assets/WorldViewer/Tests/Editor/WorldSceneResetTests.cs`
 - `Assets/WorldViewer/Tests/Editor/WorldSceneResetTests.cs.meta`
+- `Assets/WorldViewer/Tests/Editor/WorldGenerationTests.cs`
+- `Assets/WorldViewer/Tests/Editor/WorldGenerationTests.cs.meta`
+- `Assets/WorldViewer/Tests/Editor/WorldCreationScreenTests.cs`
+- `Assets/WorldViewer/Tests/Editor/WorldCreationScreenTests.cs.meta`
+- `Assets/WorldViewer/Tests/Editor/WorldPreviewTests.cs`
+- `Assets/WorldViewer/Tests/Editor/WorldPreviewTests.cs.meta`
 - `Assets/WorldViewer/Tests/PlayMode.meta`
 - `Assets/WorldViewer/WorldViewer.unity`
 - `Assets/WorldViewer/WorldViewer.unity.meta`
@@ -233,6 +239,8 @@
 - `GamePackages/com.civsandbox.people/package.json`
 - `GamePackages/com.civsandbox.people/package.json.meta`
 - `GamePackages/com.civsandbox.people/Runtime.meta`
+- `GamePackages/com.civsandbox.people/Runtime/CampSnapshot.cs`
+- `GamePackages/com.civsandbox.people/Runtime/CampSnapshot.cs.meta`
 - `GamePackages/com.civsandbox.people/Runtime/CivSandbox.People.asmdef`
 - `GamePackages/com.civsandbox.people/Runtime/CivSandbox.People.asmdef.meta`
 - `GamePackages/com.civsandbox.people/Runtime/PersonAction.cs`
@@ -251,6 +259,8 @@
 - `GamePackages/com.civsandbox.people/Tests/Editor/CivSandbox.People.Tests.asmdef.meta`
 - `GamePackages/com.civsandbox.people/Tests/Editor/DeterministicResetTests.cs`
 - `GamePackages/com.civsandbox.people/Tests/Editor/DeterministicResetTests.cs.meta`
+- `GamePackages/com.civsandbox.people/Tests/Editor/FoundingCampInteractionTests.cs`
+- `GamePackages/com.civsandbox.people/Tests/Editor/FoundingCampInteractionTests.cs.meta`
 - `GamePackages/com.civsandbox.people/Tests/Editor/MovementAndClockTests.cs`
 - `GamePackages/com.civsandbox.people/Tests/Editor/MovementAndClockTests.cs.meta`
 - `GamePackages/com.civsandbox.people/Tests/Editor/SurvivalNeedsTests.cs`
@@ -265,6 +275,8 @@
 - `GamePackages/com.civsandbox.presentation/Runtime.meta`
 - `GamePackages/com.civsandbox.presentation/Runtime/AssemblyInfo.cs`
 - `GamePackages/com.civsandbox.presentation/Runtime/AssemblyInfo.cs.meta`
+- `GamePackages/com.civsandbox.presentation/Runtime/CampSceneView.cs`
+- `GamePackages/com.civsandbox.presentation/Runtime/CampSceneView.cs.meta`
 - `GamePackages/com.civsandbox.presentation/Runtime/CivSandbox.Presentation.asmdef`
 - `GamePackages/com.civsandbox.presentation/Runtime/CivSandbox.Presentation.asmdef.meta`
 - `GamePackages/com.civsandbox.presentation/Runtime/EarlyModernSpriteFactory.cs`
@@ -275,8 +287,12 @@
 - `GamePackages/com.civsandbox.presentation/Runtime/PersonBillboardView.cs.meta`
 - `GamePackages/com.civsandbox.presentation/Runtime/RuntimeObjectLifecycle.cs`
 - `GamePackages/com.civsandbox.presentation/Runtime/RuntimeObjectLifecycle.cs.meta`
+- `GamePackages/com.civsandbox.presentation/Runtime/VertexColorTerrain.shader`
+- `GamePackages/com.civsandbox.presentation/Runtime/VertexColorTerrain.shader.meta`
 - `GamePackages/com.civsandbox.presentation/Runtime/WorldCameraController.cs`
 - `GamePackages/com.civsandbox.presentation/Runtime/WorldCameraController.cs.meta`
+- `GamePackages/com.civsandbox.presentation/Runtime/WorldPreviewView.cs`
+- `GamePackages/com.civsandbox.presentation/Runtime/WorldPreviewView.cs.meta`
 - `GamePackages/com.civsandbox.presentation/Runtime/WorldSceneView.cs`
 - `GamePackages/com.civsandbox.presentation/Runtime/WorldSceneView.cs.meta`
 - `GamePackages/com.civsandbox.presentation/Runtime/WorldSelectionController.cs`
@@ -338,12 +354,16 @@
 - `GamePackages/com.civsandbox.ui/Runtime/Resources.meta`
 - `GamePackages/com.civsandbox.ui/Runtime/Resources/WorldViewerRuntimeTheme.tss`
 - `GamePackages/com.civsandbox.ui/Runtime/Resources/WorldViewerRuntimeTheme.tss.meta`
+- `GamePackages/com.civsandbox.ui/Runtime/Resources/WorldViewerRuntimeStyles.uss`
+- `GamePackages/com.civsandbox.ui/Runtime/Resources/WorldViewerRuntimeStyles.uss.meta`
 - `GamePackages/com.civsandbox.ui/Runtime/CivSandbox.UI.asmdef`
 - `GamePackages/com.civsandbox.ui/Runtime/CivSandbox.UI.asmdef.meta`
 - `GamePackages/com.civsandbox.ui/Runtime/IWorldViewerSession.cs`
 - `GamePackages/com.civsandbox.ui/Runtime/IWorldViewerSession.cs.meta`
 - `GamePackages/com.civsandbox.ui/Runtime/WorldViewerHud.cs`
 - `GamePackages/com.civsandbox.ui/Runtime/WorldViewerHud.cs.meta`
+- `GamePackages/com.civsandbox.ui/Runtime/WorldCreationScreen.cs`
+- `GamePackages/com.civsandbox.ui/Runtime/WorldCreationScreen.cs.meta`
 - `GamePackages/com.civsandbox.world/codex.md`
 - `GamePackages/com.civsandbox.world/codex.md.meta`
 - `GamePackages/com.civsandbox.world/package.json`
@@ -351,12 +371,26 @@
 - `GamePackages/com.civsandbox.world/Runtime.meta`
 - `GamePackages/com.civsandbox.world/Runtime/CivSandbox.World.asmdef`
 - `GamePackages/com.civsandbox.world/Runtime/CivSandbox.World.asmdef.meta`
+- `GamePackages/com.civsandbox.world/Runtime/GeneratedWorld.cs`
+- `GamePackages/com.civsandbox.world/Runtime/GeneratedWorld.cs.meta`
+- `GamePackages/com.civsandbox.world/Runtime/GeneratedWorldCell.cs`
+- `GamePackages/com.civsandbox.world/Runtime/GeneratedWorldCell.cs.meta`
+- `GamePackages/com.civsandbox.world/Runtime/WorldBiome.cs`
+- `GamePackages/com.civsandbox.world/Runtime/WorldBiome.cs.meta`
 - `GamePackages/com.civsandbox.world/Runtime/WorldBounds.cs`
 - `GamePackages/com.civsandbox.world/Runtime/WorldBounds.cs.meta`
 - `GamePackages/com.civsandbox.world/Runtime/WorldPosition.cs`
 - `GamePackages/com.civsandbox.world/Runtime/WorldPosition.cs.meta`
+- `GamePackages/com.civsandbox.world/Runtime/WorldGenerationSettings.cs`
+- `GamePackages/com.civsandbox.world/Runtime/WorldGenerationSettings.cs.meta`
+- `GamePackages/com.civsandbox.world/Runtime/WorldGenerator.cs`
+- `GamePackages/com.civsandbox.world/Runtime/WorldGenerator.cs.meta`
+- `GamePackages/com.civsandbox.world/Runtime/WorldResourceProfile.cs`
+- `GamePackages/com.civsandbox.world/Runtime/WorldResourceProfile.cs.meta`
 - `GamePackages/com.civsandbox.world/Runtime/WorldSeed.cs`
 - `GamePackages/com.civsandbox.world/Runtime/WorldSeed.cs.meta`
+- `GamePackages/com.civsandbox.world/Runtime/WorldSizePreset.cs`
+- `GamePackages/com.civsandbox.world/Runtime/WorldSizePreset.cs.meta`
 - `GamePackages/PACKAGE_MAP.md`
 - `KIT_AUDIT.md`
 - `Packages/codex.md`

@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using CivSandbox.People;
 using CivSandbox.Simulation;
+using CivSandbox.World;
 using UnityEngine;
 
 namespace CivSandbox.Presentation
@@ -9,10 +11,16 @@ namespace CivSandbox.Presentation
     {
         private readonly Dictionary<StableEntityId, PersonBillboardView> people = new Dictionary<StableEntityId, PersonBillboardView>();
         private Camera worldCamera;
+        private Vector3 worldOffset;
+        private float personPositionScale = 1f;
+        private Func<Vector3, float> terrainHeight;
+        private CampSceneView campView;
 
         public Camera WorldCamera => worldCamera;
 
         public int PersonViewCount => people.Count;
+
+        public CampSceneView CampView => campView;
 
         public void SetSelected(StableEntityId? selectedPersonId)
         {
@@ -22,18 +30,50 @@ namespace CivSandbox.Presentation
             }
         }
 
+        public void SetCampSelected(bool selected)
+        {
+            campView?.SetSelected(selected);
+        }
+
         public void Initialize(WorldSnapshot snapshot)
+        {
+            Initialize(snapshot, WorldBiome.Grassland);
+        }
+
+        public void Initialize(WorldSnapshot snapshot, WorldBiome foundingBiome)
         {
             worldCamera = CreateCamera();
             worldCamera.gameObject.AddComponent<WorldCameraController>().Configure(snapshot.Bounds);
             CreateLight();
-            CreateGround(snapshot);
+            CreateGround(snapshot, foundingBiome);
             CreateBoundaryMarkers(snapshot);
+            Apply(snapshot, true);
+        }
+
+        public void InitializeInGeneratedWorld(
+            WorldSnapshot snapshot,
+            Camera generatedWorldCamera,
+            Vector3 foundingPosition,
+            float worldUnitsPerMeter,
+            Func<Vector3, float> surfaceHeight)
+        {
+            worldCamera = generatedWorldCamera;
+            worldOffset = foundingPosition;
+            personPositionScale = worldUnitsPerMeter;
+            terrainHeight = surfaceHeight;
+            if (snapshot.Camp.IsFounded)
+            {
+                var campObject = new GameObject("Authoritative camp read model");
+                campObject.transform.SetParent(transform, false);
+                campView = campObject.AddComponent<CampSceneView>();
+                campView.Initialize(snapshot.Camp, foundingPosition, worldUnitsPerMeter, surfaceHeight);
+            }
             Apply(snapshot, true);
         }
 
         public void Apply(WorldSnapshot snapshot, bool snap = false)
         {
+            campView?.Apply(snapshot.Camp);
             RemoveStalePeople(snapshot);
             for (int index = 0; index < snapshot.Count; index++)
             {
@@ -43,7 +83,7 @@ namespace CivSandbox.Presentation
                     var personObject = new GameObject();
                     personObject.transform.SetParent(transform, false);
                     view = personObject.AddComponent<PersonBillboardView>();
-                    view.Initialize(person, worldCamera);
+                    view.Initialize(person, worldCamera, worldOffset, personPositionScale, terrainHeight);
                     people.Add(person.Id, view);
                 }
 
@@ -112,16 +152,27 @@ namespace CivSandbox.Presentation
             RenderSettings.ambientLight = new Color(0.34f, 0.35f, 0.28f);
         }
 
-        private void CreateGround(WorldSnapshot snapshot)
+        private void CreateGround(WorldSnapshot snapshot, WorldBiome foundingBiome)
         {
             float width = (snapshot.Bounds.MaximumEastMillimeters - snapshot.Bounds.MinimumEastMillimeters) / 1000f;
             float depth = (snapshot.Bounds.MaximumNorthMillimeters - snapshot.Bounds.MinimumNorthMillimeters) / 1000f;
             GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            ground.name = "Bounded common ground";
+            ground.name = $"Bounded {foundingBiome} founding ground";
             ground.transform.SetParent(transform, false);
             ground.transform.localPosition = new Vector3(0f, -0.3f, 0f);
             ground.transform.localScale = new Vector3(width, 0.5f, depth);
-            ground.GetComponent<MeshRenderer>().sharedMaterial = EraMaterialFactory.CreateLit(new Color(0.29f, 0.39f, 0.20f));
+            ground.GetComponent<MeshRenderer>().sharedMaterial = EraMaterialFactory.CreateLit(GroundColor(foundingBiome));
+        }
+
+        private static Color GroundColor(WorldBiome biome)
+        {
+            switch (biome)
+            {
+                case WorldBiome.Coast: return new Color(0.48f, 0.43f, 0.25f);
+                case WorldBiome.Woodland: return new Color(0.20f, 0.34f, 0.17f);
+                case WorldBiome.Dryland: return new Color(0.46f, 0.32f, 0.16f);
+                default: return new Color(0.29f, 0.39f, 0.20f);
+            }
         }
 
         private void CreateBoundaryMarkers(WorldSnapshot snapshot)

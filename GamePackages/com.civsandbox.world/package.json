@@ -2,7 +2,7 @@
   "name": "com.civsandbox.world",
   "version": "0.1.0",
   "displayName": "Civilization Sandbox World",
-  "description": "Minimal authoritative world seed, coordinates, and bounded-space definitions for Build 01.",
+  "description": "Deterministic semantic world generation, geography, stable region identity, coordinates, and bounded-space definitions.",
   "unity": "6000.3",
   "dependencies": {
     "com.civsandbox.simulation.core": "0.1.0"

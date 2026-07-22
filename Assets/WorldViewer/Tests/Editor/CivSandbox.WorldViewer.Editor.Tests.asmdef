@@ -6,6 +6,7 @@
     "CivSandbox.World",
     "CivSandbox.People",
     "CivSandbox.Presentation",
+    "CivSandbox.UI",
     "CivSandbox.WorldViewer"
   ],
   "includePlatforms": [

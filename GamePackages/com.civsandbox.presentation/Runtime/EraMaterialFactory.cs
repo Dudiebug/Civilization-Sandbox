@@ -7,6 +7,7 @@ namespace CivSandbox.Presentation
     {
         private static readonly Dictionary<Color32, Material> LitMaterials = new Dictionary<Color32, Material>();
         private static readonly Dictionary<Color32, Material> UnlitMaterials = new Dictionary<Color32, Material>();
+        private static Material terrainMaterial;
 
         internal static int CachedLitMaterialCount => LitMaterials.Count;
 
@@ -22,6 +23,21 @@ namespace CivSandbox.Presentation
         public static Material CreateUnlit(Color color)
         {
             return GetOrCreate(UnlitMaterials, color, "Build 01 Runtime Unlit Material");
+        }
+
+        public static Material CreateTerrain()
+        {
+            if (terrainMaterial != null)
+            {
+                return terrainMaterial;
+            }
+
+            Shader shader = Shader.Find("CivSandbox/Vertex Color Terrain") ?? Shader.Find("Sprites/Default");
+            terrainMaterial = new Material(shader)
+            {
+                name = "Build 02 Vertex Color Terrain Material"
+            };
+            return terrainMaterial;
         }
 
         private static Material GetOrCreate(Dictionary<Color32, Material> cache, Color color, string materialName)

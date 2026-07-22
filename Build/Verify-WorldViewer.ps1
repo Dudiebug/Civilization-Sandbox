@@ -52,7 +52,7 @@ try {
 
     $minimumPassingTests = @{}
     $minimumPassingTests[$peopleXml] = 7
-    $minimumPassingTests[$presentationXml] = 18
+    $minimumPassingTests[$presentationXml] = 29
     foreach ($reportPath in @($peopleXml, $presentationXml)) {
         if (-not (Test-Path -LiteralPath $reportPath -PathType Leaf)) { throw "CIV-BUILD01-TEST-003: Missing NUnit report $reportPath." }
         [xml]$report = Get-Content -LiteralPath $reportPath -Raw
@@ -76,6 +76,9 @@ try {
     if ($smoke.ExitCode -ne 0) { throw "CIV-BUILD01-SMOKE-002: World Viewer player exited with $($smoke.ExitCode)." }
     if (-not (Select-String -LiteralPath $smokeLog -SimpleMatch 'CIV-BUILD01-SMOKE-000' -Quiet)) {
         throw 'CIV-BUILD01-SMOKE-003: First-frame success marker is absent from the player log.'
+    }
+    if (-not (Select-String -LiteralPath $smokeLog -SimpleMatch 'CIV-BUILD02-WORLDGEN-SMOKE-000' -Quiet)) {
+        throw 'CIV-BUILD02-SMOKE-003: Generated-world and founding-region success marker is absent from the player log.'
     }
 
     [xml]$peopleReport = Get-Content -LiteralPath $peopleXml -Raw

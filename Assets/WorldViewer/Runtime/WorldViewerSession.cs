@@ -3,6 +3,7 @@ using CivSandbox.People;
 using CivSandbox.Presentation;
 using CivSandbox.Simulation;
 using CivSandbox.UI;
+using CivSandbox.World;
 
 namespace CivSandbox.WorldViewer
 {
@@ -28,6 +29,21 @@ namespace CivSandbox.WorldViewer
             Snapshot = simulation.CreateSnapshot();
         }
 
+        public WorldViewerSession(
+            GeneratedWorld world,
+            GeneratedWorldCell foundingCell,
+            ulong seed,
+            int maximumFixedStepsPerPump = 8,
+            int maximumRetainedBacklogSteps = 40)
+        {
+            simulation = new WorldSimulation(world, foundingCell, seed);
+            fixedStepPump = new FixedStepPump(
+                SimulationClock.FixedWallTicksPerSecond,
+                maximumFixedStepsPerPump,
+                maximumRetainedBacklogSteps);
+            Snapshot = simulation.CreateSnapshot();
+        }
+
         public ulong Seed => simulation.Seed.Value;
 
         public SimulationSpeed Speed { get; private set; } = SimulationSpeed.Normal;
@@ -35,6 +51,8 @@ namespace CivSandbox.WorldViewer
         public WorldSnapshot Snapshot { get; private set; }
 
         public StableEntityId? SelectedPersonId => selection.SelectedPersonId;
+
+        public bool IsCampSelected { get; private set; }
 
         public bool IsClockOverloaded => LastPumpReport.IsOverloaded;
 
@@ -65,6 +83,7 @@ namespace CivSandbox.WorldViewer
             fixedStepPump.Reset();
             LastPumpReport = default;
             selection.Clear();
+            IsCampSelected = false;
             Speed = SimulationSpeed.Normal;
             Snapshot = simulation.CreateSnapshot();
         }
@@ -82,6 +101,7 @@ namespace CivSandbox.WorldViewer
 
         public void SelectPerson(StableEntityId? personId)
         {
+            IsCampSelected = false;
             if (personId.HasValue)
             {
                 selection.Select(personId.Value);
@@ -90,6 +110,12 @@ namespace CivSandbox.WorldViewer
             {
                 selection.Clear();
             }
+        }
+
+        public void SelectCamp()
+        {
+            selection.Clear();
+            IsCampSelected = true;
         }
 
         public ulong ComputeAuthoritativeChecksum()

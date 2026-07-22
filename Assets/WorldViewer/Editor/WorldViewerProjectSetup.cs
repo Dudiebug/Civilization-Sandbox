@@ -16,14 +16,14 @@ namespace CivSandbox.WorldViewer.Editor
         public static void Configure()
         {
             PlayerSettings.companyName = "Civilization Sandbox";
-            PlayerSettings.productName = "Civilization Sandbox - World Viewer";
-            PlayerSettings.bundleVersion = "0.1.0";
+            PlayerSettings.productName = "Civilization Sandbox - Founding Worlds";
+            PlayerSettings.bundleVersion = "0.2.0";
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Standalone, ScriptingImplementation.Mono2x);
 
             EnsureScene();
             EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
             AssetDatabase.SaveAssets();
-            Debug.Log("CIV-BUILD01-SCENE-000: World Viewer scene configured.");
+            Debug.Log("CIV-BUILD02-SCENE-000: Founding Worlds scene configured.");
         }
 
         private static void EnsureScene()

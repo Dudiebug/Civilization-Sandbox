@@ -10,10 +10,12 @@ namespace CivSandbox.UI
         SimulationSpeed Speed { get; }
         WorldSnapshot Snapshot { get; }
         StableEntityId? SelectedPersonId { get; }
+        bool IsCampSelected { get; }
         bool IsClockOverloaded { get; }
         TimeSpan TotalDroppedWallTime { get; }
         void Reset(ulong seed);
         void SetSpeed(SimulationSpeed speed);
         void SelectPerson(StableEntityId? personId);
+        void SelectCamp();
     }
 }

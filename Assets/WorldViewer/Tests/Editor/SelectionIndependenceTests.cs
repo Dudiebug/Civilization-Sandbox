@@ -25,6 +25,11 @@ namespace CivSandbox.WorldViewer.Tests
             session.SelectPerson(null);
             Assert.That(session.SelectedPersonId, Is.Null);
             Assert.That(session.ComputeAuthoritativeChecksum(), Is.EqualTo(before));
+
+            session.SelectCamp();
+            Assert.That(session.IsCampSelected, Is.True);
+            Assert.That(session.SelectedPersonId, Is.Null);
+            Assert.That(session.ComputeAuthoritativeChecksum(), Is.EqualTo(before));
         }
 
         [Test]

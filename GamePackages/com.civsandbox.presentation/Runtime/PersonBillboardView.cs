@@ -1,3 +1,4 @@
+using System;
 using CivSandbox.People;
 using CivSandbox.Simulation;
 using UnityEngine;
@@ -7,19 +8,49 @@ namespace CivSandbox.Presentation
     public sealed class PersonBillboardView : MonoBehaviour
     {
         private Camera worldCamera;
+        private Vector3 worldOffset;
+        private float positionScale = 1f;
+        private Func<Vector3, float> terrainHeight;
         private Vector3 targetPosition;
         private bool hasPosition;
         private GameObject selectionMarker;
+        private Transform spriteVisual;
 
         public StableEntityId Id { get; private set; }
 
         public void Initialize(PersonSnapshot person, Camera camera)
         {
+            Initialize(person, camera, Vector3.zero);
+        }
+
+        public void Initialize(PersonSnapshot person, Camera camera, Vector3 positionOffset)
+        {
+            Initialize(person, camera, positionOffset, 1f);
+        }
+
+        public void Initialize(PersonSnapshot person, Camera camera, Vector3 positionOffset, float localPositionScale)
+        {
+            Initialize(person, camera, positionOffset, localPositionScale, null);
+        }
+
+        public void Initialize(
+            PersonSnapshot person,
+            Camera camera,
+            Vector3 positionOffset,
+            float localPositionScale,
+            Func<Vector3, float> surfaceHeight)
+        {
             Id = person.Id;
             worldCamera = camera;
+            worldOffset = positionOffset;
+            positionScale = localPositionScale;
+            terrainHeight = surfaceHeight;
             gameObject.name = $"Person - {person.Name}";
 
-            var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+            var spriteObject = new GameObject("Crisp camera-facing pixel person");
+            spriteObject.transform.SetParent(transform, false);
+            spriteVisual = spriteObject.transform;
+            var spriteRenderer = spriteObject.AddComponent<SpriteRenderer>();
             spriteRenderer.sprite = EarlyModernSpriteFactory.Create(person.AppearanceVariant);
             spriteRenderer.sortingOrder = 10;
 
@@ -34,7 +65,14 @@ namespace CivSandbox.Presentation
 
         public void Apply(PersonSnapshot person, bool snap)
         {
-            targetPosition = new Vector3(person.Position.EastMillimeters / 1000f, 0.03f, person.Position.NorthMillimeters / 1000f);
+            Vector3 horizontalPosition = worldOffset + new Vector3(
+                person.Position.EastMillimeters / 1000f * positionScale,
+                0f,
+                person.Position.NorthMillimeters / 1000f * positionScale);
+            targetPosition = new Vector3(
+                horizontalPosition.x,
+                terrainHeight == null ? worldOffset.y + 0.03f : terrainHeight(horizontalPosition) + 0.03f,
+                horizontalPosition.z);
             if (snap || !hasPosition)
             {
                 transform.position = targetPosition;
@@ -58,11 +96,9 @@ namespace CivSandbox.Presentation
                 return;
             }
 
-            Vector3 towardCamera = worldCamera.transform.position - transform.position;
-            towardCamera.y = 0f;
-            if (towardCamera.sqrMagnitude > 0.001f)
+            if (spriteVisual != null)
             {
-                transform.rotation = Quaternion.LookRotation(towardCamera.normalized, Vector3.up);
+                spriteVisual.rotation = worldCamera.transform.rotation;
             }
         }
 

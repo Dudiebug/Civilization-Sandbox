@@ -101,7 +101,7 @@ namespace CivSandbox.WorldViewer.Tests
             explicitSchedule.SetSpeed(SimulationSpeed.VeryFast);
             explicitSchedule.AdvanceWallTime(TimeSpan.FromMilliseconds(50));
 
-            Assert.That(changedSpeed.Snapshot.Time, Is.EqualTo(new WorldTime(33)));
+            Assert.That(changedSpeed.Snapshot.Time, Is.EqualTo(new WorldTime(2)));
             Assert.That(changedSpeed.Snapshot.Time, Is.EqualTo(explicitSchedule.Snapshot.Time));
             Assert.That(
                 changedSpeed.ComputeAuthoritativeChecksum(),
@@ -117,7 +117,7 @@ namespace CivSandbox.WorldViewer.Tests
             session.SetSpeed(SimulationSpeed.Normal);
             session.AdvanceWallTime(TimeSpan.FromMilliseconds(25));
 
-            Assert.That(session.Snapshot.Time, Is.EqualTo(new WorldTime(3)));
+            Assert.That(session.Snapshot.Time, Is.EqualTo(new WorldTime(0)));
             Assert.That(session.TotalDroppedWallTime, Is.EqualTo(TimeSpan.Zero));
         }
 
@@ -132,7 +132,7 @@ namespace CivSandbox.WorldViewer.Tests
                 session.AdvanceWallTime(TimeSpan.FromMilliseconds(10));
             }
 
-            Assert.That(session.Snapshot.Time, Is.EqualTo(new WorldTime(9)));
+            Assert.That(session.Snapshot.Time, Is.EqualTo(new WorldTime(0)));
             Assert.That(session.TotalDroppedWallTime, Is.EqualTo(TimeSpan.Zero));
         }
 
@@ -159,7 +159,7 @@ namespace CivSandbox.WorldViewer.Tests
             FixedStepPumpReport report = session.AdvanceWallTime(TimeSpan.FromSeconds(10));
 
             Assert.That(report.StepsToRun, Is.EqualTo(4));
-            Assert.That(session.Snapshot.Time, Is.EqualTo(new WorldTime(12)));
+            Assert.That(session.Snapshot.Time, Is.EqualTo(new WorldTime(1)));
             Assert.That(session.IsClockOverloaded, Is.True);
             Assert.That(session.TotalDroppedWallTime, Is.EqualTo(TimeSpan.FromMilliseconds(9500)));
 

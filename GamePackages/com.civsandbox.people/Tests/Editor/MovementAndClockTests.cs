@@ -37,9 +37,28 @@ namespace CivSandbox.People.Tests
                 veryFast.AdvanceFixedWallTick(SimulationSpeed.VeryFast);
             }
 
-            Assert.That(normal.Time.Seconds, Is.EqualTo(300L));
+            Assert.That(normal.Time.Seconds, Is.EqualTo(25L));
             Assert.That(veryFast.Time, Is.EqualTo(normal.Time));
             Assert.That(veryFast.ComputeChecksum(), Is.EqualTo(normal.ComputeChecksum()));
+        }
+
+        [Test]
+        public void CalendarRunsFiveTimesRealTimeWithoutMultiplyingNormalActorWork()
+        {
+            var simulation = new WorldSimulation(9917UL);
+            WorldSnapshot initial = simulation.CreateSnapshot();
+
+            for (int tick = 0; tick < WorldSimulation.ActorFixedTicksPerSecond; tick++)
+            {
+                simulation.AdvanceFixedWallTick(SimulationSpeed.Normal);
+            }
+
+            WorldSnapshot later = simulation.CreateSnapshot();
+            Assert.That(later.Time.Seconds, Is.EqualTo(5L));
+            Assert.That(
+                System.Math.Abs(later[0].Position.EastMillimeters - initial[0].Position.EastMillimeters),
+                Is.LessThan(100),
+                "A five-second calendar advance must not silently apply five seconds of ordinary walking.");
         }
 
         [Test]

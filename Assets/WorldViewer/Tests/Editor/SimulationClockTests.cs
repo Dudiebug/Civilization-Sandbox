@@ -11,12 +11,22 @@ namespace CivSandbox.WorldViewer.Tests
             var clock = new SimulationClock();
 
             Assert.That(SimulationClock.FixedWallTicksPerSecond, Is.EqualTo(20));
+            Assert.That(SimulationClock.CalendarSecondsPerRealSecond, Is.EqualTo(5));
+            for (int tick = 0; tick < 20; tick++)
+            {
+                clock.AdvanceFixedWallTick(SimulationSpeed.Normal);
+            }
+
+            Assert.That(clock.Time, Is.EqualTo(new WorldTime(5)),
+                "One real second at Normal must advance the calendar exactly five seconds.");
+
+            for (int tick = 0; tick < 20; tick++)
+            {
+                clock.AdvanceFixedWallTick(SimulationSpeed.Double);
+            }
+
+            Assert.That(clock.Time, Is.EqualTo(new WorldTime(15)));
             Assert.That(clock.AdvanceFixedWallTick(SimulationSpeed.Paused), Is.Zero);
-            Assert.That(clock.AdvanceFixedWallTick(SimulationSpeed.Normal), Is.EqualTo(3));
-            Assert.That(clock.AdvanceFixedWallTick(SimulationSpeed.Double), Is.EqualTo(6));
-            Assert.That(clock.AdvanceFixedWallTick(SimulationSpeed.Fast), Is.EqualTo(15));
-            Assert.That(clock.AdvanceFixedWallTick(SimulationSpeed.VeryFast), Is.EqualTo(30));
-            Assert.That(clock.Time, Is.EqualTo(new WorldTime(54)));
         }
 
         [Test]

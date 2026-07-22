@@ -28,7 +28,7 @@ namespace CivSandbox.People.Tests
         public void NeedsClampAtZeroAndBecomeCritical()
         {
             var simulation = new WorldSimulation(170601UL);
-            for (int tick = 0; tick < 24000; tick++)
+            for (int tick = 0; tick < 240000; tick++)
             {
                 simulation.AdvanceFixedWallTick(SimulationSpeed.VeryFast);
             }

@@ -30,7 +30,7 @@ namespace CivSandbox.WorldViewer.Editor
                     throw new InvalidOperationException($"World Viewer build failed with {report.summary.totalErrors} errors.");
                 }
 
-                Debug.Log($"CIV-BUILD01-BUILD-000: World Viewer player built at {output}.");
+                Debug.Log($"CIV-BUILD02-BUILD-000: Founding Worlds player built at {output}.");
             }
             catch (Exception exception)
             {

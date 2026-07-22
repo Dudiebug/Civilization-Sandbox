@@ -10,12 +10,13 @@ namespace CivSandbox.People
     {
         private readonly PersonSnapshot[] people;
 
-        internal WorldSnapshot(WorldSeed seed, WorldTime time, WorldBounds bounds, PersonSnapshot[] people)
+        internal WorldSnapshot(WorldSeed seed, WorldTime time, WorldBounds bounds, PersonSnapshot[] people, CampSnapshot camp = null)
         {
             Seed = seed;
             Time = time;
             Bounds = bounds;
             this.people = people ?? throw new ArgumentNullException(nameof(people));
+            Camp = camp ?? CampSnapshot.Empty;
         }
 
         public WorldSeed Seed { get; }
@@ -23,6 +24,8 @@ namespace CivSandbox.People
         public WorldTime Time { get; }
 
         public WorldBounds Bounds { get; }
+
+        public CampSnapshot Camp { get; }
 
         public int Count => people.Length;
 

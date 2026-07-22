@@ -21,6 +21,29 @@ Build 01 intentionally used a small diamond-shaped diagnostic field. The creator
 - Build 20 extends this hierarchy through orbital and interplanetary play. Build 02 does not implement planets, orbital topology, interplanetary travel, or distant-age content.
 - Generated image assets are not required for this direction. Procedural geometry, project-owned materials, and authored assets may be evaluated through normal playable slices.
 
+### Creator scale amendment - 2026-07-21
+
+- Build 02 terrain cells are person-scale ground tiles in the playable presentation. One standing person occupies approximately one tile; a cell is not a giant region containing an entire visible camp.
+- The current provisional presets are **Small 96x96**, **Standard 384x384**, and **Max 1024x1024** tiles. The 1024x1024 preset is the current Build 02 ceiling, not a final release-scale promise.
+- The terrain preview uses chunked geometry and camera culling so the Max preset does not require one monolithic million-cell mesh or collider.
+- The default view presents the world from a near-top-down orthographic angle while preserving readable elevation. The player can toggle to a stronger angled view, rotate, pan, and zoom; neither camera mode can affect authoritative state.
+- A founding tile must provide a bounded walkable local footprint for the initial company; merely coloring a tile as land is insufficient if the legacy local movement area would overlap water.
+
+### Creator resource and camera amendment - 2026-07-21
+
+- Terrain colors use hard person-scale cell boundaries and faceted lighting instead of interpolated color gradients. Pixel sprites and terrain must use point-like, crisp visual decisions rather than blurred texture filtering.
+- Build 02 activates deterministic source fields for **fresh water, staple food, protein food, timber, stone, clay, fiber, iron ore, coal, and medicinal inputs**. Surface sources receive bounded visible markers; underground resources remain semantic and are only exposed visually where geology makes them surface-readable.
+- The complete Blueprint commodity set remains 18 classes. **Seed stock, fuelwood, lumber, masonry/brick, tools, construction goods, textiles/consumer goods, and weapons/ammunition** are processed outputs activated with the recipes, workplaces, skills, and technical capabilities that can actually produce or use them. They are not scattered across the generated map as fake deposits.
+- Resource generation in this slice establishes stable semantic availability and visual density. Extraction, depletion, reservations, hauling, stockpile conservation, processing, and capability-gated use remain the connected follow-on slices required before resources become fully playable.
+
+### Creator camp-loop and calendar amendment - 2026-07-21
+
+- At the default **1x** control, calendar time advances at **five world seconds per real second**. Ordinary person movement and labor remain at one actor-second per real second; the calendar scale does not silently multiply physical activity. Explicit 2x, 5x, and 10x controls accelerate both after the player chooses them.
+- The first connected resource slice activates fresh water, food, timber, and stone as finite reachable camp nodes derived from the generated semantic fields. A person performs a bounded source search, reserves units, physically travels to the source, gathers, carries the load back, and deposits it into the shared stockpile.
+- Shelter construction commits 60 timber and 30 stone exactly once, then requires attributed person labor. Source remainder, reservations, carried units, stockpile units, committed materials, and consumption remain authoritative integer quantities included in deterministic checksums.
+- The HUD exposes stockpile totals, reachable remainder, shelter material/labor progress, action reasons, a resource legend, and a marker toggle. Clicking the physical camp foundation selects its read model; presentation remains unable to mutate camp truth.
+- This amendment does not activate processed commodities, rivers and lake hydrology, wildlife populations, road networks, crop production, mature ecosystems, or final environment art.
+
 ## Consequences
 
 - Build 02 grows from a single regional test patch into the minimum world-creation foundation while retaining the Founding Camp survival loop.

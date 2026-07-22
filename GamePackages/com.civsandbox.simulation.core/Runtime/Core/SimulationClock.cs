@@ -7,13 +7,21 @@ namespace CivSandbox.Simulation
     public sealed class SimulationClock
     {
         public const int FixedWallTicksPerSecond = 20;
+        public const int CalendarSecondsPerRealSecond = 5;
         private long worldSeconds;
+        private int calendarSubsecondTicks;
 
         public WorldTime Time => new WorldTime(worldSeconds);
 
+        public int CalendarSubsecondTicks => calendarSubsecondTicks;
+
         public int AdvanceFixedWallTick(SimulationSpeed speed)
         {
-            int elapsedGameSeconds = speed.GameSecondsPerFixedTick();
+            int previousWholeSeconds = calendarSubsecondTicks / FixedWallTicksPerSecond;
+            calendarSubsecondTicks = checked(
+                calendarSubsecondTicks + speed.Multiplier() * CalendarSecondsPerRealSecond);
+            int elapsedGameSeconds = calendarSubsecondTicks / FixedWallTicksPerSecond - previousWholeSeconds;
+            calendarSubsecondTicks %= FixedWallTicksPerSecond;
             worldSeconds = checked(worldSeconds + elapsedGameSeconds);
             return elapsedGameSeconds;
         }
@@ -21,6 +29,7 @@ namespace CivSandbox.Simulation
         public void Reset()
         {
             worldSeconds = 0;
+            calendarSubsecondTicks = 0;
         }
     }
 }
